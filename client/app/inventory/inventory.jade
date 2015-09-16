@@ -1,4 +1,31 @@
 div(ng-include='"components/navbar/navbar.html"')
 
 .col-md-12
-    | This is the inventory view.
+  table.table(st-pipe='mc.callServer', st-table='mc.displayed')
+    thead
+      tr
+        th(st-sort='id') id
+        th(st-sort='name') name
+        th(st-sort='age') age
+        th(st-sort='saved') saved people
+      tr
+        th
+          input(st-search='id')
+        th
+          input(st-search='name')
+        th
+          input(st-search='age')
+        th
+          input(st-search='saved')
+    tbody(ng-show='!mc.isLoading')
+      tr(ng-repeat='row in mc.displayed')
+        td {{row.id}}
+        td {{row.name}}
+        td {{row.age}}
+        td {{row.saved}}
+    tbody(ng-show='mc.isLoading')
+      tr
+        td.text-center(colspan='4') Loading ... 
+    tfoot
+      tr
+        td.text-center(st-pagination='', st-items-by-page='10', colspan='4')
