@@ -5,6 +5,12 @@ angular.module('tdpharmaClientApp')
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
+    }, {
+      title: 'Inventory',
+      link: '/inventory'
+    }, {
+      title: 'Orders',
+      link: '/orders'
     }];
 
     $scope.isCollapsed = true;
