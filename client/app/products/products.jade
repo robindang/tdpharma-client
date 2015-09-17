@@ -1,0 +1,8 @@
+div(ng-include='"components/navbar/navbar.html"')
+
+.container
+  tabset
+    tab(heading='Category')
+      include ./includes/products.category.jade
+    tab(heading='Details')
+      include ./includes/products.details.jade
