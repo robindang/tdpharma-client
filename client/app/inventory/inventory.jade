@@ -19,13 +19,13 @@ div(ng-include='"components/navbar/navbar.html"')
     .form-group
       span {{mc.numberOfResults}} Item(s)
   .form-inline
-    .input-group
-      .form-group
-        label.control-label Filters
-        .btn-group(ng-init="mc.status=''")
-          label.btn.btn-default(ng-model='mc.status', btn-radio="''") All
-          label.btn.btn-default(ng-model='mc.status', btn-radio="'Active'") Active
-          label.btn.btn-default(ng-model='mc.status', btn-radio="'Inactive'") Inactive
+    .form-group
+      label.control-label Filters
+    .form-group
+      .btn-group(ng-init="mc.status=''")
+        label.btn.btn-default(ng-model='mc.status', btn-radio="''") All
+        label.btn.btn-default(ng-model='mc.status', btn-radio="'Active'") Active
+        label.btn.btn-default(ng-model='mc.status', btn-radio="'Inactive'") Inactive
   table.table.table-striped(st-pipe='mc.callServer', st-table='mc.displayed')
     thead
       tr
