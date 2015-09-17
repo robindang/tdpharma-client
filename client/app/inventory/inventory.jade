@@ -1,14 +1,43 @@
 div(ng-include='"components/navbar/navbar.html"')
 
 .col-md-12
-  table.table(st-pipe='mc.callServer', st-table='mc.displayed')
+  .form-inline
+    .input-group
+      .btn-group(dropdown='')
+        button#single-button.btn.btn-primary.dropdown-toggle(type='button', dropdown-toggle='', ng-disabled='disabled')
+          | Action on {{mc.getNumberOfRowsSelected()}} selected
+          span.caret
+        ul.dropdown-menu(role='menu', aria-labelledby='single-button')
+          li(role='menuitem')
+            a(href='#') Delete
+      .form-group
+        .input-group
+          input.form-control(type='text', placeholder='Search for...')
+          span.input-group-btn
+            button.btn.btn-default(type='button') Search
+      span {{mc.numberOfResults}} Item(s)
+  .form-inline
+    .input-group
+      .form-group
+        label.control-label Filters
+        .btn-group(ng-init="mc.status=''")
+          label.btn.btn-default(ng-model='mc.status', btn-radio="''") All
+          label.btn.btn-default(ng-model='mc.status', btn-radio="'Active'") Active
+          label.btn.btn-default(ng-model='mc.status', btn-radio="'Inactive'") Inactive
+  table.table.table-striped(st-pipe='mc.callServer', st-table='mc.displayed')
     thead
       tr
-        th(st-sort='id') id
-        th(st-sort='name') name
-        th(st-sort='age') age
-        th(st-sort='saved') saved people
+        th
+        th(st-sort='id') Status
+        th(st-sort='name') Category
+        th(st-sort='age') Image
+        th(st-sort='saved') Name
+        th Updated
+        th Available
+        th Price
+        th Action
       tr
+        th
         th
           input(st-search='id')
         th
@@ -16,16 +45,44 @@ div(ng-include='"components/navbar/navbar.html"')
         th
           input(st-search='age')
         th
-          input(st-search='saved')
+          input(ng-model="saved")
+        th
+          input
+        th
+          input
+        th
+          input
+        th
     tbody(ng-show='!mc.isLoading')
       tr(ng-repeat='row in mc.displayed')
+        td(cs-select="row")
         td {{row.id}}
         td {{row.name}}
         td {{row.age}}
         td {{row.saved}}
+        td
+        td
+        td
+        td
+          .input-group
+            .btn-group(dropdown='', style='min-width:100px')
+              button#split-button.btn.btn-default(type='button') Edit
+              button.btn.btn-default(type='button', dropdown-toggle='')
+                span.caret
+                span.sr-only Split button!
+              ul.dropdown-menu(role='menu', aria-labelledby='split-button')
+                li(role='menuitem')
+                  a(href='#') Edit
+                li(role='menuitem')
+                  a(href='#') Delete
+                li.divider
+                li(role='menuitem')
+                  a(href='#') Stop Sale
     tbody(ng-show='mc.isLoading')
       tr
-        td.text-center(colspan='4') Loading ... 
+        td.text-center(colspan='9') Loading ... 
     tfoot
       tr
-        td.text-center(st-pagination='', st-items-by-page='10', colspan='4')
+        td.text-center(colspan='9')
+          div(st-items-by-page='10', st-pagination='', st-template='/components/pagination/pagination.html')
+

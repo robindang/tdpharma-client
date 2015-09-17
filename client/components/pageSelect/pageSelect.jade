@@ -1,0 +1,14 @@
+nav(ng-if='pages.length >= 2')
+  ul.pagination
+    li
+      a(ng-click='selectPage(1)') First
+    li
+      a(ng-click='selectPage(currentPage - 1)') <
+    li
+      a
+        page-select
+        |  of {{numPages}}
+    li
+      a(ng-click='selectPage(currentPage + 1)') >
+    li
+      a(ng-click='selectPage(numPages)') Last

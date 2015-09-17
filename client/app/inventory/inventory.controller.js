@@ -6,6 +6,7 @@ angular.module('tdpharmaClientApp')
     var ctrl = this;
 
     this.displayed = [];
+    this.numberOfResults = '';
 
     this.callServer = function callServer(tableState) {
 
@@ -18,9 +19,14 @@ angular.module('tdpharmaClientApp')
 
       service.getPage(start, number, tableState).then(function (result) {
         ctrl.displayed = result.data;
+        ctrl.numberOfResults = result.numberOfResults;
         tableState.pagination.numberOfPages = result.numberOfPages;//set the number of pages so the pagination can update
         ctrl.isLoading = false;
       });
     };
+
+    this.getNumberOfRowsSelected = function() {
+      return this.displayed.filter(function(x) {return x.isSelected}).length;
+    }
 
   }]);

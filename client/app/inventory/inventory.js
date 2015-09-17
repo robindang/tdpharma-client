@@ -51,7 +51,8 @@ angular.module('tdpharmaClientApp')
         //note, the server passes the information about the data set size
         deferred.resolve({
           data: result,
-          numberOfPages: Math.ceil(filtered.length / number)
+          numberOfPages: Math.ceil(filtered.length / number),
+          numberOfResults: filtered.length
         });
       }, 1500);
 
