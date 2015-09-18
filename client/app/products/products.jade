@@ -1,8 +1,8 @@
 div(ng-include='"components/navbar/navbar.html"')
 
-.container
+.col-md-12
   tabset
     tab(heading='Category')
-      include ./includes/products.category.jade
+      div(ng-include='"app/products/includes/category.html"')
     tab(heading='Details')
-      include ./includes/products.details.jade
+      div(ng-include='"app/products/includes/details.html"')
