@@ -1,4 +1,10 @@
 div(ng-include='"components/navbar/navbar.html"')
 
 .col-md-12
-    | This is the orders view.
+  tabset
+    tab(heading='Purchases')
+      div(ng-include='"app/orders/includes/purchases.html"')
+    tab(heading='Sales')
+      div(ng-include='"app/orders/includes/sales.html"')
+    tab(heading='History')
+      div(ng-include='"app/orders/includes/history.html"')
