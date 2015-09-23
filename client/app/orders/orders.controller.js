@@ -1,6 +1,15 @@
 'use strict';
 
 angular.module('tdpharmaClientApp')
-  .controller('OrdersCtrl', function ($scope) {
-    $scope.message = 'Hello';
-  });
+  .controller('OrdersCtrl', OrdersCtrl);
+
+function OrdersCtrl(categoryFactory) {
+
+  var ctrl = this;
+
+  ctrl.tabs = [
+    { title:'Purchases', template:'app/orders/includes/purchases.html' },
+    { title:'Sales', template:'app/orders/includes/sales.html' },
+    { title:'History', template:'app/orders/includes/history.html' }
+  ];
+}

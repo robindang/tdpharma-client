@@ -2,9 +2,5 @@ div(ng-include='"components/navbar/navbar.html"')
 
 .col-md-12
   tabset
-    tab(heading='Purchases')
-      div(ng-include='"app/orders/includes/purchases.html"')
-    tab(heading='Sales')
-      div(ng-include='"app/orders/includes/sales.html"')
-    tab(heading='History')
-      div(ng-include='"app/orders/includes/history.html"')
+    tab(ng-repeat="tab in orders.tabs", heading="{{tab.title}}", active="tab.active", disable="tab.disabled")
+      div(ng-include="tab.template")
