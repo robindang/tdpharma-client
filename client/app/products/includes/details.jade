@@ -1,20 +1,22 @@
-form.form-horizontal
-  .form-group
-    label.col-sm-2.control-label(for='name') Name
-    .col-sm-10
-      input#name.form-control(type='text', placeholder='Name')
-  .form-group
-    label.col-sm-2.control-label(for='concentration') Concentration
-    .col-sm-10
-      input#concentration.form-control(type='text', placeholder='Concentration')
-  .form-group
-    label.col-sm-2.control-label(for='unit') Concentration Unit
-    .col-sm-10
-      input#unit.form-control(type='text', placeholder='Concentration Unit')
+.col-sm-12
+  h5 Details
+  form.form-horizontal
     .form-group
-    label.col-sm-2.control-label(for='form') Medicine Form
-    .col-sm-10
-      input#form.form-control(type='text', placeholder='Medicine Form')
-  .form-group
-    .col-sm-offset-2.col-sm-10
-      button.btn.btn-default(type='submit') Save
+      label.col-sm-2.control-label(for='name') Name
+      .col-sm-10
+        input#name.form-control(type='text', placeholder='Name')
+    .form-group
+      label.col-sm-2.control-label(for='concentration') Concentration
+      .col-sm-10
+        input#concentration.form-control(type='text', placeholder='Concentration')
+    .form-group
+      label.col-sm-2.control-label(for='unit') Concentration Unit
+      .col-sm-10
+        input#unit.form-control(type='text', placeholder='Concentration Unit')
+      .form-group
+      label.col-sm-2.control-label(for='form') Medicine Form
+      .col-sm-10
+        input#form.form-control(type='text', placeholder='Medicine Form')
+    .form-group
+      .col-sm-offset-2.col-sm-10
+        button.btn.btn-primary(type='submit', ng-click="activeTab='details'") Save

@@ -1,6 +1,6 @@
 div(ng-include='"components/navbar/navbar.html"')
 
-.col-md-12.inventory
+.col-sm-12.inventory
   .form-inline
     .form-group
       .btn-group(dropdown='')
@@ -19,13 +19,15 @@ div(ng-include='"components/navbar/navbar.html"')
     .form-group
       span {{mc.numberOfResults}} Item(s)
   .form-inline
-    .form-group
+    .form-group.pull-left
       label.control-label Filters
-    .form-group
+      span &nbsp;&nbsp;
       .btn-group(ng-init="mc.status=''")
         label.btn.btn-default(ng-model='mc.status', btn-radio="''") All
         label.btn.btn-default(ng-model='mc.status', btn-radio="'Active'") Active
         label.btn.btn-default(ng-model='mc.status', btn-radio="'Inactive'") Inactive
+    .form-group.pull-right
+      a.btn.btn-primary(href="/products") Add a product
   table.table.table-striped(st-pipe='mc.callServer', st-table='mc.displayed')
     thead
       tr
