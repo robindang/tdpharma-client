@@ -11,6 +11,9 @@ angular.module('tdpharmaClientApp')
     }, {
       title: 'Orders',
       link: '/orders'
+    }, {
+      title: 'Checkout',
+      link: '/checkout'
     }];
 
     $scope.isCollapsed = true;

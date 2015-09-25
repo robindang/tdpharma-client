@@ -1,0 +1,111 @@
+@import "node_modules/lesshat/build/lesshat-prefixed.less";
+
+.checkout {
+  height: 100%;
+  .lh-display(flex);
+  .lh-flex-direction(column);
+  .main {
+    .lh-flex(1);
+  }
+}
+
+.checkout .main {
+  .lh-display(flex);
+  .lh-flex-direction(row);
+  .col1 {
+    .lh-flex(5);
+  }
+  .col2 {
+    .lh-flex(2);
+  }
+  .col3 {
+    .lh-flex(3);
+  }
+}
+
+.checkout .col1 {
+  .lh-display(flex);
+  .lh-flex-direction(column);
+  .list {
+    .lh-flex(1);
+  }
+}
+
+.checkout .col2 {
+  .lh-display(flex);
+  .lh-flex-direction(column);
+  .numpad {
+    .lh-flex(2);
+  }
+  .macro {
+    .lh-flex(3);
+  }
+}
+
+.checkout .col3 {
+  .lh-display(flex);
+  .lh-flex-direction(column);
+  .product-finder {
+    .lh-flex(1);
+  }
+}
+
+.checkout .list-controls {
+  .lh-display(flex);
+  .lh-flex-wrap(wrap);
+ .btn {
+    width: 25%;
+  }
+}
+
+.checkout .btn-pay {
+  width: 100%;
+}
+
+.checkout .macro {
+  .lh-display(flex);
+  .lh-flex-wrap(wrap);
+  .btn {
+    width: 33.33%;
+  }
+}
+
+.checkout .product-finder {
+  .lh-display(flex);
+  .lh-flex-wrap(wrap);
+  .btn {
+    .lh-display(flex);
+    .lh-align-items(center);
+    .lh-justify-content(center);  
+    width: 25%;
+  }
+}
+
+.checkout .totals {
+  background-color: rgb(66,66,66);
+  color: white;
+  *:nth-child(even) {
+    text-align: right;
+  }
+  h1, h3 {
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+}
+
+.checkout .numpad {
+  .lh-display(flex);
+  .lh-flex-wrap(wrap);
+  .btn {
+    .lh-display(flex);
+    .lh-align-items(center);
+    .lh-justify-content(center);
+    width: 33.33%;
+  }
+  input {
+    background-color: yellow;
+    text-align: right;
+    height: initial;
+    width: 66.66%;
+  }
+}
