@@ -3,12 +3,12 @@ nav(ng-if='pages.length >= 2')
     li
       a(ng-click='selectPage(1)') First
     li
-      a(ng-click='selectPage(currentPage - 1)') <
+      a(ng-click='selectPage(currentPage - 1)') &lt;
     li
       a
         page-select
         |  of {{numPages}}
     li
-      a(ng-click='selectPage(currentPage + 1)') >
+      a(ng-click='selectPage(currentPage + 1)') &gt;
     li
       a(ng-click='selectPage(numPages)') Last
