@@ -4,7 +4,7 @@ angular.module('tdpharmaClientApp')
   .factory('Auth', function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
     var currentUser = {};
     if($cookieStore.get('token')) {
-      currentUser = User.get();
+      currentUser = User.get({id: $cookieStore.get('id'), email: $cookieStore.get('email'), token: $cookieStore.get('token')});
     }
 
     return {
@@ -27,6 +27,8 @@ angular.module('tdpharmaClientApp')
           }
         },
         function(data) {
+          $cookieStore.put('id', data.id);
+          $cookieStore.put('email', data.email);
           $cookieStore.put('token', data.authentication_token);
           currentUser = User.get({id: data.id, email: data.email, token: data.authentication_token});
           deferred.resolve(data);
@@ -65,6 +67,8 @@ angular.module('tdpharmaClientApp')
             user: user
           },
           function(data) {
+            $cookieStore.put('id', data.id);
+            $cookieStore.put('email', data.email);
             $cookieStore.put('token', data.authentication_token);
             currentUser = User.get({id: data.id, email: data.email, token: data.authentication_token});
             return cb(user);
