@@ -115,7 +115,7 @@ angular.module('tdpharmaClientApp')
        * @return {Boolean}
        */
       isLoggedIn: function() {
-        return currentUser.hasOwnProperty('role');
+        return currentUser.hasOwnProperty('roles');
       },
 
       /**
@@ -128,7 +128,7 @@ angular.module('tdpharmaClientApp')
           }).catch(function() {
             cb(false);
           });
-        } else if(currentUser.hasOwnProperty('role')) {
+        } else if(currentUser.hasOwnProperty('roles')) {
           cb(true);
         } else {
           cb(false);
