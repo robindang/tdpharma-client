@@ -18,7 +18,7 @@ angular.module('tdpharmaClientApp')
           $location.path('/');
         })
         .catch( function(err) {
-          $scope.errors.other = err.message;
+          $scope.errors.other = err.message || 'Authentication failed';
         });
       }
     };
