@@ -59,10 +59,12 @@ angular.module('tdpharmaClientApp')
       createUser: function(user, callback) {
         var cb = callback || angular.noop;
 
-        return User.save(user,
+        return User.save({
+            user: user
+          },
           function(data) {
-            $cookieStore.put('token', data.token);
-            currentUser = User.get();
+            $cookieStore.put('token', data.authentication_token);
+            currentUser = User.get({id: data.id, email: data.email, token: data.authentication_token});
             return cb(user);
           },
           function(err) {

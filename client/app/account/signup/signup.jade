@@ -5,12 +5,19 @@ div(ng-include='"components/navbar/navbar.html"')
       h1 Sign up
     .col-sm-12
       form.form(name='form', ng-submit='register(form)', novalidate='')
-        .form-group(ng-class='{ "has-success": form.name.$valid && submitted,\
-        "has-error": form.name.$invalid && submitted }')
-          label Name
-          input.form-control(type='text', name='name', ng-model='user.name', required='')
-          p.help-block(ng-show='form.name.$error.required && submitted')
-            | A name is required
+        .form-group(ng-class='{ "has-success": form.first_name.$valid && submitted,\
+        "has-error": form.first_name.$invalid && submitted }')
+          label First Name
+          input.form-control(type='text', name='first_name', ng-model='user.first_name', required='')
+          p.help-block(ng-show='form.first_name.$error.required && submitted')
+            | A first name is required
+
+        .form-group(ng-class='{ "has-success": form.last_name.$valid && submitted,\
+        "has-error": form.last_name.$invalid && submitted }')
+          label Last Name
+          input.form-control(type='text', name='last_name', ng-model='user.last_name', required='')
+          p.help-block(ng-show='form.last_name.$error.required && submitted')
+            | A last name is required
 
         .form-group(ng-class='{ "has-success": form.email.$valid && submitted,\
         "has-error": form.email.$invalid && submitted }')

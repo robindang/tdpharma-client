@@ -2,8 +2,9 @@
 
 angular.module('tdpharmaClientApp')
   .factory('User', function ($resource) {
-    return $resource('/api/users/:id/:controller', {
-      id: '@_id'
+    return $resource('http://localhost:3000/api/v1/users/:id/:controller', {
+      id: '@_id',
+      format: 'json'
     },
     {
       changePassword: {
@@ -17,6 +18,10 @@ angular.module('tdpharmaClientApp')
         params: {
           id:'me'
         }
+      },
+      save: {
+        method: 'POST',
+        url: 'http://localhost:3000/users/:id/:controller'
       }
 	  });
   });
