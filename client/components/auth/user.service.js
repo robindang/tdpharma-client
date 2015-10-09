@@ -22,6 +22,10 @@ angular.module('tdpharmaClientApp')
       save: {
         method: 'POST',
         url: 'http://localhost:3000/users/:id/:controller'
+      },
+      signIn: {
+        method: 'POST',
+        url: 'http://localhost:3000/users/sign_in?format=json'
       }
 	  });
   });

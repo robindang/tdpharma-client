@@ -20,17 +20,19 @@ angular.module('tdpharmaClientApp')
         var cb = callback || angular.noop;
         var deferred = $q.defer();
 
-        $http.post('/auth/local', {
-          email: user.email,
-          password: user.password
-        }).
-        success(function(data) {
-          $cookieStore.put('token', data.token);
-          currentUser = User.get();
+        User.signIn({
+          user: {
+            email: user.email,
+            password: user.password
+          }
+        },
+        function(data) {
+          $cookieStore.put('token', data.authentication_token);
+          currentUser = User.get({id: data.id, email: data.email, token: data.authentication_token});
           deferred.resolve(data);
           return cb();
-        }).
-        error(function(err) {
+        },
+        function(err) {
           this.logout();
           deferred.reject(err);
           return cb(err);
