@@ -9,6 +9,7 @@ angular.module('tdpharmaClientApp')
     {
       changePassword: {
         method: 'PUT',
+        url: 'http://localhost:3000/users/password',
         params: {
           controller:'password'
         }

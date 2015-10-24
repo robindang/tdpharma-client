@@ -26,7 +26,7 @@ angular.module('tdpharmaClientApp')
           // Update validity of form fields that match the mongoose errors
           angular.forEach(err.errors, function(error, field) {
             form[field].$setValidity('mongoose', false);
-            $scope.errors[field] = error.message;
+            $scope.errors[field] = error.length ? error[0] : '';
           });
         });
       }
