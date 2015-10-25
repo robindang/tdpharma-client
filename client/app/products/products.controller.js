@@ -21,7 +21,6 @@ function ProductsCtrl(categoryFactory) {
   }
 
   categoryFactory.getCategories().then(function(x) {
-    ctrl.categoryMap = x;
-    ctrl.categories = Object.keys(x);
+    ctrl.categories = x;
   });
 }

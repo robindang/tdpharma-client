@@ -3,9 +3,9 @@
 angular.module('tdpharmaClientApp')
   .factory('categoryFactory', categoryFactory);
 
-categoryFactory.$inject = ['$http'];
+categoryFactory.$inject = ['$http', '$cookies'];
 
-function categoryFactory($http) {
+function categoryFactory($http, $cookies) {
 
   // Public API here
   return {
@@ -13,11 +13,17 @@ function categoryFactory($http) {
   };
 
   function getCategories() {
-      return $http.get('/assets/data/category.json')
-            .then(getCategoriesComplete);
+
+      
+      return $http.get(
+        'http://localhost:3000/api/v1/categories', 
+        {
+          params: {email: $cookies.get('email'), token: $cookies.get('token')}
+        }
+        ).then(getCategoriesComplete);
     
     function getCategoriesComplete(res) {
-      return res.data;
+      return res.data.data;
     }
   }
 }
