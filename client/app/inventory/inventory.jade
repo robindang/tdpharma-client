@@ -61,7 +61,7 @@ div(ng-include='"components/navbar/navbar.html"')
       tr(ng-repeat='row in mc.displayed')
         td(cs-select="row")
         td {{row.status}}
-        td {{row.category_id}}
+        td {{row.categoryName}}
         td {{row.photo_thumb}}
         td {{row.itemable.name}}
         td {{row.updated_at}}
