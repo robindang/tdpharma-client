@@ -1,18 +1,18 @@
 'use strict';
 
 angular.module('tdpharmaClientApp')
-  .factory('categoryFactory', categoryFactory);
+  .factory('Category', Category);
 
-categoryFactory.$inject = ['$http', '$cookies'];
+Category.$inject = ['$http', '$cookies'];
 
-function categoryFactory($http, $cookies) {
+function Category($http, $cookies) {
 
   // Public API here
   return {
-    getCategories: getCategories
+    get: get
   };
 
-  function getCategories() {
+  function get() {
 
       
       return $http.get(

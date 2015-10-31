@@ -3,7 +3,7 @@
 angular.module('tdpharmaClientApp')
   .controller('OrdersCtrl', OrdersCtrl);
 
-function OrdersCtrl(categoryFactory) {
+function OrdersCtrl() {
 
   var ctrl = this;
 
