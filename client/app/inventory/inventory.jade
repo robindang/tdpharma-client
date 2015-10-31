@@ -60,13 +60,13 @@ div(ng-include='"components/navbar/navbar.html"')
     tbody(ng-show='!mc.isLoading')
       tr(ng-repeat='row in mc.displayed')
         td(cs-select="row")
-        td {{row.id}}
-        td {{row.name}}
-        td {{row.age}}
-        td {{row.saved}}
-        td
-        td
-        td
+        td {{row.status}}
+        td {{row.category_id}}
+        td {{row.photo_thumb}}
+        td {{row.itemable.name}}
+        td {{row.updated_at}}
+        td {{row.amount}}
+        td 
         td
           .input-group
             .btn-group(dropdown='', style='min-width:100px')

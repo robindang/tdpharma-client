@@ -10,7 +10,7 @@ angular.module('tdpharmaClientApp')
         controllerAs: 'mc'
       });
   })
-  .factory('Resource', ['$q', '$filter', '$timeout', function ($q, $filter, $timeout) {
+  .factory('Resource', ['$q', '$filter', '$timeout', '$cookies', 'Inventory', function ($q, $filter, $timeout, $cookies, Inventory) {
 
     //this would be the service to call your server, a standard bridge between your model an $http
 
@@ -47,14 +47,14 @@ angular.module('tdpharmaClientApp')
 
       var result = filtered.slice(start, start + number);
 
-      $timeout(function () {
-        //note, the server passes the information about the data set size
+      Inventory.get({page: 1+start/number, email: $cookies.get('email'), token: $cookies.get('token')}, function(inventory) {
+        console.log(inventory.data.items);
         deferred.resolve({
-          data: result,
-          numberOfPages: Math.ceil(filtered.length / number),
-          numberOfResults: filtered.length
+          data: inventory.data.items,
+          numberOfPages: Math.ceil(inventory.data.total_count / number),
+          numberOfResults: inventory.data.total_count
         });
-      }, 1500);
+      });
 
 
       return deferred.promise;
