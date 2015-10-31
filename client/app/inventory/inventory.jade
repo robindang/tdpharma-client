@@ -62,7 +62,8 @@ div(ng-include='"components/navbar/navbar.html"')
         td(cs-select="row")
         td {{row.status}}
         td {{row.categoryName}}
-        td {{row.photo_thumb}}
+        td
+          img(ng-src="http://localhost:3000/{{row.photo_thumb}}")
         td {{row.itemable.name}}
         td {{row.updated_at}}
         td {{row.amount}}
