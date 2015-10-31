@@ -1,55 +1,60 @@
 div(ng-include='"components/navbar/navbar.html"')
 
 .col-sm-12.inventory
-  .form-inline
-    .form-group
-      .btn-group(dropdown='')
-        button#single-button.btn.btn-primary(type='button', dropdown-toggle='', ng-disabled='mc.getNumberOfRowsSelected()===0')
-          | Action on {{mc.getNumberOfRowsSelected()}} selected
-          span.caret
-        ul.dropdown-menu(role='menu', aria-labelledby='single-button')
-          li(role='menuitem')
-            a(href='#') Delete
-    .form-group
-      .input-group
-        .input-group
-          input.form-control(type='text', placeholder='Search for...')
-          span.input-group-btn
-            button.btn.btn-default(type='button') Search
-    .form-group
-      span {{mc.numberOfResults}} Item(s)
-  .form-inline.clearfix
-    .form-group.pull-left
-      label.control-label Filters
-      span &nbsp;&nbsp;
-      .btn-group(ng-init="mc.status=''")
-        label.btn.btn-default(ng-model='mc.status', btn-radio="''") All
-        label.btn.btn-default(ng-model='mc.status', btn-radio="'Active'") Active
-        label.btn.btn-default(ng-model='mc.status', btn-radio="'Inactive'") Inactive
-    .form-group.pull-right
-      a.btn.btn-primary(href="/products") Add a product
   table.table.table-striped(st-pipe='mc.callServer', st-table='mc.displayed')
     thead
       tr
+        tr
+          th(colspan=9)
+            .form-inline
+              .form-group
+                .btn-group(dropdown='')
+                  button#single-button.btn.btn-primary(type='button', dropdown-toggle='', ng-disabled='mc.getNumberOfRowsSelected()===0')
+                    | Action on {{mc.getNumberOfRowsSelected()}} selected
+                    span.caret
+                  ul.dropdown-menu(role='menu', aria-labelledby='single-button')
+                    li(role='menuitem')
+                      a(href='#') Delete
+              .form-group
+                .input-group
+                  .input-group
+                    input.form-control(st-search, type='text', placeholder='Search for...')
+                    span.input-group-btn
+                      button.btn.btn-default(type='button') Search
+              .form-group
+                span {{mc.numberOfResults}} Item(s)
+            .form-inline.clearfix
+              .form-group.pull-left
+                label.control-label Filters
+                span &nbsp;&nbsp;
+                .btn-group(ng-init="mc.status=''")
+                  label.btn.btn-default(ng-model='mc.status', btn-radio="''") All
+                  label.btn.btn-default(ng-model='mc.status', btn-radio="'Active'") Active
+                  label.btn.btn-default(ng-model='mc.status', btn-radio="'Inactive'") Inactive
+              .form-group.pull-right
+                a.btn.btn-primary(href="/products") Add a product
+      tr
         th
-        th(st-sort='id') Status
-        th(st-sort='name') Category
-        th(st-sort='age') Image
-        th(st-sort='saved') Name
-        th Updated
-        th Available
+        th(st-sort='status') Status
+        th(st-sort='categoryName') Category
+        th Image
+        th(st-sort='name') Name
+        th(st-sort='updated_at') Updated
+        th(st-sort='amount') Available
         th Price
         th Action
       tr
         th
         th
-          input(st-search='id')
+          input(st-search='status')
         th
-          input(st-search='name')
+          select.form-control(st-search="strictSelectValue")
+            option(value="") All
+            option(ng-repeat="row in mc.displayed | unique:'categoryName'", value="{{row.categoryName}}") {{row.categoryName}}
         th
           input(st-search='age')
         th
-          input(ng-model="saved")
+          input(st-search="name")
         th
           input
         th
