@@ -3,9 +3,9 @@
 angular.module('tdpharmaClientApp')
   .controller('ProductsCtrl', ProductsCtrl);
 
-ProductsCtrl.$inject = ['Category'];
+ProductsCtrl.$inject = ['Category', '$cookies'];
 
-function ProductsCtrl(Category) {
+function ProductsCtrl(Category, $cookies) {
 
   var ctrl = this;
 
@@ -20,7 +20,7 @@ function ProductsCtrl(Category) {
     tab.disabled = false;
   }
 
-  Category.get().then(function(x) {
-    ctrl.categories = x;
+  Category.get({email: $cookies.get('email'), token: $cookies.get('token')}, function(x) {
+    ctrl.categories = x.data;
   });
 }
