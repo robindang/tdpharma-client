@@ -9,6 +9,8 @@ function ProductsCtrl($cookies, Category, Medicine) {
 
   var ctrl = this;
 
+  ctrl.medicine = {med_batches_attributes:[]};
+
   ctrl.tabs = [
     { title:'Category', template:'app/products/includes/category.html', active: true },
     { title:'Details', template:'app/products/includes/details.html', disabled: true }

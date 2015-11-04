@@ -18,5 +18,49 @@
       .col-sm-10
         input#form.form-control(type='text', placeholder='Medicine Form', ng-model='pc.medicine.med_form')
     .form-group
+      .col-sm-2
+        button(type='button', ng-click='pc.medicine.med_batches_attributes.push({})').btn.btn-default
+          i.fa.fa-plus-square &nbsp;Add a medicine batch
+    div(ng-repeat-start="batch in pc.medicine.med_batches_attributes")
+    h5 Batch {{$index+1}}
+    .form-group
+      label.col-sm-2.control-label Date
+      .col-sm-10
+        input.form-control(type='text', placeholder='Manufactuer Date', ng-model='batch.mfg_date')
+    .form-group
+      label.col-sm-2.control-label Expiry
+      .col-sm-10
+        input.form-control(type='text', placeholder='Expiry Date', ng-model='batch.expire_date')
+    .form-group
+      label.col-sm-2.control-label Package
+      .col-sm-10
+        input.form-control(type='text', placeholder='Package', ng-model='batch.package')
+    .form-group
+      label.col-sm-2.control-label Location
+      .col-sm-10
+        input.form-control(type='text', placeholder='Manufactuer Location', ng-model='batch.mfg_location')
+    .form-group
+      label.col-sm-2.control-label Store
+      .col-sm-10
+        input.form-control(type='text', placeholder='Store', ng-model='batch.store')
+    .form-group
+      label.col-sm-2.control-label Amount
+      .col-sm-10
+        input.form-control(type='text', placeholder='Amount per Package', ng-model='batch.amount_per_pkg')
+    .form-group
+      label.col-sm-2.control-label Unit
+      .col-sm-10
+        input.form-control(type='text', placeholder='Amount Unit', ng-model='batch.amount_unit')
+    .form-group
+      label.col-sm-2.control-label Total
+      .col-sm-10
+        input.form-control(type='text', placeholder='Total Units', ng-model='batch.total_units')
+    .form-group
+      label.col-sm-2.control-label Price
+      .col-sm-10
+        input.form-control(type='text', placeholder='Total Price', ng-model='batch.total_price')
+    div(ng-repeat-end)
+    .form-group
       .col-sm-offset-2.col-sm-10
         button.btn.btn-primary(type='submit', ng-click="pc.save()") Save
+    
