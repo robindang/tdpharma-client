@@ -10,7 +10,7 @@ angular.module('tdpharmaClientApp')
         controllerAs: 'mc'
       });
   })
-  .factory('Resource', ['$q', '$filter', '$timeout', '$cookies', 'Inventory', 'Category', function ($q, $filter, $timeout, $cookies, Inventory, Category) {
+  .factory('Resource', ['$q', '$filter', '$timeout', '$cookies', 'InventoryItem', 'Category', function ($q, $filter, $timeout, $cookies, InventoryItem, Category) {
 
     function getPage(start, number, params) {
 
@@ -24,16 +24,16 @@ angular.module('tdpharmaClientApp')
 
       // var result = filtered.slice(start, start + number);
 
-      Inventory.get({page: 1+start/number, email: $cookies.get('email'), token: $cookies.get('token')}, function(inventory) {
-        inventory.data.items.forEach(function(x) {
+      InventoryItem.get({page: 1+start/number, email: $cookies.get('email'), token: $cookies.get('token')}, function(item) {
+        item.data.items.forEach(function(x) {
           Category.get({email: $cookies.get('email'), token: $cookies.get('token'), id: x.category_id}, function(y) {
             x.categoryName = y.data.name;
           });
         });
         deferred.resolve({
-          data: inventory.data.items,
-          numberOfPages: Math.ceil(inventory.data.total_count / number),
-          numberOfResults: inventory.data.total_count
+          data: item.data.items,
+          numberOfPages: Math.ceil(item.data.total_count / number),
+          numberOfResults: item.data.total_count
         });
       });
 
