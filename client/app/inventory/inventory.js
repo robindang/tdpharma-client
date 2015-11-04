@@ -24,9 +24,9 @@ angular.module('tdpharmaClientApp')
 
       // var result = filtered.slice(start, start + number);
 
-      InventoryItem.get({page: 1+start/number, email: $cookies.get('email'), token: $cookies.get('token')}, function(item) {
+      InventoryItem.get({page: 1+start/number}, function(item) {
         item.data.items.forEach(function(x) {
-          Category.get({email: $cookies.get('email'), token: $cookies.get('token'), id: x.category_id}, function(y) {
+          Category.get({id: x.category_id}, function(y) {
             x.categoryName = y.data.name;
           });
         });

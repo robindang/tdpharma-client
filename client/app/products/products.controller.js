@@ -22,12 +22,12 @@ function ProductsCtrl($cookies, Category, Medicine) {
   }
 
   ctrl.save = function() {
-    Medicine.save({email: $cookies.get('email'), token: $cookies.get('token')}, {
+    Medicine.save({}, {
       medicine: ctrl.medicine
     });
   }
 
-  Category.get({email: $cookies.get('email'), token: $cookies.get('token')}, function(x) {
+  Category.get({}, function(x) {
     ctrl.categories = x.data;
   });
 }

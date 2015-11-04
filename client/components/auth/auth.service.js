@@ -8,7 +8,7 @@ Auth.$inject = ['$location', '$rootScope', '$http', 'User', '$cookies', '$q'];
 function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
   var currentUser = {};
   if($cookieStore.get('token')) {
-    currentUser = User.get({id: $cookieStore.get('id'), email: $cookieStore.get('email'), token: $cookieStore.get('token')});
+    currentUser = User.get({id: $cookieStore.get('id')});
   }
 
   return {
@@ -31,10 +31,10 @@ function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
         }
       },
       function(data) {
+        console.log('AUTH_TOKEN', data.authentication_token);
         $cookieStore.put('id', data.id);
-        $cookieStore.put('email', data.email);
         $cookieStore.put('token', data.authentication_token);
-        currentUser = User.get({id: data.id, email: data.email, token: data.authentication_token});
+        currentUser = User.get({id: data.id});
         deferred.resolve(data);
         return cb();
       },
@@ -72,9 +72,8 @@ function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
         },
         function(data) {
           $cookieStore.put('id', data.id);
-          $cookieStore.put('email', data.email);
           $cookieStore.put('token', data.authentication_token);
-          currentUser = User.get({id: data.id, email: data.email, token: data.authentication_token});
+          currentUser = User.get({id: data.id});
           return cb(user);
         },
         function(err) {
