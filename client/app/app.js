@@ -29,6 +29,13 @@ angular.module('tdpharmaClientApp', [
         return config;
       },
 
+      response: function(response) {
+        if (response.data instanceof Object && response.data.authentication_token) {
+          $cookies.put('token', response.data.authentication_token);
+        }
+        return $q.resolve(response);
+      },
+
       // Intercept 401s and redirect you to login
       responseError: function(response) {
         if(response.status === 401) {

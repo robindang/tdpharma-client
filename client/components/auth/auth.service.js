@@ -5,10 +5,10 @@ angular.module('tdpharmaClientApp')
 
 Auth.$inject = ['$location', '$rootScope', '$http', 'User', '$cookies', '$q'];
 
-function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
+function Auth($location, $rootScope, $http, User, $cookies, $q) {
   var currentUser = {};
-  if($cookieStore.get('token')) {
-    currentUser = User.get({id: $cookieStore.get('id')});
+  if($cookies.get('token')) {
+    currentUser = User.get({id: $cookies.get('id')});
   }
 
   return {
@@ -32,8 +32,7 @@ function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
       },
       function(data) {
         console.log('AUTH_TOKEN', data.authentication_token);
-        $cookieStore.put('id', data.id);
-        $cookieStore.put('token', data.authentication_token);
+        $cookies.put('id', data.id);
         currentUser = User.get({id: data.id});
         deferred.resolve(data);
         return cb();
@@ -53,7 +52,7 @@ function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
      * @param  {Function}
      */
     logout: function() {
-      $cookieStore.remove('token');
+      $cookies.remove('token');
       currentUser = {};
     },
 
@@ -71,8 +70,7 @@ function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
           user: user
         },
         function(data) {
-          $cookieStore.put('id', data.id);
-          $cookieStore.put('token', data.authentication_token);
+          $cookies.put('id', data.id);
           currentUser = User.get({id: data.id});
           return cb(user);
         },
@@ -151,7 +149,7 @@ function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
      * Get auth token
      */
     getToken: function() {
-      return $cookieStore.get('token');
+      return $cookies.get('token');
     }
   };
 }
