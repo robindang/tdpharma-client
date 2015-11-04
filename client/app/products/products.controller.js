@@ -10,12 +10,13 @@ function ProductsCtrl(Category, $cookies) {
   var ctrl = this;
 
   ctrl.tabs = [
-    { title:'Category', template:'app/products/includes/category.html' },
+    { title:'Category', template:'app/products/includes/category.html', active: true },
     { title:'Details', template:'app/products/includes/details.html', disabled: true }
   ];
 
   ctrl.nextTab = function() {
-    var tab = ctrl.tabs[1];
+    var idx = ctrl.tabs.findIndex(function(x) {return x.active});
+    var tab = ctrl.tabs[idx+1];
     tab.active = true;
     tab.disabled = false;
   }
