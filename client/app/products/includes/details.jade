@@ -17,17 +17,12 @@
       label.col-sm-2.control-label(for='form') Medicine Form
       .col-sm-10
         input#form.form-control(type='text', placeholder='Medicine Form', ng-model='pc.medicine.med_form')
-    .form-group
-      .col-sm-2
-        button(type='button', ng-click='pc.medicine.med_batches_attributes.push({})').btn.btn-default
-          i.fa.fa-plus-square &nbsp;Add a medicine batch
-    div(ng-repeat-start="batch in pc.medicine.med_batches_attributes")
-    h5 Batch {{$index+1}}
+    h5 Batch 1
     .form-group
       label.col-sm-2.control-label Date
       .col-sm-10
         p.input-group
-          input.form-control(type='text', placeholder='Manufactuer Date', uib-datepicker-popup='dd-MM-yyyy', ng-model='batch.mfg_date', is-open='pc.status[$index].opened', max-date='pc.maxDate', datepicker-options='pc.dateOptions', ng-required='true', close-text='Close', required='required')
+          input.form-control(type='text', placeholder='Manufactuer Date', uib-datepicker-popup='dd-MM-yyyy', ng-model='pc.medicine.med_batches_attributes[.mfg_date', is-open='pc.status[$index].opened', max-date='pc.maxDate', datepicker-options='pc.dateOptions', ng-required='true', close-text='Close', required='required')
           span.input-group-btn
             button.btn.btn-default(type='button', ng-click='pc.open("status", $event, $index)')
               i.glyphicon.glyphicon-calendar
@@ -35,39 +30,38 @@
       label.col-sm-2.control-label Expiry
       .col-sm-10
         p.input-group
-          input.form-control(type='text', placeholder='Expiry Date', uib-datepicker-popup='dd-MM-yyyy', ng-model='batch.expire_date', is-open='pc.expStatus[$index].opened', max-date='pc.maxDate', datepicker-options='pc.dateOptions', ng-required='true', close-text='Close', required='required')
+          input.form-control(type='text', placeholder='Expiry Date', uib-datepicker-popup='dd-MM-yyyy', ng-model='pc.medicine.med_batches_attributes[0].expire_date', is-open='pc.expStatus[$index].opened', max-date='pc.maxDate', datepicker-options='pc.dateOptions', ng-required='true', close-text='Close', required='required')
           span.input-group-btn
             button.btn.btn-default(type='button', ng-click='pc.open("expStatus", $event, $index)')
               i.glyphicon.glyphicon-calendar
     .form-group
       label.col-sm-2.control-label Package
       .col-sm-10
-        input.form-control(type='text', placeholder='Package', ng-model='batch.package')
+        input.form-control(type='text', placeholder='Package', ng-model='pc.medicine.med_batches_attributes[0].package')
     .form-group
       label.col-sm-2.control-label Location
       .col-sm-10
-        input.form-control(type='text', placeholder='Manufactuer Location', ng-model='batch.mfg_location')
+        input.form-control(type='text', placeholder='Manufactuer Location', ng-model='pc.medicine.med_batches_attributes[0].mfg_location')
     .form-group
       label.col-sm-2.control-label Store
       .col-sm-10
-        input.form-control(type='text', placeholder='Store', ng-model='batch.store')
+        input.form-control(type='text', placeholder='Store', ng-model='pc.medicine.med_batches_attributes[0].store')
     .form-group
       label.col-sm-2.control-label Amount
       .col-sm-10
-        input.form-control(type='text', placeholder='Amount per Package', ng-model='batch.amount_per_pkg')
+        input.form-control(type='text', placeholder='Amount per Package', ng-model='pc.medicine.med_batches_attributes[0].amount_per_pkg')
     .form-group
       label.col-sm-2.control-label Unit
       .col-sm-10
-        input.form-control(type='text', placeholder='Amount Unit', ng-model='batch.amount_unit')
+        input.form-control(type='text', placeholder='Amount Unit', ng-model='pc.medicine.med_batches_attributes[0].amount_unit')
     .form-group
       label.col-sm-2.control-label Total
       .col-sm-10
-        input.form-control(type='text', placeholder='Total Units', ng-model='batch.total_units')
+        input.form-control(type='text', placeholder='Total Units', ng-model='pc.medicine.med_batches_attributes[0].total_units')
     .form-group
       label.col-sm-2.control-label Price
       .col-sm-10
-        input.form-control(type='text', placeholder='Total Price', ng-model='batch.total_price')
-    div(ng-repeat-end)
+        input.form-control(type='text', placeholder='Total Price', ng-model='pc.medicine.med_batches_attributes[0].total_price')
     .form-group
       .col-sm-offset-2.col-sm-10
         button.btn.btn-primary(type='submit', ng-click="pc.save()") Save
