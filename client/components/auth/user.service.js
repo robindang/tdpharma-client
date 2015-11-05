@@ -7,18 +7,14 @@ angular.module('tdpharmaClientApp')
       format: 'json'
     },
     {
-      changePassword: {
-        method: 'PUT',
-        url: 'http://localhost:3000/users/password',
-        params: {
-          controller:'password'
-        }
-      },
       get: {
         method: 'GET',
         params: {
           id:'me'
         }
+      },
+      update: {
+        method: 'PUT'
       },
       save: {
         method: 'POST',

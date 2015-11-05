@@ -91,9 +91,11 @@ function Auth($location, $rootScope, $http, User, $cookies, $q) {
     changePassword: function(oldPassword, newPassword, callback) {
       var cb = callback || angular.noop;
 
-      return User.changePassword({ id: currentUser._id }, {
-        oldPassword: oldPassword,
-        newPassword: newPassword
+      return User.update({ id: currentUser.id }, {
+        user: {
+          // oldPassword: oldPassword,
+          password: newPassword
+        }
       }, function(user) {
         return cb(user);
       }, function(err) {
