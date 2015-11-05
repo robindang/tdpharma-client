@@ -14,7 +14,7 @@ angular.module('tdpharmaClientApp')
         }
       },
       update: {
-        method: 'PUT'
+        method: 'PATCH'
       },
       save: {
         method: 'POST',
