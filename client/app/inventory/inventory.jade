@@ -35,33 +35,14 @@ div(ng-include='"components/navbar/navbar.html"')
                 a.btn.btn-primary(href="/products") Add a product
       tr
         th
-        th(st-sort='status') Status
-        th(st-sort='categoryName') Category
+        th Status
+        th Category
         th Image
-        th(st-sort='name') Name
-        th(st-sort='updated_at') Updated
-        th(st-sort='amount') Available
+        th Name
+        th Updated
+        th Available
         th Price
         th Action
-      tr
-        th
-        th
-          input(st-search='status')
-        th
-          select.form-control(st-search="strictSelectValue")
-            option(value="") All
-            option(ng-repeat="row in mc.displayed | unique:'categoryName'", value="{{row.categoryName}}") {{row.categoryName}}
-        th
-          input(st-search='age')
-        th
-          input(st-search="name")
-        th
-          input
-        th
-          input
-        th
-          input
-        th
     tbody(ng-show='!mc.isLoading')
       tr(ng-repeat='row in mc.displayed')
         td(cs-select="row")
