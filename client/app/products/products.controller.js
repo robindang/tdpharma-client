@@ -32,4 +32,17 @@ function ProductsCtrl($cookies, Category, Medicine) {
   Category.get({}, function(x) {
     ctrl.categories = x.data;
   });
+
+  ctrl.maxDate = new Date();
+
+  ctrl.open = function(status, $event, $index) {
+    ctrl[status] = ctrl[status] || [];
+    ctrl[status][$index] = ctrl[status][$index] || {};
+    ctrl[status][$index].opened = true;
+  };
+
+  ctrl.dateOptions = {
+    formatYear: 'yy',
+    startingDay: 1
+  };
 }
