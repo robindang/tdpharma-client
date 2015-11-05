@@ -8,7 +8,7 @@ Auth.$inject = ['$location', '$rootScope', '$http', 'User', '$cookies', '$q'];
 function Auth($location, $rootScope, $http, User, $cookies, $q) {
   var currentUser = {};
   if($cookies.get('token')) {
-    currentUser = User.get({id: $cookies.get('id')});
+    currentUser = User.get();
   }
 
   return {
@@ -32,8 +32,7 @@ function Auth($location, $rootScope, $http, User, $cookies, $q) {
       },
       function(data) {
         console.log('AUTH_TOKEN', data.authentication_token);
-        $cookies.put('id', data.id);
-        currentUser = User.get({id: data.id});
+        currentUser = User.get();
         deferred.resolve(data);
         return cb();
       },
@@ -70,8 +69,7 @@ function Auth($location, $rootScope, $http, User, $cookies, $q) {
           user: user
         },
         function(data) {
-          $cookies.put('id', data.id);
-          currentUser = User.get({id: data.id});
+          currentUser = User.get();
           return cb(user);
         },
         function(err) {
