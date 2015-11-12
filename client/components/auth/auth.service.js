@@ -90,6 +90,7 @@ function Auth($location, $rootScope, $http, User, $cookies, $q) {
       var cb = callback || angular.noop;
 
       return User.update({ id: currentUser.id }, {
+        old_password: oldPassword,
         user: {
           // oldPassword: oldPassword,
           password: newPassword

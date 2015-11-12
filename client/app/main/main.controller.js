@@ -1,8 +1,12 @@
 'use strict';
 
 angular.module('tdpharmaClientApp')
-  .controller('MainCtrl', function ($scope, $http, socket) {
+  .controller('MainCtrl', function ($scope, $http, socket, $translate) {
     $scope.awesomeThings = [];
+
+    $scope.changeLanguage = function(lan) {
+      $translate.use(lan);
+    };
 
     $http.get('/api/things').success(function(awesomeThings) {
       $scope.awesomeThings = awesomeThings;

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tdpharmaClientApp')
-  .controller('SettingsCtrl', function ($scope, User, Auth) {
+  .controller('SettingsCtrl', function ($scope, $filter, User, Auth, toastr) {
     $scope.errors = {};
 
     $scope.changePassword = function(form) {
@@ -9,12 +9,15 @@ angular.module('tdpharmaClientApp')
       if(form.$valid) {
         Auth.changePassword( $scope.user.oldPassword, $scope.user.newPassword )
         .then( function() {
-          $scope.message = 'Password successfully changed.';
+          toastr.success($filter('translate')('PASSWORD_CHANGE_SUCCESS'), $filter('translate')('TOASTR_CONGRATS'));
         })
-        .catch( function() {
+        .catch( function(resp) {
           form.password.$setValidity('mongoose', false);
-          $scope.errors.other = 'Incorrect password';
-          $scope.message = '';
+          $scope.user.oldPassword = '';
+          $scope.user.newPassword = '';
+          if  (resp.data && resp.data.data && resp.data.data.errors == 'Incorrect Password') {
+            toastr.error($filter('translate')('INCORRECT_PASSWORD'), $filter('translate')('TOASTR_SORRY'));
+          }
         });
       }
 		};

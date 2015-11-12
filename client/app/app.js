@@ -8,7 +8,8 @@ angular.module('tdpharmaClientApp', [
   'ui.router',
   'ui.bootstrap',
   'smart-table',
-  'listGroup'
+  'listGroup',
+  'pascalprecht.translate'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
