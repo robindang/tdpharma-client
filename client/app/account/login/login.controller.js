@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tdpharmaClientApp')
-  .controller('LoginCtrl', function ($scope, Auth, $location) {
+  .controller('LoginCtrl', function ($scope, Auth, $location, $translate) {
     $scope.user = {};
     $scope.errors = {};
 
@@ -13,7 +13,12 @@ angular.module('tdpharmaClientApp')
           email: $scope.user.email,
           password: $scope.user.password
         })
-        .then( function() {
+        .then( function(resp) {
+          // Set up user language
+          var current_user = resp;
+          if (current_user && current_user.preferred_language) {
+            $translate.use(current_user.preferred_language);
+          }                    
           // Logged in, redirect to home
           $location.path('/');
         })

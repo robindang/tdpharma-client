@@ -9,7 +9,9 @@ angular.module('tdpharmaClientApp', [
   'ui.bootstrap',
   'smart-table',
   'listGroup',
-  'pascalprecht.translate'
+  'ui.select',
+  'pascalprecht.translate',
+  'ngFileUpload'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

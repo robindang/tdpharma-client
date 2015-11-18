@@ -30,8 +30,7 @@ function Auth($location, $rootScope, $http, User, $cookies, $q) {
           password: user.password
         }
       },
-      function(data) {
-        console.log('AUTH_TOKEN', data.authentication_token);
+      function(data) {        
         currentUser = User.get();
         deferred.resolve(data);
         return cb();

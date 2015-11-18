@@ -1,17 +1,18 @@
 'use strict';
 
 angular.module('tdpharmaClientApp')
-  .controller('MainCtrl', function ($scope, $http, socket, $translate) {
+  .controller('MainCtrl', function ($scope, $http, socket, Auth, $translate) {
     $scope.awesomeThings = [];
-
-    $scope.changeLanguage = function(lan) {
-      $translate.use(lan);
-    };
 
     $http.get('/api/things').success(function(awesomeThings) {
       $scope.awesomeThings = awesomeThings;
       socket.syncUpdates('thing', $scope.awesomeThings);
     });
+
+    var current_user = Auth.getCurrentUser();
+    if (current_user && current_user.preferred_language){
+      $translate.use(current_user.preferred_language);
+    }
 
     $scope.addThing = function() {
       if($scope.newThing === '') {

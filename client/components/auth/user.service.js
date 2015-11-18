@@ -13,6 +13,10 @@ angular.module('tdpharmaClientApp')
           id:'me'
         }
       },
+      query: {
+        method: 'GET',
+        isArray:true
+      },
       update: {
         method: 'PATCH'
       },
