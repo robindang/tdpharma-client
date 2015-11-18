@@ -32,7 +32,7 @@
       PASSWORD_CHANGE_SUCCESS: 'Your password has been changed successfully',
       INCORRECT_PASSWORD: 'Incorrect Password',
       NEXT: 'Next',
-      DRAG_IMAGE: 'Drag image into the gray area to save',
+      DRAG_IMAGE: 'Drag image into the gray area to attach',
       // Category related pages
       SELECT_A_CATEGORY: 'Select a category',
       'Baby & Kids': 'Baby & Kids',
@@ -83,7 +83,36 @@
       'Bee Supplements': 'Bee Supplements',
       'Vitamin': 'Vitamin',
       "Greens & Antioxidants": "Greens & Antioxidants",
-      'Mushrooms': 'Mushrooms'
+      'Mushrooms': 'Mushrooms',
+      // Add product page
+      ADD_PRODUCT_DETAIL: 'Detail',
+      AUTHOR: 'Author',
+      NAME: 'Name',
+      CONCENTRATION: 'Concentration',
+      CONCENTRATION_UNIT: 'Concentration Units',
+      MEDICINE_FORM: 'Medicine Form',
+      MFG_LOCATION: 'Mfg Location',
+      MANUFACTURE_DATE: 'Mfg Date',
+      EXPIRE_DATE: 'Expire Date',
+      PACKAGE: 'Package',
+      AMOUNT: 'Amount / Package',
+      UNIT: 'Number of Packages',
+      TOTAL: 'Total Amount',
+      PRICE: 'Price',
+      SAVE: 'Save',
+      AUTHOR_REQUIRED: 'Author is required',
+      NAME_REQUIRED: 'Name is required',
+      CONCENTRATION_REQUIRED: 'Concentration is required',
+      CONCENTRATION_UNIT_REQUIRED: 'Concentration unit is required',
+      MFG_LOCATION_REQUIRED: 'Manufacture location is required',
+      MFG_DATE_REQUIRED: 'Manufuacture date is requried',
+      EXPIRE_DATE_REQUIRED: 'Expiration date is required',
+      PACKAGE_REQUIRED: 'Package is required',
+      AMOUNT_PER_PKG_REQUIRED: 'amount per package is required',
+      AMOUNT_UNIT_REQUIRED: 'Number of packages is required',
+      TOTAL_UNITS_REQUIRED: 'Total amount is required',
+      PRICE_REQUIRED: 'Price is requried',
+      CATEGORY_REQUIRED: 'Category is requried'            
     });
     $translateProvider.preferredLanguage('vn');
   }
