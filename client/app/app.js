@@ -16,11 +16,13 @@ angular.module('tdpharmaClientApp', [
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
       .otherwise('/');
-
     $locationProvider.html5Mode(true);
     $httpProvider.interceptors.push('authInterceptor');
   })
-
+  .constant('APP_CONFIGURATION', {
+    API_V1_URL: 'http://localhost:3000/api/v1/'
+    // API_V1_URL: 'http://tdpos.herokuapp.com/api/v1/'
+  })
   .factory('authInterceptor', function ($rootScope, $q, $cookies, $location) {
     return {
       // Add authorization token to headers

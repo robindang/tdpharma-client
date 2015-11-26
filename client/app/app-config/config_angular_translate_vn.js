@@ -33,6 +33,10 @@
       INCORRECT_PASSWORD: 'Mật mã hiện tại không đúng',
       NEXT: 'Tiếp tục',
       DRAG_IMAGE: 'Kéo hình vào vùng màu xám để đi kèm',
+      // Image processing message
+      PROCESSING_IMAGE: 'Hiện đang phân tích hình ảnh...',
+      UPLOADING_IMAGE: 'Hiện đang truyền tải hình ảnh lên...',
+      SUPPORT_IMAGE_FILE: 'File hình ảnh được hỗ trợ là: ',
       // Category related pages
       SELECT_A_CATEGORY: 'Chọn thể loại',
       'Baby & Kids': 'Trẻ em & Sơ sinh',

@@ -1,6 +1,6 @@
 .col-sm-12
   h5 {{ 'ADD_PRODUCT_DETAIL' | translate }}
-  form.form-horizontal(name='form' ng-submit='pc.save()')
+  form.form-horizontal(name='form' ng-submit='pc.saveDirectUpload()')
     .col-sm-12
       .col-sm-3      
         img(ngf-thumbnail="pc.file" class="thumbnail")
@@ -73,5 +73,5 @@
           input.form-control(type='number', placeholder="{{ 'PRICE' | translate }}", min='0' ng-model='pc.medicine.med_batches_attributes[0].total_price' required)
       .form-group
         .col-sm-offset-2.col-sm-10
-          button.btn.btn-primary(type='submit') {{ 'SAVE' | translate }}
+          button.btn.btn-primary(type='submit') {{ 'SAVE' | translate }}          
     

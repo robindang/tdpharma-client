@@ -84,6 +84,10 @@
       'Vitamin': 'Vitamin',
       "Greens & Antioxidants": "Greens & Antioxidants",
       'Mushrooms': 'Mushrooms',
+      // Image processing message
+      PROCESSING_IMAGE: 'Processing Image...',
+      UPLOADING_IMAGE: 'Uploading Image...',
+      SUPPORT_IMAGE_FILE: 'Supported image file formats are: ',
       // Add product page
       ADD_PRODUCT_DETAIL: 'Detail',
       AUTHOR: 'Author',

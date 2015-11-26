@@ -35,9 +35,9 @@ div(ng-include='"components/navbar/navbar.html"')
                 a.btn.btn-primary(href="/products") Add a product
       tr
         th
-        th Status
-        th Category
         th Image
+        th Status
+        th Category        
         th Name
         th Updated
         th Available
@@ -46,10 +46,10 @@ div(ng-include='"components/navbar/navbar.html"')
     tbody(ng-show='!mc.isLoading')
       tr(ng-repeat='row in mc.displayed')
         td(cs-select="row")
+        td
+          img(ng-src="http://localhost:3000/{{row.photo_thumb.photo}}")          
         td {{row.status}}
         td {{row.categoryName}}
-        td
-          img(ng-src="http://localhost:3000/{{row.photo_thumb}}")
         td {{row.itemable.name}}
         td {{row.updated_at}}
         td {{row.amount}}
