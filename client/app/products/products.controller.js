@@ -104,15 +104,19 @@ function ProductsCtrl($cookies, $filter, $timeout, Category, Medicine, User, toa
       async.waterfall([
           function(callback) {
             // First process the image
-            var filename = moment().format('YYYYMMDDDDmmssssss');
-            S3Upload.upload(ctrl.amazon_config, ctrl.file, filename).then(function(resp){
-              if (resp) {
-                params.direct_upload_url = resp;
-              }              
-              return callback(null, params);
-            }).catch(function(error){
-              callback({error: error});
-            })
+            if (ctrl.file) {
+              var filename = moment().format('YYYYMMDDDDmmssssss');
+              S3Upload.upload(ctrl.amazon_config, ctrl.file, filename).then(function(resp){
+                if (resp) {
+                  params.direct_upload_url = resp;
+                }              
+                return callback(null, params);
+              }).catch(function(error){
+                return callback({error: error});
+              })
+            } else {
+              callback(null, params);             // No image to processed so just return the same params
+            }            
           },
           function(arg1, callback) {
             // Save the medicines 
@@ -125,10 +129,11 @@ function ProductsCtrl($cookies, $filter, $timeout, Category, Medicine, User, toa
           function(arg1, callback) {
             // Wait until medicine image is ready
             var item = arg1;
-            if (arg1.photo_thumb && !arg1.photo_thumb.processed) {                            
+            var retry = 10;
+            if (arg1.photo_thumb && arg1.photo_thumb.processed === false) {                            
               async.whilst(
                 function(){
-                  return !item.photo_thumb.processed;
+                  return (item.photo_thumb.processed === false);
                 },
                 function(cb) {                  
                   toastr.info($filter('translate')('PROCESSING_IMAGE'));
@@ -137,6 +142,10 @@ function ProductsCtrl($cookies, $filter, $timeout, Category, Medicine, User, toa
                   }).catch(function(error){                                                                                  
                     return cb(error.data.data.errors);
                   })
+                  retry = retry - 1;
+                  if (retry == 0) {
+                    return cb($filter('translate')('PROCESSING_IMAGE_TIMEOUT'));
+                  }
                   $timeout(cb, 4000)
                 },
                 function(err) {
@@ -218,6 +227,10 @@ function ProductsCtrl($cookies, $filter, $timeout, Category, Medicine, User, toa
     }
     if (ok_flag && !ctrl.medicine.mfg_location) {
       toastr.error($filter('translate')('MFG_LOCATION_REQUIRED'));  
+      ok_flag = false;
+    }
+    if (ok_flag && !ctrl.medicine.manufacturer) {
+      toastr.error($filter('translate')('MANUFACTURER_REQUIRED'));  
       ok_flag = false;
     }
     if (ok_flag && !ctrl.medicine.med_batches_attributes[0].mfg_date){

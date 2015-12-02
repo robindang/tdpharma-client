@@ -24,12 +24,7 @@ angular.module('tdpharmaClientApp')
 
       // var result = filtered.slice(start, start + number);
 
-      InventoryItem.get({page: 1+start/number}, function(item) {
-        item.data.items.forEach(function(x) {
-          Category.get({id: x.category_id}, function(y) {
-            x.categoryName = y.data.name;
-          });
-        });
+      InventoryItem.get({page: 1+start/number}, function(item) {        
         deferred.resolve({
           data: item.data.items,
           numberOfPages: Math.ceil(item.data.total_count / number),

@@ -87,6 +87,7 @@
       // Image processing message
       PROCESSING_IMAGE: 'Processing Image...',
       UPLOADING_IMAGE: 'Uploading Image...',
+      PROCESSING_IMAGE_TIMEOUT: 'Process Image Timeout',
       SUPPORT_IMAGE_FILE: 'Supported image file formats are: ',
       // Add product page
       ADD_PRODUCT_DETAIL: 'Detail',
@@ -96,6 +97,7 @@
       CONCENTRATION_UNIT: 'Concentration Units',
       MEDICINE_FORM: 'Medicine Form',
       MFG_LOCATION: 'Mfg Location',
+      MANUFACTURER: 'Manufacturer',
       MANUFACTURE_DATE: 'Mfg Date',
       EXPIRE_DATE: 'Expire Date',
       PACKAGE: 'Package',
@@ -109,6 +111,7 @@
       CONCENTRATION_REQUIRED: 'Concentration is required',
       CONCENTRATION_UNIT_REQUIRED: 'Concentration unit is required',
       MFG_LOCATION_REQUIRED: 'Manufacture location is required',
+      MANUFACTURER_REQUIRED: 'Manufacturer is required',
       MFG_DATE_REQUIRED: 'Manufuacture date is requried',
       EXPIRE_DATE_REQUIRED: 'Expiration date is required',
       PACKAGE_REQUIRED: 'Package is required',

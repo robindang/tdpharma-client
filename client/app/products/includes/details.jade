@@ -30,6 +30,10 @@
           .col-sm-10
             input#form.form-control(type='text', placeholder="{{ 'MEDICINE_FORM' | translate }}", ng-model='pc.medicine.med_form' required)
         .form-group
+          label.col-sm-2.control-label(for='manufacturer') {{ 'MANUFACTURER' | translate }}
+          .col-sm-10
+            input#manufacturer.form-control(type='text', placeholder="{{ 'MANUFACTURER'| translate }}", ng-model='pc.medicine.manufacturer' required)
+        .form-group
           label.col-sm-2.control-label(for='mfg_location') {{ 'MFG_LOCATION' | translate }}
           .col-sm-10
             input#mfg_location.form-control(type='text', placeholder="{{ 'MFG_LOCATION' | translate }}", ng-model='pc.medicine.mfg_location' required)          

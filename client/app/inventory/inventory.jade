@@ -28,9 +28,9 @@ div(ng-include='"components/navbar/navbar.html"')
                 label.control-label Filters
                 span &nbsp;&nbsp;
                 .btn-group(ng-init="mc.status=''")
-                  label.btn.btn-default(ng-model='mc.status', btn-radio="''") All
-                  label.btn.btn-default(ng-model='mc.status', btn-radio="'Active'") Active
-                  label.btn.btn-default(ng-model='mc.status', btn-radio="'Inactive'") Inactive
+                  label.btn.btn-default(ng-model='mc.status', btn-radio="''", ng-change='mc.updateItemList()') All
+                  label.btn.btn-default(ng-model='mc.status', btn-radio="'active'", ng-change='mc.updateItemList()') Active
+                  label.btn.btn-default(ng-model='mc.status', btn-radio="'inactive'", ng-change='mc.updateItemList()') Inactive
               .form-group.pull-right
                 a.btn.btn-primary(href="/products") Add a product
       tr
@@ -47,11 +47,11 @@ div(ng-include='"components/navbar/navbar.html"')
       tr(ng-repeat='row in mc.displayed')
         td(cs-select="row")
         td
-          img(ng-src="http://localhost:3000/{{row.photo_thumb.photo}}")          
+          img.photo-thumb(ng-src="{{ row.photo_thumb.photo_link }}")          
         td {{row.status}}
-        td {{row.categoryName}}
+        td {{row.category.name}}
         td {{row.itemable.name}}
-        td {{row.updated_at}}
+        td {{row.updated_moment.format('MM/DD/YY HH:mm')}}
         td {{row.amount}}
         td 
         td

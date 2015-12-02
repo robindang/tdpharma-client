@@ -36,6 +36,7 @@
       // Image processing message
       PROCESSING_IMAGE: 'Hiện đang phân tích hình ảnh...',
       UPLOADING_IMAGE: 'Hiện đang truyền tải hình ảnh lên...',
+      PROCESSING_IMAGE_TIMEOUT: 'Phân tích hình ảnh quá lâu',
       SUPPORT_IMAGE_FILE: 'File hình ảnh được hỗ trợ là: ',
       // Category related pages
       SELECT_A_CATEGORY: 'Chọn thể loại',
@@ -96,6 +97,7 @@
       CONCENTRATION_UNIT: 'Đơn vị cường độ',
       MEDICINE_FORM: 'Dạng Thuốc',
       MFG_LOCATION: 'Nước Sản Xuất',
+      MANUFACTURER: 'Công ty Sản Xuất',
       MANUFACTURE_DATE: 'Ngày Sản Xuất',
       EXPIRE_DATE: 'Ngày Hết Hạn',
       PACKAGE: 'Cách Đóng Gói',
@@ -109,6 +111,7 @@
       CONCENTRATION_REQUIRED: 'Cường độ là mục cần thiết',
       CONCENTRATION_UNIT_REQUIRED: 'Đơn vị cường độ là mục cần thiết',
       MFG_LOCATION_REQUIRED: 'Nước sản xuất là mục cần thiết',
+      MANUFACTURER_REQUIRED: 'Công ty sản xuất là mục cần thiết',
       MFG_DATE_REQUIRED: 'Ngày sản xuất là mục cần thiết',
       EXPIRE_DATE_REQUIRED: 'Ngày hết hạn là mục cần thiết',
       PACKAGE_REQUIRED: 'Cách đóng gói là mục cần thiết',
