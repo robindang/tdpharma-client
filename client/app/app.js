@@ -20,8 +20,12 @@ angular.module('tdpharmaClientApp', [
     $httpProvider.interceptors.push('authInterceptor');
   })
   .constant('APP_CONFIGURATION', {
-    API_V1_URL: 'http://localhost:3000/api/v1/'
-    // API_V1_URL: 'http://tdpos.herokuapp.com/api/v1/'
+    API_V1_URL: 'http://localhost:3000/api/v1/',
+    // API_V1_URL: 'http://tdpos.herokuapp.com/api/v1/',
+    SERVER_END_POINT: 'http://localhost:3000/',
+    // SERVER_END_POINT: 'http://tdpos.herokuapp.com/',
+    SERVER_DEFAULT_PICTURE_ENDPOINT: 'http://localhost:3000'
+    // SERVER_DEFAULT_PICTURE_ENDPOINT: 'http://tdpos.herokuapp.com'
   })
   .factory('authInterceptor', function ($rootScope, $q, $cookies, $location) {
     return {
