@@ -1,18 +1,18 @@
 'use strict';
 
 angular.module('tdpharmaClientApp')
-  .controller('NavbarCtrl', function ($scope, $location, $filter, Auth) {
+  .controller('NavbarCtrl', function ($scope, $location, Auth) {
     $scope.menu = [{
-      'title': $filter('translate')('HOME'),
+      'title': 'HOME',
       'link': '/'
     }, {
-      title: $filter('translate')('INVENTORY'),
+      title: 'INVENTORY',
       link: '/inventory'
     }, {
-      title: $filter('translate')('ORDERS'),
+      title: 'ORDERS',
       link: '/orders'
     }, {
-      title: $filter('translate')('CHECKOUT'),
+      title: 'CHECKOUT',
       link: '/checkout'
     }];
 
