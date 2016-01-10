@@ -11,7 +11,8 @@ angular.module('tdpharmaClientApp', [
   'listGroup',
   'ui.select',
   'pascalprecht.translate',
-  'ngFileUpload'
+  'ngFileUpload',
+  'LocalStorageModule'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tdpharmaClientApp')
-  .controller('NavbarCtrl', function ($scope, $location, Auth) {
+  .controller('NavbarCtrl', function ($scope, $location, $translate, Auth, localStorageService) {
     $scope.menu = [{
       'title': 'HOME',
       'link': '/'
@@ -29,4 +29,11 @@ angular.module('tdpharmaClientApp')
     $scope.isActive = function(route) {
       return route === $location.path();
     };
+
+    $scope.lang = localStorageService.get('lang') || $translate.use();
+    $scope.setLang = function(lang) {
+      localStorageService.set('lang', lang);
+      $translate.use(lang);
+      $scope.lang = lang;
+    }
   });
