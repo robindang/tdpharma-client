@@ -7,6 +7,8 @@
   angularTranslateConfig.$inject = ['$translateProvider'];
 
   function angularTranslateConfig($translateProvider) {
+    $translateProvider.useSanitizeValueStrategy('sanitizeParameters');
+
     $translateProvider.translations('en', {
       GREETING: 'Allo, Allo!',
       LEADING_GREETING: 'Kick-start your pharmacy with tdPharma',
