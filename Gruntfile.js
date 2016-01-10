@@ -13,6 +13,7 @@ module.exports = function (grunt) {
   require('jit-grunt')(grunt, {
     express: 'grunt-express-server',
     useminPrepare: 'grunt-usemin',
+    ngconstant: 'grunt-ng-constant',
     ngtemplates: 'grunt-angular-templates',
     cdnify: 'grunt-google-cdn',
     protractor: 'grunt-protractor-runner',
@@ -312,6 +313,32 @@ module.exports = function (grunt) {
       }
     },
 
+    ngconstant: {
+      options: {
+        deps: false,
+        dest: 'client/app/config.js',
+        name: 'tdpharmaClientApp',
+        constants: {
+          APP_CONFIGURATION: {
+            API_V1_URL: 'http://localhost:3000/api/v1/',
+            SERVER_END_POINT: 'http://localhost:3000/',
+            SERVER_DEFAULT_PICTURE_ENDPOINT: 'http://localhost:3000'
+          }
+        }
+      },
+      dist: {
+        constants: {
+          APP_CONFIGURATION: {
+            API_V1_URL: 'http://tdpos.herokuapp.com/api/v1/',
+            SERVER_END_POINT: 'http://tdpos.herokuapp.com/',
+            SERVER_DEFAULT_PICTURE_ENDPOINT: 'http://tdpos.herokuapp.com'
+          }
+        }
+      },
+      server: {},
+      test: {}
+    },
+
     // Package all the html partials into a single javascript payload
     ngtemplates: {
       options: {
@@ -597,6 +624,7 @@ module.exports = function (grunt) {
       return grunt.task.run([
         'clean:server',
         'env:all',
+        'ngconstant:server',
         'injector:less', 
         'concurrent:server',
         'injector',
@@ -609,6 +637,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'env:all',
+      'ngconstant:server',
       'injector:less', 
       'concurrent:server',
       'injector',
@@ -639,6 +668,7 @@ module.exports = function (grunt) {
       return grunt.task.run([
         'clean:server',
         'env:all',
+        'ngconstant:test',
         'injector:less', 
         'concurrent:test',
         'injector',
@@ -652,6 +682,7 @@ module.exports = function (grunt) {
         'clean:server',
         'env:all',
         'env:test',
+        'ngconstant:test',
         'injector:less', 
         'concurrent:test',
         'injector',
@@ -670,6 +701,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'ngconstant:dist',
     'injector:less', 
     'concurrent:dist',
     'injector',
