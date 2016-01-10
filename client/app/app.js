@@ -12,7 +12,7 @@ angular.module('tdpharmaClientApp', [
   'ui.select',
   'pascalprecht.translate',
   'ngFileUpload',
-  'LocalStorageModule'
+  'ngStorage'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

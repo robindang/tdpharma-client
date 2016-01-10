@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tdpharmaClientApp')
-  .controller('NavbarCtrl', function ($scope, $location, $translate, Auth, localStorageService) {
+  .controller('NavbarCtrl', function ($scope, $location, $translate, Auth, $localStorage) {
     $scope.menu = [{
       'title': 'HOME',
       'link': '/'
@@ -30,10 +30,13 @@ angular.module('tdpharmaClientApp')
       return route === $location.path();
     };
 
-    $scope.lang = localStorageService.get('lang') || $translate.use();
-    $scope.setLang = function(lang) {
-      localStorageService.set('lang', lang);
-      $translate.use(lang);
-      $scope.lang = lang;
-    }
+    if (!$localStorage.lang) $localStorage.lang = $translate.use();
+    $scope.$storage = $localStorage;
+    $scope.$watch('$storage.lang', function() {
+      $translate.use($storage.lang);
+    });
+    // $scope.setLang = function(lang) {
+    //   $translate.use(lang);
+    //   $scope.lang = lang;
+    // }
   });

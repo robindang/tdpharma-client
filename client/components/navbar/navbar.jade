@@ -14,17 +14,17 @@ div.navbar.navbar-default.navbar-static-top(ng-controller='NavbarCtrl')
           a(ng-href='{{item.link}}') {{item.title | translate }}
 
       ul.nav.navbar-nav.navbar-right
-        li.dropdown(ng-show='lang')
+        li.dropdown
           a.dropdown-toggle(href='#' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false')
-            span.flag-icon(ng-class='{"flag-icon-gb":lang=="en","flag-icon-vn":lang=="vn"}')
+            span.flag-icon(ng-class='{"flag-icon-gb":$storage.lang=="en","flag-icon-vn":$storage.lang=="vn"}')
             span.caret
           ul.dropdown-menu
             li
-              a(href='#', ng-click='setLang("en")')
+              a(href='#', ng-click='$storage.lang="en"')
                 span.flag-icon.flag-icon-gb
                 | &nbsp;English
             li
-              a(href='#', ng-click='setLang("vn")')
+              a(href='#', ng-click='$storage.lang="vn"')
                 span.flag-icon.flag-icon-vn
                 | &nbsp;Tiếng Việt
 
