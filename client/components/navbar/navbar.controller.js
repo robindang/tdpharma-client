@@ -33,10 +33,6 @@ angular.module('tdpharmaClientApp')
     if (!$localStorage.lang) $localStorage.lang = $translate.use();
     $scope.$storage = $localStorage;
     $scope.$watch('$storage.lang', function() {
-      $translate.use($storage.lang);
+      $translate.use($scope.$storage.lang);
     });
-    // $scope.setLang = function(lang) {
-    //   $translate.use(lang);
-    //   $scope.lang = lang;
-    // }
   });
