@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('tdpharmaClientApp')
-  .factory('User', function ($resource) {
-    return $resource('http://localhost:3000/api/v1/users/:id/:controller', {
+  .factory('User', function ($resource, APP_CONFIGURATION) {
+    return $resource(APP_CONFIGURATION.API_V1_URL+'users/:id/:controller', {
       id: '@_id',
       format: 'json'
     },
@@ -22,11 +22,11 @@ angular.module('tdpharmaClientApp')
       },
       save: {
         method: 'POST',
-        url: 'http://localhost:3000/users/:id/:controller'
+        url: APP_CONFIGURATION.SERVER_END_POINT+'users/:id/:controller'
       },
       signIn: {
         method: 'POST',
-        url: 'http://localhost:3000/users/sign_in'
+        url: APP_CONFIGURATION.SERVER_END_POINT+'users/sign_in'
       }
 	  });
   });
