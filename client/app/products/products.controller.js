@@ -37,7 +37,7 @@ function ProductsCtrl($cookies, $filter, $timeout, Category, Medicine, User, toa
     User.query().$promise.then(function(resp){
         ctrl.store_users = resp;
     }).catch(function(err){
-      toastr.error(error.data.data.errors, $filter('translate')('TOASTR_SORRY'));
+      toastr.error(err.data.data.errors, $filter('translate')('TOASTR_SORRY'));
     });
 
     Category.get({}, function(x) {
@@ -47,7 +47,7 @@ function ProductsCtrl($cookies, $filter, $timeout, Category, Medicine, User, toa
     serverConfig.get({id: 'temp_amazon_s3'}).$promise.then(function(resp){
       ctrl.amazon_config = resp.data;
     }).catch(function(err){
-      toastr.error(error.data.data.errors, $filter('translate')('TOASTR_SORRY'));
+      toastr.error(err.data.data.errors, $filter('translate')('TOASTR_SORRY'));
     })
   }
 
