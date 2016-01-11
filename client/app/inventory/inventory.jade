@@ -8,8 +8,8 @@ div(ng-include='"components/navbar/navbar.html"')
           th(colspan=9)
             .form-inline.col-md-12
               .form-group.col-md-3
-                .btn-group(dropdown='')
-                  button#single-button.btn.btn-primary(type='button', dropdown-toggle='', ng-disabled='mc.getNumberOfRowsSelected()===0')
+                .btn-group(uib-dropdown='')
+                  button#single-button.btn.btn-primary(type='button', uib-dropdown-toggle='', ng-disabled='mc.getNumberOfRowsSelected()===0')
                     | Action on {{mc.getNumberOfRowsSelected()}} selected 
                     span.caret
                   ul.dropdown-menu(role='menu', aria-labelledby='single-button')
@@ -33,9 +33,9 @@ div(ng-include='"components/navbar/navbar.html"')
                 label.control-label Filters
                 span &nbsp;&nbsp;
                 .btn-group(ng-init="mc.status=''")
-                  label.btn.btn-default(ng-model='mc.status', btn-radio="''", ng-change='mc.updateItemList()') All
-                  label.btn.btn-default(ng-model='mc.status', btn-radio="'active'", ng-change='mc.updateItemList()') Active
-                  label.btn.btn-default(ng-model='mc.status', btn-radio="'inactive'", ng-change='mc.updateItemList()') Inactive
+                  label.btn.btn-default(ng-model='mc.status', uib-btn-radio="''", ng-change='mc.updateItemList()') All
+                  label.btn.btn-default(ng-model='mc.status', uib-btn-radio="'active'", ng-change='mc.updateItemList()') Active
+                  label.btn.btn-default(ng-model='mc.status', uib-btn-radio="'inactive'", ng-change='mc.updateItemList()') Inactive
               .form-group.pull-right
                 a.btn.btn-primary(href="/products") Add a product
       tr
@@ -61,7 +61,7 @@ div(ng-include='"components/navbar/navbar.html"')
         td 
         td
           .input-group
-            .btn-group(dropdown='', style='min-width:100px')
+            .btn-group(uib-dropdown='', style='min-width:100px')
               button#split-button.btn.btn-default(type='button') Edit
               button.btn.btn-default(type='button', dropdown-toggle='')
                 span.caret
