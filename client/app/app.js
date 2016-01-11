@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('tdpharmaClientApp', [
+  'ngAnimate',
   'ngCookies',
   'ngResource',
   'ngSanitize',
@@ -12,13 +13,21 @@ angular.module('tdpharmaClientApp', [
   'ui.select',
   'pascalprecht.translate',
   'ngFileUpload',
-  'ngStorage'
+  'ngStorage',
+  'toastr'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
       .otherwise('/');
     $locationProvider.html5Mode(true);
     $httpProvider.interceptors.push('authInterceptor');
+  })
+  .config(function(toastrConfig) {
+    angular.extend(toastrConfig, {
+      closeButton: true,
+      positionClass: 'toast-custom-top-right',
+      timeOut: 4000
+    });
   })
   .factory('authInterceptor', function ($rootScope, $q, $cookies, $location) {
     return {
