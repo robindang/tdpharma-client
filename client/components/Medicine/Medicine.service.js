@@ -3,10 +3,10 @@
 angular.module('tdpharmaClientApp')
   .factory('Medicine', Medicine);
 
-Medicine.$inject = ['$resource'];
+Medicine.$inject = ['$resource', APP_CONFIGURATION];
 
-function Medicine($resource) {
-  return $resource('http://localhost:3000/api/v1/medicines/:id/:controller', {
+function Medicine($resource, APP_CONFIGURATION) {
+  return $resource(APP_CONFIGURATION.API_V1_URL+'medicines/:id/:controller', {
     id: '@_id',
     format: 'json'
   });

@@ -1,7 +1,6 @@
 'use strict';
 
 angular.module('tdpharmaClientApp', [
-  'ngAnimate',
   'ngCookies',
   'ngResource',
   'ngSanitize',
