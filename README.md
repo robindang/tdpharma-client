@@ -26,6 +26,9 @@ $ grunt serve
 
 ```sh
 $ grunt build
+```
+Commit and push the resulting build, located in your dist folder.
+```sh
 $ grunt buildcontrol:heroku
 ```
 
