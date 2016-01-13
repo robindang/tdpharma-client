@@ -1,5 +1,7 @@
 # Pharma Client
 
+See [example](http://ontario.herokuapp.com/).
+
 ### Installation
 
 First install [node.js](http://nodejs.org/). Then:
