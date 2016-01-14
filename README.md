@@ -1,4 +1,4 @@
-# Pharma Client
+x# Pharma Client
 
 See [example](http://ontario.herokuapp.com/).
 
@@ -47,7 +47,9 @@ $ grunt test
 
 ### Server side configuration is in Gruntfile.js
 
-Lookup ngconstant. To be moved to a separate file. Server configuration are built to client/app/config.js. To be determined if can be easily built to existing app.js file.
+Server configurations can be found in server/config/environment/. Configurations may be overrided by adding local.env.js in server/config/environment/. Please see local.env.sample.js for an example.
+
+Client configurations are available in client/config/environment/. Configurations are accessible in angular by injecting APP_CONFIGURATION. They are incorporated into the build and is built to app/config.js. Client configurations may be overrided for all targets by adding local.env.json file to the client/config/ folder.
 
 ### Known errors
 
