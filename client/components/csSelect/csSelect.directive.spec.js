@@ -42,6 +42,6 @@ describe('Directive: csSelect', function () {
       </table>');
     element = $compile(element)(scope);
     scope.$apply();
-    expect(element.text()).toBe('                                        first name           last name           birth date           balance           email                                                          LAURENT           Renard           May 20, 1987           $102.00           email                               BLANDINE           Faivre           Apr 24, 1987           -$2,323.22           email                               FRANCOISE           Frere           Aug 26, 1955           $42,343.00           email                         ');
+    expect(element.text()).toMatch(/\s+first\s+name\s+last\s+name\s+birth\s+date\s+balance\s+email\s+LAURENT\s+Renard\s+May\s+20,\s+1987\s+\$102.00\s+email\s+BLANDINE\s+Faivre\s+Apr\s+24,\s+1987\s+-\$2,323.22\s+email\s+FRANCOISE\s+Frere\s+Aug\s+26,\s+1955\s+\$42,343.00\s+email\s+/);
   }));
 });
