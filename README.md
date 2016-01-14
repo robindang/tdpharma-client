@@ -1,6 +1,6 @@
 # Pharmaplus app
 
-See [here](http://ontario.herokuapp.com/) for an example.
+See [here](http://pharmaplus.herokuapp.com/) for an example.
 
 ### Installation
 
