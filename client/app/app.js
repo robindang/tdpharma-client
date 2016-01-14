@@ -2,6 +2,7 @@
 
 angular.module('tdpharmaClientApp', [
   'ngCookies',
+  'ngLodash',
   'ngResource',
   'ngSanitize',
   'btford.socket-io',

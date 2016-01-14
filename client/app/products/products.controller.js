@@ -3,9 +3,11 @@
 angular.module('tdpharmaClientApp')
   .controller('ProductsCtrl', ProductsCtrl);
 
-ProductsCtrl.$inject = ['$cookies', '$filter', '$timeout', 'Category', 'Medicine', 'User', 'toastr', 'S3Upload', 'serverConfig', 'InventoryItem'];
+ProductsCtrl.$inject = [
+  '$cookies', '$filter', '$timeout', 'Category', 'Medicine', 'User', 
+  'toastr', 'S3Upload', 'lodash', 'serverConfig', 'InventoryItem'];
 
-function ProductsCtrl($cookies, $filter, $timeout, Category, Medicine, User, toastr, S3Upload, serverConfig, InventoryItem) {
+function ProductsCtrl($cookies, $filter, $timeout, Category, Medicine, User, toastr, S3Upload, _, serverConfig, InventoryItem) {
 
   var ctrl = this;
   ctrl.tabs = [
@@ -42,6 +44,8 @@ function ProductsCtrl($cookies, $filter, $timeout, Category, Medicine, User, toa
 
     Category.get({}, function(x) {
       ctrl.categories = x.data;
+      ctrl.selected = [ctrl.categories[0], ctrl.categories[0].children[0]]
+
     });
 
     serverConfig.get({id: 'temp_amazon_s3'}).$promise.then(function(resp){
