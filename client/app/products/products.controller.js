@@ -4,17 +4,17 @@ angular.module('tdpharmaClientApp')
   .controller('ProductsCtrl', ProductsCtrl);
 
 ProductsCtrl.$inject = [
-  '$cookies', '$filter', '$scope', '$timeout', 'APP_CONFIGURATION', 'Category', 
+  '$cookies', '$filter', '$location', '$scope', '$timeout', 'APP_CONFIGURATION', 'Category', 
   'Medicine', 'User', 'toastr', 'S3Upload', 'lodash', 'serverConfig', 'InventoryItem'];
 
-function ProductsCtrl($cookies, $filter, $scope, $timeout, APP_CONFIGURATION, Category, 
-  Medicine, User, toastr, S3Upload, _, serverConfig, InventoryItem) {
+function ProductsCtrl($cookies, $filter, $location, $scope, $timeout, APP_CONFIGURATION, 
+  Category, Medicine, User, toastr, S3Upload, _, serverConfig, InventoryItem) {
 
   var ctrl = this;
   ctrl.IMAGE_PLACEHOLDER = APP_CONFIGURATION.SERVER_DEFAULT_PICTURE_ENDPOINT + '/images/inventoryitem.svg';
   ctrl.tabs = [
-    { title:'Category', template:'app/products/includes/category.html', active: true },
-    { title:'Details', template:'app/products/includes/details.html', disabled: true }
+    { hash: 'category', title: 'Category', template:'app/products/includes/category.html', active: true },
+    { hash: 'details', title: 'Details', template:'app/products/includes/details.html' }
   ];
   ctrl.categories = [];
   ctrl.amazon_config = {};
@@ -29,17 +29,38 @@ function ProductsCtrl($cookies, $filter, $scope, $timeout, APP_CONFIGURATION, Ca
   ctrl.updateUser = updateUser;
   ctrl.open = open;
   ctrl.nextTab = nextTab;
+  ctrl.updateHash = updateHash;
   ctrl.updateTotalAmount = updateTotalAmount;
   ctrl.uploadImage = uploadImage;
   ctrl.saveDirectUpload = saveDirectUpload;
   ctrl.save = save;
 
-  $scope.$watch('pc.selected_user', ctrl.updateUser);
+  init();
+  
+  function init() {
+    initActiveTab();
+    initWatches();
+    initData();
+  }
 
-  prepareData();
+  function initActiveTab() {
+    var hash = $location.hash().toLowerCase();
+    if (!hash) return;
+    _.each(ctrl.tabs, function(tab) {
+      if (tab.hash===hash && !tab.active) tab.active = true
+    })
+  }
+
+  function initWatches() {
+    $scope.$watch('pc.selected_user', ctrl.updateUser);
+  }
+
+  function updateHash(tab) {
+    $location.hash(tab.hash);
+  }
 
   // Function definition
-  function prepareData(){    
+  function initData(){    
     User.query().$promise.then(function(resp){
         ctrl.store_users = resp;
         if (!ctrl.store_users.length) return;

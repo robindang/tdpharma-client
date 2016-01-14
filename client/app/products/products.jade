@@ -2,5 +2,5 @@ div(ng-include='"components/navbar/navbar.html"')
 
 .col-md-12
   uib-tabset
-    uib-tab(ng-repeat="tab in pc.tabs", heading="{{tab.title}}", active="tab.active", disable="tab.disabled")
+    uib-tab(ng-repeat="tab in pc.tabs", heading="{{tab.title}}", active="tab.active", disable="tab.disabled", select="pc.updateHash(tab)")
       div(ng-include="tab.template")
