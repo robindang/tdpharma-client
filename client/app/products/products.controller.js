@@ -4,10 +4,11 @@ angular.module('tdpharmaClientApp')
   .controller('ProductsCtrl', ProductsCtrl);
 
 ProductsCtrl.$inject = [
-  '$cookies', '$filter', '$timeout', 'APP_CONFIGURATION', 'Category', 'Medicine', 'User', 
-  'toastr', 'S3Upload', 'lodash', 'serverConfig', 'InventoryItem'];
+  '$cookies', '$filter', '$scope', '$timeout', 'APP_CONFIGURATION', 'Category', 
+  'Medicine', 'User', 'toastr', 'S3Upload', 'lodash', 'serverConfig', 'InventoryItem'];
 
-function ProductsCtrl($cookies, $filter, $timeout, APP_CONFIGURATION, Category, Medicine, User, toastr, S3Upload, _, serverConfig, InventoryItem) {
+function ProductsCtrl($cookies, $filter, $scope, $timeout, APP_CONFIGURATION, Category, 
+  Medicine, User, toastr, S3Upload, _, serverConfig, InventoryItem) {
 
   var ctrl = this;
   ctrl.IMAGE_PLACEHOLDER = APP_CONFIGURATION.SERVER_DEFAULT_PICTURE_ENDPOINT + '/images/inventoryitem.svg';
@@ -32,6 +33,8 @@ function ProductsCtrl($cookies, $filter, $timeout, APP_CONFIGURATION, Category, 
   ctrl.uploadImage = uploadImage;
   ctrl.saveDirectUpload = saveDirectUpload;
   ctrl.save = save;
+
+  $scope.$watch('pc.selected_user', ctrl.updateUser);
 
   prepareData();
 
@@ -63,6 +66,7 @@ function ProductsCtrl($cookies, $filter, $timeout, APP_CONFIGURATION, Category, 
   }
 
   function updateUser(item){
+    if (!item) return;
     var resp = item;
     _.each(ctrl.medicine.med_batches_attributes, function(b){
       b.user_id = item.id;
