@@ -12,8 +12,8 @@ describe('Filter: unique', function () {
   }));
 
   it('should return the input prefixed with "unique filter:"', function () {
-    var text = 'angularjs';
-    expect(unique(text)).toBe('unique filter: ' + text);
+    var a = [{id:"foo"}, {id:"bar"}, {id:"baz"}];
+    expect(unique(a,'id')).toContain(a[0]);
   });
 
 });
