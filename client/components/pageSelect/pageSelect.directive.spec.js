@@ -4,7 +4,6 @@ describe('Directive: pageSelect', function () {
 
   // load the directive's module and view
   beforeEach(module('tdpharmaClientApp'));
-  beforeEach(module('app/pageSelect/pageSelect.html'));
 
   var element, scope;
 
