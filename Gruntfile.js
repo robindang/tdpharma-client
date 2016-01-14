@@ -318,25 +318,22 @@ module.exports = function (grunt) {
         deps: false,
         dest: 'client/app/config.js',
         name: 'tdpharmaClientApp',
+      },
+      dev: {
         constants: {
-          APP_CONFIGURATION: {
-            API_V1_URL: 'http://localhost:3000/api/v1/',
-            SERVER_END_POINT: 'http://localhost:3000/',
-            SERVER_DEFAULT_PICTURE_ENDPOINT: 'http://localhost:3000'
-          }
+          APP_CONFIGURATION: grunt.file.readJSON('client/config/environment/development.json')
         }
       },
-      dist: {
+      prod: {
         constants: {
-          APP_CONFIGURATION: {
-            API_V1_URL: 'http://tdpos.herokuapp.com/api/v1/',
-            SERVER_END_POINT: 'http://tdpos.herokuapp.com/',
-            SERVER_DEFAULT_PICTURE_ENDPOINT: 'http://tdpos.herokuapp.com'
-          }
+          APP_CONFIGURATION: grunt.file.readJSON('client/config/environment/production.json')
         }
       },
-      server: {},
-      test: {}
+      test: {
+        constants: {
+          APP_CONFIGURATION: grunt.file.readJSON('client/config/environment/development.json')
+        }
+      }
     },
 
     // Package all the html partials into a single javascript payload
@@ -624,7 +621,7 @@ module.exports = function (grunt) {
       return grunt.task.run([
         'clean:server',
         'env:all',
-        'ngconstant:server',
+        'ngconstant:dev',
         'injector:less', 
         'concurrent:server',
         'injector',
@@ -637,7 +634,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'env:all',
-      'ngconstant:server',
+      'ngconstant:dev',
       'injector:less', 
       'concurrent:server',
       'injector',
@@ -701,7 +698,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'ngconstant:dist',
+    'ngconstant:prod',
     'injector:less', 
     'concurrent:dist',
     'injector',
