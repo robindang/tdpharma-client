@@ -3,33 +3,37 @@ div(ng-include='"components/navbar/navbar.html"')
 .container
   .row
     .col-md-12
+      ul.breadcrumb
+        li(ng-repeat='breadcrumb in pic.breadcrumbs')
+          a(href='#') {{breadcrumb.name}}
       .row
-        .col-sm-9
+        .col-md-10.col-xs-9
           h3 {{pic.item.itemable.name}}
           h5 {{pic.item.itemable.manufacturer}}
-        .col-md-3.text-right
-          .btn.btn-default(ng-show='pic.isReadOnly' ng-click='pic.isReadOnly=false')
+        .col-md-2.col-xs-3.text-right
+          .btn.btn-default(ng-show='pic.isReadOnly' ng-click='pic.isReadOnly=false' style='margin-top:20px')
             i.fa.fa-pencil
             | &nbsp;Edit
+      hr
       form.form-horizontal
         .form-group
-          label.col-sm-3.control-label(for='concentration') {{ 'CONCENTRATION' | translate }}
-          .col-sm-9
+          label.col-md-2.col-xs-3.control-label(for='concentration') {{ 'CONCENTRATION' | translate }}
+          .col-md-10.col-xs-9
             input#concentration.form-control(type='number', placeholder="{{ 'CONCENTRATION' | translate }}", ng-model='pic.item.itemable.concentration' ng-readonly="pic.isReadOnly" required)        
         .form-group
-          label.col-sm-3.control-label(for='unit') {{ 'CONCENTRATION_UNIT' | translate }}
-          .col-sm-9
+          label.col-md-2.col-xs-3.control-label(for='unit') {{ 'CONCENTRATION_UNIT' | translate }}
+          .col-md-10.col-xs-9
             input#unit.form-control(type='text', placeholder="{{ 'CONCENTRATION_UNIT' | translate }}", ng-model='pic.item.itemable.concentration_unit' ng-readonly="pic.isReadOnly" required)
           .form-group
-          label.col-sm-3.control-label(for='form') {{ 'MEDICINE_FORM' | translate }}
-          .col-sm-9
+          label.col-md-2.col-xs-3.control-label(for='form') {{ 'MEDICINE_FORM' | translate }}
+          .col-md-10.col-xs-9
             input#form.form-control(type='text', placeholder="{{ 'MEDICINE_FORM' | translate }}", ng-model='pic.item.itemable.med_form' ng-readonly="pic.isReadOnly" required)
         .form-group
-          label.col-sm-3.control-label(for='mfg_location') {{ 'MFG_LOCATION' | translate }}
-          .col-sm-9
+          label.col-md-2.col-xs-3.control-label(for='mfg_location') {{ 'MFG_LOCATION' | translate }}
+          .col-md-10.col-xs-9
             input#mfg_location.form-control(type='text', placeholder="{{ 'MFG_LOCATION' | translate }}", ng-model='pic.item.itemable.mfg_location' ng-readonly="pic.isReadOnly" required)
         .row
-          .col-sm-9
+          .col-md-10.col-xs-9
           .col-md-3.text-right
             .btn.btn-danger(ng-show='!pic.isReadOnly' ng-click='pic.isReadOnly=true') Cancel
             | &nbsp;&nbsp;
