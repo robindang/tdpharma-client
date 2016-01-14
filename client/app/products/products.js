@@ -5,8 +5,14 @@ angular.module('tdpharmaClientApp')
     $stateProvider
       .state('products', {
         url: '/products',
-        templateUrl: 'app/products/products.html',
+        templateUrl: 'app/products/index/products.html',
         controller: 'ProductsCtrl',
         controllerAs: 'pc'
+      })
+      .state('productsId', {
+        url: '/products/:id',
+        templateUrl: 'app/products/id/productsId.html',
+        controller: 'ProductsIdCtrl',
+        controllerAs: 'pic'
       });
   });

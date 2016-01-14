@@ -1,0 +1,30 @@
+div(ng-include='"components/navbar/navbar.html"')
+
+.container
+  .row
+    .col-md-12
+      form.form-horizontal
+        .form-group
+          label.col-sm-3.control-label(for='name') {{ 'NAME' | translate }}
+          .col-sm-9
+            input#name.form-control(type='text', placeholder="{{ 'NAME' | translate }}", ng-model='pic.medicine.name' name='name' ng-readonly="pic.isReadOnly" required)            
+        .form-group
+          label.col-sm-3.control-label(for='concentration') {{ 'CONCENTRATION' | translate }}
+          .col-sm-9
+            input#concentration.form-control(type='number', placeholder="{{ 'CONCENTRATION' | translate }}", ng-model='pic.medicine.concentration' ng-readonly="pic.isReadOnly" required)        
+        .form-group
+          label.col-sm-3.control-label(for='unit') {{ 'CONCENTRATION_UNIT' | translate }}
+          .col-sm-9
+            input#unit.form-control(type='text', placeholder="{{ 'CONCENTRATION_UNIT' | translate }}", ng-model='pic.medicine.concentration_unit' ng-readonly="pic.isReadOnly" required)
+          .form-group
+          label.col-sm-3.control-label(for='form') {{ 'MEDICINE_FORM' | translate }}
+          .col-sm-9
+            input#form.form-control(type='text', placeholder="{{ 'MEDICINE_FORM' | translate }}", ng-model='pic.medicine.med_form' ng-readonly="pic.isReadOnly" required)
+        .form-group
+          label.col-sm-3.control-label(for='manufacturer') {{ 'MANUFACTURER' | translate }}
+          .col-sm-9
+            input#manufacturer.form-control(type='text', placeholder="{{ 'MANUFACTURER'| translate }}", ng-model='pic.medicine.manufacturer' ng-readonly="pic.isReadOnly" required)
+        .form-group
+          label.col-sm-3.control-label(for='mfg_location') {{ 'MFG_LOCATION' | translate }}
+          .col-sm-9
+            input#mfg_location.form-control(type='text', placeholder="{{ 'MFG_LOCATION' | translate }}", ng-model='pic.medicine.mfg_location' ng-readonly="pic.isReadOnly" required)   
