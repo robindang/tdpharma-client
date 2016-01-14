@@ -92,7 +92,7 @@
       PROCESSING_IMAGE_TIMEOUT: 'Process Image Timeout',
       SUPPORT_IMAGE_FILE: 'Supported image file formats are: ',
       // Add product page
-      ADD_PRODUCT_DETAIL: 'Detail',
+      ADD_PRODUCT_DETAIL: 'Fill in product information',
       AUTHOR: 'Author',
       NAME: 'Name',
       CONCENTRATION: 'Concentration',
