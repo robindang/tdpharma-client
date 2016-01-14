@@ -428,7 +428,9 @@ module.exports = function (grunt) {
       },
       heroku: {
         options: {
-          config: {'user.name': 'Robin Dang'},
+          config: {
+            'user.email': 'you@example.com',
+            'user.name': 'Your Name'},
           force: true,
           remote: 'heroku',
           branch: 'master'
