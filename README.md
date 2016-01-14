@@ -4,8 +4,15 @@ See [example](http://ontario.herokuapp.com/).
 
 ### Installation
 
-First install [node.js](http://nodejs.org/). Then:
+First install node.js [here](http://nodejs.org/). Then:
 
+You only need to do this once. This will install the Grunt task runner and node-inspector for server side debugging. The node-inspector is optional and only needed to run `grunt serve:debug`.
+```sh
+$ npm install -g grunt-cli
+$ npm install -g node-inspector
+```
+
+And then run the below to update the project dependencies.
 ```sh
 $ npm install
 $ bower install
@@ -45,13 +52,13 @@ The build builds the client into four files, an app and vendor file for the css 
 $ grunt test
 ```
 
-### Server side configuration is in Gruntfile.js
+### Server and Client Configurations
 
 Server configurations can be found in server/config/environment/. Configurations may be overrided by adding local.env.js in server/config/environment/. Please see local.env.sample.js for an example.
 
 Client configurations are available in client/config/environment/. Configurations are accessible in angular by injecting APP_CONFIGURATION. They are incorporated into the build and is built to app/config.js. Client configurations may be overrided for all targets by adding local.env.json file to the client/config/ folder.
 
-### Known errors
+### Known Issues
 
 The client still tries to access Thing api. It has been removed from the server. Test are broken at the moment. To be fixed. 
 
