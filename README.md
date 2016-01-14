@@ -8,6 +8,7 @@ First install node.js [here](http://nodejs.org/). Then:
 
 ```sh
 $ npm install -g grunt-cli
+$ npm install -g bower
 $ npm install -g node-inspector
 ```
 You only need to do this once. This will install the Grunt task runner and node-inspector for server side debugging. The node-inspector is optional and only needed to run `grunt serve:debug`.
