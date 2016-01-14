@@ -1,16 +1,16 @@
-x# Pharma Client
+# Pharmaplus app
 
-See [example](http://ontario.herokuapp.com/).
+See [here](http://ontario.herokuapp.com/) for an example.
 
 ### Installation
 
 First install node.js [here](http://nodejs.org/). Then:
 
-You only need to do this once. This will install the Grunt task runner and node-inspector for server side debugging. The node-inspector is optional and only needed to run `grunt serve:debug`.
 ```sh
 $ npm install -g grunt-cli
 $ npm install -g node-inspector
 ```
+You only need to do this once. This will install the Grunt task runner and node-inspector for server side debugging. The node-inspector is optional and only needed to run `grunt serve:debug`.
 
 And then run the below to update the project dependencies.
 ```sh
@@ -56,7 +56,7 @@ $ grunt test
 
 Server configurations can be found in server/config/environment/. Configurations may be overrided by adding local.env.js in server/config/environment/. Please see local.env.sample.js for an example.
 
-Client configurations are available in client/config/environment/. Configurations are accessible in angular by injecting APP_CONFIGURATION. They are incorporated into the build and is built to app/config.js. Client configurations may be overrided for all targets by adding local.env.json file to the client/config/ folder.
+Client configurations are available in client/config/environment/. Configurations are accessible in angular by injecting APP_CONFIGURATION. These configurations are generated in app/config.js as part of the target build. They may be overrided for all targets by adding local.env.json file to the client/config/ folder.
 
 ### Known Issues
 
