@@ -34,7 +34,7 @@
       PASSWORD_CHANGE_SUCCESS: 'Your password has been changed successfully',
       INCORRECT_PASSWORD: 'Incorrect Password',
       NEXT: 'Next',
-      DRAG_IMAGE: 'Drag image into the gray area to attach',
+      DRAG_IMAGE: 'Drag And Drop your image here',
       // Category related pages
       SELECT_A_CATEGORY: 'Select a category',
       'Baby & Kids': 'Baby & Kids',

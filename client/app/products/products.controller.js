@@ -4,12 +4,13 @@ angular.module('tdpharmaClientApp')
   .controller('ProductsCtrl', ProductsCtrl);
 
 ProductsCtrl.$inject = [
-  '$cookies', '$filter', '$timeout', 'Category', 'Medicine', 'User', 
+  '$cookies', '$filter', '$timeout', 'APP_CONFIGURATION', 'Category', 'Medicine', 'User', 
   'toastr', 'S3Upload', 'lodash', 'serverConfig', 'InventoryItem'];
 
-function ProductsCtrl($cookies, $filter, $timeout, Category, Medicine, User, toastr, S3Upload, _, serverConfig, InventoryItem) {
+function ProductsCtrl($cookies, $filter, $timeout, APP_CONFIGURATION, Category, Medicine, User, toastr, S3Upload, _, serverConfig, InventoryItem) {
 
   var ctrl = this;
+  ctrl.IMAGE_PLACEHOLDER = APP_CONFIGURATION.SERVER_DEFAULT_PICTURE_ENDPOINT + '/images/inventoryitem.svg';
   ctrl.tabs = [
     { title:'Category', template:'app/products/includes/category.html', active: true },
     { title:'Details', template:'app/products/includes/details.html', disabled: true }

@@ -2,10 +2,10 @@
   h5 {{ 'ADD_PRODUCT_DETAIL' | translate }}
   form.form-horizontal(name='form' ng-submit='pc.saveDirectUpload()')
     .col-sm-12
-      .col-sm-3      
-        img(ngf-thumbnail="pc.file" class="thumbnail")
-        div(ngf-drop ng-model="pc.file" class="drop-box" name='file' ngf-pattern="'image/*'" accept="image/*" ngf-resize="{width: 250, height: 250}")
-          p(class="text-center m-5-t") {{'DRAG_IMAGE' | translate }}
+      .col-sm-3
+        div.drop(ngf-drop ng-model="pc.file" name='file' ngf-pattern="'image/*'" accept="image/*" ngf-resize="{width: 250, height: 250}")
+          img.center-block(ngf-thumbnail="pc.file || pc.IMAGE_PLACEHOLDER")
+          p(class="text-center") {{'DRAG_IMAGE' | translate }}
       .col-sm-9  
         .form-group
           label.col-sm-2.control-label(for='user') {{ 'AUTHOR' | translate }}
