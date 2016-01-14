@@ -2,11 +2,20 @@
 'use strict';
 
 module.exports = function (grunt) {
+  var _ = require('lodash');
+
   var localConfig;
   try {
     localConfig = require('./server/config/local.env');
   } catch(e) {
     localConfig = {};
+  }
+  
+  var localClientConfig;
+  try {
+    localClientConfig = require('./client/config/local.env.json')
+  } catch(e) {
+    localClientConfig = {}
   }
 
   // Load grunt tasks automatically, when needed
@@ -321,17 +330,17 @@ module.exports = function (grunt) {
       },
       dev: {
         constants: {
-          APP_CONFIGURATION: grunt.file.readJSON('client/config/environment/development.json')
+          APP_CONFIGURATION: _.merge(grunt.file.readJSON('client/config/environment/development.json'), localClientConfig)
         }
       },
       prod: {
         constants: {
-          APP_CONFIGURATION: grunt.file.readJSON('client/config/environment/production.json')
+          APP_CONFIGURATION: _.merge(grunt.file.readJSON('client/config/environment/production.json'), localClientConfig)
         }
       },
       test: {
         constants: {
-          APP_CONFIGURATION: grunt.file.readJSON('client/config/environment/development.json')
+          APP_CONFIGURATION: _.merge(grunt.file.readJSON('client/config/environment/development.json'), localClientConfig)
         }
       }
     },
@@ -551,6 +560,7 @@ module.exports = function (grunt) {
           '<%= yeoman.client %>/index.html': [
               ['{.tmp,<%= yeoman.client %>}/{app,components}/**/*.js',
                '!{.tmp,<%= yeoman.client %>}/app/app.js',
+               '!{.tmp,<%= yeoman.client %>}/app/config.js',
                '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.spec.js',
                '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.mock.js']
             ]
