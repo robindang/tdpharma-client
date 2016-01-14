@@ -39,6 +39,12 @@ function ProductsCtrl($cookies, $filter, $timeout, APP_CONFIGURATION, Category, 
   function prepareData(){    
     User.query().$promise.then(function(resp){
         ctrl.store_users = resp;
+        if (!ctrl.store_users.length) return;
+        ctrl.selected_user = ctrl.store_users[0];
+        User.get().$promise.then(function(user) {
+          var users = ctrl.store_users.filter(function(x) {return x.id===user.id});
+          if (users.length) ctrl.selected_user = users[0];
+        })
     }).catch(function(err){
       toastr.error(err.data.data.errors, $filter('translate')('TOASTR_SORRY'));
     });
