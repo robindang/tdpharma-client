@@ -9,7 +9,7 @@
   function angularTranslateConfig($translateProvider) {
     $translateProvider.translations('vn', {
       GREETING: 'Allo, Allo!',
-      LEADING_GREETING: 'Kích hoạt nhà thuốc của bạn với tdPharma',
+      LEADING_GREETING: 'Kích hoạt nhà thuốc của bạn với {{company}}',
       HOME: 'Home',
       INVENTORY: 'Tồn Kho',
       ORDERS: 'Hoá Đơn',

@@ -11,7 +11,7 @@
 
     $translateProvider.translations('en', {
       GREETING: 'Allo, Allo!',
-      LEADING_GREETING: 'Kick-start your pharmacy with tdPharma',
+      LEADING_GREETING: 'Kick-start your pharmacy with {{company}}',
       HOME: 'Home',
       INVENTORY: 'Inventory',
       ORDERS: 'Orders',

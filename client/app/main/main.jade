@@ -3,7 +3,7 @@ div(ng-include='"components/navbar/navbar.html"')
 header#banner.hero-unit
   .container
     h1 {{ 'GREETING' | translate }}
-    p.lead {{ 'LEADING_GREETING' | translate }}
+    p.lead {{ 'LEADING_GREETING' | translate:text }}
     img.logo(src='assets/images/tdlogo4_50.svg', alt='I\'m Yeoman')
 
 .container
