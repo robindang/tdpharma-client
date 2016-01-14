@@ -21,6 +21,10 @@ Development
 ```sh
 $ grunt serve
 ```
+Debugging server with node-inspector
+```sh
+$ grunt serve:debug
+```
 
 ### Deploying the application to heroku
 
@@ -48,3 +52,4 @@ Lookup ngconstant. To be moved to a separate file. Server configuration are buil
 ### Known errors
 
 The client still tries to access Thing api. It has been removed from the server. Test are broken at the moment. To be fixed. 
+
