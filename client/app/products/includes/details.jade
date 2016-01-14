@@ -1,64 +1,81 @@
 .col-sm-12
-  h5 Details
-  form.form-horizontal
-    .form-group
-      label.col-sm-2.control-label(for='name') Name
-      .col-sm-10
-        input#name.form-control(type='text', placeholder='Name', ng-model='pc.medicine.name')
-    .form-group
-      label.col-sm-2.control-label(for='concentration') Concentration
-      .col-sm-10
-        input#concentration.form-control(type='text', placeholder='Concentration', ng-model='pc.medicine.concentration')
-    .form-group
-      label.col-sm-2.control-label(for='unit') Concentration Unit
-      .col-sm-10
-        input#unit.form-control(type='text', placeholder='Concentration Unit', ng-model='pc.medicine.concentration_unit')
+  h5 {{ 'ADD_PRODUCT_DETAIL' | translate }}
+  form.form-horizontal(name='form' ng-submit='pc.saveDirectUpload()')
+    .col-sm-12
+      .col-sm-3      
+        img(ngf-thumbnail="pc.file" class="thumbnail")
+        div(ngf-drop ng-model="pc.file" class="drop-box" name='file' ngf-pattern="'image/*'" accept="image/*" ngf-resize="{width: 250, height: 250}")
+          p(class="text-center m-5-t") {{'DRAG_IMAGE' | translate }}
+      .col-sm-9  
+        .form-group
+          label.col-sm-2.control-label(for='user') {{ 'AUTHOR' | translate }}
+          .col-sm-10
+            ui-select#user(ng-model='pc.selected_user' name='author' close-on-select='true' on-select='pc.updateUser($item)' required)
+              ui-select-match(placeholder="{{ 'SELECT_USER' | translate }}") {{$select.selected.first_name}} {{$select.selected.last_name}}
+              ui-select-choices(repeat='data in pc.store_users | filter:$select.search') {{data.first_name}} {{data.last_name}}                                      
+        .form-group
+          label.col-sm-2.control-label(for='name') {{ 'NAME' | translate }}
+          .col-sm-10
+            input#name.form-control(type='text', placeholder="{{ 'NAME' | translate }}", ng-model='pc.medicine.name' name='name' required)            
+        .form-group
+          label.col-sm-2.control-label(for='concentration') {{ 'CONCENTRATION' | translate }}
+          .col-sm-10
+            input#concentration.form-control(type='number', placeholder="{{ 'CONCENTRATION' | translate }}", ng-model='pc.medicine.concentration' required)        
+        .form-group
+          label.col-sm-2.control-label(for='unit') {{ 'CONCENTRATION_UNIT' | translate }}
+          .col-sm-10
+            input#unit.form-control(type='text', placeholder="{{ 'CONCENTRATION_UNIT' | translate }}", ng-model='pc.medicine.concentration_unit' required)
+          .form-group
+          label.col-sm-2.control-label(for='form') {{ 'MEDICINE_FORM' | translate }}
+          .col-sm-10
+            input#form.form-control(type='text', placeholder="{{ 'MEDICINE_FORM' | translate }}", ng-model='pc.medicine.med_form' required)
+        .form-group
+          label.col-sm-2.control-label(for='manufacturer') {{ 'MANUFACTURER' | translate }}
+          .col-sm-10
+            input#manufacturer.form-control(type='text', placeholder="{{ 'MANUFACTURER'| translate }}", ng-model='pc.medicine.manufacturer' required)
+        .form-group
+          label.col-sm-2.control-label(for='mfg_location') {{ 'MFG_LOCATION' | translate }}
+          .col-sm-10
+            input#mfg_location.form-control(type='text', placeholder="{{ 'MFG_LOCATION' | translate }}", ng-model='pc.medicine.mfg_location' required)          
+
+    .col-sm-12.m-5-t
       .form-group
-      label.col-sm-2.control-label(for='form') Medicine Form
-      .col-sm-10
-        input#form.form-control(type='text', placeholder='Medicine Form', ng-model='pc.medicine.med_form')
-    h5 Batch 1
-    .form-group
-      label.col-sm-2.control-label Date
-      .col-sm-10
-        p.input-group
-          input.form-control(type='text', placeholder='Manufactuer Date', uib-datepicker-popup='dd-MM-yyyy', ng-model='pc.medicine.med_batches_attributes.mfg_date', is-open='pc.status[$index].opened', max-date='pc.maxDate', datepicker-options='pc.dateOptions', ng-required='true', close-text='Close', required='required')
-          span.input-group-btn
-            button.btn.btn-default(type='button', ng-click='pc.open("status", $event, $index)')
-              i.glyphicon.glyphicon-calendar
-    .form-group
-      label.col-sm-2.control-label Expiry
-      .col-sm-10
-        p.input-group
-          input.form-control(type='text', placeholder='Expiry Date', uib-datepicker-popup='dd-MM-yyyy', ng-model='pc.medicine.med_batches_attributes[0].expire_date', is-open='pc.expStatus[$index].opened', max-date='pc.maxDate', datepicker-options='pc.dateOptions', ng-required='true', close-text='Close', required='required')
-          span.input-group-btn
-            button.btn.btn-default(type='button', ng-click='pc.open("expStatus", $event, $index)')
-              i.glyphicon.glyphicon-calendar
-    .form-group
-      label.col-sm-2.control-label Package
-      .col-sm-10
-        input.form-control(type='text', placeholder='Package', ng-model='pc.medicine.med_batches_attributes[0].package')
-    .form-group
-      label.col-sm-2.control-label Location
-      .col-sm-10
-        input.form-control(type='text', placeholder='Manufactuer Location', ng-model='pc.medicine.med_batches_attributes[0].mfg_location')
-    .form-group
-      label.col-sm-2.control-label Amount
-      .col-sm-10
-        input.form-control(type='text', placeholder='Amount per Package', ng-model='pc.medicine.med_batches_attributes[0].amount_per_pkg')
-    .form-group
-      label.col-sm-2.control-label Unit
-      .col-sm-10
-        input.form-control(type='text', placeholder='Amount Unit', ng-model='pc.medicine.med_batches_attributes[0].amount_unit')
-    .form-group
-      label.col-sm-2.control-label Total
-      .col-sm-10
-        input.form-control(type='text', placeholder='Total Units', ng-model='pc.medicine.med_batches_attributes[0].total_units')
-    .form-group
-      label.col-sm-2.control-label Price
-      .col-sm-10
-        input.form-control(type='text', placeholder='Total Price', ng-model='pc.medicine.med_batches_attributes[0].total_price')
-    .form-group
-      .col-sm-offset-2.col-sm-10
-        button.btn.btn-primary(type='submit', ng-click="pc.save()") Save
+        label.col-sm-2.control-label {{'MANUFACTURE_DATE' | translate }}
+        .col-sm-10
+          p.input-group
+            input.form-control(type='text', placeholder="{{'MANUFACTURE_DATE' | translate }}", uib-datepicker-popup='dd-MM-yyyy', ng-model='pc.medicine.med_batches_attributes[0].mfg_date', is-open='pc.status[$index].opened', max-date='pc.maxDate', datepicker-options='pc.dateOptions', ng-required='true', close-text='Close', required='required')
+            span.input-group-btn
+              button.btn.btn-default(type='button', ng-click='pc.open("status", $event, $index)')
+                i.glyphicon.glyphicon-calendar
+      .form-group
+        label.col-sm-2.control-label {{ 'EXPIRE_DATE' | translate }}
+        .col-sm-10
+          p.input-group
+            input.form-control(type='text', placeholder="{{ 'EXPIRE_DATE' | translate }}", uib-datepicker-popup='dd-MM-yyyy', ng-model='pc.medicine.med_batches_attributes[0].expire_date', is-open='pc.expStatus[$index].opened', min-date='pc.maxDate', datepicker-options='pc.dateOptions', ng-required='true', close-text='Close', required='required')
+            span.input-group-btn
+              button.btn.btn-default(type='button', ng-click='pc.open("expStatus", $event, $index)')
+                i.glyphicon.glyphicon-calendar
+      .form-group
+        label.col-sm-2.control-label {{ 'PACKAGE' | translate }}
+        .col-sm-10
+          input.form-control(type='text', placeholder="{{ 'PACKAGE' | translate }}", ng-model='pc.medicine.med_batches_attributes[0].package' required)    
+      .form-group
+        label.col-sm-2.control-label {{ 'AMOUNT' | translate }}
+        .col-sm-10
+          input.form-control(type='number', placeholder="{{ 'AMOUNT' | translate }}", min='0' ng-model='pc.medicine.med_batches_attributes[0].amount_per_pkg' ng-change="pc.updateTotalAmount()" required)
+      .form-group
+        label.col-sm-2.control-label {{ 'UNIT' | translate }}
+        .col-sm-10
+          input.form-control(type='number', placeholder="{{ 'UNIT' | translate }}", min='0' ng-model='pc.medicine.med_batches_attributes[0].amount_unit' ng-change="pc.updateTotalAmount()" required)
+      .form-group
+        label.col-sm-2.control-label {{ 'TOTAL' | translate }}
+        .col-sm-10
+          input.form-control(type='number', placeholder="{{ 'TOTAL' | translate }}", min='0' ng-model='pc.medicine.med_batches_attributes[0].total_units' disabled required)
+      .form-group
+        label.col-sm-2.control-label {{ 'PRICE' | translate }}
+        .col-sm-10
+          input.form-control(type='number', placeholder="{{ 'PRICE' | translate }}", min='0' ng-model='pc.medicine.med_batches_attributes[0].total_price' required)
+      .form-group
+        .col-sm-offset-2.col-sm-10
+          button.btn.btn-primary(type='submit') {{ 'SAVE' | translate }}          
     
