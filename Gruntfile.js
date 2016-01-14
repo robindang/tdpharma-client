@@ -428,11 +428,7 @@ module.exports = function (grunt) {
       },
       heroku: {
         options: {
-          config: {
-            'user.email': 'you@example.com',
-            'user.name': 'Your Name'},
-          force: true,
-          remote: 'heroku',
+          remote: 'https://git.heroku.com/pharmaplus.git',
           branch: 'master'
         }
       },
