@@ -1,4 +1,6 @@
 # Pharmaplus app
+[ ![Codeship Status for robindang/tdpharma-client](https://codeship.com/projects/f45262f0-9ab1-0133-d91f-1eba7eda5a8f/status?branch=master)](https://codeship.com/projects/126542)
+[![Dependency Status](https://david-dm.org/robindang/tdpharma-client.svg)](https://david-dm.org/robindang/tdpharma-client)
 
 See [here](http://pharmaplus.herokuapp.com/) for an example.
 
