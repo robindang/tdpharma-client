@@ -15,6 +15,6 @@ describe('Directive: pageSelect', function () {
     element = angular.element('<page-select></page-select>');
     element = $compile(element)(scope);
     scope.$apply();
-    expect(element.text()).toBe('this is the pageSelect directive');
+    expect(element.text()).toBe('');
   }));
 });
