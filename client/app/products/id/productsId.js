@@ -3,13 +3,14 @@
 angular.module('tdpharmaClientApp')
   .controller('ProductsIdCtrl', ProductsIdCtrl);
 
-ProductsIdCtrl.$inject = ['$stateParams', '$window', 'Category', 'InventoryItem'];
+ProductsIdCtrl.$inject = ['$stateParams', '$window', 'APP_CONFIGURATION', 'Category', 'InventoryItem'];
 
-function ProductsIdCtrl($stateParams, $window, Category, InventoryItem) {
+function ProductsIdCtrl($stateParams, $window, APP_CONFIGURATION, Category, InventoryItem) {
   console.log($stateParams)
   var async = $window.async;
 
   var ctrl = this;
+  ctrl.APP_CONFIGURATION = APP_CONFIGURATION;
   ctrl.isReadOnly = true;
 
   init();  

@@ -7,7 +7,9 @@ div(ng-include='"components/navbar/navbar.html"')
         li(ng-repeat='breadcrumb in pic.breadcrumbs')
           a(href='#') {{breadcrumb.name}}
       .row
-        .col-md-10.col-xs-9
+        .col-md-3.col-xs-3
+          img(ng-src='{{pic.APP_CONFIGURATION.SERVER_DEFAULT_PICTURE_ENDPOINT}}/{{pic.item.photo_thumb.photo}}')
+        .col-md-7.col-xs-6
           h3 {{pic.item.itemable.name}}
           h5 {{pic.item.itemable.manufacturer}}
         .col-md-2.col-xs-3.text-right
@@ -33,8 +35,7 @@ div(ng-include='"components/navbar/navbar.html"')
           .col-md-10.col-xs-9
             input#mfg_location.form-control(type='text', placeholder="{{ 'MFG_LOCATION' | translate }}", ng-model='pic.item.itemable.mfg_location' ng-readonly="pic.isReadOnly" required)
         .row
-          .col-md-10.col-xs-9
-          .col-md-3.text-right
+          .col-xs-12.text-right
             .btn.btn-danger(ng-show='!pic.isReadOnly' ng-click='pic.isReadOnly=true') Cancel
             | &nbsp;&nbsp;
             .btn.btn-primary(ng-show='!pic.isReadOnly' ng-click='pic.isReadOnly=true') Save
