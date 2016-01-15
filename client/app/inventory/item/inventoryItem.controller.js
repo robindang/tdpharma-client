@@ -12,6 +12,7 @@ function InventoryItemCtrl($stateParams, $window, APP_CONFIGURATION, Category, I
   var ctrl = this;
   ctrl.APP_CONFIGURATION = APP_CONFIGURATION;
   ctrl.isReadOnly = true;
+  ctrl.getStatus = getStatus
 
   init();  
 
@@ -49,5 +50,12 @@ function InventoryItemCtrl($stateParams, $window, APP_CONFIGURATION, Category, I
         }
         ctrl.breadcrumbs = breadcrumbs;
       });
+  }
+
+  function getStatus() {
+    if (!ctrl.item) return '';
+    if (ctrl.item.status === 'inactive') return 'Off Sale';
+    if (ctrl.item.status === 'active') return ctrl.item.amount ? 'On Sale':'Out of Stock';
+    return ctrl.item.status;
   }
 }

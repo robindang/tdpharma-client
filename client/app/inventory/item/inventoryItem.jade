@@ -25,6 +25,7 @@ div(ng-include='"components/navbar/navbar.html"')
                 tr
                   td {{ 'MFG_LOCATION' | translate }}
                   td {{iic.item.itemable.mfg_location}}
+          h5(ng-class='{"text-danger":iic.getStatus()==="Off Sale","text-success":iic.getStatus()==="On Sale","text-warning":iic.getStatus()==="Out of Stock"}') {{iic.getStatus()}}
         .col-md-2.col-xs-3.text-right
           .btn.btn-default(ng-show='iic.isReadOnly' ng-click='iic.isReadOnly=false' style='margin-top:20px')
             i.fa.fa-pencil
