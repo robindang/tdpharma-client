@@ -12,6 +12,7 @@ function ProductsIdCtrl($stateParams, $window, APP_CONFIGURATION, Medicine) {
   var ctrl = this;
   ctrl.APP_CONFIGURATION = APP_CONFIGURATION;
   ctrl.isReadOnly = true;
+  ctrl.goBack = goBack
 
   init();  
 
@@ -26,5 +27,9 @@ function ProductsIdCtrl($stateParams, $window, APP_CONFIGURATION, Medicine) {
       ], function(err) {
         console.log(ctrl.medicine);
       });
+  }
+
+  function goBack() {
+    $window.history.back(-1);
   }
 }

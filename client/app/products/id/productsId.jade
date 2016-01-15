@@ -3,6 +3,11 @@ div(ng-include='"components/navbar/navbar.html"')
 .container
   .row
     .col-md-12
+      ul.pager
+        li.previous
+          a(href='#' ng-click='pic.goBack()')
+            span(aria-hidden='true') &larr;
+            |  Back
       .row
         .col-md-3.col-xs-3
           img(ng-src='{{pic.APP_CONFIGURATION.SERVER_DEFAULT_PICTURE_ENDPOINT}}/{{pic.medicine.photo_thumb.photo}}')
