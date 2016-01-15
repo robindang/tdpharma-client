@@ -10,7 +10,7 @@ div(ng-include='"components/navbar/navbar.html"')
           h3 {{pic.medicine.name}}
           h5 {{pic.medicine.manufacturer}}
         .col-md-2.col-xs-3.text-right
-          .btn.btn-default(ng-show='pic.isReadOnly' ng-click='pic.isReadOnly=false' style='margin-top:20px')
+          button.btn.btn-default(ng-show='pic.isReadOnly' ng-click='pic.isReadOnly=false' style='margin-top:20px' disabled)
             i.fa.fa-pencil
             | &nbsp;Edit
       hr
