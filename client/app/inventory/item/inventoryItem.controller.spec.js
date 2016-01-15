@@ -5,12 +5,12 @@ describe('Controller: InventoryItemCtrl', function () {
   // load the controller's module
   beforeEach(module('tdpharmaClientApp'));
 
-  var InventoryCtrl, scope;
+  var InventoryItemCtrl, scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    InventoryCtrl = $controller('InventoryItemCtrl', {
+    InventoryItemCtrl = $controller('InventoryItemCtrl', {
       $scope: scope
     });
   }));
