@@ -1,16 +1,16 @@
 'use strict';
 
-describe('Controller: ItemsCtrl', function () {
+describe('Controller: InventoryItemCtrl', function () {
 
   // load the controller's module
   beforeEach(module('tdpharmaClientApp'));
 
-  var ItemsCtrl, scope;
+  var InventoryCtrl, scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    ItemsCtrl = $controller('ItemsCtrl', {
+    InventoryCtrl = $controller('InventoryItemCtrl', {
       $scope: scope
     });
   }));

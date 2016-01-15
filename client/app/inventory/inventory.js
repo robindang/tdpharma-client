@@ -5,9 +5,15 @@ angular.module('tdpharmaClientApp')
     $stateProvider
       .state('inventory', {
         url: '/inventory',
-        templateUrl: 'app/inventory/inventory.html',
+        templateUrl: 'app/inventory/index/inventory.html',
         controller: 'InventoryCtrl',
         controllerAs: 'mc'
+      })
+      .state('inventoryItem', {
+        url: '/inventory/:id',
+        templateUrl: 'app/inventory/item/inventoryItem.html',
+        controller: 'InventoryItemCtrl',
+        controllerAs: 'iic'
       });
   })
   .factory('Resource', ['$q', '$filter', '$timeout', '$cookies', 'InventoryItem', 'Category', function ($q, $filter, $timeout, $cookies, InventoryItem, Category) {
