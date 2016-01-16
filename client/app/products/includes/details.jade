@@ -51,7 +51,7 @@
         label.col-sm-2.control-label {{ 'EXPIRE_DATE' | translate }}
         .col-sm-10
           p.input-group
-            input.form-control(type='text', placeholder="{{ 'EXPIRE_DATE' | translate }}", uib-datepicker-popup='{{pc.pharmacare.getDatePickerDateFormat()}}', ng-model='pc.medicine.med_batches_attributes[0].expire_date', is-open='pc.expStatus[$index].opened', min-date='pc.maxDate', datepicker-options='pc.dateOptions', ng-required='true', close-text='Close', required='required')
+            input.form-control(type='text', placeholder="{{ 'EXPIRE_DATE' | translate }}", uib-datepicker-popup='{{pc.pharmacare.getDateFormat()}}', ng-model='pc.medicine.med_batches_attributes[0].expire_date', is-open='pc.expStatus[$index].opened', min-date='pc.maxDate', datepicker-options='pc.dateOptions', ng-required='true', close-text='Close', required='required')
             span.input-group-btn
               button.btn.btn-default(type='button', ng-click='pc.open("expStatus", $event, $index)')
                 i.glyphicon.glyphicon-calendar

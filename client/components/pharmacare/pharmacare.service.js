@@ -20,7 +20,7 @@ function pharmacare($filter, $storage, $translate, $window, amMoment) {
     getLocaleFlagCSSClass: function() {
       var locale = this.getLocale();
       if (locale === 'vi') return 'flag-icon-vn';
-      if (locale === 'en-ca') return 'flag-icon-gb';
+      if (locale === 'en') return 'flag-icon-gb';
       return '';
     },
     getStatus: function(item) {
