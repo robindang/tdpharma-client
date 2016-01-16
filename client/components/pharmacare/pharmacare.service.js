@@ -3,15 +3,14 @@
 angular.module('tdpharmaClientApp')
   .service('pharmacare', pharmacare);
 
-pharmacare.$inject = ['$filter', '$localStorage', '$translate', 'amMoment'];
+pharmacare.$inject = ['$filter', '$localStorage', '$translate', '$window', 'amMoment'];
 
-function pharmacare($filter, $storage, $translate, amMoment) {
+function pharmacare($filter, $storage, $translate, $window, amMoment) {
+  var moment = $window.moment;
   return {
-    getDateFormat: function() {
-      return $filter('translate')('DATE_FORMAT');
-    },
-    getDateTimeFormat: function() {
-      return $filter('translate')('DATETIME_FORMAT');
+    getDatePickerDateFormat: function(key) {
+      if (!key) key = 'L';
+      return moment.localeData().longDateFormat(key).replace('DD','dd').replace('YYYY','yyyy');
     },
     getLocale: function() {
       var locale = $storage.locale;

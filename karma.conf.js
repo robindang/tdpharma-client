@@ -31,6 +31,8 @@ module.exports = function(config) {
       'client/bower_components/ngstorage/ngStorage.js',
       'client/bower_components/angular-toastr/dist/angular-toastr.tpls.js',
       'client/bower_components/async/lib/async.js',
+      'client/bower_components/moment/moment.js',
+      'client/bower_components/angular-moment/angular-moment.js',
       'client/app/app.js',
       'client/app/app.coffee',
       'client/app/config.js',
