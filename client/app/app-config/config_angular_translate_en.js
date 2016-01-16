@@ -10,6 +10,7 @@
     $translateProvider.useSanitizeValueStrategy('sanitizeParameters');
 
     $translateProvider.translations('en', {
+      DATE_FORMAT: 'YYYY-MM-DD h:mm A',
       GREETING: 'Allo, Allo!',
       LEADING_GREETING: 'Kick-start your pharmacy with {{company}}',
       HOME: 'Home',

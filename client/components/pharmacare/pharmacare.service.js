@@ -3,8 +3,13 @@
 angular.module('tdpharmaClientApp')
   .factory('pharmacare', pharmacare);
 
-function pharmacare() {
+pharmacare.$inject = ['$filter'];
+
+function pharmacare($filter) {
   return {
+    getDateFormat: function() {
+      return $filter('translate')('DATE_FORMAT');
+    },
     getStatus: function(item) {
       if (!item) return '';
       if (item.status === 'inactive') return 'Off Sale';
