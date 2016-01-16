@@ -13,22 +13,26 @@ div(ng-include='"components/navbar/navbar.html"')
           h3
             a(ng-href='/products/{{iic.item.itemable.id}}') {{iic.item.itemable.name}}
           h5 {{iic.item.itemable.manufacturer}}
+          hr
           p
+            h5(ng-class='getStatusCSSClass(iic.item)') {{iic.pharmacare.getStatus(iic.item)}}
+            h3 Product Information
             table.table.table-condensed
-              tbody
-                tr
-                  td {{ 'CONCENTRATION' | translate }}
-                  td {{iic.item.itemable.concentration}} {{iic.item.itemable.concentration_unit}}
-                tr
-                  td {{ 'MEDICINE_FORM' | translate }}
-                  td {{iic.item.itemable.med_form}}
-                tr
-                  td {{ 'MFG_LOCATION' | translate }}
-                  td {{iic.item.itemable.mfg_location}}
-                tr
-                  td Quantity
-                  td {{iic.item.amount | number}}
-          h5(ng-class='getStatusCSSClass(iic.item)') {{iic.pharmacare.getStatus(iic.item)}}
+              .form-horizontal
+                .form-group
+                  label.control-label.col-xs-3 {{ 'CONCENTRATION' | translate }}
+                  .col-xs-9
+                    p.form-control-static {{iic.item.itemable.concentration}} {{iic.item.itemable.concentration_unit}}
+                  label.control-label.col-xs-3 {{ 'MEDICINE_FORM' | translate }}
+                  .col-xs-9
+                    p.form-control-static {{iic.item.itemable.med_form}}
+                  label.control-label.col-xs-3 {{ 'MFG_LOCATION' | translate }}
+                  .col-xs-9
+                    p.form-control-static {{iic.item.itemable.mfg_location}}
+                  label.control-label.col-xs-3 Quantity
+                  .col-xs-9
+                    p.form-control-static(ng-show='iic.isReadOnly') {{iic.item.amount | number}}
+                    input.form-control(type='number', placeholder="Quantity", min='0' ng-model='iic.item.amount' required ng-show='!iic.isReadOnly')
         .col-md-2.col-xs-3.text-right
           .btn.btn-default(ng-show='iic.isReadOnly' ng-click='iic.isReadOnly=false' style='margin-top:20px')
             i.fa.fa-pencil
