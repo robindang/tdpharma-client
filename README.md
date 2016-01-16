@@ -61,6 +61,21 @@ Server configurations can be found in server/config/environment/. Configurations
 
 Client configurations are available in client/config/environment/. Configurations are accessible in angular by injecting APP_CONFIGURATION. These configurations are generated in app/config.js as part of the target build. They may be overrided for all targets by adding local.env.json file to the client/config/ folder.
 
+### FAQ
+
+How to update npm and bower dependencies to the latest version
+Install `npm install -g npm-check-updates`. Then
+```sh
+ncu
+ncu -m bower
+```
+to see latest versions
+```sh
+ncu -u
+ncu -m bower -u
+```
+to update dependencies to latest version in package.json and bower.json respectively.
+
 ### Known Issues
 
 The client still tries to access Thing api. It has been removed from the server. Test are broken at the moment. To be fixed. 

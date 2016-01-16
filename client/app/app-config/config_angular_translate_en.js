@@ -10,8 +10,6 @@
     $translateProvider.useSanitizeValueStrategy('sanitizeParameters');
 
     $translateProvider.translations('en', {
-      DATE_FORMAT: 'yyyy-MM-dd',
-      DATETIME_FORMAT: 'YYYY-MM-DD h:mm A',
       GREETING: 'Allo, Allo!',
       LEADING_GREETING: 'Kick-start your pharmacy with {{company}}',
       HOME: 'Home',
@@ -125,7 +123,7 @@
       PRICE_REQUIRED: 'Price is requried',
       CATEGORY_REQUIRED: 'Category is requried'            
     });
-    $translateProvider.preferredLanguage('vn');
+    $translateProvider.preferredLanguage('vi');
   }
 
 })();

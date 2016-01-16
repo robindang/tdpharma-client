@@ -1,38 +1,47 @@
 'use strict';
 
 angular.module('tdpharmaClientApp')
-  .controller('NavbarCtrl', function ($scope, $location, $translate, Auth, $localStorage) {
-    $scope.menu = [{
-      'title': 'HOME',
-      'link': '/'
-    }, {
-      title: 'INVENTORY',
-      link: '/inventory'
-    }, {
-      title: 'ORDERS',
-      link: '/orders'
-    }, {
-      title: 'CHECKOUT',
-      link: '/checkout'
-    }];
+  .controller('NavbarCtrl', NavbarCtrl);
 
-    $scope.isCollapsed = true;
-    $scope.isLoggedIn = Auth.isLoggedIn;
-    $scope.isAdmin = Auth.isAdmin;
-    $scope.getCurrentUser = Auth.getCurrentUser;
+NavbarCtrl.$inject = ['$scope', '$location', '$translate', 'amMoment', 'pharmacare', 'Auth', '$localStorage'];
 
-    $scope.logout = function() {
-      Auth.logout();
-      $location.path('/login');
-    };
+function NavbarCtrl($scope, $location, $translate, amMoment, pharmacare, Auth, $storage) {
 
-    $scope.isActive = function(route) {
-      return route === $location.path();
-    };
+  var ctrl = this;
+  ctrl.menu = [{
+    'title': 'HOME',
+    'link': '/'
+  }, {
+    title: 'INVENTORY',
+    link: '/inventory'
+  }, {
+    title: 'ORDERS',
+    link: '/orders'
+  }, {
+    title: 'CHECKOUT',
+    link: '/checkout'
+  }];
+  ctrl.isCollapsed = true;
+  ctrl.locale = pharmacare.getLocale();
+  ctrl.isLoggedIn = Auth.isLoggedIn;
+  ctrl.isActive = isActive;
+  ctrl.isAdmin = Auth.isAdmin;
+  ctrl.getCurrentUser = Auth.getCurrentUser;
+  ctrl.logout = logout;
+  ctrl.pharmacare = pharmacare;
+  
+  init();
 
-    if (!$localStorage.lang) $localStorage.lang = $translate.use();
-    $scope.$storage = $localStorage;
-    $scope.$watch('$storage.lang', function() {
-      $translate.use($scope.$storage.lang);
-    });
-  });
+  function init() {
+    $scope.$watch('locale', pharmacare.updateLocale);
+  }
+
+  function logout() {
+    Auth.logout();
+    $location.path('/login');
+  }
+
+  function isActive(route) {
+    return route === $location.path();
+  }
+}

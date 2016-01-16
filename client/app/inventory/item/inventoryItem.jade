@@ -7,38 +7,51 @@ div(ng-include='"components/navbar/navbar.html"')
         li(ng-repeat='breadcrumb in iic.breadcrumbs')
           a(href='#') {{breadcrumb.name}}
       .row
-        .col-md-3.col-xs-3
-          img(ng-src='{{iic.APP_CONFIGURATION.SERVER_DEFAULT_PICTURE_ENDPOINT}}/{{iic.item.photo_thumb.photo}}')
-        .col-md-7.col-xs-6
-          h3
-            a(ng-href='/products/{{iic.item.itemable.id}}') {{iic.item.itemable.name}}
-          h5 {{iic.item.itemable.manufacturer}}
-          hr
-          p
-            h5(ng-class='getStatusCSSClass(iic.item)') {{iic.pharmacare.getStatus(iic.item)}}
-            h3 Product Information
-            table.table.table-condensed
-              .form-horizontal
-                .form-group
-                  label.control-label.col-xs-3 {{ 'CONCENTRATION' | translate }}
-                  .col-xs-9
-                    p.form-control-static {{iic.item.itemable.concentration}} {{iic.item.itemable.concentration_unit}}
-                  label.control-label.col-xs-3 {{ 'MEDICINE_FORM' | translate }}
-                  .col-xs-9
-                    p.form-control-static {{iic.item.itemable.med_form}}
-                  label.control-label.col-xs-3 {{ 'MFG_LOCATION' | translate }}
-                  .col-xs-9
-                    p.form-control-static {{iic.item.itemable.mfg_location}}
-                  label.control-label.col-xs-3 Quantity
-                  .col-xs-9
-                    p.form-control-static(ng-show='iic.isReadOnly') {{iic.item.amount | number}}
-                    input.form-control(type='number', placeholder="Quantity", min='0' ng-model='iic.item.amount' required ng-show='!iic.isReadOnly')
-        .col-md-2.col-xs-3.text-right
-          .btn.btn-default(ng-show='iic.isReadOnly' ng-click='iic.isReadOnly=false' style='margin-top:20px')
-            i.fa.fa-pencil
-            | &nbsp;Edit
-      hr(ng-repeat-start='batch in iic.item.med_batches')
-      form.form-horizontal(ng-repeat-end)
+        .col-md-3.col-sm-3
+          img(ng-src='{{iic.APP_CONFIGURATION.SERVER_DEFAULT_PICTURE_ENDPOINT}}/{{iic.item.photo_thumb.photo}}' style='max-width:200px')
+        .col-md-9.col-sm-9
+          .col-md-9.col-sm-7.col-xs-12
+            h3
+              a(ng-href='/products/{{iic.item.itemable.id}}') {{iic.item.itemable.name}}
+            h5 {{iic.item.itemable.manufacturer}}
+          .col-md-3.col-sm-5.hidden-xs.text-right
+            .btn.btn-default(ng-show='iic.isReadOnly' ng-click='iic.isReadOnly=false' style='margin-top:20px')
+              i.fa.fa-plus
+              | &nbsp;Add
+            | &nbsp;&nbsp;
+            .btn.btn-default(ng-show='iic.isReadOnly' ng-click='iic.isReadOnly=false' style='margin-top:20px')
+              i.fa.fa-pencil
+              | &nbsp;Edit
+          .col-xs-12
+            hr
+            p
+              h5(ng-class='getStatusCSSClass(iic.item)') {{iic.pharmacare.getStatus(iic.item)}}
+              h3 Product Information
+              table.table.table-condensed
+                .form-horizontal
+                  .form-group
+                    label.control-label.col-sm-3 {{ 'CONCENTRATION' | translate }}
+                    .col-sm-9
+                      p.form-control-static {{iic.item.itemable.concentration}} {{iic.item.itemable.concentration_unit}}
+                    label.control-label.col-sm-3 {{ 'MEDICINE_FORM' | translate }}
+                    .col-sm-9
+                      p.form-control-static {{iic.item.itemable.med_form}}
+                    label.control-label.col-sm-3 {{ 'MFG_LOCATION' | translate }}
+                    .col-sm-9
+                      p.form-control-static {{iic.item.itemable.mfg_location}}
+                    label.control-label.col-sm-3 Quantity
+                    .col-sm-9
+                      p.form-control-static(ng-show='iic.isReadOnly') {{iic.item.amount | number}}
+                      input.form-control(type='number', placeholder="Quantity", min='0' ng-model='iic.item.amount' required ng-show='!iic.isReadOnly')
+      a(data-toggle='collapse', data-target='#collapse{{$index}}' ng-repeat-start='batch in iic.item.med_batches')
+        i.fa.fa-minus-square-o
+        | &nbsp;&nbsp;Collapse
+      hr
+      form.form-horizontal(id='collapse{{$index}}' ng-repeat-end)
+        .form-group
+          label.col-md-2.col-xs-3.control-label Date
+          .col-md-10.col-xs-9
+            p.form-control-static {{iic.pharmacare.formatDateTime(batch.created_at)}}
         .form-group
           label.col-md-2.col-xs-3.control-label {{ 'TOTAL' | translate }}
           .col-md-10.col-xs-9

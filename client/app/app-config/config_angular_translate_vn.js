@@ -7,9 +7,7 @@
   angularTranslateConfig.$inject = ['$translateProvider'];
 
   function angularTranslateConfig($translateProvider) {
-    $translateProvider.translations('vn', {
-      DATE_FORMAT: 'MM/dd/yy',
-      DATETIME_FORMAT: 'MM/DD/YY HH:mm',
+    $translateProvider.translations('vi', {
       GREETING: 'Allo, Allo!',
       LEADING_GREETING: 'Kích hoạt nhà thuốc của bạn với {{company}}',
       HOME: 'Home',

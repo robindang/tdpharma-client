@@ -57,7 +57,7 @@ div(ng-include='"components/navbar/navbar.html"')
         td(ng-class='ic.pharmacare.getStatusCSSClass(row)') {{ic.pharmacare.getStatus(row)}}
         td
           a(href='#') {{row.category.name}}
-        td {{row.updated_moment.format(ic.pharmacare.getDateTimeFormat())}}
+        td {{row.updated_moment.toString() | amDateFormat:'lll'}}
         td {{row.amount | number}}
         td 
         td

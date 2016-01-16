@@ -8,6 +8,7 @@ angular.module('tdpharmaClientApp', [
   'btford.socket-io',
   'ui.router',
   'ui.bootstrap',
+  'angularMoment',
   'smart-table',
   'listGroup',
   'ui.select',
