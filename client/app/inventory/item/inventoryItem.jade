@@ -25,18 +25,29 @@ div(ng-include='"components/navbar/navbar.html"')
                 tr
                   td {{ 'MFG_LOCATION' | translate }}
                   td {{iic.item.itemable.mfg_location}}
+                tr
+                  td Quantity
+                  td {{iic.item.amount | number}}
           h5(ng-class='getStatusCSSClass(iic.item)') {{iic.pharmacare.getStatus(iic.item)}}
         .col-md-2.col-xs-3.text-right
           .btn.btn-default(ng-show='iic.isReadOnly' ng-click='iic.isReadOnly=false' style='margin-top:20px')
             i.fa.fa-pencil
             | &nbsp;Edit
-      hr
-      form.form-horizontal
+      hr(ng-repeat-start='batch in iic.item.med_batches')
+      form.form-horizontal(ng-repeat-end)
+        .form-group
+          label.col-md-2.col-xs-3.control-label {{ 'TOTAL' | translate }}
+          .col-md-10.col-xs-9
+            p.form-control-static {{batch.total_units | number}}
+        .form-group
+          label.col-md-2.col-xs-3.control-label {{ 'PRICE' | translate }}
+          .col-md-10.col-xs-9
+            p.form-control-static {{batch.total_price | currency:'₫':0}}
         .form-group
           label.col-md-2.col-xs-3.control-label {{'MANUFACTURE_DATE' | translate }}
           .col-md-10.col-xs-9
             p.input-group
-              input.form-control(type='text', placeholder="{{'MANUFACTURE_DATE' | translate }}", uib-datepicker-popup='dd-MM-yyyy', ng-model='pc.medicine.med_batches_attributes[0].mfg_date', is-open='pc.status[$index].opened', max-date='pc.maxDate', datepicker-options='pc.dateOptions', ng-required='true', close-text='Close', required='required')
+              input.form-control(type='text', placeholder="{{'MANUFACTURE_DATE' | translate }}", uib-datepicker-popup='{{iic.pharmacare.getDateFormat()}}', ng-model='batch.mfg_date', is-open='pc.status[$index].opened', max-date='pc.maxDate', datepicker-options='pc.dateOptions', ng-required='true', close-text='Close', required='required' ng-disabled='iic.isReadOnly')
               span.input-group-btn
                 button.btn.btn-default(type='button', ng-click='pc.open("status", $event, $index)')
                   i.glyphicon.glyphicon-calendar
@@ -44,30 +55,10 @@ div(ng-include='"components/navbar/navbar.html"')
           label.col-md-2.col-xs-3.control-label {{ 'EXPIRE_DATE' | translate }}
           .col-md-10.col-xs-9
             p.input-group
-              input.form-control(type='text', placeholder="{{ 'EXPIRE_DATE' | translate }}", uib-datepicker-popup='dd-MM-yyyy', ng-model='pc.medicine.med_batches_attributes[0].expire_date', is-open='pc.expStatus[$index].opened', min-date='pc.maxDate', datepicker-options='pc.dateOptions', ng-required='true', close-text='Close', required='required')
+              input.form-control(type='text', placeholder="{{ 'EXPIRE_DATE' | translate }}", uib-datepicker-popup='{{iic.pharmacare.getDateFormat()}}', ng-model='batch.expire_date', is-open='pc.expStatus[$index].opened', min-date='pc.maxDate', datepicker-options='pc.dateOptions', ng-required='true', close-text='Close', required='required' ng-disabled='iic.isReadOnly')
               span.input-group-btn
                 button.btn.btn-default(type='button', ng-click='pc.open("expStatus", $event, $index)')
                   i.glyphicon.glyphicon-calendar
-        .form-group
-          label.col-md-2.col-xs-3.control-label {{ 'PACKAGE' | translate }}
-          .col-md-10.col-xs-9
-            input.form-control(type='text', placeholder="{{ 'PACKAGE' | translate }}", ng-model='pc.medicine.med_batches_attributes[0].package' required)    
-        .form-group
-          label.col-md-2.col-xs-3.control-label {{ 'AMOUNT' | translate }}
-          .col-md-10.col-xs-9
-            input.form-control(type='number', placeholder="{{ 'AMOUNT' | translate }}", min='0' ng-model='pc.medicine.med_batches_attributes[0].amount_per_pkg' ng-change="pc.updateTotalAmount()" required)
-        .form-group
-          label.col-md-2.col-xs-3.control-label {{ 'UNIT' | translate }}
-          .col-md-10.col-xs-9
-            input.form-control(type='number', placeholder="{{ 'UNIT' | translate }}", min='0' ng-model='pc.medicine.med_batches_attributes[0].amount_unit' ng-change="pc.updateTotalAmount()" required)
-        .form-group
-          label.col-md-2.col-xs-3.control-label {{ 'TOTAL' | translate }}
-          .col-md-10.col-xs-9
-            input.form-control(type='number', placeholder="{{ 'TOTAL' | translate }}", min='0' ng-model='pc.medicine.med_batches_attributes[0].total_units' disabled required)
-        .form-group
-          label.col-md-2.col-xs-3.control-label {{ 'PRICE' | translate }}
-          .col-md-10.col-xs-9
-            input.form-control(type='number', placeholder="{{ 'PRICE' | translate }}", min='0' ng-model='pc.medicine.med_batches_attributes[0].total_price' required)
       .row
         .col-xs-12.text-right
           .btn.btn-danger(ng-show='!iic.isReadOnly' ng-click='iic.isReadOnly=true') Cancel

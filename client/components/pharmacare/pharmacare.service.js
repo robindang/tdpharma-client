@@ -10,6 +10,9 @@ function pharmacare($filter) {
     getDateFormat: function() {
       return $filter('translate')('DATE_FORMAT');
     },
+    getDateTimeFormat: function() {
+      return $filter('translate')('DATETIME_FORMAT');
+    },
     getStatus: function(item) {
       if (!item) return '';
       if (item.status === 'inactive') return 'Off Sale';
