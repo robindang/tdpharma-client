@@ -74,7 +74,9 @@
       .form-group
         label.col-sm-2.control-label {{ 'PRICE' | translate }}
         .col-sm-10
-          input.form-control(type='number', placeholder="{{ 'PRICE' | translate }}", min='0' ng-model='pc.medicine.med_batches_attributes[0].total_price' required)
+          .input-group
+            span.input-group-addon ₫
+            input.form-control(type='number', placeholder="{{ 'PRICE' | translate }}", min='0' ng-model='pc.medicine.med_batches_attributes[0].total_price' required)
       .form-group
         .col-sm-offset-2.col-sm-10
           button.btn.btn-primary(type='submit') {{ 'SAVE' | translate }}          
