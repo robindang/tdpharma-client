@@ -9,7 +9,7 @@
   function angularTranslateConfig($translateProvider) {
     $translateProvider.useSanitizeValueStrategy('sanitizeParameters');
 
-    $translateProvider.translations('en', {
+    $translateProvider.translations('en-ca', {
       GREETING: 'Allo, Allo!',
       LEADING_GREETING: 'Kick-start your pharmacy with {{company}}',
       HOME: 'Home',
