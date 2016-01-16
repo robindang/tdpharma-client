@@ -31,10 +31,10 @@ div(ng-include='"components/navbar/navbar.html"')
             .form-group.col-md-3.pull-left
               label.control-label Filters
               span &nbsp;&nbsp;
-              .btn-group(ng-init="ic.status=''")
+              .btn-group
                 label.btn.btn-default(ng-model='ic.status', uib-btn-radio="''", ng-change='ic.updateItemList()') All
-                label.btn.btn-default(ng-model='ic.status', uib-btn-radio="'active'", ng-change='ic.updateItemList()') Active
-                label.btn.btn-default(ng-model='ic.status', uib-btn-radio="'inactive'", ng-change='ic.updateItemList()') Inactive
+                label.btn.btn-default(ng-model='ic.status', uib-btn-radio="'active'", ng-change='ic.updateItemList()') On Sale
+                label.btn.btn-default(ng-model='ic.status', uib-btn-radio="'inactive'", ng-change='ic.updateItemList()') Off Sale
             .form-group.pull-right
               a.btn.btn-primary(href="/products") Add a product
       tr

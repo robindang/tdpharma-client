@@ -12,7 +12,7 @@ function InventoryCtrl(service, pharmacare, toastr, Medicine, APP_CONFIGURATION)
   ctrl.displayed = [];
   ctrl.raw = [];
   ctrl.store_medicines = [];      // Store medicines array for search drop down
-  ctrl.status = '';
+  ctrl.status = 'active';
   ctrl.numberOfResults = '';
   ctrl.callServer = callServer;
   ctrl.getNumberOfRowsSelected = getNumberOfRowsSelected;
