@@ -8,7 +8,8 @@
 
   function angularTranslateConfig($translateProvider) {
     $translateProvider.translations('vn', {
-      DATE_FORMAT: 'MM/DD/YY HH:mm',
+      DATE_FORMAT: 'MM/dd/yy',
+      DATETIME_FORMAT: 'MM/DD/YY HH:mm',
       GREETING: 'Allo, Allo!',
       LEADING_GREETING: 'Kích hoạt nhà thuốc của bạn với {{company}}',
       HOME: 'Home',

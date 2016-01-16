@@ -4,10 +4,10 @@ angular.module('tdpharmaClientApp')
   .controller('ProductsCtrl', ProductsCtrl);
 
 ProductsCtrl.$inject = [
-  '$cookies', '$filter', '$location', '$scope', '$timeout', 'APP_CONFIGURATION', 'Category', 
+  '$cookies', '$filter', '$location', '$scope', '$timeout', 'pharmacare', 'APP_CONFIGURATION', 'Category', 
   'Medicine', 'User', 'toastr', 'S3Upload', 'lodash', 'serverConfig', 'InventoryItem'];
 
-function ProductsCtrl($cookies, $filter, $location, $scope, $timeout, APP_CONFIGURATION, 
+function ProductsCtrl($cookies, $filter, $location, $scope, $timeout, pharmacare, APP_CONFIGURATION, 
   Category, Medicine, User, toastr, S3Upload, _, serverConfig, InventoryItem) {
 
   var ctrl = this;
@@ -29,6 +29,7 @@ function ProductsCtrl($cookies, $filter, $location, $scope, $timeout, APP_CONFIG
   ctrl.updateUser = updateUser;
   ctrl.open = open;
   ctrl.nextTab = nextTab;
+  ctrl.pharmacare = pharmacare;
   ctrl.updateHash = updateHash;
   ctrl.updateTotalAmount = updateTotalAmount;
   ctrl.uploadImage = uploadImage;
