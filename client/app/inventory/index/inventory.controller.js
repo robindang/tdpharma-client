@@ -3,9 +3,9 @@
 angular.module('tdpharmaClientApp')
   .controller('InventoryCtrl', InventoryCtrl);
 
-InventoryCtrl.$inject = ['Resource', 'toastr', 'Medicine', 'APP_CONFIGURATION'];
+InventoryCtrl.$inject = ['Resource', 'pharmacare', 'toastr', 'Medicine', 'APP_CONFIGURATION'];
 
-function InventoryCtrl(service, toastr, Medicine, APP_CONFIGURATION) {
+function InventoryCtrl(service, pharmacare, toastr, Medicine, APP_CONFIGURATION) {
 
   var ctrl = this;
 
@@ -16,6 +16,7 @@ function InventoryCtrl(service, toastr, Medicine, APP_CONFIGURATION) {
   ctrl.numberOfResults = '';
   ctrl.callServer = callServer;
   ctrl.getNumberOfRowsSelected = getNumberOfRowsSelected;
+  ctrl.pharmacare = pharmacare;
   ctrl.updateItemList = updateItemList;
   ctrl.searchMedicine = searchMedicine;
 

@@ -1,63 +1,64 @@
 div(ng-include='"components/navbar/navbar.html"')
 
 .col-sm-12.inventory
-  table.table.table-striped(st-pipe='mc.callServer', st-table='mc.displayed')
+  table.table.table-striped(st-pipe='ic.callServer', st-table='ic.displayed')
     thead
       tr
-        tr
-          th(colspan=9)
-            .form-inline.col-md-12
-              .form-group.col-md-3
-                .btn-group(uib-dropdown='')
-                  button#single-button.btn.btn-primary(type='button', uib-dropdown-toggle='', ng-disabled='mc.getNumberOfRowsSelected()===0')
-                    | Action on {{mc.getNumberOfRowsSelected()}} selected 
-                    span.caret
-                  ul.dropdown-menu(role='menu', aria-labelledby='single-button')
-                    li(role='menuitem')
-                      a(href='#') Delete
-              .form-group.col-md-6
-                .input-group                  
-                  ui-select#medicine(ng-model='mc.selected_med' name='medicine' close-on-select='true' required)
-                    ui-select-match(placeholder='Search for...') {{$select.selected.name}}, {{$select.selected.concentration}} {{$select.selected.concentration_unit}}, {{$select.selected.manufacturer}}
-                    ui-select-choices(repeat='data.name as data in mc.store_medicines | filter:$select.search' refresh='mc.searchMedicine($select.search)')                      
-                      small
-                        span
-                          img.photo-search(ng-src="{{ data.photo_thumb.photo_link }}")                        
-                          | {{data.name}}, {{data.concentration}} {{data.concentration_unit}}, {{data.manufacturer}}
-                  span.input-group-btn
-                    button.btn.btn-default(type='button') Search
-              .form-group
-                span {{mc.numberOfResults}} Item(s)
-            .form-inline.col-md-12.clearfix
-              .form-group.col-md-3.pull-left
-                label.control-label Filters
-                span &nbsp;&nbsp;
-                .btn-group(ng-init="mc.status=''")
-                  label.btn.btn-default(ng-model='mc.status', uib-btn-radio="''", ng-change='mc.updateItemList()') All
-                  label.btn.btn-default(ng-model='mc.status', uib-btn-radio="'active'", ng-change='mc.updateItemList()') Active
-                  label.btn.btn-default(ng-model='mc.status', uib-btn-radio="'inactive'", ng-change='mc.updateItemList()') Inactive
-              .form-group.pull-right
-                a.btn.btn-primary(href="/products") Add a product
+        th(colspan=8)
+          .form-inline.col-md-12
+            .form-group.col-md-3
+              .btn-group(uib-dropdown='')
+                button#single-button.btn.btn-primary(type='button', uib-dropdown-toggle='', ng-disabled='ic.getNumberOfRowsSelected()===0')
+                  | Action on {{ic.getNumberOfRowsSelected()}} selected 
+                  span.caret
+                ul.dropdown-menu(role='menu', aria-labelledby='single-button')
+                  li(role='menuitem')
+                    a(href='#') Delete
+            .form-group.col-md-6
+              .input-group                  
+                ui-select#medicine(ng-model='ic.selected_med' name='medicine' close-on-select='true' required)
+                  ui-select-match(placeholder='Search for...') {{$select.selected.name}}, {{$select.selected.concentration}} {{$select.selected.concentration_unit}}, {{$select.selected.manufacturer}}
+                  ui-select-choices(repeat='data.name as data in ic.store_medicines | filter:$select.search' refresh='ic.searchMedicine($select.search)')                      
+                    small
+                      span
+                        img.photo-search(ng-src="{{ data.photo_thumb.photo_link }}")                        
+                        | {{data.name}}, {{data.concentration}} {{data.concentration_unit}}, {{data.manufacturer}}
+                span.input-group-btn
+                  button.btn.btn-default(type='button') Search
+            .form-group
+              span {{ic.numberOfResults}} Item(s)
+          .form-inline.col-md-12.clearfix
+            .form-group.col-md-3.pull-left
+              label.control-label Filters
+              span &nbsp;&nbsp;
+              .btn-group(ng-init="ic.status=''")
+                label.btn.btn-default(ng-model='ic.status', uib-btn-radio="''", ng-change='ic.updateItemList()') All
+                label.btn.btn-default(ng-model='ic.status', uib-btn-radio="'active'", ng-change='ic.updateItemList()') Active
+                label.btn.btn-default(ng-model='ic.status', uib-btn-radio="'inactive'", ng-change='ic.updateItemList()') Inactive
+            .form-group.pull-right
+              a.btn.btn-primary(href="/products") Add a product
       tr
         th
-        th Image
-        th Status
-        th Category        
+        //- th Image
         th Name
+        th Status
+        th Category
         th Updated
         th Available
         th Price
         th Action
-    tbody(ng-show='!mc.isLoading')
-      tr(ng-repeat='row in mc.displayed')
+    tbody(ng-show='!ic.isLoading')
+      tr(ng-repeat='row in ic.displayed')
         td(cs-select="row")
+        //- td
+        //-   img.photo-thumb(ng-src="{{ row.photo_thumb.photo_link }}")          
         td
-          img.photo-thumb(ng-src="{{ row.photo_thumb.photo_link }}")          
-        td {{row.status}}
-        td {{row.category.name}}
-        td {{row.itemable.name}}
+          a(ng-href='/inventory/{{row.id}}') {{row.itemable.name}}
+        td(ng-class='ic.pharmacare.getStatusCSSClass(row)') {{ic.pharmacare.getStatus(row)}}
+        td
+          a(href='#') {{row.category.name}}
         td {{row.updated_moment.format('MM/DD/YY HH:mm')}}
-        td {{row.amount}}
+        td {{row.amount | number}}
         td 
         td
           .input-group
@@ -74,11 +75,11 @@ div(ng-include='"components/navbar/navbar.html"')
                 li.divider
                 li(role='menuitem')
                   a(href='#') Stop Sale
-    tbody(ng-show='mc.isLoading')
+    tbody(ng-show='ic.isLoading')
       tr
-        td.text-center(colspan='9') Loading ... 
+        td.text-center(colspan='8') Loading ... 
     tfoot
       tr
-        td.text-center(colspan='9')
+        td.text-center(colspan='8')
           div(st-items-by-page='25', st-pagination='', st-template='components/pagination/pagination.html')
 

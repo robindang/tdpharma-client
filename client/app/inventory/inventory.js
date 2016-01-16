@@ -7,7 +7,7 @@ angular.module('tdpharmaClientApp')
         url: '/inventory',
         templateUrl: 'app/inventory/index/inventory.html',
         controller: 'InventoryCtrl',
-        controllerAs: 'mc'
+        controllerAs: 'ic'
       })
       .state('inventoryItem', {
         url: '/inventory/:id',

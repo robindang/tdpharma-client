@@ -3,16 +3,17 @@
 angular.module('tdpharmaClientApp')
   .controller('InventoryItemCtrl', InventoryItemCtrl);
 
-InventoryItemCtrl.$inject = ['$stateParams', '$window', 'APP_CONFIGURATION', 'Category', 'InventoryItem'];
+InventoryItemCtrl.$inject = [
+  '$stateParams', '$window', 'pharmacare', 'APP_CONFIGURATION', 'Category', 'InventoryItem'];
 
-function InventoryItemCtrl($stateParams, $window, APP_CONFIGURATION, Category, InventoryItem) {
+function InventoryItemCtrl($stateParams, $window, pharmacare, APP_CONFIGURATION, Category, InventoryItem) {
   console.log($stateParams)
   var async = $window.async;
 
   var ctrl = this;
   ctrl.APP_CONFIGURATION = APP_CONFIGURATION;
   ctrl.isReadOnly = true;
-  ctrl.getStatus = getStatus
+  ctrl.pharmacare = pharmacare
 
   init();  
 
@@ -50,12 +51,5 @@ function InventoryItemCtrl($stateParams, $window, APP_CONFIGURATION, Category, I
         }
         ctrl.breadcrumbs = breadcrumbs;
       });
-  }
-
-  function getStatus() {
-    if (!ctrl.item) return '';
-    if (ctrl.item.status === 'inactive') return 'Off Sale';
-    if (ctrl.item.status === 'active') return ctrl.item.amount ? 'On Sale':'Out of Stock';
-    return ctrl.item.status;
   }
 }
