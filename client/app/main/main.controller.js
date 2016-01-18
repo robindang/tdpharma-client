@@ -1,13 +1,16 @@
 'use strict';
 
 angular.module('tdpharmaClientApp')
-  .controller('MainCtrl', function ($scope, $http, Auth, $translate) {
+  .controller('MainCtrl', MainCtrl);
+
+function MainCtrl() {
     
-    $scope.text = {
+    var ctrl = this;
+    ctrl.text = {
       company: 'Pharmaplus'
     }
 
-    $scope.features = [
+    ctrl.features = [
       {
         info: 'Track your store inventory. Update prices. Put items on and off sale.',
         link: '/inventory',
@@ -24,11 +27,6 @@ angular.module('tdpharmaClientApp')
         info: 'Checkout customer orders. Record transactions.',
         link: '/checkout',
         name: 'Record retail transactions...'
-      }]
+      }];
 
-    var current_user = Auth.getCurrentUser();
-    if (current_user && current_user.preferred_language){
-      $translate.use(current_user.preferred_language);
-    }
-
-  });
+};
