@@ -51,7 +51,7 @@ div(ng-include='"components/navbar/navbar.html"')
         .form-group
           label.col-md-2.col-xs-3.control-label Date
           .col-md-10.col-xs-9
-            p.form-control-static {{iic.pharmacare.formatDateTime(batch.created_at)}}
+            p.form-control-static {{iic.pharmacare | amDateFormat:'LLL'}}
         .form-group
           label.col-md-2.col-xs-3.control-label {{ 'TOTAL' | translate }}
           .col-md-10.col-xs-9
