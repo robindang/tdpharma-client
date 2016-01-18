@@ -4,9 +4,10 @@ angular.module('tdpharmaClientApp')
   .controller('InventoryItemCtrl', InventoryItemCtrl);
 
 InventoryItemCtrl.$inject = [
-  '$stateParams', '$window', 'pharmacare', 'APP_CONFIGURATION', 'Category', 'InventoryItem'];
+  '$location', '$stateParams', '$window', 'pharmacare', 'APP_CONFIGURATION', 
+  'Category', 'InventoryItem'];
 
-function InventoryItemCtrl($stateParams, $window, pharmacare, APP_CONFIGURATION, Category, InventoryItem) {
+function InventoryItemCtrl($location, $stateParams, $window, pharmacare, APP_CONFIGURATION, Category, InventoryItem) {
   console.log($stateParams)
   var async = $window.async;
 
@@ -60,7 +61,8 @@ function InventoryItemCtrl($stateParams, $window, pharmacare, APP_CONFIGURATION,
   }
 
   function initMode() {
-    var __mode = 'read';
+    var hash = $location.hash();
+    var __mode = (hash==='add'||hash==='edit') ? hash:'read';
     var __getter = function(mode) {return function() {return __mode===mode}};
     var __setter = function(mode) {return function() {__mode = mode}};
     ctrl.mode = {
