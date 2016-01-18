@@ -3,9 +3,9 @@
 angular.module('tdpharmaClientApp')
   .controller('InventoryCtrl', InventoryCtrl);
 
-InventoryCtrl.$inject = ['Resource', 'lodash', 'pharmacare', 'toastr', 'Medicine', 'APP_CONFIGURATION'];
+InventoryCtrl.$inject = ['lodash', 'pharmacare', 'toastr', 'InventorySearch', 'Medicine', 'APP_CONFIGURATION'];
 
-function InventoryCtrl(service, _, pharmacare, toastr, Medicine, APP_CONFIGURATION) {
+function InventoryCtrl(_, pharmacare, toastr, InventorySearch, Medicine, APP_CONFIGURATION) {
 
   var ctrl = this;
 
@@ -62,7 +62,7 @@ function InventoryCtrl(service, _, pharmacare, toastr, Medicine, APP_CONFIGURATI
     var start = pagination.start || 0;     // This is NOT the page number, but the index of item in the list that you want to use to display the table.
     var number = pagination.number || 10;  // Number of entries showed per page.
 
-    service.getPage(start, number, tableState).then(function (result) {
+    InventorySearch.getPage(start, number, tableState).then(function (result) {
       ctrl.raw = result.data;        
       ctrl.numberOfResults = result.numberOfResults * ctrl.raw.length;
       //set the number of pages so the pagination can update

@@ -16,7 +16,7 @@ angular.module('tdpharmaClientApp')
         controllerAs: 'iic'
       });
   })
-  .factory('Resource', ['$q', '$filter', '$timeout', '$cookies', 'InventoryItem', 'Category', function ($q, $filter, $timeout, $cookies, InventoryItem, Category) {
+  .factory('InventorySearch', ['$q', '$filter', '$timeout', '$cookies', 'InventoryItem', 'Category', function ($q, $filter, $timeout, $cookies, InventoryItem, Category) {
 
     function getPage(start, number, params) {
 
