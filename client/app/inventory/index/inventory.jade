@@ -39,7 +39,7 @@ div(ng-include='"components/navbar/navbar.html"')
               a.btn.btn-primary(href="/products") Add a product
       tr
         th
-        //- th Image
+          input(type='checkbox' ng-click='ic.selectAllRows($event)')
         th Name
         th Status
         th Category
@@ -50,14 +50,12 @@ div(ng-include='"components/navbar/navbar.html"')
     tbody(ng-show='!ic.isLoading')
       tr(ng-repeat='row in ic.displayed')
         td(cs-select="row")
-        //- td
-        //-   img.photo-thumb(ng-src="{{ row.photo_thumb.photo_link }}")          
         td
           a(ng-href='/inventory/{{row.id}}') {{row.itemable.name}}
         td(ng-class='ic.pharmacare.getStatusCSSClass(row)') {{ic.pharmacare.getStatus(row)}}
         td
           a(href='#') {{row.category.name}}
-        td {{row.updated_moment.toString() | amDateFormat:'lll'}}
+        td {{row.updated_moment.toString() | amDateFormat:'LLL'}}
         td {{row.amount | number}}
         td 
         td

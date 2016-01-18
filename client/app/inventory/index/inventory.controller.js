@@ -3,9 +3,9 @@
 angular.module('tdpharmaClientApp')
   .controller('InventoryCtrl', InventoryCtrl);
 
-InventoryCtrl.$inject = ['Resource', 'pharmacare', 'toastr', 'Medicine', 'APP_CONFIGURATION'];
+InventoryCtrl.$inject = ['Resource', 'lodash', 'pharmacare', 'toastr', 'Medicine', 'APP_CONFIGURATION'];
 
-function InventoryCtrl(service, pharmacare, toastr, Medicine, APP_CONFIGURATION) {
+function InventoryCtrl(service, _, pharmacare, toastr, Medicine, APP_CONFIGURATION) {
 
   var ctrl = this;
 
@@ -19,6 +19,7 @@ function InventoryCtrl(service, pharmacare, toastr, Medicine, APP_CONFIGURATION)
   ctrl.pharmacare = pharmacare;
   ctrl.updateItemList = updateItemList;
   ctrl.searchMedicine = searchMedicine;
+  ctrl.selectAllRows = selectAllRows;
 
   searchMedicine(null, true);
 
@@ -78,7 +79,13 @@ function InventoryCtrl(service, pharmacare, toastr, Medicine, APP_CONFIGURATION)
   };
 
   function getNumberOfRowsSelected() {
-    return this.displayed.filter(function(x) {return x.isSelected}).length;
-  }    
+    return ctrl.displayed.filter(function(x) {return x.isSelected}).length;
+  }
 
+  function selectAllRows($event) {
+    var newValue = $event.target.checked ? true:false;
+    _.each(ctrl.displayed, function(row) {
+      row.isSelected = newValue;
+    })
+  }
 }

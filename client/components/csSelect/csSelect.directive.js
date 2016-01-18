@@ -4,7 +4,7 @@ angular.module('tdpharmaClientApp')
   .directive('csSelect', function () {
     return {
       require: '^stTable',
-      template: '<input type="checkbox"/>',
+      template: '<input type="checkbox" ng-checked="row.isSelected"/>',
       scope: {
         row: '=csSelect'
       },
