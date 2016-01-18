@@ -12,12 +12,19 @@ function InventoryItemCtrl($stateParams, $window, pharmacare, APP_CONFIGURATION,
 
   var ctrl = this;
   ctrl.APP_CONFIGURATION = APP_CONFIGURATION;
-  ctrl.isReadOnly = true;
   ctrl.pharmacare = pharmacare
 
-  init();  
+  init();
 
   function init() {
+    initMode();
+    initData(function(err) {
+      if (err) return;
+      initBreadcrumbs(ctrl.item.category_id);
+    });
+  }
+
+  function initData(callback) {
     async.waterfall([
         function(next) {
           Category.get().$promise.then(function(categories) {
@@ -39,17 +46,30 @@ function InventoryItemCtrl($stateParams, $window, pharmacare, APP_CONFIGURATION,
             next(null)
           })    
         }
-      ], function(err) {
-        console.log(ctrl.categories); console.log(ctrl.item);
-        var categoryId = ctrl.item.category_id;
-        if (categoryId === null) return;
-        var category = ctrl.categories[categoryId];
-        var breadcrumbs = [category];
-        while (category.parent_id !== null) {
-          category = ctrl.categories[category.parent_id];
-          breadcrumbs.unshift(category);
-        }
-        ctrl.breadcrumbs = breadcrumbs;
-      });
+      ], callback);
+  }
+
+  function initBreadcrumbs(categoryId) {
+    var breadcrumbs = [];
+    while (categoryId !== null) {
+      var category = ctrl.categories[categoryId];
+      breadcrumbs.unshift(category);
+      categoryId = category.parent_id;
+    }
+    ctrl.breadcrumbs = breadcrumbs;
+  }
+
+  function initMode() {
+    var __mode = 'read';
+    var __getter = function(mode) {return function() {return __mode===mode}};
+    var __setter = function(mode) {return function() {__mode = mode}};
+    ctrl.mode = {
+      isAddMode: __getter('add'),
+      isEditMode: __getter('edit'),
+      isReadMode: __getter('read'),
+      setAddMode: __setter('add'),
+      setEditMode: __setter('edit'),
+      setReadMode: __setter('read')
+    }
   }
 }

@@ -15,11 +15,11 @@ div(ng-include='"components/navbar/navbar.html"')
               a(ng-href='/products/{{iic.item.itemable.id}}') {{iic.item.itemable.name}}
             h5 {{iic.item.itemable.manufacturer}}
           .col-md-3.col-sm-5.hidden-xs.text-right
-            .btn.btn-default(ng-show='iic.isReadOnly' ng-click='iic.isReadOnly=false' style='margin-top:20px')
+            .btn.btn-default(ng-show='iic.mode.isReadMode()' ng-click='iic.mode.setAddMode()' style='margin-top:20px')
               i.fa.fa-plus
               | &nbsp;Add
             | &nbsp;&nbsp;
-            .btn.btn-default(ng-show='iic.isReadOnly' ng-click='iic.isReadOnly=false' style='margin-top:20px')
+            .btn.btn-default(ng-show='iic.mode.isReadMode()' ng-click='iic.mode.setEditMode()' style='margin-top:20px')
               i.fa.fa-pencil
               | &nbsp;Edit
           .col-xs-12
@@ -41,13 +41,58 @@ div(ng-include='"components/navbar/navbar.html"')
                       p.form-control-static {{iic.item.itemable.mfg_location}}
                     label.control-label.col-sm-3 Quantity
                     .col-sm-9
-                      p.form-control-static(ng-show='iic.isReadOnly') {{iic.item.amount | number}}
-                      input.form-control(type='number', placeholder="Quantity", min='0' ng-model='iic.item.amount' required ng-show='!iic.isReadOnly')
-      a(data-toggle='collapse', data-target='#collapse{{$index}}' ng-repeat-start='batch in iic.item.med_batches')
+                      p.form-control-static(ng-show='!iic.mode.isEditMode()') {{iic.item.amount | number}}
+                      input.form-control(type='number', placeholder="Quantity", min='0' ng-model='iic.item.amount' required ng-show='iic.mode.isEditMode()')
+      form.form-horizontal(ng-show='iic.mode.isAddMode()')
+        .form-group
+          label.col-sm-2.control-label {{'MANUFACTURE_DATE' | translate }}
+          .col-sm-10
+            p.input-group
+              input.form-control(type='text', placeholder="{{'MANUFACTURE_DATE' | translate }}", uib-datepicker-popup='{{pc.pharmacare.getDatePickerDateFormat()}}', ng-model='pc.medicine.med_batches_attributes[0].mfg_date', is-open='pc.status[$index].opened', max-date='pc.maxDate', datepicker-options='pc.dateOptions', ng-required='true', close-text='Close', required='required')
+              span.input-group-btn
+                button.btn.btn-default(type='button', ng-click='pc.open("status", $event, $index)')
+                  i.glyphicon.glyphicon-calendar
+        .form-group
+          label.col-sm-2.control-label {{ 'EXPIRE_DATE' | translate }}
+          .col-sm-10
+            p.input-group
+              input.form-control(type='text', placeholder="{{ 'EXPIRE_DATE' | translate }}", uib-datepicker-popup='{{pc.pharmacare.getDateFormat()}}', ng-model='pc.medicine.med_batches_attributes[0].expire_date', is-open='pc.expStatus[$index].opened', min-date='pc.maxDate', datepicker-options='pc.dateOptions', ng-required='true', close-text='Close', required='required')
+              span.input-group-btn
+                button.btn.btn-default(type='button', ng-click='pc.open("expStatus", $event, $index)')
+                  i.glyphicon.glyphicon-calendar
+        .form-group
+          label.col-sm-2.control-label {{ 'PACKAGE' | translate }}
+          .col-sm-10
+            input.form-control(type='text', placeholder="{{ 'PACKAGE' | translate }}", ng-model='pc.medicine.med_batches_attributes[0].package' required)    
+        .form-group
+          label.col-sm-2.control-label {{ 'AMOUNT' | translate }}
+          .col-sm-10
+            input.form-control(type='number', placeholder="{{ 'AMOUNT' | translate }}", min='0' ng-model='pc.medicine.med_batches_attributes[0].amount_per_pkg' ng-change="pc.updateTotalAmount()" required)
+        .form-group
+          label.col-sm-2.control-label {{ 'UNIT' | translate }}
+          .col-sm-10
+            input.form-control(type='number', placeholder="{{ 'UNIT' | translate }}", min='0' ng-model='pc.medicine.med_batches_attributes[0].amount_unit' ng-change="pc.updateTotalAmount()" required)
+        .form-group
+          label.col-sm-2.control-label {{ 'TOTAL' | translate }}
+          .col-sm-10
+            input.form-control(type='number', placeholder="{{ 'TOTAL' | translate }}", min='0' ng-model='pc.medicine.med_batches_attributes[0].total_units' disabled required)
+        .form-group
+          label.col-sm-2.control-label {{ 'PRICE' | translate }}
+          .col-sm-10
+            .input-group
+              span.input-group-addon ₫
+              input.form-control(type='number', placeholder="{{ 'PRICE' | translate }}", min='0' ng-model='pc.medicine.med_batches_attributes[0].total_price' required)
+        .col-xs-12.text-right
+          .btn.btn-danger(ng-show='iic.mode.isAddMode()' ng-click='iic.mode.setReadMode()') Cancel
+          | &nbsp;&nbsp;
+          .btn.btn-primary(ng-show='iic.mode.isAddMode()' ng-click='iic.mode.setReadMode()') Add
+          br
+          br
+      a(data-toggle='collapse', data-target='#collapse0')
         i.fa.fa-minus-square-o
         | &nbsp;&nbsp;Collapse
       hr
-      form.form-horizontal(id='collapse{{$index}}' ng-repeat-end)
+      form.form-horizontal(id='collapse0' ng-repeat='batch in iic.item.med_batches')
         .form-group
           label.col-md-2.col-xs-3.control-label Date
           .col-md-10.col-xs-9
@@ -64,7 +109,7 @@ div(ng-include='"components/navbar/navbar.html"')
           label.col-md-2.col-xs-3.control-label {{'MANUFACTURE_DATE' | translate }}
           .col-md-10.col-xs-9
             p.input-group
-              input.form-control(type='text', placeholder="{{'MANUFACTURE_DATE' | translate }}", uib-datepicker-popup='{{iic.pharmacare.getDateFormat()}}', ng-model='batch.mfg_date', is-open='pc.status[$index].opened', max-date='pc.maxDate', datepicker-options='pc.dateOptions', ng-required='true', close-text='Close', required='required' ng-disabled='iic.isReadOnly')
+              input.form-control(type='text', placeholder="{{'MANUFACTURE_DATE' | translate }}", uib-datepicker-popup='{{iic.pharmacare.getDateFormat()}}', ng-model='batch.mfg_date', is-open='pc.status[$index].opened', max-date='pc.maxDate', datepicker-options='pc.dateOptions', ng-required='true', close-text='Close', required='required' ng-disabled='iic.mode.isReadMode()')
               span.input-group-btn
                 button.btn.btn-default(type='button', ng-click='pc.open("status", $event, $index)')
                   i.glyphicon.glyphicon-calendar
@@ -72,14 +117,14 @@ div(ng-include='"components/navbar/navbar.html"')
           label.col-md-2.col-xs-3.control-label {{ 'EXPIRE_DATE' | translate }}
           .col-md-10.col-xs-9
             p.input-group
-              input.form-control(type='text', placeholder="{{ 'EXPIRE_DATE' | translate }}", uib-datepicker-popup='{{iic.pharmacare.getDateFormat()}}', ng-model='batch.expire_date', is-open='pc.expStatus[$index].opened', min-date='pc.maxDate', datepicker-options='pc.dateOptions', ng-required='true', close-text='Close', required='required' ng-disabled='iic.isReadOnly')
+              input.form-control(type='text', placeholder="{{ 'EXPIRE_DATE' | translate }}", uib-datepicker-popup='{{iic.pharmacare.getDateFormat()}}', ng-model='batch.expire_date', is-open='pc.expStatus[$index].opened', min-date='pc.maxDate', datepicker-options='pc.dateOptions', ng-required='true', close-text='Close', required='required' ng-disabled='iic.mode.isReadMode()')
               span.input-group-btn
                 button.btn.btn-default(type='button', ng-click='pc.open("expStatus", $event, $index)')
                   i.glyphicon.glyphicon-calendar
       .row
         .col-xs-12.text-right
-          .btn.btn-danger(ng-show='!iic.isReadOnly' ng-click='iic.isReadOnly=true') Cancel
+          .btn.btn-danger(ng-show='iic.mode.isEditMode()' ng-click='iic.mode.setReadMode()') Cancel
           | &nbsp;&nbsp;
-          .btn.btn-primary(ng-show='!iic.isReadOnly' ng-click='iic.isReadOnly=true') Save
+          .btn.btn-primary(ng-show='iic.mode.isEditMode()' ng-click='iic.mode.setReadMode()') Save
       br
       br
