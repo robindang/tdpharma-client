@@ -61,15 +61,15 @@ div(ng-include='"components/navbar/navbar.html"')
         td
           .input-group
             .btn-group(uib-dropdown='', style='min-width:100px')
-              button#split-button.btn.btn-default(type='button' go-click="/inventory/{{row.id}}") Edit
+              button#split-button.btn.btn-default(type='button' go-click="/inventory/{{row.id}}#edit") Edit
               button.btn.btn-default(type='button', uib-dropdown-toggle='')
                 span.caret
                 span.sr-only Split button!
               ul.dropdown-menu(role='menu', aria-labelledby='split-button')
                 li(role='menuitem')
-                  a(href='#') Edit
+                  a(href='/inventory/{{row.id}}#edit') Edit
                 li(role='menuitem')
-                  a(href='#') Delete
+                  a(href='/inventory/{{row.id}}#add') Add
                 li.divider
                 li(role='menuitem')
                   a(href='#') Stop Sale
