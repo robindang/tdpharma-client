@@ -17,7 +17,7 @@
     "jquery": "~2.2.0",
     "json3": "~3.3.1",
     "lodash": "~4.0.0",
-    "moment": "~2.11.1",
+    "moment": ">=2.8.0",
     "angular-translate": "~2.8.1",
     "underscore": "~1.8.3",
     "ui-select": "angular-ui-select#~0.13.2",
