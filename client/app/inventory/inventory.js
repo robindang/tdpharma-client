@@ -22,6 +22,11 @@ angular.module('tdpharmaClientApp')
 
       var deferred = $q.defer();
 
+      var query = {};
+      number = 25;
+      params = params || {};
+      query.page = 1 + start / number;
+      if (params.categoryId) query.category_id = params.categoryId;
       // var filtered = params.search.predicateObject ? $filter('filter')(randomsItems, params.search.predicateObject) : randomsItems;
 
       // if (params.sort.predicate) {
@@ -30,11 +35,11 @@ angular.module('tdpharmaClientApp')
 
       // var result = filtered.slice(start, start + number);
 
-      InventoryItem.get({page: 1+start/number}, function(item) {        
+      InventoryItem.get(query, function(obj) {        
         deferred.resolve({
-          data: item.data.items,
-          numberOfPages: Math.ceil(item.data.total_count / number),
-          numberOfResults: item.data.total_count
+          data: obj.data.items,
+          numberOfPages: Math.ceil(obj.data.total_count / number),
+          numberOfResults: obj.data.total_count
         });
       });
 

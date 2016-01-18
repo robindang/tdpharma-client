@@ -5,9 +5,9 @@ angular.module('tdpharmaClientApp')
 
 InventoryItemCtrl.$inject = [
   '$location', '$stateParams', '$window', 'pharmacare', 'APP_CONFIGURATION', 
-  'Category', 'InventoryItem'];
+  'DataHelper', 'InventoryItem'];
 
-function InventoryItemCtrl($location, $stateParams, $window, pharmacare, APP_CONFIGURATION, Category, InventoryItem) {
+function InventoryItemCtrl($location, $stateParams, $window, pharmacare, APP_CONFIGURATION, DataHelper, InventoryItem) {
   console.log($stateParams)
   var async = $window.async;
 
@@ -19,35 +19,24 @@ function InventoryItemCtrl($location, $stateParams, $window, pharmacare, APP_CON
 
   function init() {
     initMode();
-    initData(function(err) {
-      if (err) return;
-      initBreadcrumbs(ctrl.item.category_id);
-    });
+    initData();
   }
 
   function initData(callback) {
     async.waterfall([
         function(next) {
-          Category.get().$promise.then(function(categories) {
-            var d = categories.data;
-            var cache = {};
-            while (d.length) {
-              var o = d.pop();
-              if (o.id in cache) continue;
-              cache[o.id] = o;
-              d = d.concat(o.children);
-            }
-            ctrl.categories = cache;
-            next(null);
-          });
-        },
-        function(next) {
           InventoryItem.get($stateParams).$promise.then(function(item) {
             ctrl.item = item.data;
-            next(null)
+            next(null, ctrl.item.category_id)
           })    
+        },
+        function(categoryId, next) {
+          DataHelper.getBreadcrumbs(categoryId).then(function(breadcrumbs) {
+            ctrl.breadcrumbs = breadcrumbs;
+            next(null);
+          });
         }
-      ], callback);
+      ], callback || function(){});
   }
 
   function initBreadcrumbs(categoryId) {

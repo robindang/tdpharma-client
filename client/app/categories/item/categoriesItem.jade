@@ -1,0 +1,16 @@
+div(ng-include='"components/navbar/navbar.html"')
+
+.container
+  .row
+    .col-md-12
+      ul.breadcrumb
+        li(ng-repeat='breadcrumb in cic.breadcrumbs')
+          a(ng-href='/categories/{{breadcrumb.id}}') {{breadcrumb.name}}
+  .row
+    .col-md-2.col-sm-3.col-xs-4(ng-repeat='item in cic.results.data')
+      .thumbnail
+        img(ng-src='{{cic.APP_CONFIG.SERVER_DEFAULT_PICTURE_ENDPOINT}}/{{item.photo_thumb.photo}}', alt='...')
+        .caption
+          h3 {{item.itemable.name}}
+          h5 {{item.itemable.manufacturer}}
+          p $1.00
