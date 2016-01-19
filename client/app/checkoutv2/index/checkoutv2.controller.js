@@ -18,7 +18,7 @@ function Checkoutv2Ctrl($scope, $localStorage, InventoryItem) {
   ctrl.cart = $localStorage.cart || angular.copy(emptyCart)
   ctrl.addManualItem = addManualItem;
   ctrl.addQuantity = addQuantity;
-  ctrl.printReceipt = printReceipt;
+  ctrl.proceedToCheckout = proceedToCheckout;
   ctrl.removeProductFromCart = removeProductFromCart;
   ctrl.removeQuantity = removeQuantity;
   ctrl.updateCartTotals = updateCartTotals;
@@ -90,21 +90,9 @@ function Checkoutv2Ctrl($scope, $localStorage, InventoryItem) {
     updateCartInLocalStorage();
   }
 
-  function printReceipt(payment) {
-    // print receipt
-    var cart = angular.copy(ctrl.cart);
-    cart.payment = angular.copy(payment);
-    cart.date = new Date();
-
-    // save to database
-    Transactions.add(cart).then(function (res) {
-
-      // clear cart and start fresh
-      resetCart();
-      
-    });
-
-    refreshInventory();
+  function proceedToCheckout(cart) {
+    if (!cart.total) return;
+    $location.path('/checkout/confirm');
   }
 
   function addQuantity(product) {
@@ -128,6 +116,11 @@ function Checkoutv2Ctrl($scope, $localStorage, InventoryItem) {
     if (e.which === 8) {
       e.preventDefault();
       ctrl.barcode = ctrl.barcode.substring(0, ctrl.barcode.length-1);
+      return;
+    }
+    if (e.which === 9) {
+      e.preventDefault();
+      proceedToCheckout(ctrl.cart);
       return;
     }
     if (e.which === 13) {
