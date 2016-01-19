@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Directive: keydownEvents', function () {
+describe('Directive: hashchangeEvent', function () {
 
   // load the directive's module
   beforeEach(module('tdpharmaClientApp'));
@@ -13,7 +13,7 @@ describe('Directive: keydownEvents', function () {
   }));
 
   it('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<keydown-events></keydown-events>');
+    element = angular.element('<hashchange-event></hashchange-event>');
     element = $compile(element)(scope);
     expect(element.text()).toBe('');
   }));

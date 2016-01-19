@@ -1,18 +1,17 @@
 'use strict';
 
 angular.module('tdpharmaClientApp')
-  .directive('keydownEvents', keydownEvents);
+  .directive('keydownEvent', keydownEvent);
 
-keydownEvents.$inject = ['$document', '$rootScope'];
+keydownEvent.$inject = ['$document', '$rootScope'];
 
-function keydownEvents($document, $rootScope) {
+function keydownEvent($document, $rootScope) {
   return {
     restrict: 'A',
     link: function() {
       $document.bind('keydown', function(e) {
         console.log('Got keypress:', e.which);
         $rootScope.$broadcast('keydown', e);
-        $rootScope.$broadcast('keydown:' + e.which, e);
       });
     }
   };
