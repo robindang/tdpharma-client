@@ -10,7 +10,7 @@ div(ng-include='"components/navbar/navbar.html"')
             |  Back
       .row
         .col-md-3.col-xs-3
-          img(ng-src='{{pic.APP_CONFIGURATION.SERVER_DEFAULT_PICTURE_ENDPOINT}}/{{pic.medicine.photo_thumb.photo}}')
+          img(ng-src='{{pic.medicine.photo_thumb.photo | resolve}}')
         .col-md-7.col-xs-6
           h3 {{pic.medicine.name}}
           h5 {{pic.medicine.manufacturer}}

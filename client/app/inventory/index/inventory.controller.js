@@ -8,7 +8,6 @@ InventoryCtrl.$inject = ['lodash', 'pharmacare', 'toastr', 'InventorySearch', 'M
 function InventoryCtrl(_, pharmacare, toastr, InventorySearch, Medicine, APP_CONFIG) {
 
   var ctrl = this;
-  ctrl.APP_CONFIG = APP_CONFIG;
   ctrl.displayed = [];
   ctrl.raw = [];
   ctrl.store_medicines = [];      // Store medicines array for search drop down

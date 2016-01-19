@@ -41,7 +41,7 @@ div(ng-include='"components/navbar/navbar.html"')
     tbody(ng-show='!ic.isLoading')
       tr(ng-repeat='row in ic.displayed')
         td
-          img(ng-src='{{ic.APP_CONFIG.SERVER_DEFAULT_PICTURE_ENDPOINT}}/{{row.photo_thumb.photo}}')
+          img(ng-src='{{row.photo_thumb.photo | resolve}}')
         td
           a(ng-href='/inventory/{{row.id}}') {{row.itemable.name}}
         td

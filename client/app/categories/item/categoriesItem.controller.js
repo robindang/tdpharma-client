@@ -3,11 +3,10 @@
 angular.module('tdpharmaClientApp')
   .controller('CategoriesItemCtrl', CategoriesItemCtrl);
 
-CategoriesItemCtrl.$inject = ['$stateParams', 'APP_CONFIGURATION', 'DataHelper', 'InventorySearch']
+CategoriesItemCtrl.$inject = ['$stateParams', 'DataHelper', 'InventorySearch']
 
-function CategoriesItemCtrl($stateParams, APP_CONFIG, DataHelper, InventorySearch) {
+function CategoriesItemCtrl($stateParams, DataHelper, InventorySearch) {
   var ctrl = this;
-  ctrl.APP_CONFIG = APP_CONFIG;
 
   init();
 
