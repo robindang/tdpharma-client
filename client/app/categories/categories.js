@@ -6,7 +6,8 @@ angular.module('tdpharmaClientApp')
       .state('categories', {
         url: '/categories',
         templateUrl: 'app/categories/index/categories.html',
-        controller: 'CategoriesCtrl'
+        controller: 'CategoriesCtrl',
+        controllerAs: 'cc'
       })
       .state('categoriesItem', {
         url: '/categories/:id',
