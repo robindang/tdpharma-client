@@ -3,9 +3,9 @@
 angular.module('tdpharmaClientApp')
   .controller('OrdersCtrl', OrdersCtrl);
 
-OrdersCtrl.$inject = ['Transaction'];
+OrdersCtrl.$inject = ['Receipt'];
 
-function OrdersCtrl(Transaction) {
+function OrdersCtrl(Receipt) {
 
   var ctrl = this;
 
@@ -15,7 +15,7 @@ function OrdersCtrl(Transaction) {
     { title:'History', template:'app/orders/includes/history.html' }
   ];
 
-  Transaction.get().then(function(transactions) {
+  Receipt.get().$promise.then(function(transactions) {
     console.log(transactions);
   });
 }
