@@ -11,8 +11,8 @@ function keydownEvents($document, $rootScope) {
     link: function() {
       $document.bind('keydown', function(e) {
         console.log('Got keypress:', e.which);
-        $rootScope.$broadcast('keypress', e);
-        $rootScope.$broadcast('keypress:' + e.which, e);
+        $rootScope.$broadcast('keydown', e);
+        $rootScope.$broadcast('keydown:' + e.which, e);
       });
     }
   };

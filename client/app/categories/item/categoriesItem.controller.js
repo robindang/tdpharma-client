@@ -25,7 +25,6 @@ function CategoriesItemCtrl($stateParams, APP_CONFIG, DataHelper, InventorySearc
           });
         },
         function(next) {
-          categoryId = null;
           InventorySearch.getPage(0, 25, {categoryId:categoryId}).then(function(results) {
             ctrl.results = results;
             next(null)
