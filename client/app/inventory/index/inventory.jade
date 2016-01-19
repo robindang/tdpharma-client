@@ -4,17 +4,10 @@ div(ng-include='"components/navbar/navbar.html"')
   table.table.table-striped(st-pipe='ic.callServer', st-table='ic.displayed')
     thead
       tr
-        th(colspan=8)
+        th(colspan='7')
           .form-inline.col-md-12
-            .form-group.col-md-3
-              .btn-group(uib-dropdown='')
-                button#single-button.btn.btn-primary(type='button', uib-dropdown-toggle='', ng-disabled='ic.getNumberOfRowsSelected()===0')
-                  | Action on {{ic.getNumberOfRowsSelected()}} selected 
-                  span.caret
-                ul.dropdown-menu(role='menu', aria-labelledby='single-button')
-                  li(role='menuitem')
-                    a(href='#') Delete
-            .form-group.col-md-6
+            //- .form-group.col-md-3
+            .form-group.col-md-9
               .input-group                  
                 ui-select#medicine(ng-model='ic.selected_med' name='medicine' close-on-select='true' required)
                   ui-select-match(placeholder='Search for...') {{$select.selected.name}}, {{$select.selected.concentration}} {{$select.selected.concentration_unit}}, {{$select.selected.manufacturer}}
@@ -39,24 +32,22 @@ div(ng-include='"components/navbar/navbar.html"')
               a.btn.btn-primary(href="/products") Add a product
       tr
         th
-          input(type='checkbox' ng-click='ic.selectAllRows($event)')
         th Name
         th Status
         th Category
-        th Updated
         th Price
         th Quantity
         th Action
     tbody(ng-show='!ic.isLoading')
       tr(ng-repeat='row in ic.displayed')
-        td(cs-select="row")
+        td
+          img(ng-src='{{ic.APP_CONFIG.SERVER_DEFAULT_PICTURE_ENDPOINT}}/{{row.photo_thumb.photo}}')
         td
           a(ng-href='/inventory/{{row.id}}') {{row.itemable.name}}
         td
           span(ng-class='ic.pharmacare.getStatusCSSClass(row)') {{ic.pharmacare.getStatus(row)}}
         td
           a(href='/categories/{{row.category.id}}') {{row.category.name}}
-        td {{row.updated_moment.toString() | amDateFormat:'LLL'}}
         td 
         td {{row.amount | number}}
         td
@@ -76,13 +67,13 @@ div(ng-include='"components/navbar/navbar.html"')
                   a(href='#') Stop Sale
     tbody(ng-show='ic.isLoading')
       tr
-        td.text-center(colspan='8')
+        td.text-center(colspan='7')
           br
           i.fa.fa-spinner.fa-spin.fa-lg 
           br
           br
     tfoot
       tr
-        td.text-center(colspan='8')
+        td.text-center(colspan='7')
           div(st-items-by-page='25', st-pagination='', st-template='components/pagination/pagination.html')
 

@@ -5,21 +5,19 @@ angular.module('tdpharmaClientApp')
 
 InventoryCtrl.$inject = ['lodash', 'pharmacare', 'toastr', 'InventorySearch', 'Medicine', 'APP_CONFIGURATION'];
 
-function InventoryCtrl(_, pharmacare, toastr, InventorySearch, Medicine, APP_CONFIGURATION) {
+function InventoryCtrl(_, pharmacare, toastr, InventorySearch, Medicine, APP_CONFIG) {
 
   var ctrl = this;
-
+  ctrl.APP_CONFIG = APP_CONFIG;
   ctrl.displayed = [];
   ctrl.raw = [];
   ctrl.store_medicines = [];      // Store medicines array for search drop down
   ctrl.status = 'active';
   ctrl.numberOfResults = '';
   ctrl.callServer = callServer;
-  ctrl.getNumberOfRowsSelected = getNumberOfRowsSelected;
   ctrl.pharmacare = pharmacare;
   ctrl.updateItemList = updateItemList;
   ctrl.searchMedicine = searchMedicine;
-  ctrl.selectAllRows = selectAllRows;
 
   searchMedicine(null, true);
 
@@ -41,10 +39,10 @@ function InventoryCtrl(_, pharmacare, toastr, InventorySearch, Medicine, APP_CON
         _.each(ctrl.store_medicines, function(m){
           if (m.store_thumb) {
             // Display store image first if there is one
-            m.photo_thumb.photo_link = m.store_thumb.processed == true ? m.store_thumb.photo : (APP_CONFIGURATION.SERVER_DEFAULT_PICTURE_ENDPOINT + m.store_thumb.photo);
+            m.photo_thumb.photo_link = m.store_thumb.processed == true ? m.store_thumb.photo : (APP_CONFIG.SERVER_DEFAULT_PICTURE_ENDPOINT + m.store_thumb.photo);
           }
           else if (m.photo_thumb) {
-            m.photo_thumb.photo_link = m.photo_thumb.processed == true ? m.photo_thumb.photo : (APP_CONFIGURATION.SERVER_DEFAULT_PICTURE_ENDPOINT + m.photo_thumb.photo);
+            m.photo_thumb.photo_link = m.photo_thumb.processed == true ? m.photo_thumb.photo : (APP_CONFIG.SERVER_DEFAULT_PICTURE_ENDPOINT + m.photo_thumb.photo);
           }
         });
       }).catch(function(error){
@@ -71,21 +69,10 @@ function InventoryCtrl(_, pharmacare, toastr, InventorySearch, Medicine, APP_CON
       _.each(ctrl.raw, function(m){
         m.updated_moment = moment(m.updated_at);
         if (m.photo_thumb) {
-          m.photo_thumb.photo_link = m.photo_thumb.processed == true ? m.photo_thumb.photo : (APP_CONFIGURATION.SERVER_DEFAULT_PICTURE_ENDPOINT + m.photo_thumb.photo);
+          m.photo_thumb.photo_link = m.photo_thumb.processed == true ? m.photo_thumb.photo : (APP_CONFIG.SERVER_DEFAULT_PICTURE_ENDPOINT + m.photo_thumb.photo);
         }          
       });
       updateItemList();
     });
-  };
-
-  function getNumberOfRowsSelected() {
-    return ctrl.displayed.filter(function(x) {return x.isSelected}).length;
-  }
-
-  function selectAllRows($event) {
-    var newValue = $event.target.checked ? true:false;
-    _.each(ctrl.displayed, function(row) {
-      row.isSelected = newValue;
-    })
   }
 }
