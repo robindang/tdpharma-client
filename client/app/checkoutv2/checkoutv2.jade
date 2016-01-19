@@ -1,3 +1,43 @@
-.col-md-12
-    p Press enter to clear
-    p Barcode: {{cc.barcode}}
+div(ng-include='"components/templates/navbar/navbar.html"')
+
+.container
+  .row
+    .col-md-12
+        p Press enter to clear
+        p Barcode: {{cc.barcode}}
+    .text-center
+      span.lead Total
+      br
+      span.text-success.checkout-total-price
+        | $
+        span(odometer='cc.cart.total')
+      checkout(cart-total='cc.cart.total', print-receipt='cc.printReceipt(payment)')
+    table.pos.table.table-responsive.table-striped.table-hover
+      thead
+        tr
+          td.text-center(colspan='6')
+            add-manual-item.pull-left(add-item='cc.addManualItem(item)')
+        tr.titles
+          th Name
+          th Price
+          th Quantity
+          th Total
+          th
+      tbody
+        tr(ng-repeat='product in cc.cart.products track by $index')
+          td.col-md-2  {{ product.itemable.name }} 
+          td.col-md-1  {{ product.price | currency }} 
+          td.col-md-2
+            button.btn.btn-sm.pull-left(ng-click='cc.removeQuantity(product)')
+              i.glyphicon.glyphicon-minus
+            .col-md-6
+              input(type='number', step='1', min='1', ng-model='product.quantity', ng-change='cc.updateCartTotals()', required='')
+            button.btn.btn-sm.pull-right(ng-click='cc.addQuantity(product)')
+              i.glyphicon.glyphicon-plus
+          td.col-md-2
+            | {{ (product.tax_percent * product.quantity * product.price) + ( product.price * product.quantity) | currency }}
+          td.col-md-2
+            button.btn.btn-danger(ng-click='cc.removeProductFromCart($index)')
+              i.glyphicon.glyphicon-trash
+        tr(ng-if='!cc.cart.products.length')
+          td(colspan='6') Scan products or add unlisted item above.

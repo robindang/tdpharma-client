@@ -19,7 +19,7 @@ function NavbarCtrl($scope, $location, $translate, amMoment, pharmacare, Auth, $
     link: '/orders'
   }, {
     title: 'CHECKOUT',
-    link: '/checkout'
+    link: '/checkoutv2'
   }];
   ctrl.isCollapsed = true;
   ctrl.locale = pharmacare.getLocale();
