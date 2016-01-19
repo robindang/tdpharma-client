@@ -7,6 +7,6 @@ angular.module('tdpharmaClientApp')
         url: '/orders',
         templateUrl: 'app/orders/orders.html',
         controller: 'OrdersCtrl',
-        controllerAs: 'orders'
+        controllerAs: 'oc'
       });
   });

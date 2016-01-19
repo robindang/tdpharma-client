@@ -15,7 +15,7 @@ function OrdersCtrl(Receipt) {
     { title:'History', template:'app/orders/includes/history.html' }
   ];
 
-  Receipt.get().$promise.then(function(transactions) {
-    console.log(transactions);
+  Receipt.get({purchase: true}).$promise.then(function(res) {
+    ctrl.purchases = res.data;
   });
 }

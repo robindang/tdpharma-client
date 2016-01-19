@@ -1,1 +1,9 @@
-span blah
+table.table
+  thead
+    tr
+      th Date
+      th Total
+  tbody
+    tr(ng-repeat='purchase in oc.purchases.receipts')
+      td {{purchase.created_at | amDateFormat:'LLL'}}
+      td {{purchase.total | currency }}
