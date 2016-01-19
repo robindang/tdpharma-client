@@ -3,10 +3,11 @@
 angular.module('tdpharmaClientApp')
   .filter('resolve', resolve);
 
-resolve.$inject = ['APP_CONFIGURATION'];
+resolve.$inject = ['util', 'APP_CONFIGURATION'];
 
-function resolve(APP_CONFIG) {
-    return function (input) {
-      return APP_CONFIG.SERVER_DEFAULT_PICTURE_ENDPOINT+'/'+input;
+function resolve(util, APP_CONFIG) {
+    return function(url) {
+      if (util.isAbsoluteUrl(url)) return url;
+      return APP_CONFIG.SERVER_DEFAULT_PICTURE_ENDPOINT+'/'+url;
     };
 };
