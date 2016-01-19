@@ -33,17 +33,9 @@ function InventoryCtrl(_, pharmacare, toastr, InventorySearch, Medicine, APP_CON
 
   function searchMedicine(search_string, force) {
     if ((search_string && search_string.length > 3) || force == true) {
-      Medicine.get({search: search_string}).$promise.then(function(resp){
+      InventorySearch.getPage(0, 25, {q: search_string}).then(function(resp){
         ctrl.store_medicines = resp.data;
-        _.each(ctrl.store_medicines, function(m){
-          if (m.store_thumb) {
-            // Display store image first if there is one
-            m.photo_thumb.photo_link = m.store_thumb.processed == true ? m.store_thumb.photo : (APP_CONFIG.SERVER_DEFAULT_PICTURE_ENDPOINT + m.store_thumb.photo);
-          }
-          else if (m.photo_thumb) {
-            m.photo_thumb.photo_link = m.photo_thumb.processed == true ? m.photo_thumb.photo : (APP_CONFIG.SERVER_DEFAULT_PICTURE_ENDPOINT + m.photo_thumb.photo);
-          }
-        });
+        console.log(resp.data)
       }).catch(function(error){
         toastr.error(error.data.data.errors);
       });
@@ -64,13 +56,7 @@ function InventoryCtrl(_, pharmacare, toastr, InventorySearch, Medicine, APP_CON
       ctrl.numberOfResults = result.numberOfResults * ctrl.raw.length;
       //set the number of pages so the pagination can update
       tableState.pagination.numberOfPages = result.numberOfResults;
-      ctrl.isLoading = false;        
-      _.each(ctrl.raw, function(m){
-        m.updated_moment = moment(m.updated_at);
-        if (m.photo_thumb) {
-          m.photo_thumb.photo_link = m.photo_thumb.processed == true ? m.photo_thumb.photo : (APP_CONFIG.SERVER_DEFAULT_PICTURE_ENDPOINT + m.photo_thumb.photo);
-        }          
-      });
+      ctrl.isLoading = false;
       updateItemList();
     });
   }

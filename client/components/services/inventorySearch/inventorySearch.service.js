@@ -26,6 +26,7 @@ function InventorySearch($q, $filter, $timeout, $cookies, InventoryItem, Categor
     query.page = 1 + start / number;
     if (params.categoryId) query.category_id = params.categoryId;
     if (params.q) query.search = params.q;
+    if (params.inactive) query.inactive = true;
     
     InventoryItem.get(query, function(obj) {        
       deferred.resolve({

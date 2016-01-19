@@ -10,12 +10,12 @@ div(ng-include='"components/templates/navbar/navbar.html"')
             .form-group.col-md-9
               .input-group                  
                 ui-select#medicine(ng-model='ic.selected_med' name='medicine' close-on-select='true' required)
-                  ui-select-match(placeholder='Search for...') {{$select.selected.name}}, {{$select.selected.concentration}} {{$select.selected.concentration_unit}}, {{$select.selected.manufacturer}}
-                  ui-select-choices(repeat='data.name as data in ic.store_medicines | filter:$select.search' refresh='ic.searchMedicine($select.search)')                      
+                  ui-select-match(placeholder='Search for...') {{$select.selected.itemable.name}}, {{$select.selected.itemable.concentration}} {{$select.selected.itemable.concentration_unit}}, {{$select.selected.itemable.manufacturer}}
+                  ui-select-choices(repeat='data.itemable.name as data in ic.store_medicines | filter:$select.search' refresh='ic.searchMedicine($select.search)')                      
                     small
                       span
-                        img.photo-search(ng-src="{{ data.photo_thumb.photo_link }}")                        
-                        | {{data.name}}, {{data.concentration}} {{data.concentration_unit}}, {{data.manufacturer}}
+                        img.photo-search(ng-src="{{ data.photo_thumb.photo | resolve }}")                        
+                        | {{data.itemable.name}}, {{data.itemable.concentration}} {{data.itemable.concentration_unit}}, {{data.itemable.manufacturer}}
                 span.input-group-btn
                   button.btn.btn-default(type='button') Search
             .form-group
@@ -25,7 +25,7 @@ div(ng-include='"components/templates/navbar/navbar.html"')
               label.control-label Filters
               span &nbsp;&nbsp;
               .btn-group
-                label.btn.btn-default(ng-model='ic.status', uib-btn-radio="''", ng-change='ic.updateItemList()') All
+                //- label.btn.btn-default(ng-model='ic.status', uib-btn-radio="''", ng-change='ic.updateItemList()') All
                 label.btn.btn-default(ng-model='ic.status', uib-btn-radio="'active'", ng-change='ic.updateItemList()') On Sale
                 label.btn.btn-default(ng-model='ic.status', uib-btn-radio="'inactive'", ng-change='ic.updateItemList()') Off Sale
             .form-group.pull-right
