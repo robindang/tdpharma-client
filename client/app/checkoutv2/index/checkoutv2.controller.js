@@ -3,9 +3,9 @@
 angular.module('tdpharmaClientApp')
   .controller('Checkoutv2Ctrl', Checkoutv2Ctrl);
 
-Checkoutv2Ctrl.$inject = ['$scope', '$localStorage', 'InventoryItem'];
+Checkoutv2Ctrl.$inject = ['$scope', '$localStorage', '$location', 'InventoryItem'];
 
-function Checkoutv2Ctrl($scope, $localStorage, InventoryItem) {
+function Checkoutv2Ctrl($scope, $localStorage, $location, InventoryItem) {
 
   var emptyCart = {
     products: {},
@@ -16,7 +16,6 @@ function Checkoutv2Ctrl($scope, $localStorage, InventoryItem) {
   var ctrl = this;
   ctrl.barcode = '';
   ctrl.cart = $localStorage.cart || angular.copy(emptyCart)
-  // ctrl.addManualItem = addManualItem;
   ctrl.addQuantity = addQuantity;
   ctrl.proceedToCheckout = proceedToCheckout;
   ctrl.removeProductFromCart = removeProductFromCart;
@@ -56,11 +55,6 @@ function Checkoutv2Ctrl($scope, $localStorage, InventoryItem) {
       addProductAndUpdateCart(barcode, product);
     });
   }
-
-  // function addManualItem(product) {
-  //   product.quantity = 1;
-  //   addProductAndUpdateCart(product);
-  // }
 
   function removeProductFromCart(barcode) {
     delete ctrl.cart.products[barcode];
