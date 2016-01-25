@@ -8,7 +8,7 @@ Checkoutv2Ctrl.$inject = ['$scope', '$localStorage', 'InventoryItem'];
 function Checkoutv2Ctrl($scope, $localStorage, InventoryItem) {
 
   var emptyCart = {
-    products: [],
+    products: {},
     total: 0,
     total_tax: 0,
   };
@@ -16,7 +16,7 @@ function Checkoutv2Ctrl($scope, $localStorage, InventoryItem) {
   var ctrl = this;
   ctrl.barcode = '';
   ctrl.cart = $localStorage.cart || angular.copy(emptyCart)
-  ctrl.addManualItem = addManualItem;
+  // ctrl.addManualItem = addManualItem;
   ctrl.addQuantity = addQuantity;
   ctrl.proceedToCheckout = proceedToCheckout;
   ctrl.removeProductFromCart = removeProductFromCart;
@@ -31,20 +31,19 @@ function Checkoutv2Ctrl($scope, $localStorage, InventoryItem) {
       updateCartTotals();
   }
   
-  function addProductAndUpdateCart(product) {
-    ctrl.cart.products = ctrl.cart.products.concat([product]);
+  function addProductAndUpdateCart(barcode, product) {
+    if (!ctrl.cart.products[barcode]) ctrl.cart.products[barcode] = product;
+    ctrl.cart.products[barcode].quantity = (ctrl.cart.products[barcode].quantity || 0) + 1;
     updateCartTotals();
     ctrl.barcode = '';
   }
 
   function productAlreadyInCart(barcode) {
-    var product = _.find(ctrl.cart.products, function(x) { return x.id.toString() === barcode; });
+    var product = ctrl.cart.products[barcode];
     
-    if (product) {
-      product.quantity = product.quantity + 1;
-      updateCartTotals();
-    }
-
+    if (!product) return null;
+    product.quantity = product.quantity + 1;
+    updateCartTotals();
     return product;
   }
 
@@ -54,18 +53,17 @@ function Checkoutv2Ctrl($scope, $localStorage, InventoryItem) {
     
     InventoryItem.get({id: barcode}).$promise.then(function(product) {
       product = angular.copy(product.data);
-      product.quantity = 1;
-      addProductAndUpdateCart(product);
+      addProductAndUpdateCart(barcode, product);
     });
   }
 
-  function addManualItem(product) {
-    product.quantity = 1;
-    addProductAndUpdateCart(product);
-  }
+  // function addManualItem(product) {
+  //   product.quantity = 1;
+  //   addProductAndUpdateCart(product);
+  // }
 
-  function removeProductFromCart(index) {
-    ctrl.cart.products.splice(index,1);
+  function removeProductFromCart(barcode) {
+    delete ctrl.cart.products[barcode];
     updateCartTotals();
   }
 

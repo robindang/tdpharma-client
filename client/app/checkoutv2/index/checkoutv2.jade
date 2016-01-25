@@ -32,7 +32,7 @@ div(ng-include='"components/templates/navbar/navbar.html"')
           th Total
           th
       tbody
-        tr(ng-repeat='product in cc.cart.products track by $index')
+        tr(ng-repeat='(barcode, product) in cc.cart.products track by barcode')
           td.col-md-2  {{ product.itemable.name }} 
           td.col-md-1  {{ product.price | currency }} 
           td.col-md-2
@@ -53,7 +53,7 @@ div(ng-include='"components/templates/navbar/navbar.html"')
           td.col-md-2
             | {{ (product.tax_percent * product.quantity * product.price) + ( product.price * product.quantity) | currency }}
           td.col-md-2
-            button.btn.btn-danger(ng-click='cc.removeProductFromCart($index)')
+            button.btn.btn-danger(ng-click='cc.removeProductFromCart(barcode)')
               i.glyphicon.glyphicon-trash
         tr(ng-if='!cc.cart.products.length')
           td(colspan='6') Scan products or add unlisted item above.
