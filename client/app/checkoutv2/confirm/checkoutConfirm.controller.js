@@ -3,9 +3,9 @@
 angular.module('tdpharmaClientApp')
   .controller('CheckoutConfirmCtrl', CheckoutConfirmCtrl);
 
-CheckoutConfirmCtrl.$inject = ['$scope', '$localStorage', 'InventoryItem'];
+CheckoutConfirmCtrl.$inject = ['$scope', '$localStorage', '$location', 'InventoryItem'];
 
-function CheckoutConfirmCtrl($scope, $localStorage, InventoryItem) {
+function CheckoutConfirmCtrl($scope, $localStorage, $location, InventoryItem) {
 
   var emptyCart = {
     products: [],
