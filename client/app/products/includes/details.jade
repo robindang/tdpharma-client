@@ -36,7 +36,13 @@
         .form-group
           label.col-sm-2.control-label(for='mfg_location') {{ 'MFG_LOCATION' | translate }}
           .col-sm-10
-            input#mfg_location.form-control(type='text', placeholder="{{ 'MFG_LOCATION' | translate }}", ng-model='pc.medicine.mfg_location' required)          
+            input#mfg_location.form-control(type='text', placeholder="{{ 'MFG_LOCATION' | translate }}", ng-model='pc.medicine.mfg_location' required)
+        .form-group
+          label.col-sm-2.control-label {{ 'SALE_PRICE' | translate }}
+          .col-sm-10
+            .input-group
+              span.input-group-addon ₫
+              input.form-control(type='number', placeholder="{{ 'SALE_PRICE' | translate }}", min='0' ng-model='pc.salePrice' required)
 
     .col-sm-12.m-5-t
       .form-group

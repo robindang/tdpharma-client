@@ -4,12 +4,13 @@ angular.module('tdpharmaClientApp')
   .controller('ProductsCtrl', ProductsCtrl);
 
 ProductsCtrl.$inject = [
-  '$cookies', '$filter', '$location', '$scope', '$timeout', 'pharmacare', 'APP_CONFIGURATION', 'Category', 
+  '$cookies', '$filter', '$location', '$scope', '$timeout', '$window', 'pharmacare', 'APP_CONFIGURATION', 'Category', 
   'Medicine', 'User', 'toastr', 'S3Upload', 'lodash', 'serverConfig', 'InventoryItem'];
 
-function ProductsCtrl($cookies, $filter, $location, $scope, $timeout, pharmacare, APP_CONFIGURATION, 
+function ProductsCtrl($cookies, $filter, $location, $scope, $timeout, $window, pharmacare, APP_CONFIGURATION, 
   Category, Medicine, User, toastr, S3Upload, _, serverConfig, InventoryItem) {
 
+  var async = $window.async;
   var ctrl = this;
   ctrl.IMAGE_PLACEHOLDER = APP_CONFIGURATION.SERVER_DEFAULT_PICTURE_ENDPOINT + '/images/inventoryitem.svg';
   ctrl.tabs = [
@@ -34,7 +35,6 @@ function ProductsCtrl($cookies, $filter, $location, $scope, $timeout, pharmacare
   ctrl.updateTotalAmount = updateTotalAmount;
   ctrl.uploadImage = uploadImage;
   ctrl.saveDirectUpload = saveDirectUpload;
-  ctrl.save = save;
 
   init();
   
@@ -163,6 +163,21 @@ function ProductsCtrl($cookies, $filter, $location, $scope, $timeout, pharmacare
               callback({error: error.data.data.errors});
             });
           },
+          function(med, callback) {
+            if (!ctrl.salePrice) return callback(null, med);
+            var o = {
+              inventory_item: {
+                sale_price_attributes: {
+                  amount: ctrl.salePrice
+                }
+              }
+            };
+            InventoryItem.update({id: med.id}, o).$promise.then(function() {
+              callback(null, med);
+            }, function(error) {
+              callback({error: error.data.data.errors});
+            });
+          },
           function(arg1, callback) {
             // Wait until medicine image is ready
             var item = arg1;
@@ -209,34 +224,6 @@ function ProductsCtrl($cookies, $filter, $location, $scope, $timeout, pharmacare
         }
         ctrl.loading = false;
       })
-    }
-  }
-
-  function save() {
-    // First attach the category id into the medicine
-    if (ctrl.selected[1]) {
-      ctrl.medicine.med_batches_attributes[0].category_id = ctrl.selected[1].id;
-    } else if (ctrl.selected[0]) {
-      ctrl.medicine.med_batches_attributes[0].category_id = ctrl.selected[0].id;
-    }
-    // Validate form and save
-    if (validateForm()) {
-      var params = {
-        medicine: ctrl.medicine
-      };  
-      if (ctrl.file) {
-        params.image = ctrl.file.$ngfDataUrl;
-      }
-      Medicine.save({}, params).$promise.then(function(resp){
-        // Reset form
-        ctrl.medicine = {med_batches_attributes:[{user_id: ctrl.selected_user.id}]};      
-        ctrl.file = null;
-        _.extend(ctrl.tabs[0], {active: true, disabled: false});
-        _.extend(ctrl.tabs[1], {active: false, disabled: true});
-        toastr.success(resp.data.name + $filter('translate')('TOASTR_CREATED'), $filter('translate')('TOASTR_CONGRATS'))
-      }).catch(function(error){
-        toastr.error(error.data.data.errors, $filter('translate')('TOASTR_SORRY'));
-      });
     }
   }
 
