@@ -48,8 +48,7 @@ div(ng-include='"components/templates/navbar/navbar.html"')
                     p.form-control-static {{iic.item.itemable.mfg_location}}
                   label.control-label.col-sm-3 Quantity
                   .col-sm-9
-                    p.form-control-static(ng-show='!iic.mode.isEditMode()') {{iic.item.amount | number}}
-                    input.form-control(type='number', placeholder="Quantity", min='0' ng-model='iic.item.amount' required ng-show='iic.mode.isEditMode()')
+                    p.form-control-static {{iic.item.amount | number}}
       form.form-horizontal(ng-show='iic.mode.isAddMode()')
         .form-group
           label.col-sm-2.control-label {{'MANUFACTURE_DATE' | translate }}
@@ -132,6 +131,6 @@ div(ng-include='"components/templates/navbar/navbar.html"')
         .col-xs-12.text-right
           .btn.btn-danger(ng-show='iic.mode.isEditMode()' ng-click='iic.mode.setReadMode()') Cancel
           | &nbsp;&nbsp;
-          .btn.btn-primary(ng-show='iic.mode.isEditMode()' ng-click='iic.mode.setReadMode()') Save
+          .btn.btn-primary(ng-show='iic.mode.isEditMode()' ng-click='iic.mode.save()') Save
       br
       br

@@ -52,15 +52,29 @@ function InventoryItemCtrl($location, $stateParams, $window, pharmacare, APP_CON
   function initMode() {
     var hash = $location.hash();
     var __mode = (hash==='add'||hash==='edit') ? hash:'read';
-    var __getter = function(mode) {return function() {return __mode===mode}};
-    var __setter = function(mode) {return function() {__mode = mode}};
+    var __oldItem = angular.copy(ctrl.item);
+
     ctrl.mode = {
       isAddMode: __getter('add'),
       isEditMode: __getter('edit'),
       isReadMode: __getter('read'),
+      save: __save,
       setAddMode: __setter('add'),
       setEditMode: __setter('edit'),
       setReadMode: __setter('read')
+    }
+
+    function __getter(mode) {return function() {return __mode===mode}}
+    function __setter(mode) {return function() {
+      if (__mode == 'edit') ctrl.item = angular.copy(__oldItem);
+      __mode = mode;
+      if (__mode == 'edit') __oldItem = angular.copy(ctrl.item);
+    }}
+    function __save() {
+      if (__mode != 'edit') return;
+      ctrl.item.sale_price_attributes = ctrl.item.sale_price;
+      InventoryItem.update({id: ctrl.item.id}, {inventory_item: ctrl.item});
+      __mode = 'read';
     }
   }
 }
