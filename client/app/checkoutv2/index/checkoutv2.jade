@@ -34,7 +34,8 @@ div(ng-include='"components/templates/navbar/navbar.html"')
       tbody
         tr(ng-repeat='(barcode, product) in cc.cart.products track by barcode')
           td.col-md-2
-            p.form-control-static {{ product.itemable.name }} 
+            p.form-control-static
+              a(ng-href='/inventory/{{product.id}}') {{ product.itemable.name }} 
           td.col-md-1
             p.form-control-static {{ product.sale_price.amount | currency }} 
           td.col-md-2
