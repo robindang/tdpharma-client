@@ -3,17 +3,35 @@
 angular.module('tdpharmaClientApp')
   .controller('CheckoutConfirmCtrl', CheckoutConfirmCtrl);
 
-CheckoutConfirmCtrl.$inject = ['$scope', '$localStorage', '$location', 'InventoryItem'];
+CheckoutConfirmCtrl.$inject = ['$scope', '$localStorage', '$location', 'lodash', 'InventoryItem', 'Receipt'];
 
-function CheckoutConfirmCtrl($scope, $localStorage, $location, InventoryItem) {
+function CheckoutConfirmCtrl($scope, $localStorage, $location, _, InventoryItem, Receipt) {
 
   var ctrl = this;
   ctrl.totalPaid = 0;
   ctrl.cart = null;
   ctrl.calcChangeDue = calcChangeDue;
+  ctrl.checkout = checkout;
   ctrl.printReceipt = printReceipt;
 
   init();
+
+  function checkout(cart) {
+    var o = {
+      receipt_type: 'sale',
+      total: cart.total,
+      transactions_attributes: _.map(cart.products, function(item) {
+        return {
+          amount: item.quantity,
+          med_batch_id: item.id,
+          total_price: item.quantity * item.sale_price.amount
+        }
+      })
+    };
+    Receipt.save({}, o).$promise.then(function(receipt) {
+      console.log(receipt);
+    });
+  }
 
   function calcChangeDue(totalPaid, totalDue) {
     return Math.max(0, totalPaid - totalDue);
