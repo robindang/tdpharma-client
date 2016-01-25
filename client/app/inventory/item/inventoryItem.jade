@@ -24,25 +24,32 @@ div(ng-include='"components/templates/navbar/navbar.html"')
               | &nbsp;Edit
           .col-xs-12
             hr
-            p
-              h5(ng-class='getStatusCSSClass(iic.item)') {{iic.pharmacare.getStatus(iic.item)}}
-              h3 Product Information
-              table.table.table-condensed
-                .form-horizontal
-                  .form-group
-                    label.control-label.col-sm-3 {{ 'CONCENTRATION' | translate }}
-                    .col-sm-9
-                      p.form-control-static {{iic.item.itemable.concentration}} {{iic.item.itemable.concentration_unit}}
-                    label.control-label.col-sm-3 {{ 'MEDICINE_FORM' | translate }}
-                    .col-sm-9
-                      p.form-control-static {{iic.item.itemable.med_form}}
-                    label.control-label.col-sm-3 {{ 'MFG_LOCATION' | translate }}
-                    .col-sm-9
-                      p.form-control-static {{iic.item.itemable.mfg_location}}
-                    label.control-label.col-sm-3 Quantity
-                    .col-sm-9
-                      p.form-control-static(ng-show='!iic.mode.isEditMode()') {{iic.item.amount | number}}
-                      input.form-control(type='number', placeholder="Quantity", min='0' ng-model='iic.item.amount' required ng-show='iic.mode.isEditMode()')
+            .form-inline
+              .form-group
+                label Sale Price:&nbsp;
+                p.form-control-static(ng-show='!iic.mode.isEditMode()') {{iic.item.sale_price.amount | currency}}
+                .input-group(ng-show='iic.mode.isEditMode()')
+                  span.input-group-addon ₫
+                  input.form-control(type='number', placeholder="Price", min='0' ng-model='iic.item.sale_price.amount' required)
+          .col-xs-12   
+            h5(ng-class='getStatusCSSClass(iic.item)') {{iic.pharmacare.getStatus(iic.item)}}
+            h3 Product Information
+            table.table.table-condensed
+              .form-horizontal
+                .form-group
+                  label.control-label.col-sm-3 {{ 'CONCENTRATION' | translate }}
+                  .col-sm-9
+                    p.form-control-static {{iic.item.itemable.concentration}} {{iic.item.itemable.concentration_unit}}
+                  label.control-label.col-sm-3 {{ 'MEDICINE_FORM' | translate }}
+                  .col-sm-9
+                    p.form-control-static {{iic.item.itemable.med_form}}
+                  label.control-label.col-sm-3 {{ 'MFG_LOCATION' | translate }}
+                  .col-sm-9
+                    p.form-control-static {{iic.item.itemable.mfg_location}}
+                  label.control-label.col-sm-3 Quantity
+                  .col-sm-9
+                    p.form-control-static(ng-show='!iic.mode.isEditMode()') {{iic.item.amount | number}}
+                    input.form-control(type='number', placeholder="Quantity", min='0' ng-model='iic.item.amount' required ng-show='iic.mode.isEditMode()')
       form.form-horizontal(ng-show='iic.mode.isAddMode()')
         .form-group
           label.col-sm-2.control-label {{'MANUFACTURE_DATE' | translate }}

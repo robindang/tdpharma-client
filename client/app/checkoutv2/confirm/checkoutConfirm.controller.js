@@ -7,12 +7,6 @@ CheckoutConfirmCtrl.$inject = ['$scope', '$localStorage', '$location', 'Inventor
 
 function CheckoutConfirmCtrl($scope, $localStorage, $location, InventoryItem) {
 
-  var emptyCart = {
-    products: [],
-    total: 0,
-    total_tax: 0,
-  };
-
   var ctrl = this;
   ctrl.totalPaid = 0;
   ctrl.cart = null;
