@@ -33,6 +33,8 @@ module.exports = function(config) {
       'client/bower_components/async/lib/async.js',
       'client/bower_components/moment/moment.js',
       'client/bower_components/angular-moment/angular-moment.js',
+      'client/bower_components/odometer/odometer.js',
+      'client/bower_components/angular-odometer-js/dist/angular-odometer.js',
       'client/app/app.js',
       'client/app/app.coffee',
       'client/app/config.js',
