@@ -50,6 +50,15 @@ function CheckoutConfirmCtrl($scope, $localStorage, $location, InventoryItem) {
       // checkout
       return;
     }
+    if (e.which === 9) {
+      e.preventDefault();
+      if (e.shiftKey) $location.path('/checkoutv2');
+      return;
+    }
+    if (e.which == 37) {
+      $location.path('/checkoutv2');
+      return
+    }
     if (!/\d/.test(s)) return;
     ctrl.totalPaid = ctrl.totalPaid * 10 + parseInt(s);
   }

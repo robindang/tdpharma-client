@@ -111,6 +111,10 @@ function Checkoutv2Ctrl($scope, $localStorage, $location, InventoryItem, toastr)
       proceedToCheckout(ctrl.cart);
       return;
     }
+    if (e.which === 39) {
+      proceedToCheckout(ctrl.cart);
+      return;
+    }
     if (e.which === 13) {
       addProductToCart(ctrl.barcode);
       ctrl.barcode = '';
