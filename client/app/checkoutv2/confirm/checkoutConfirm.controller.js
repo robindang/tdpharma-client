@@ -10,9 +10,14 @@ function CheckoutConfirmCtrl($scope, $localStorage, $location, InventoryItem) {
   var ctrl = this;
   ctrl.totalPaid = 0;
   ctrl.cart = null;
+  ctrl.calcChangeDue = calcChangeDue;
   ctrl.printReceipt = printReceipt;
 
   init();
+
+  function calcChangeDue(totalPaid, totalDue) {
+    return Math.max(0, totalPaid - totalDue);
+  }
 
   function printReceipt(payment) {
     // print receipt
@@ -33,14 +38,20 @@ function CheckoutConfirmCtrl($scope, $localStorage, $location, InventoryItem) {
 
   function onKeydown(event, e) {
     var s = String.fromCharCode(e.which);
-    if (e.which === 13) {
-      // checkout
-      addProductToCart(ctrl.barcode);
-      ctrl.barcode = '';
+    if (e.which === 27) {
+      ctrl.totalPaid = 0;
+    }
+    if (e.which === 8) {
+      e.preventDefault();
+      ctrl.totalPaid = Math.floor(ctrl.totalPaid / 10);
       return;
     }
-    if (!/[\d\w]/.test(s)) return;
-    ctrl.barcode = ctrl.barcode + s;
+    if (e.which === 13) {
+      // checkout
+      return;
+    }
+    if (!/\d/.test(s)) return;
+    ctrl.totalPaid = ctrl.totalPaid * 10 + parseInt(s);
   }
 
   function init() {
