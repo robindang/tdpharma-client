@@ -16,7 +16,7 @@ div(ng-include='"components/templates/navbar/navbar.html"')
     .text-center
       span.lead Total
       br
-      span.text-success.checkout-total-price
+      h1.text-success.checkout-total-price
         | $
         span(odometer='cc.cart.total')
       checkout(cart-total='cc.cart.total', print-receipt='cc.printReceipt(payment)')
@@ -34,7 +34,7 @@ div(ng-include='"components/templates/navbar/navbar.html"')
       tbody
         tr(ng-repeat='(barcode, product) in cc.cart.products track by barcode')
           td.col-md-2  {{ product.itemable.name }} 
-          td.col-md-1  {{ product.price | currency }} 
+          td.col-md-1  {{ product.sale_price.amount | currency }} 
           td.col-md-2
             .input-group
               span.input-group-btn

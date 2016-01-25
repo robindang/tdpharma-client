@@ -11,6 +11,7 @@ angular.module('tdpharmaClientApp', [
   'angularMoment',
   'smart-table',
   'listGroup',
+  'ui.odometer',
   'ui.select',
   'pascalprecht.translate',
   'ngFileUpload',

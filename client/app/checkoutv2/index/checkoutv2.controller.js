@@ -73,16 +73,12 @@ function Checkoutv2Ctrl($scope, $localStorage, InventoryItem) {
 
   function updateCartTotals() {
     ctrl.cart.total = _.reduce(ctrl.cart.products, function (total, product) {
-      var weightedPrice = parseFloat( product.price * product.quantity );
-      var weightedTax = parseFloat( weightedPrice * product.taxPercent );
+      var salePrice = product.sale_price.amount;
+      var taxPercent = 0;
+      var weightedPrice = parseFloat( salePrice * product.quantity );
+      var weightedTax = parseFloat( weightedPrice * taxPercent );
       var weightedPricePlusTax = weightedPrice + weightedTax;
       return total + weightedPricePlusTax;
-    }, 0);
-
-    ctrl.cart.total_tax = _.reduce(ctrl.cart.products, function (total, product) {
-      var weightedPrice = parseFloat( product.price * product.quantity );
-      var weightedTax = parseFloat( weightedPrice * product.taxPercent );
-      return total + weightedTax;
     }, 0);
 
     updateCartInLocalStorage();
