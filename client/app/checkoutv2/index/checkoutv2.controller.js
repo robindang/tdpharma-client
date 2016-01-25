@@ -3,9 +3,9 @@
 angular.module('tdpharmaClientApp')
   .controller('Checkoutv2Ctrl', Checkoutv2Ctrl);
 
-Checkoutv2Ctrl.$inject = ['$scope', '$localStorage', '$location', 'InventoryItem'];
+Checkoutv2Ctrl.$inject = ['$scope', '$localStorage', '$location', 'InventoryItem', 'toastr'];
 
-function Checkoutv2Ctrl($scope, $localStorage, $location, InventoryItem) {
+function Checkoutv2Ctrl($scope, $localStorage, $location, InventoryItem, toastr) {
 
   var emptyCart = {
     products: {},
@@ -79,7 +79,7 @@ function Checkoutv2Ctrl($scope, $localStorage, $location, InventoryItem) {
   }
 
   function proceedToCheckout(cart) {
-    if (!cart.total) return;
+    if (!cart.total) return toastr.warning('Please add items into the cart', 'Empty cart');
     $location.path('/checkout/confirm');
   }
 
