@@ -33,8 +33,10 @@ div(ng-include='"components/templates/navbar/navbar.html"')
           th
       tbody
         tr(ng-repeat='(barcode, product) in cc.cart.products track by barcode')
-          td.col-md-2  {{ product.itemable.name }} 
-          td.col-md-1  {{ product.sale_price.amount | currency }} 
+          td.col-md-2
+            p.form-control-static {{ product.itemable.name }} 
+          td.col-md-1
+            p.form-control-static {{ product.sale_price.amount | currency }} 
           td.col-md-2
             .input-group
               span.input-group-btn
@@ -44,14 +46,8 @@ div(ng-include='"components/templates/navbar/navbar.html"')
               span.input-group-btn
                 button.btn.btn-default(ng-click='cc.addQuantity(product)')
                   i.glyphicon.glyphicon-plus
-
-            //- button.btn.btn-sm.pull-left(ng-click='cc.removeQuantity(product)')
-            //-   i.glyphicon.glyphicon-minus
-            //- input(type='number', step='1', min='1', ng-model='product.quantity', ng-change='cc.updateCartTotals()', required='')
-            //- button.btn.btn-sm.pull-right(ng-click='cc.addQuantity(product)')
-            //-   i.glyphicon.glyphicon-plus
           td.col-md-2
-            | {{ (product.tax_percent * product.quantity * product.price) + ( product.price * product.quantity) | currency }}
+            p.form-control-static {{ ( product.sale_price.amount * product.quantity) | currency }}
           td.col-md-2
             button.btn.btn-danger(ng-click='cc.removeProductFromCart(barcode)')
               i.glyphicon.glyphicon-trash
