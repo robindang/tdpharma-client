@@ -42,4 +42,4 @@ div.navbar.navbar-default.navbar-static-top(ng-controller='NavbarCtrl as nc')
             span.glyphicon.glyphicon-cog
 
         li(ng-show='nc.isLoggedIn()', ng-class='{active: nc.isActive("/logout")}')
-          a(href='', ng-click='logout()') {{'LOGOUT' | translate}}
+          a(href='', ng-click='nc.logout()') {{'LOGOUT' | translate}}
