@@ -35,9 +35,9 @@ div(ng-include='"components/templates/navbar/navbar.html"')
         tr(ng-repeat='(barcode, product) in cc.cart.products track by barcode')
           td.col-md-2
             p.form-control-static
-              a(ng-href='/inventory/{{product.id}}') {{ product.itemable.name }} 
+              a(ng-href='/inventory/{{product.inventory_item.id}}') {{ product.inventory_item.itemable.name }} 
           td.col-md-1
-            p.form-control-static {{ product.sale_price.amount | currency }} 
+            p.form-control-static {{ product.inventory_item.sale_price.amount | currency }} 
           td.col-md-2
             .input-group
               span.input-group-btn
@@ -48,7 +48,7 @@ div(ng-include='"components/templates/navbar/navbar.html"')
                 button.btn.btn-default(ng-click='cc.addQuantity(product)')
                   i.glyphicon.glyphicon-plus
           td.col-md-2
-            p.form-control-static {{ ( product.sale_price.amount * product.quantity) | currency }}
+            p.form-control-static {{ ( product.inventory_item.sale_price.amount * product.quantity) | currency }}
           td.col-md-2
             button.btn.btn-danger(ng-click='cc.removeProductFromCart(barcode)')
               i.glyphicon.glyphicon-trash

@@ -27,7 +27,7 @@ function CheckoutConfirmCtrl($scope, $localStorage, $location, _, InventoryItem,
             due_date: moment(),
             delivery_time: moment(),
             sale_user_id: 1,            
-            total_price: item.quantity * item.sale_price.amount
+            total_price: item.quantity * item.inventory_item.sale_price.amount
           }
         })
       }      

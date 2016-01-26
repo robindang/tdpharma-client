@@ -3,9 +3,9 @@
 angular.module('tdpharmaClientApp')
   .controller('Checkoutv2Ctrl', Checkoutv2Ctrl);
 
-Checkoutv2Ctrl.$inject = ['$scope', '$localStorage', '$location', 'InventoryItem', 'toastr'];
+Checkoutv2Ctrl.$inject = ['$scope', '$localStorage', '$location', 'InventoryItem', 'toastr', 'MedBatch'];
 
-function Checkoutv2Ctrl($scope, $localStorage, $location, InventoryItem, toastr) {
+function Checkoutv2Ctrl($scope, $localStorage, $location, InventoryItem, toastr, MedBatch) {
 
   var emptyCart = {
     products: {},
@@ -50,9 +50,13 @@ function Checkoutv2Ctrl($scope, $localStorage, $location, InventoryItem, toastr)
     if (!barcode) return;
     if (productAlreadyInCart(barcode)) return;
     
-    InventoryItem.get({id: barcode}).$promise.then(function(product) {
-      product = angular.copy(product.data);
-      addProductAndUpdateCart(barcode, product);
+    MedBatch.get({barcode: barcode}).$promise.then(function(x) {
+      if (!x.data.length) return;
+      x = angular.copy(x.data[0]);
+      InventoryItem.get({id: x.inventory_item.id}).$promise.then(function(y) {
+        x.inventory_item = angular.copy(y.data);
+        addProductAndUpdateCart(barcode, x);
+      });
     });
   }
 
@@ -67,7 +71,7 @@ function Checkoutv2Ctrl($scope, $localStorage, $location, InventoryItem, toastr)
 
   function updateCartTotals() {
     ctrl.cart.total = _.reduce(ctrl.cart.products, function (total, product) {
-      var salePrice = product.sale_price.amount;
+      var salePrice = product.inventory_item.sale_price.amount;
       var taxPercent = 0;
       var weightedPrice = parseFloat( salePrice * product.quantity );
       var weightedTax = parseFloat( weightedPrice * taxPercent );

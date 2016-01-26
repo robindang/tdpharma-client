@@ -11,9 +11,9 @@ div(ng-include='"components/templates/navbar/navbar.html"')
           .col-xs-4 Item
           .col-xs-4 Quantity
           .col-xs-4 Total
-          .col-xs-4(ng-repeat-start='(barcode, product) in ccc.cart.products track by barcode') {{ product.itemable.name }} 
+          .col-xs-4(ng-repeat-start='(barcode, product) in ccc.cart.products track by barcode') {{ product.inventory_item.itemable.name }} 
           .col-xs-4 {{ product.quantity }}
-          .col-xs-4(ng-repeat-end) {{ ( product.sale_price.amount * product.quantity) | currency }}
+          .col-xs-4(ng-repeat-end) {{ ( product.inventory_item.sale_price.amount * product.quantity) | currency }}
     .col-md-6
         h3
           | Total: 
