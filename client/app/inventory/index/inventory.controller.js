@@ -53,9 +53,9 @@ function InventoryCtrl(_, pharmacare, toastr, InventorySearch, Medicine, APP_CON
 
     InventorySearch.getPage(start, number, tableState).then(function (result) {
       ctrl.raw = result.data;        
-      ctrl.numberOfResults = result.numberOfResults * ctrl.raw.length;
+      ctrl.numberOfResults = result.numberOfResults;
       //set the number of pages so the pagination can update
-      tableState.pagination.numberOfPages = result.numberOfResults;
+      tableState.pagination.numberOfPages = result.numberOfPages;
       ctrl.isLoading = false;
       updateItemList();
     });
