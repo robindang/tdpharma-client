@@ -4,6 +4,6 @@ table.table
       th Date
       th Total
   tbody
-    tr(ng-repeat='transaction in oc.history.receipts')
+    tr(ng-repeat='transaction in oc.history.receipts | orderBy:"-created_at"')
       td {{transaction.created_at | amDateFormat:'LLL'}}
       td {{oc.getTotal(transaction) | currency }}
