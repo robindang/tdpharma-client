@@ -27,6 +27,6 @@ div(ng-include='"components/templates/navbar/navbar.html"')
               .input-group-addon $
               input#checkoutPaymentAmount.form-control.input-lg.ng-pristine.ng-untouched.ng-valid-min.ng-invalid.ng-invalid-required(type='number', name='totalPaid', step='any', min='0', ng-model='ccc.totalPaid', required='' disabled)
           p.text-danger.ng-hide(ng-show='checkoutForm.totalPaid.$error.required && checkoutForm.$dirty') Enter payment amount.
-          button.btn.btn-primary.btn-lg.lead(type='submit', ng-disabled='checkoutForm.totalPaid.$error && ccc.totalPaid < ccc.cart.total' ng-click='ccc.checkout(ccc.cart)')
+          button.btn.btn-primary.btn-lg.lead(type='submit' ng-click='ccc.checkout(ccc.cart, ccc.totalPaid)')
             i.fa.fa-shopping-cart
             | &nbsp;Checkout

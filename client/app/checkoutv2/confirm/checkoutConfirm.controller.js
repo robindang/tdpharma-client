@@ -3,9 +3,9 @@
 angular.module('tdpharmaClientApp')
   .controller('CheckoutConfirmCtrl', CheckoutConfirmCtrl);
 
-CheckoutConfirmCtrl.$inject = ['$scope', '$localStorage', '$location', 'lodash', 'InventoryItem', 'Receipt'];
+CheckoutConfirmCtrl.$inject = ['$scope', '$localStorage', '$location', 'lodash', 'toastr', 'Receipt'];
 
-function CheckoutConfirmCtrl($scope, $localStorage, $location, _, InventoryItem, Receipt) {
+function CheckoutConfirmCtrl($scope, $localStorage, $location, _, toastr, Receipt) {
 
   var ctrl = this;
   ctrl.totalPaid = 0;
@@ -16,7 +16,10 @@ function CheckoutConfirmCtrl($scope, $localStorage, $location, _, InventoryItem,
 
   init();
 
-  function checkout(cart) {
+  function checkout(cart, totalPaid) {
+    if (totalPaid < cart.total) return toastr.info('Please enter the total paid.', 'Total paid is less than cart total');
+    if (cart.isCheckedOut) return;
+    cart.isCheckedOut = true;
     var o = {
       receipt: {
         receipt_type: 'sale',
@@ -33,7 +36,12 @@ function CheckoutConfirmCtrl($scope, $localStorage, $location, _, InventoryItem,
       }      
     };
     Receipt.save({}, o).$promise.then(function(receipt) {
-      console.log(receipt);
+      cart.isCheckedOut = false;
+      var compiled = _.template('Total: <%= total %>\nChange: <%= change %>');
+      var message = compiled({total: receipt.data.total, change: calcChangeDue(totalPaid, receipt.data.total)});
+      toastr.success(message, 'Sale Receipt', {timeOut: 20000});
+      delete $localStorage.cart;
+      $location.path('/checkoutv2');
     });
   }
 
@@ -69,7 +77,7 @@ function CheckoutConfirmCtrl($scope, $localStorage, $location, _, InventoryItem,
       return;
     }
     if (e.which === 13) {
-      // checkout
+      checkout(ctrl.cart, ctrl.totalPaid);
       return;
     }
     if (e.which === 9) {
