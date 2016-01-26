@@ -108,7 +108,7 @@ function Checkoutv2Ctrl($scope, $localStorage, $location, InventoryItem, toastr)
     }
     if (e.which === 9) {
       e.preventDefault();
-      proceedToCheckout(ctrl.cart);
+      if (!e.shiftKey) proceedToCheckout(ctrl.cart);
       return;
     }
     if (e.which === 39) {
