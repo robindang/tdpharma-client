@@ -5,7 +5,7 @@ div(ng-include='"components/templates/navbar/navbar.html"')
     .col-md-12
       ul.breadcrumb
         li(ng-repeat='breadcrumb in iic.breadcrumbs')
-          a(ng-href='/categories/{{breadcrumb.id}}') {{breadcrumb.name}}
+          a(ng-href='{{breadcrumb.link}}') {{breadcrumb.name}}
       .row
         .col-md-3.col-sm-3
           img(ng-src='{{iic.item.photo_thumb.photo | resolve}}' style='max-width:200px')

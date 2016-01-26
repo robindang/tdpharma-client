@@ -20,6 +20,7 @@ function DataHelper($q, Category) {
         var result = [];
         while (categoryId !== null) {
           var category = categories[categoryId];
+          category.link = result.length ? ('/categories#'+category.name):('/categories/'+category.id);
           result.unshift(category);
           categoryId = category.parent_id;
         }

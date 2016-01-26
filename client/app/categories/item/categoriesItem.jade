@@ -5,7 +5,7 @@ div(ng-include='"components/templates/navbar/navbar.html"')
     .col-md-12
       ul.breadcrumb
         li(ng-repeat='breadcrumb in cic.breadcrumbs')
-          a(ng-href='/categories/{{breadcrumb.id}}') {{breadcrumb.name}}
+          a(ng-href='{{breadcrumb.link}}') {{breadcrumb.name}}
   .row
     .col-md-2.col-sm-3.col-xs-4(ng-repeat='item in cic.results.data')
       a(ng-href='/inventory/{{item.id}}')
