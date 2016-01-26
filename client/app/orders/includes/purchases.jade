@@ -6,4 +6,4 @@ table.table
   tbody
     tr(ng-repeat='purchase in oc.purchases.receipts')
       td {{purchase.created_at | amDateFormat:'LLL'}}
-      td {{purchase.total | currency }}
+      td {{-purchase.total | currency }}
