@@ -18,16 +18,19 @@ function CheckoutConfirmCtrl($scope, $localStorage, $location, _, InventoryItem,
 
   function checkout(cart) {
     var o = {
-      receipt_type: 'sale',
-      transactions_attributes: _.map(cart.products, function(item) {
-        return {
-          amount: item.quantity,
-          med_batch_id: item.id,
-          sale_user_id: 1,
-          seller_item_id: item.itemable.id,
-          total_price: item.quantity * item.sale_price.amount
-        }
-      })
+      receipt: {
+        receipt_type: 'sale',
+        transactions_attributes: _.map(cart.products, function(item) {
+          return {
+            amount: item.quantity,
+            med_batch_id: item.id,
+            due_date: moment(),
+            delivery_time: moment(),
+            sale_user_id: 1,            
+            total_price: item.quantity * item.sale_price.amount
+          }
+        })
+      }      
     };
     Receipt.save({}, o).$promise.then(function(receipt) {
       console.log(receipt);
