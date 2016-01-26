@@ -19,11 +19,12 @@ function CheckoutConfirmCtrl($scope, $localStorage, $location, _, InventoryItem,
   function checkout(cart) {
     var o = {
       receipt_type: 'sale',
-      total: cart.total,
       transactions_attributes: _.map(cart.products, function(item) {
         return {
           amount: item.quantity,
           med_batch_id: item.id,
+          sale_user_id: 1,
+          seller_item_id: item.itemable.id,
           total_price: item.quantity * item.sale_price.amount
         }
       })
