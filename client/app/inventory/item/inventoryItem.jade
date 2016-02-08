@@ -110,7 +110,8 @@ div(ng-include='"components/templates/navbar/navbar.html"')
         .form-group
           label.col-md-2.col-xs-3.control-label {{ 'TOTAL' | translate }}
           .col-md-10.col-xs-9
-            p.form-control-static {{batch.total_units | number}}
+            p.form-control-static(ng-show='!iic.mode.isEditMode()') {{batch.total_units | number}}
+            input.form-control(type='number', placeholder="Price", min='0' ng-model='batch.total_units' ng-show='iic.mode.isEditMode()' required)
         .form-group
           label.col-md-2.col-xs-3.control-label {{ 'PRICE' | translate }}
           .col-md-10.col-xs-9
@@ -118,19 +119,11 @@ div(ng-include='"components/templates/navbar/navbar.html"')
         .form-group
           label.col-md-2.col-xs-3.control-label {{'MANUFACTURE_DATE' | translate }}
           .col-md-10.col-xs-9
-            p.input-group
-              input.form-control(type='text', placeholder="{{'MANUFACTURE_DATE' | translate }}", uib-datepicker-popup='{{iic.pharmacare.getDateFormat()}}', ng-model='batch.mfg_date', is-open='pc.status[$index].opened', max-date='pc.maxDate', datepicker-options='pc.dateOptions', ng-required='true', close-text='Close', required='required' ng-disabled='iic.mode.isReadMode()')
-              span.input-group-btn
-                button.btn.btn-default(type='button', ng-click='pc.open("status", $event, $index)')
-                  i.glyphicon.glyphicon-calendar
+            p.form-control-static {{batch.mfg_date}}
         .form-group
           label.col-md-2.col-xs-3.control-label {{ 'EXPIRE_DATE' | translate }}
           .col-md-10.col-xs-9
-            p.input-group
-              input.form-control(type='text', placeholder="{{ 'EXPIRE_DATE' | translate }}", uib-datepicker-popup='{{iic.pharmacare.getDateFormat()}}', ng-model='batch.expire_date', is-open='pc.expStatus[$index].opened', min-date='pc.maxDate', datepicker-options='pc.dateOptions', ng-required='true', close-text='Close', required='required' ng-disabled='iic.mode.isReadMode()')
-              span.input-group-btn
-                button.btn.btn-default(type='button', ng-click='pc.open("expStatus", $event, $index)')
-                  i.glyphicon.glyphicon-calendar
+            p.form-control-static {{batch.expire_date}}
       .row
         .col-xs-12.text-right
           .btn.btn-danger(ng-show='iic.mode.isEditMode()' ng-click='iic.mode.setReadMode()') Cancel
