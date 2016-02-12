@@ -5,39 +5,39 @@ div(ng-include='"components/templates/navbar/navbar.html"')
     thead
       tr
         th(colspan='7')
-          .form-inline.col-md-12
-            //- .form-group.col-md-3
-            .form-group.col-md-9
-              .input-group                  
-                ui-select#medicine(ng-model='ic.selected_med' name='medicine' close-on-select='true' required)
-                  ui-select-match(placeholder='Search for...') {{$select.selected.itemable.name}}, {{$select.selected.itemable.concentration}} {{$select.selected.itemable.concentration_unit}}, {{$select.selected.itemable.manufacturer}}
-                  ui-select-choices(repeat='data.itemable.name as data in ic.store_medicines | filter:$select.search' refresh='ic.searchMedicine($select.search)')                      
-                    small
-                      span
-                        img.photo-search(ng-src="{{ data.photo_thumb.photo | resolve }}")                        
-                        | {{data.itemable.name}}, {{data.itemable.concentration}} {{data.itemable.concentration_unit}}, {{data.itemable.manufacturer}}
-                span.input-group-btn
-                  button.btn.btn-default(type='button') Search
-            .form-group
-              span {{ic.numberOfResults}} Item(s)
+          .form-group.col-md-12
+            .col-md-8              
+              .input-group
+                ui-select#medicine(ng-model='ic.selected_med' name='medicine' close-on-select='true' required style="width:100%")
+                    ui-select-match(placeholder="{{ 'SEARCH_FOR' | translate }}") {{$select.selected.itemable.name}}, {{$select.selected.itemable.concentration}} {{$select.selected.itemable.concentration_unit}}, {{$select.selected.itemable.manufacturer}}
+                    ui-select-choices(repeat='data.itemable as data in ic.store_medicines | filter:$select.search' refresh='ic.searchMedicine($select.search)')                      
+                      small
+                        span
+                          img.photo-search(ng-src="{{ data.photo_thumb.photo | resolve }}")                        
+                          | {{data.itemable.name}}, {{data.itemable.concentration}} {{data.itemable.concentration_unit}}, {{data.itemable.manufacturer}}
+                  span.input-group-btn
+                    button.btn.btn-default(type='button' ng-click="ic.gotoItem()") {{ 'SEARCH' | translate }} 
+            .col-md-3.m-5-t
+              span {{ic.numberOfResults}} {{'ITEMS'|translate}}
+          br                                            
           .form-inline.col-md-12.clearfix
             .form-group.col-md-3.pull-left
-              label.control-label Filters
+              label.control-label {{'FILTER'|translate}}
               span &nbsp;&nbsp;
               .btn-group
                 //- label.btn.btn-default(ng-model='ic.status', uib-btn-radio="''", ng-change='ic.updateItemList()') All
-                label.btn.btn-default(ng-model='ic.status', uib-btn-radio="'active'", ng-change='ic.updateItemList()') On Sale
-                label.btn.btn-default(ng-model='ic.status', uib-btn-radio="'inactive'", ng-change='ic.updateItemList()') Off Sale
+                label.btn.btn-default(ng-model='ic.status', uib-btn-radio="'active'", ng-change='ic.updateItemList()') {{'On Sale' | translate }}
+                label.btn.btn-default(ng-model='ic.status', uib-btn-radio="'inactive'", ng-change='ic.updateItemList()') {{'Off Sale' | translate }}
             .form-group.pull-right
-              a.btn.btn-primary(href="/products") Add a product
+              a.btn.btn-primary(href="/products") {{'ADD_A_PRODUCT' | translate}}
       tr
         th
-        th Name
-        th Status
-        th Category
-        th Price
-        th Quantity
-        th Action
+        th {{'NAME'|translate}}
+        th {{'STATUS' | translate}}
+        th {{'CATEGORY' | translate}}
+        th {{'PRICE'|translate}}
+        th {{'QUANTITY'|translate}}
+        th {{'ACTION'|translate}}
     tbody(ng-show='!ic.isLoading')
       tr(ng-repeat='row in ic.displayed')
         td
@@ -45,26 +45,31 @@ div(ng-include='"components/templates/navbar/navbar.html"')
         td
           a(ng-href='/inventory/{{row.id}}') {{row.itemable.name}}
         td
-          span(ng-class='ic.pharmacare.getStatusCSSClass(row)') {{ic.pharmacare.getStatus(row)}}
+          span(ng-class='ic.pharmacare.getStatusCSSClass(row)') {{ic.pharmacare.getStatus(row) | translate}}
         td
-          a(href='/categories/{{row.category.id}}') {{row.category.name}}
+          a(href='/categories/{{row.category.id}}') {{row.category.name | translate}}
         td 
+          span(ng-if='!row.edit_price_mode') {{row.sale_price.amount | number }}
+          span(ng-if='row.edit_price_mode == true')
+            input.form-control(type='number' ng-model='row.sale_price_attributes.amount')
         td {{row.amount | number}}
         td
           .input-group
-            .btn-group(uib-dropdown='', style='min-width:100px')
-              button#split-button.btn.btn-default(type='button' go-click="/inventory/{{row.id}}#edit") Edit
+            .btn-group(uib-dropdown='', style='min-width:100px' ng-if='!row.edit_price_mode')
+              button#split-button.btn.btn-default(type='button' ng-click="row.edit_price_mode = true;") {{'EDIT_PRICE' | translate }}
               button.btn.btn-default(type='button', uib-dropdown-toggle='')
                 span.caret
                 span.sr-only Split button!
               ul.dropdown-menu(role='menu', aria-labelledby='split-button')
                 li(role='menuitem')
-                  a(href='/inventory/{{row.id}}#edit') Edit
+                  a(href='/inventory/{{row.id}}#edit') {{'EDIT'|translate}}                
                 li(role='menuitem')
-                  a(href='/inventory/{{row.id}}#add') Add
+                  a(href='/inventory/{{row.id}}#add') {{'ADD_ITEM'|translate}}
                 li.divider
                 li(role='menuitem')
-                  a(href='#') Stop Sale
+                  a(href='#') {{'STOP_SALE'|translate}}
+            .btn-group(uib-dropdown='', style='min-width:100px;' ng-if='row.edit_price_mode == true')
+              button.btn.btn-default(type='button' ng-click='ic.updatePrice(row)') {{'SAVE'|translate}}
     tbody(ng-show='ic.isLoading')
       tr
         td.text-center(colspan='7')

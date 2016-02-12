@@ -7,10 +7,10 @@
   angularTranslateConfig.$inject = ['$translateProvider'];
 
   function angularTranslateConfig($translateProvider) {
-    $translateProvider.translations('vi', {
+    $translateProvider.translations('vi', {      
       GREETING: 'Allo, Allo!',
-      LEADING_GREETING: 'Kích hoạt nhà thuốc của bạn với {{company}}',
-      HOME: 'Home',
+      LEADING_GREETING: 'Kích hoạt nhà thuốc của bạn với Pharmaplus',
+      HOME: 'Trang chủ',
       INVENTORY: 'Tồn Kho',
       ORDERS: 'Hoá Đơn',
       CHECKOUT: 'Bán Thuốc',
@@ -119,7 +119,32 @@
       AMOUNT_UNIT_REQUIRED: 'Số gói là mục cần thiết',
       TOTAL_UNITS_REQUIRED: 'Tổng số lượng là mục cần thiết',
       PRICE_REQUIRED: 'Giá mua là mục cần thiết',
-      CATEGORY_REQUIRED: 'Thể loại là mục cần thiết. Xin quay lại chọn thể loại'
+      CATEGORY_REQUIRED: 'Thể loại là mục cần thiết. Xin quay lại chọn thể loại',
+      'On Sale': 'Đang bán',
+      'Off Sale': 'Hết bán',
+      ADD_A_PRODUCT: 'Nhập sản phẩm mới',
+      SEARCH: 'Tìm kiếm',
+      SEARCH_FOR: 'Tìm kiếm tên sản phẩm',
+      NAME: 'Tên',
+      STATUS: 'Trạng thái',
+      CATEGORY: 'Thể loại',
+      Price: 'Giá tiền',
+      QUANTITY: 'Số lượng',
+      ACTION: 'Hành động',
+      ITEMS: 'Sản phẩm',
+      EDIT: 'Cập nhật',
+      ADD_ITEM: 'Nhập hàng',
+      STOP_SALE: 'Dừng bán',
+      EDIT_PRICE: 'Đổi Giá',
+      FILTER: 'Phân lọc',
+      FIRST: 'Trang Đầu',
+      LAST: 'Trang Cuối',
+      'Track your inventory...': 'Quản lý tồn kho...',
+      'Manage your store...': 'Quản lý cửa hàng...',
+      'Track your sales and purchases...': 'Theo dõi giao dịch mua bán...',
+      'Effective Point of Sale...': 'Giao diện mua bán hiệu quả...',
+      'Real time Price Control...': 'Quản lý giá thị trường live...',
+      'FEATURES': 'Chức năng'      
     });
   }
 

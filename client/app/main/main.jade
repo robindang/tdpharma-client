@@ -9,11 +9,11 @@ header#banner.hero-unit
 .container
   .row
     .col-lg-12
-      h1.page-header Features:
+      h1.page-header {{'FEATURES'|translate}}:
       ul.nav.nav-tabs.nav-stacked.col-md-4.col-lg-4.col-sm-6(ng-repeat='feature in mc.features')
         li
           a(ng-href='{{feature.link}}', uib-tooltip='{{feature.info}}')
-            | {{feature.name}}
+            | {{feature.name | translate}}
             //- button.close(type='button', ng-click='deleteThing(thing)') ×
   br
   br

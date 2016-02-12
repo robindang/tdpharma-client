@@ -121,16 +121,6 @@ module.exports = function (grunt) {
         options: {
           livereload: true
         }
-      },
-      express: {
-        files: [
-          'server/**/*.{js,json}'
-        ],
-        tasks: ['express:dev', 'wait'],
-        options: {
-          livereload: true,
-          nospawn: true //Without this option specified express won't be reloaded
-        }
       }
     },
 

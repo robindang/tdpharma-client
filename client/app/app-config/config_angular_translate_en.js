@@ -9,9 +9,9 @@
   function angularTranslateConfig($translateProvider) {
     $translateProvider.useSanitizeValueStrategy('sanitizeParameters');
 
-    $translateProvider.translations('en', {
+    $translateProvider.translations('en', {      
       GREETING: 'Allo, Allo!',
-      LEADING_GREETING: 'Kick-start your pharmacy with {{company}}',
+      LEADING_GREETING: 'Kick-start your pharmacy with Pharmaplus',
       HOME: 'Home',
       INVENTORY: 'Inventory',
       ORDERS: 'Orders',
@@ -121,7 +121,32 @@
       AMOUNT_UNIT_REQUIRED: 'Number of packages is required',
       TOTAL_UNITS_REQUIRED: 'Total amount is required',
       PRICE_REQUIRED: 'Price is requried',
-      CATEGORY_REQUIRED: 'Category is requried'            
+      CATEGORY_REQUIRED: 'Category is requried',
+      'On Sale': 'On Sale',
+      'Off Sale': 'Off Sale',
+      ADD_A_PRODUCT: 'Add a product',
+      SEARCH: 'Search',
+      SEARCH_FOR: 'Search for',
+      NAME: 'Name',
+      STATUS: 'Status',
+      CATEGORY: 'Category',
+      Price: 'Price',
+      QUANTITY: 'Quantity',
+      ACTION: 'Action',
+      ITEMS: 'Item(s)',
+      EDIT: 'Edit',
+      ADD_ITEM: 'Add',
+      STOP_SALE: 'Stop Sale',
+      EDIT_PRICE: 'Edit price',     
+      FILTER: 'Filter',
+      FIRST: 'First',
+      LAST: 'Last',
+      'Track your inventory...': 'Track your inventory...',
+      'Manage your store...': 'Manage your store...',
+      'Track your sales and purchases...': 'Track your sales and purchases...',
+      'Effective Point of Sale...': 'Effective Point of Sale...',
+      'Real time Price Control...': 'Real time Price Control...',
+      'FEATURES': 'Features'
     });
     $translateProvider.preferredLanguage('vi');
   }

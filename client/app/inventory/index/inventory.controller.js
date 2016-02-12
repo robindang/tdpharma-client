@@ -3,9 +3,9 @@
 angular.module('tdpharmaClientApp')
   .controller('InventoryCtrl', InventoryCtrl);
 
-InventoryCtrl.$inject = ['lodash', 'pharmacare', 'toastr', 'InventorySearch', 'Medicine', 'APP_CONFIGURATION'];
+InventoryCtrl.$inject = ['lodash', 'pharmacare', 'toastr', '$state', 'InventoryItem', 'InventorySearch', 'Medicine', 'APP_CONFIGURATION'];
 
-function InventoryCtrl(_, pharmacare, toastr, InventorySearch, Medicine, APP_CONFIG) {
+function InventoryCtrl(_, pharmacare, toastr, $state, InventoryItem, InventorySearch, Medicine, APP_CONFIG) {
 
   var ctrl = this;
   ctrl.displayed = [];
@@ -17,6 +17,8 @@ function InventoryCtrl(_, pharmacare, toastr, InventorySearch, Medicine, APP_CON
   ctrl.pharmacare = pharmacare;
   ctrl.updateItemList = updateItemList;
   ctrl.searchMedicine = searchMedicine;
+  ctrl.gotoItem = gotoItem;
+  ctrl.updatePrice = updatePrice;
 
   searchMedicine(null, true);
 
@@ -29,6 +31,10 @@ function InventoryCtrl(_, pharmacare, toastr, InventorySearch, Medicine, APP_CON
     } else {
       ctrl.displayed = ctrl.raw;
     }
+  }
+
+  function gotoItem() {    
+    $state.go('inventoryItem', {id: ctrl.selected_med.id});
   }
 
   function searchMedicine(search_string, force) {
@@ -59,5 +65,21 @@ function InventoryCtrl(_, pharmacare, toastr, InventorySearch, Medicine, APP_CON
       ctrl.isLoading = false;
       updateItemList();
     });
+  }
+
+
+  function updatePrice(item) {
+    item.edit_price_mode = false;
+    var data = {
+      inventory_item: {        
+        sale_price_attributes: item.sale_price_attributes
+      }
+    };
+    InventoryItem.update({id: item.id}, data).$promise.then(function(resp){
+      item.sale_price = resp.data.sale_price;
+    }, function(error){
+      if (error.data && error.data.data && error.data.data.errors)
+          toastr.error(error.data.data.errors);
+    })
   }
 }

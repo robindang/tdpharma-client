@@ -3,7 +3,9 @@
 angular.module('tdpharmaClientApp')
   .controller('MainCtrl', MainCtrl);
 
-function MainCtrl() {
+MainCtrl.$inject = ['$filter'];
+
+function MainCtrl($filter) {
     
     var ctrl = this;
     ctrl.text = {
@@ -12,7 +14,7 @@ function MainCtrl() {
 
     ctrl.features = [
       {
-        info: 'Track your store inventory. Update prices. Put items on and off sale.',
+        info: 'Track your store inventory. Put items on and off sale.',
         link: '/inventory',
         name: 'Track your inventory...'
       }, {
@@ -20,13 +22,17 @@ function MainCtrl() {
         link: '#',
         name: 'Manage your store...'
       }, {
-        info: 'Track your sales and purchase history. See your daily and monthly sales and expenses.',
+        info: 'Track your sales and purchases history. See your daily and monthly revenue and expenses.',
         link: '/orders',
         name: 'Track your sales and purchases...'
       }, {
-        info: 'Checkout customer orders. Record transactions.',
+        info: 'Simple and easy to use interface to speed up checkout process',
         link: '/checkout',
-        name: 'Record retail transactions...'
+        name: 'Effective Point of Sale...'
+      }, {
+        info: 'Changes in prices become effective immediately independent of time and location',
+        link: '/inventory',
+        name: 'Real time Price Control...'
       }];
 
 };
