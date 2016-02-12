@@ -127,7 +127,6 @@
       ADD_A_PRODUCT: 'Add a product',
       SEARCH: 'Search',
       SEARCH_FOR: 'Search for',
-      NAME: 'Name',
       STATUS: 'Status',
       CATEGORY: 'Category',
       Price: 'Price',

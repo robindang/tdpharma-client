@@ -125,7 +125,6 @@
       ADD_A_PRODUCT: 'Nhập sản phẩm mới',
       SEARCH: 'Tìm kiếm',
       SEARCH_FOR: 'Tìm kiếm tên sản phẩm',
-      NAME: 'Tên',
       STATUS: 'Trạng thái',
       CATEGORY: 'Thể loại',
       Price: 'Giá tiền',
