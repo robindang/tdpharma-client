@@ -40,8 +40,7 @@ function InventoryCtrl(_, pharmacare, toastr, $state, InventoryItem, InventorySe
   function searchMedicine(search_string, force) {
     if ((search_string && search_string.length > 3) || force == true) {
       InventorySearch.getPage(0, 25, {q: search_string}).then(function(resp){
-        ctrl.store_medicines = resp.data;
-        console.log(resp.data)
+        ctrl.store_medicines = resp.data;        
       }).catch(function(error){
         toastr.error(error.data.data.errors);
       });

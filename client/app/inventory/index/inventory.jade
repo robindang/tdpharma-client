@@ -60,9 +60,7 @@ div(ng-include='"components/templates/navbar/navbar.html"')
               button.btn.btn-default(type='button', uib-dropdown-toggle='')
                 span.caret
                 span.sr-only Split button!
-              ul.dropdown-menu(role='menu', aria-labelledby='split-button')
-                li(role='menuitem')
-                  a(href='/inventory/{{row.id}}#edit') {{'EDIT'|translate}}                
+              ul.dropdown-menu(role='menu', aria-labelledby='split-button')                
                 li(role='menuitem')
                   a(href='/inventory/{{row.id}}#add') {{'ADD_ITEM'|translate}}
                 li.divider

@@ -110,8 +110,7 @@ div(ng-include='"components/templates/navbar/navbar.html"')
         .form-group
           label.col-md-2.col-xs-3.control-label {{ 'TOTAL' | translate }}
           .col-md-10.col-xs-9
-            p.form-control-static(ng-show='!iic.mode.isEditMode()') {{batch.total_units | number}}
-            input.form-control(type='number', placeholder="Price", min='0' ng-model='batch.total_units' ng-show='iic.mode.isEditMode()' required)
+            p.form-control-static {{batch.total_units | number}}            
         .form-group
           label.col-md-2.col-xs-3.control-label {{ 'PRICE' | translate }}
           .col-md-10.col-xs-9
