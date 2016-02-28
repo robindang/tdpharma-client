@@ -33,6 +33,10 @@ function MainCtrl($filter) {
         info: 'Changes in prices become effective immediately independent of time and location',
         link: '/inventory',
         name: 'Real time Price Control...'
+      }, {
+        info: '',
+        link: '',
+        name: '...'
       }];
 
 };

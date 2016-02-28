@@ -4,8 +4,9 @@ header#banner.hero-unit
   .container
     h1 {{ 'GREETING' | translate }}
     p.lead {{ 'LEADING_GREETING' | translate:text }}
-    img.logo(src='assets/images/tdlogo4_50.svg', alt='I\'m Yeoman')
+    img.logo(src='assets/images/logo_sym_100.svg', alt='Pharmaplus')
 
+br
 .container
   .row
     .col-lg-12
@@ -17,12 +18,6 @@ header#banner.hero-unit
             //- button.close(type='button', ng-click='deleteThing(thing)') ×
   br
   br
-  form.thing-form
-    label Want a new feature? Request one here.
-    p.input-group
-      input.form-control(type='text', placeholder='Request a new feature here.', ng-model='newThing')
-      span.input-group-btn
-        button.btn.btn-primary(type='submit', ng-click='addThing()') Request
 
 footer.footer
   .container
