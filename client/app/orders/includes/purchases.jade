@@ -1,9 +1,11 @@
+br
+button.btn.btn-primary.pull-right(ng-click='oc.toNewPurchase()') {{ 'NEW_PURCHASE_RECEIPT' | translate }}
 table.table
   thead
     tr
-      th Date
-      th Total
+      th {{'DATE' | translate }}
+      th {{'TOTAL' | translate }}
   tbody
     tr(ng-repeat='purchase in oc.purchases.receipts | orderBy:"-created_at"')
-      td {{purchase.created_at | amDateFormat:'LLL'}}
+      td {{purchase.created_at | amDateFormat:'lll'}}
       td {{-purchase.total | currency }}

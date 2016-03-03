@@ -1,0 +1,73 @@
+div(ng-include='"components/templates/navbar/navbar.html"')
+
+div.col-sm-12.new-purchase
+	.col-md-8
+		p.col-md-12 {{ 'Enter the medicine name that needs to be supplied here' | translate }}
+		.form-group
+			.col-md-8
+				ui-select#medicine(ng-model='vm.selected_med' name='medicine' close-on-select='true' required style='width: 100%' autofocus='true' on-select='vm.addItem($item, $model)')
+					ui-select-match(placeholder="{{ 'SEARCH_FOR_MEDICINE_TO_ADD' | translate}}") {{$select.selected.itemable.name}}, {{$select.selected.itemable.concentration}} {{$select.selected.itemable.concentration_unit}}, {{$select.selected.itemable.manufacturer}}, {{$select.selected.itemable.mfg_location}}
+					ui-select-choices(repeat='data.itemable as data in vm.store_medicines | filter:$select.search' refresh='vm.searchMedicine($select.search)')
+						small
+							span
+								img.photo-search(ng-src="{{ data.photo_thumb.photo | resolve }}")
+								| {{data.itemable.name}}, {{data.itemable.concentration}} {{data.itemable.concentration_unit}}, {{data.itemable.manufacturer}}, {{data.itemable.mfg_location}}					
+		
+		.form-group.m-10-t.col-md-8(ng-show='vm.item_list.length > 0')
+			label.col-md-2.control-label(for='user') {{ 'AUTHOR' | translate }}
+			.col-md-10
+				ui-select#user(ng-model='vm.selected_user' name='author' close-on-select='true' required)
+					ui-select-match(placeholder="{{ 'SELECT_USER' | translate }}") {{$select.selected.first_name}} {{$select.selected.last_name}}
+					ui-select-choices(repeat='data in vm.store_users | filter:$select.search') {{data.first_name}} {{data.last_name}}
+	.col-md-4
+		button.btn.m-20-t.pull-right.btn-primary.btn-lg(ng-click='vm.savePurchase()') {{'SAVE' | translate}}
+	.col-md-12.m-10-t
+		table.table.table-striped(ng-show='vm.item_list.length > 0')
+			thead
+				tr
+					th 
+					th {{ 'NAME'|translate}}
+					th {{ 'DATE' | translate }}					
+					th {{ 'PACKAGE' | translate }}
+					th {{ 'AMOUNT' | translate }}					
+					th {{ 'TOTAL' | translate}}
+					th {{ 'PURCHASE_PRICE' | translate }}
+					th 
+			tbody
+				tr(ng-repeat='row in vm.item_list')
+					td.photo-thumb
+						img(ng-src='{{row.photo_thumb.photo | resolve}}')
+					td.info-section
+						p {{row.itemable.name}} 
+						p {{row.itemable.concentration}} {{row.itemable.concentration_unit}}
+						p {{row.itemable.manufacturer}}, {{row.itemable.mfg_location}}
+					td.date-section
+						p.input-group							
+							input.form-control(type='text', placeholder="{{'MANUFACTURE_DATE' | translate }}", uib-datepicker-popup='{{vm.pharmacare.getDatePickerDateFormat()}}', ng-model='row.med_batches_attributes[0].mfg_date', is-open='vm.status[$index].opened', max-date='vm.maxDate', datepicker-options='vm.dateOptions', ng-required='true', close-text='Close', required='required')
+							span.input-group-btn
+								button.btn.btn-default(type='button', ng-click='vm.open("status", $event, $index)')
+									i.glyphicon.glyphicon-calendar
+						p.input-group
+							input.form-control(type='text', placeholder="{{ 'EXPIRE_DATE' | translate }}", uib-datepicker-popup='{{vm.pharmacare.getDatePickerDateFormat()}}', ng-model='row.med_batches_attributes[0].expire_date', is-open='vm.expStatus[$index].opened', min-date='vm.maxDate', datepicker-options='vm.dateOptions', ng-required='true', close-text='Close', required='required')
+							span.input-group-btn
+								button.btn.btn-default(type='button', ng-click='vm.open("expStatus", $event, $index)')
+									i.glyphicon.glyphicon-calendar					
+					td.normal-section
+						p
+							input.form-control(type='text', placeholder="{{ 'PACKAGE' | translate }}", ng-model='row.med_batches_attributes[0].package' required)
+					td.number-section
+						p
+							input.form-control(type='number', placeholder="{{ 'AMOUNT_PER_PACKAGE' | translate }}", min='0' ng-model='row.med_batches_attributes[0].amount_per_pkg' ng-change="vm.updateTotalAmount(row)" required)
+						p
+							input.form-control(type='number', placeholder="{{ 'UNIT' | translate }}", min='0' ng-model='row.med_batches_attributes[0].amount_unit' ng-change="vm.updateTotalAmount(row)" required)													
+					td.number-section
+						p
+							input.form-control(type='number', placeholder="{{ 'TOTAL' | translate }}", min='0' ng-model='row.med_batches_attributes[0].total_units' disabled required)
+					td.price-section
+						p.input-group
+							span.input-group-addon ₫
+							input.form-control(type='number', placeholder="{{ 'PURCHASE_PRICE' | translate }}", min='0' ng-model='row.med_batches_attributes[0].total_price' required)
+					td
+						p.text-center
+							button.btn.btn-danger(type='button', ng-click='vm.removeItem(row)')
+								i.glyphicon.glyphicon-remove

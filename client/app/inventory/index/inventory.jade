@@ -9,12 +9,12 @@ div(ng-include='"components/templates/navbar/navbar.html"')
             .col-md-8              
               .input-group
                 ui-select#medicine(ng-model='ic.selected_med' name='medicine' close-on-select='true' required style="width:100%")
-                    ui-select-match(placeholder="{{ 'SEARCH_FOR' | translate }}") {{$select.selected.itemable.name}}, {{$select.selected.itemable.concentration}} {{$select.selected.itemable.concentration_unit}}, {{$select.selected.itemable.manufacturer}}
+                    ui-select-match(placeholder="{{ 'SEARCH_FOR' | translate }}") {{$select.selected.itemable.name}}, {{$select.selected.itemable.concentration}} {{$select.selected.itemable.concentration_unit}}, {{$select.selected.itemable.manufacturer}}, {{$select.selected.itemable.mfg_location}}
                     ui-select-choices(repeat='data.itemable as data in ic.store_medicines | filter:$select.search' refresh='ic.searchMedicine($select.search)')                      
                       small
                         span
                           img.photo-search(ng-src="{{ data.photo_thumb.photo | resolve }}")                        
-                          | {{data.itemable.name}}, {{data.itemable.concentration}} {{data.itemable.concentration_unit}}, {{data.itemable.manufacturer}}
+                          | {{data.itemable.name}}, {{data.itemable.concentration}} {{data.itemable.concentration_unit}}, {{data.itemable.manufacturer}}, {{data.itemable.mfg_location}}
                   span.input-group-btn
                     button.btn.btn-default(type='button' ng-click="ic.gotoItem()") {{ 'SEARCH' | translate }} 
             .col-md-3.m-5-t

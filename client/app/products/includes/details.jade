@@ -38,11 +38,11 @@
           .col-sm-10
             input#mfg_location.form-control(type='text', placeholder="{{ 'MFG_LOCATION' | translate }}", ng-model='pc.medicine.mfg_location' required)
         .form-group
-          label.col-sm-2.control-label {{ 'SALE_PRICE' | translate }}
+          label.col-sm-2.control-label {{ 'PURCHASE_PRICE' | translate }}
           .col-sm-10
             .input-group
               span.input-group-addon ₫
-              input.form-control(type='number', placeholder="{{ 'SALE_PRICE' | translate }}", min='0' ng-model='pc.salePrice' required)
+              input.form-control(type='number', placeholder="{{ 'PURCHASE_PRICE' | translate }}", min='0' ng-model='pc.salePrice' required)
 
     .col-sm-12.m-5-t
       .form-group
@@ -66,9 +66,9 @@
         .col-sm-10
           input.form-control(type='text', placeholder="{{ 'PACKAGE' | translate }}", ng-model='pc.medicine.med_batches_attributes[0].package' required)    
       .form-group
-        label.col-sm-2.control-label {{ 'AMOUNT' | translate }}
+        label.col-sm-2.control-label {{ 'AMOUNT_PER_PACKAGE' | translate }}
         .col-sm-10
-          input.form-control(type='number', placeholder="{{ 'AMOUNT' | translate }}", min='0' ng-model='pc.medicine.med_batches_attributes[0].amount_per_pkg' ng-change="pc.updateTotalAmount()" required)
+          input.form-control(type='number', placeholder="{{ 'AMOUNT_PER_PACKAGE' | translate }}", min='0' ng-model='pc.medicine.med_batches_attributes[0].amount_per_pkg' ng-change="pc.updateTotalAmount()" required)
       .form-group
         label.col-sm-2.control-label {{ 'UNIT' | translate }}
         .col-sm-10
@@ -78,11 +78,11 @@
         .col-sm-10
           input.form-control(type='number', placeholder="{{ 'TOTAL' | translate }}", min='0' ng-model='pc.medicine.med_batches_attributes[0].total_units' disabled required)
       .form-group
-        label.col-sm-2.control-label {{ 'PRICE' | translate }}
+        label.col-sm-2.control-label {{ 'PURCHASE_PRICE' | translate }}
         .col-sm-10
           .input-group
             span.input-group-addon ₫
-            input.form-control(type='number', placeholder="{{ 'PRICE' | translate }}", min='0' ng-model='pc.medicine.med_batches_attributes[0].total_price' required)
+            input.form-control(type='number', placeholder="{{ 'PURCHASE_PRICE' | translate }}", min='0' ng-model='pc.medicine.med_batches_attributes[0].total_price' required)
       .form-group
         .col-sm-offset-2.col-sm-10.text-right
           button.btn.btn-primary(type='submit') {{ 'SAVE' | translate }}

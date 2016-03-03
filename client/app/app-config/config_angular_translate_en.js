@@ -92,7 +92,9 @@
       PROCESSING_IMAGE_TIMEOUT: 'Process Image Timeout',
       SUPPORT_IMAGE_FILE: 'Supported image file formats are: ',
       // Add product page
+      SELECT_USER: 'Select a user',
       ADD_PRODUCT_DETAIL: 'Fill in product information',
+      AMOUNT: 'Amount',
       AUTHOR: 'Author',
       NAME: 'Name',
       CONCENTRATION: 'Concentration',
@@ -103,10 +105,10 @@
       MANUFACTURE_DATE: 'Manufacture Date',
       EXPIRE_DATE: 'Expire Date',
       PACKAGE: 'Package',
-      AMOUNT: 'Amount / Package',
+      AMOUNT_PER_PACKAGE: 'Amount / Package',
       UNIT: 'Number of Packages',
       TOTAL: 'Total Amount',
-      PRICE: 'Price',
+      PURCHASE_PRICE: 'Purchase Price',
       SAVE: 'Save',
       AUTHOR_REQUIRED: 'Author is required',
       NAME_REQUIRED: 'Name is required',
@@ -145,7 +147,12 @@
       'Track your sales and purchases...': 'Track your sales and purchases...',
       'Effective Point of Sale...': 'Effective Point of Sale...',
       'Real time Price Control...': 'Real time Price Control...',
-      'FEATURES': 'Features'
+      'FEATURES': 'Features',
+      'NEW_PURCHASE_RECEIPT': 'New Purchases',
+      'DATE': 'Date',
+      'SEARCH_FOR_MEDICINE_TO_ADD': 'Search for medicine to supply',
+      'Enter the medicine name that needs to be supplied here': 'Enter the medicine name that needs to be supplied here',
+      'PURCHASE_RECEIPT': 'Purchase receipt'
     });
     $translateProvider.preferredLanguage('vi');
   }

@@ -90,7 +90,9 @@
       "Greens & Antioxidants": "Thực phẫm chức năng",
       'Mushrooms': 'Nấm',
       // Add product page
+      SELECT_USER: 'Chọn người làm',
       ADD_PRODUCT_DETAIL: 'Chi Tiết',
+      AMOUNT: 'Số Lượng',
       AUTHOR: 'Người lưu',
       NAME: 'Tên',
       CONCENTRATION: 'Cường Độ',
@@ -101,10 +103,10 @@
       MANUFACTURE_DATE: 'Ngày Sản Xuất',
       EXPIRE_DATE: 'Ngày Hết Hạn',
       PACKAGE: 'Cách Đóng Gói',
-      AMOUNT: 'Số lượng/Gói',
+      AMOUNT_PER_PACKAGE: 'Số lượng/Gói',
       UNIT: 'Số Gói',
       TOTAL: 'Tổng số lượng',
-      PRICE: 'Giá mua',
+      PURCHASE_PRICE: 'Giá mua',
       SAVE: 'Lưu Lại',
       AUTHOR_REQUIRED: 'Người lưu là mục cần thiết',
       NAME_REQUIRED: 'Tên là mục cần thiết',
@@ -143,7 +145,12 @@
       'Track your sales and purchases...': 'Theo dõi giao dịch mua bán...',
       'Effective Point of Sale...': 'Giao diện mua bán hiệu quả...',
       'Real time Price Control...': 'Quản lý giá thị trường live...',
-      'FEATURES': 'Chức năng'      
+      'FEATURES': 'Chức năng',
+      'NEW_PURCHASE_RECEIPT': 'Tạo đơn nhập',
+      'DATE': 'Ngày tháng',
+      'SEARCH_FOR_MEDICINE_TO_ADD': 'Tìm kiếm sản phẩm để nhập hàng',
+      'Enter the medicine name that needs to be supplied here': 'Vui lòng điền tên thuốc cần nhập dưới đây',
+      'PURCHASE_RECEIPT': 'Hoá đơn nhập'      
     });
   }
 

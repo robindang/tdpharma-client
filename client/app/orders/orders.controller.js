@@ -3,12 +3,13 @@
 angular.module('tdpharmaClientApp')
   .controller('OrdersCtrl', OrdersCtrl);
 
-OrdersCtrl.$inject = ['Receipt'];
+OrdersCtrl.$inject = ['Receipt', '$state'];
 
-function OrdersCtrl(Receipt) {
+function OrdersCtrl(Receipt, $state) {
 
   var ctrl = this;
   ctrl.getTotal = getTotal;
+  ctrl.toNewPurchase = toNewPurchase;
 
   ctrl.tabs = [
     { title:'Purchases', template:'app/orders/includes/purchases.html' },
@@ -33,5 +34,9 @@ function OrdersCtrl(Receipt) {
     Receipt.get().$promise.then(function(res) {
       ctrl.history = res.data;
     });
+  }
+
+  function toNewPurchase() {
+    $state.go('newPurchases');
   }
 }

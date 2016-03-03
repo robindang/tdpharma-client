@@ -9,4 +9,12 @@ angular.module('tdpharmaClientApp')
         controller: 'OrdersCtrl',
         controllerAs: 'oc'
       });
+  })
+  .config(function($stateProvider){
+  	$stateProvider.state('newPurchases', {
+  		url: '/purchases',
+  		templateUrl: 'app/orders/purchases/new_purchase.html',
+  		controller: 'newPurchaseCtrl',
+  		controllerAs: 'vm'
+  	});
   });
