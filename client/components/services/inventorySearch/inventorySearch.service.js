@@ -9,8 +9,6 @@ function InventorySearch($q, $filter, $timeout, $cookies, InventoryItem, Categor
   // Service logic
   // ...
 
-  var meaningOfLife = 42;
-
   // Public API here
   return {
     getPage: getPage

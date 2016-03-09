@@ -1,0 +1,35 @@
+table.table.table-striped(st-pipe='oc.getAdjustments', st-table='oc.adjustments')
+  thead
+    tr
+      th {{'DATE' | translate }}
+      th {{'NAME' | translate }}
+      th {{'CONCENTRATION' | translate}}
+      th {{'MANUFACTURER' | translate}}
+      th {{'AMOUNT' | translate }}
+      th {{'TOTAL' | translate }}
+  tbody(ng-show='oc.is_loading_adjustments')
+    tr(ng-repeat='item in oc.adjustments | orderBy:"-created_at"')
+      td {{item.created_at | amDateFormat:'lll'}}
+      td        
+        div.row(ng-repeat='t in item.transactions | limitTo: 5'){{t.adjust_item.itemable.name}}
+        div.row(ng-show='item.transactions.length > 5') ...
+      td 
+        div.row(ng-repeat='t in item.transactions | limitTo: 5'){{t.adjust_item.itemable.concentration}} {{t.adjust_item.itemable.concentration_unit}}
+        div.row(ng-show='item.transactions.length > 5') ...
+      td 
+        div.row(ng-repeat='t in item.transactions | limitTo: 5'){{t.adjust_item.itemable.manufacturer}}, {{t.adjust_item.itemable.mfg_location}}
+        div.row(ng-show='item.transactions.length > 5') ...
+      td
+        div.row(ng-repeat='t in item.transactions | limitTo: 5'){{t.amount}}      
+      td {{oc.getTotal(item) | currency }}
+  tbody(ng-show='!oc.is_loading_adjustments')
+    tr
+      td.text-center(colspan='2')
+        br
+        i.fa.fa-spinner.fa-spin.fa-lg
+        br
+        br
+  tfoot
+    tr
+      td.text-center(colspan='2')
+        div(st-items-by-page='25', st-pagination='', st-template='components/templates/pagination/pagination.html')  	

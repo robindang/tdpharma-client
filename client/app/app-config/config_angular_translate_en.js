@@ -152,7 +152,9 @@
       'DATE': 'Date',
       'SEARCH_FOR_MEDICINE_TO_ADD': 'Search for medicine to supply',
       'Enter the medicine name that needs to be supplied here': 'Enter the medicine name that needs to be supplied here',
-      'PURCHASE_RECEIPT': 'Purchase receipt'
+      'PURCHASE_RECEIPT': 'Purchases',
+      'SALE_RECEIPT': 'Sales',
+      'ADJUSTMENT_RECEIPT': 'Adjustments'
     });
     $translateProvider.preferredLanguage('vi');
   }

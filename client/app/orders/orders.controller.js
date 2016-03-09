@@ -3,36 +3,62 @@
 angular.module('tdpharmaClientApp')
   .controller('OrdersCtrl', OrdersCtrl);
 
-OrdersCtrl.$inject = ['Receipt', '$state'];
+OrdersCtrl.$inject = ['Receipt', '$state', '$filter', 'OrderSearch'];
 
-function OrdersCtrl(Receipt, $state) {
+function OrdersCtrl(Receipt, $state, $filter, OrderSearch) {
 
-  var ctrl = this;
-  ctrl.getTotal = getTotal;
+  var ctrl = this;  
   ctrl.toNewPurchase = toNewPurchase;
+  ctrl.getPurchases = getPurchases;
+  ctrl.getSales = getSales;
+  ctrl.getAdjustments = getAdjustments;
 
   ctrl.tabs = [
-    { title:'Purchases', template:'app/orders/includes/purchases.html' },
-    { title:'Sales', template:'app/orders/includes/sales.html' },
-    { title:'History', template:'app/orders/includes/history.html' }
+    { title: $filter('translate')('PURCHASE_RECEIPT'), template:'app/orders/includes/purchases.html', active: 'active' },
+    { title: $filter('translate')('SALE_RECEIPT'), template:'app/orders/includes/sales.html' },
+    { title: $filter('translate')('ADJUSTMENT_RECEIPT'), template:'app/orders/includes/adjustment.html' }
   ];
 
-  init();
+  function getPurchases(tableState) {
+    ctrl.is_loading_purchases = false;
+    var pagination = tableState.pagination;
+    var start = pagination.start || 0;     // This is NOT the page number, but the index of item in the list that you want to use to display the table.
+    var number = pagination.number || 10;  // Number of entries showed per page.
+    tableState.purchase = true;
 
-  function getTotal(receipt) {
-    if (receipt.receipt_type === 'purchase') return -receipt.total;
-    return receipt.total;
+    OrderSearch.getPage(start, number, tableState).then(function (result) {
+      ctrl.purchases = result.data;              
+      //set the number of pages so the pagination can update
+      tableState.pagination.numberOfPages = result.numberOfPages;
+      ctrl.is_loading_purchases = true;
+    });
   }
 
-  function init() {
-    Receipt.get({purchase: true}).$promise.then(function(res) {
-      ctrl.purchases = res.data;
+  function getSales(tableState) {
+    ctrl.is_loading_sales = false;
+    var pagination = tableState.pagination;
+    var start = pagination.start || 0;  // This is NOT the page number, but the index of item in the list that you want to use to display the table.
+    var number = pagination.number || 10; // Number of entries showed per page.
+    tableState.sale = true;
+    OrderSearch.getPage(start, number, tableState).then(function(result){
+      ctrl.sales = result.data;
+      //set the number of pages so the pagination can update
+      tableState.pagination.numberOfPages = result.numberOfPages;
+      ctrl.is_loading_sales = true;
     });
-    Receipt.get({sale: true}).$promise.then(function(res) {
-      ctrl.sales = res.data;
-    });
-    Receipt.get().$promise.then(function(res) {
-      ctrl.history = res.data;
+  }
+
+  function getAdjustments(tableState) {
+    ctrl.is_loading_adjustments = false;
+    var pagination = tableState.pagination;
+    var start = pagination.start || 0;  // This is NOT the page number, but the index of item in the list that you want to use to display the table.
+    var number = pagination.number || 10; // Number of entries showed per page.
+    tableState.adjustment = true;
+    OrderSearch.getPage(start, number, tableState).then(function(result){
+      ctrl.sales = result.data;
+      //set the number of pages so the pagination can update
+      tableState.pagination.numberOfPages = result.numberOfPages;
+      ctrl.is_loading_adjustments = true;
     });
   }
 
