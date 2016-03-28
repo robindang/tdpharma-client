@@ -11,16 +11,16 @@ table.table.table-striped(st-pipe='oc.getSales', st-table='oc.sales')
     tr(ng-repeat='sale in oc.sales | orderBy:"-created_at"')
       td {{sale.created_at | amDateFormat:'lll'}}
       td        
-        div.row(ng-repeat='t in sale.transactions | limitTo: 5'){{t.seller_item.itemable.name}}
+        div.row(ng-repeat='t in sale.transactions | limitTo: 5') {{t.seller_item.itemable.name}}
         div.row(ng-show='sale.transactions.length > 5') ...
       td 
-        div.row(ng-repeat='t in sale.transactions | limitTo: 5'){{t.seller_item.itemable.concentration}} {{t.seller_item.itemable.concentration_unit}}
+        div.row(ng-repeat='t in sale.transactions | limitTo: 5') {{t.seller_item.itemable.concentration}} {{t.seller_item.itemable.concentration_unit}}
         div.row(ng-show='sale.transactions.length > 5') ...
       td 
-        div.row(ng-repeat='t in sale.transactions | limitTo: 5'){{t.seller_item.itemable.manufacturer}}, {{t.seller_item.itemable.mfg_location}}
+        div.row(ng-repeat='t in sale.transactions | limitTo: 5') {{t.seller_item.itemable.manufacturer}}, {{t.seller_item.itemable.mfg_location}}
         div.row(ng-show='sale.transactions.length > 5') ...
       td
-        div.row(ng-repeat='t in sale.transactions | limitTo: 5'){{t.amount}}
+        div.row(ng-repeat='t in sale.transactions | limitTo: 5') {{t.amount}}
         div.row(ng-show='sale.transactions.length > 5') ...            
       td {{sale.total | currency }}
   tbody(ng-show='!oc.is_loading_sales')

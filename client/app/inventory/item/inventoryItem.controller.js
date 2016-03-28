@@ -13,7 +13,8 @@ function InventoryItemCtrl($location, $stateParams, $window, pharmacare, toastr,
 
   var ctrl = this;
   ctrl.APP_CONFIGURATION = APP_CONFIGURATION;
-  ctrl.pharmacare = pharmacare
+  ctrl.pharmacare = pharmacare;
+  ctrl.print = print;
 
   init();
 
@@ -51,6 +52,15 @@ function InventoryItemCtrl($location, $stateParams, $window, pharmacare, toastr,
     }
     ctrl.breadcrumbs = breadcrumbs;
   }
+
+  function print(batch) {
+    var divID = 'code-' + batch.id;
+    var printContents = document.getElementById(divID);
+    var popupWin = window.open('', '_blank');
+    popupWin.document.open();
+    popupWin.document.write("<html><head></head><body onload=\"window.print()\"><img src=\"" + printContents.src + "\"/></body></html>");
+    popupWin.document.close();
+} 
 
   function initMode() {
     var hash = $location.hash();

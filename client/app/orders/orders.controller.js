@@ -9,14 +9,15 @@ function OrdersCtrl(Receipt, $state, $filter, OrderSearch) {
 
   var ctrl = this;  
   ctrl.toNewPurchase = toNewPurchase;
+  ctrl.toOrder = toOrder;
   ctrl.getPurchases = getPurchases;
   ctrl.getSales = getSales;
   ctrl.getAdjustments = getAdjustments;
 
   ctrl.tabs = [
-    { title: $filter('translate')('PURCHASE_RECEIPT'), template:'app/orders/includes/purchases.html', active: 'active' },
-    { title: $filter('translate')('SALE_RECEIPT'), template:'app/orders/includes/sales.html' },
-    { title: $filter('translate')('ADJUSTMENT_RECEIPT'), template:'app/orders/includes/adjustment.html' }
+    { title: $filter('translate')('PURCHASES_RECEIPT'), template:'app/orders/includes/purchases.html', active: 'active' },
+    { title: $filter('translate')('SALES_RECEIPT'), template:'app/orders/includes/sales.html' },
+    { title: $filter('translate')('ADJUSTMENTS_RECEIPT'), template:'app/orders/includes/adjustment.html' }
   ];
 
   function getPurchases(tableState) {
@@ -64,5 +65,9 @@ function OrdersCtrl(Receipt, $state, $filter, OrderSearch) {
 
   function toNewPurchase() {
     $state.go('newPurchases');
+  }
+
+  function toOrder(order){
+    $state.go('orderItem', {id: order.id});
   }
 }

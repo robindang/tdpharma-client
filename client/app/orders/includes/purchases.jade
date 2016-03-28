@@ -10,19 +10,19 @@ table.table.table-striped(st-pipe='oc.getPurchases', st-table='oc.purchases')
       th {{'AMOUNT' | translate }}
       th {{'Price' | translate }}
   tbody(ng-show='oc.is_loading_purchases')
-    tr(ng-repeat='purchase in oc.purchases | orderBy:"-created_at"')
+    tr(ng-repeat='purchase in oc.purchases | orderBy:"-created_at"' ng-click='oc.toOrder(purchase)')
       td {{purchase.created_at | amDateFormat:'lll'}}
       td        
-        div.row(ng-repeat='t in purchase.transactions | limitTo: 5'){{t.buyer_item.itemable.name}}
+        div.row(ng-repeat='t in purchase.transactions | limitTo: 5') {{t.buyer_item.itemable.name}}
         div.row(ng-show='purchase.transactions.length > 5') ...
       td 
-        div.row(ng-repeat='t in purchase.transactions | limitTo: 5'){{t.buyer_item.itemable.concentration}} {{t.buyer_item.itemable.concentration_unit}}
+        div.row(ng-repeat='t in purchase.transactions | limitTo: 5') {{t.buyer_item.itemable.concentration}} {{t.buyer_item.itemable.concentration_unit}}
         div.row(ng-show='purchase.transactions.length > 5') ...
       td 
-        div.row(ng-repeat='t in purchase.transactions | limitTo: 5'){{t.buyer_item.itemable.manufacturer}}, {{t.buyer_item.itemable.mfg_location}}
+        div.row(ng-repeat='t in purchase.transactions | limitTo: 5') {{t.buyer_item.itemable.manufacturer}}, {{t.buyer_item.itemable.mfg_location}}
         div.row(ng-show='purchase.transactions.length > 5') ...
       td
-        div.row(ng-repeat='t in purchase.transactions | limitTo: 5'){{t.amount}}
+        div.row(ng-repeat='t in purchase.transactions | limitTo: 5') {{t.amount}}
         div.row(ng-show='purchase.transactions.length > 5') ...        
       td {{purchase.total | currency }}
   tbody(ng-show='!oc.is_loading_purchases')

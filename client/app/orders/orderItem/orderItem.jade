@@ -1,0 +1,23 @@
+div(ng-include='"components/templates/navbar/navbar.html"')
+
+.container
+	.row.text-right
+		.btn.btn-default(ng-click='vm.toOrders()' style='margin-top:20px')
+			i.fa.fa-long-arrow-left
+			| &nbsp;{{'BACK' | translate}} 
+	.row
+		.col-md-3.col-sm-3
+			io-barcode.m-20-t(code='{{vm.receipt.barcode}}' type='CODE128B' ng-if='vm.receipt.barcode')
+		.col-md-8.col-sm-8.col-md-offset-1.col-sm-offset-1
+			.col-xs-3
+				h3 {{ vm.receipt_type }}
+				h4 {{ 'DATE' | translate }}
+				h4 {{ 'Price' | translate }}
+			.col-xs-8
+				h3 {{vm.receipt.barcode}}
+				h4 {{vm.receipt.created_at | amDateFormat:'lll'}}
+				h4 {{vm.receipt.total | currency:vm.pharmacare.getCurrencySymbol}}
+	br
+	br
+	.row
+		div(ng-include="vm.item_view")		

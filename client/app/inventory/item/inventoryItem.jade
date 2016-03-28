@@ -62,7 +62,7 @@ div(ng-include='"components/templates/navbar/navbar.html"')
           label.col-sm-2.control-label {{ 'EXPIRE_DATE' | translate }}
           .col-sm-10
             p.input-group
-              input.form-control(type='text', placeholder="{{ 'EXPIRE_DATE' | translate }}", uib-datepicker-popup='{{iic.pharmacare.getDateFormat()}}', ng-model='iic.medicine.med_batches_attributes[0].expire_date', is-open='iic.expStatus[$index].opened', min-date='iic.maxDate', datepicker-options='iic.dateOptions', ng-required='true', close-text='Close', required='required')
+              input.form-control(type='text', placeholder="{{ 'EXPIRE_DATE' | translate }}", uib-datepicker-popup='{{iic.pharmacare.getDatePickerDateFormat()}}', ng-model='iic.medicine.med_batches_attributes[0].expire_date', is-open='iic.expStatus[$index].opened', min-date='iic.maxDate', datepicker-options='iic.dateOptions', ng-required='true', close-text='Close', required='required')
               span.input-group-btn
                 button.btn.btn-default(type='button', ng-click='iic.open("expStatus", $event, $index)')
                   i.glyphicon.glyphicon-calendar
@@ -99,12 +99,12 @@ div(ng-include='"components/templates/navbar/navbar.html"')
         | &nbsp;&nbsp;Collapse
       hr
       div.panel.panel-default#collapse0
-        div.panel-body
-          form.form-horizontal.col-md-6(ng-repeat='batch in iic.item.available_batches')
+        div.panel-body(ng-repeat='batch in iic.item.available_batches')
+          form.form-horizontal.col-md-8
             .form-group
               label.col-md-4.col-xs-5.control-label Barcode
               .col-md-8.col-xs-7
-                p.form-control-static {{batch.barcode}}            
+                p.form-control-static {{batch.barcode}}
             .form-group
               label.col-md-4.col-xs-5.control-label {{ 'TOTAL' | translate }}
               .col-md-8.col-xs-7
@@ -121,6 +121,9 @@ div(ng-include='"components/templates/navbar/navbar.html"')
               label.col-md-4.col-xs-5.control-label {{ 'EXPIRE_DATE' | translate }}
               .col-md-8.col-xs-7
                 p.form-control-static {{batch.expire_date}}
+          .col-md-4.text-center            
+            p
+              io-barcode(code='{{batch.barcode}}' type='CODE128B' id='code-{{batch.id}}' ng-click='iic.print(batch)')            
       .row
         .col-xs-12.text-right
           .btn.btn-danger(ng-show='iic.mode.isEditMode()' ng-click='iic.mode.setReadMode()') Cancel

@@ -1,0 +1,11 @@
+div.panel.panel-default(ng-repeat='t in vm.receipt.transactions')
+	div.panel-heading {{t.buyer_item.itemable.name}}
+	div.panel-body
+		.col-md-6.col-sm-6
+			label.col-md-4.col-xs-5.control-label Mfg Date
+			.col-md-8.col-xs-7
+				p {{t.med_batch.mfg_date}}
+		.col-md-6.col-sm-6
+			label.col-md-4.col-xs-5.control-label Barcode
+			.col-md-8.col-xs-7
+				p {{t.med_batch.barcode}}

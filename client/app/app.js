@@ -16,7 +16,9 @@ angular.module('tdpharmaClientApp', [
   'pascalprecht.translate',
   'ngFileUpload',
   'ngStorage',
-  'toastr'
+  'toastr',
+  'io-barcode',
+  'ngLocale'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

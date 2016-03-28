@@ -150,9 +150,13 @@
       'DATE': 'Ngày tháng',
       'SEARCH_FOR_MEDICINE_TO_ADD': 'Tìm kiếm sản phẩm để nhập hàng',
       'Enter the medicine name that needs to be supplied here': 'Vui lòng điền tên thuốc cần nhập dưới đây',
-      'PURCHASE_RECEIPT': 'Hoá đơn nhập',
-      'SALE_RECEIPT': 'Hoá đơn bán',
-      'ADJUSTMENT_RECEIPT': 'Hoá đơn chỉnh sửa'      
+      'PURCHASES_RECEIPT': 'Hoá đơn nhập',
+      'SALES_RECEIPT': 'Hoá đơn bán',
+      'ADJUSTMENTS_RECEIPT': 'Hoá đơn chỉnh sửa',
+      'BACK': 'Trở về',
+      'PURCHASE': 'Đơn nhập',
+      'SALE': 'Đơn bán',
+      'ADJUSTMENT': 'Đơn chỉnh sữa'      
     });
   }
 

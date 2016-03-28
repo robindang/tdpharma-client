@@ -51,7 +51,7 @@ div.col-sm-12.new-purchase
 							input.form-control(type='text', placeholder="{{ 'EXPIRE_DATE' | translate }}", uib-datepicker-popup='{{vm.pharmacare.getDatePickerDateFormat()}}', ng-model='row.med_batches_attributes[0].expire_date', is-open='vm.expStatus[$index].opened', min-date='vm.maxDate', datepicker-options='vm.dateOptions', ng-required='true', close-text='Close', required='required')
 							span.input-group-btn
 								button.btn.btn-default(type='button', ng-click='vm.open("expStatus", $event, $index)')
-									i.glyphicon.glyphicon-calendar					
+									i.glyphicon.glyphicon-calendar		
 					td.normal-section
 						p
 							input.form-control(type='text', placeholder="{{ 'PACKAGE' | translate }}", ng-model='row.med_batches_attributes[0].package' required)
@@ -59,7 +59,7 @@ div.col-sm-12.new-purchase
 						p
 							input.form-control(type='number', placeholder="{{ 'AMOUNT_PER_PACKAGE' | translate }}", min='0' ng-model='row.med_batches_attributes[0].amount_per_pkg' ng-change="vm.updateTotalAmount(row)" required)
 						p
-							input.form-control(type='number', placeholder="{{ 'UNIT' | translate }}", min='0' ng-model='row.med_batches_attributes[0].amount_unit' ng-change="vm.updateTotalAmount(row)" required)													
+							input.form-control(type='number', placeholder="{{ 'UNIT' | translate }}", min='0' ng-model='row.med_batches_attributes[0].amount_unit' ng-change="vm.updateTotalAmount(row)" required)						
 					td.number-section
 						p
 							input.form-control(type='number', placeholder="{{ 'TOTAL' | translate }}", min='0' ng-model='row.med_batches_attributes[0].total_units' disabled required)
