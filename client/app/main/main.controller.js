@@ -3,14 +3,14 @@
 angular.module('tdpharmaClientApp')
   .controller('MainCtrl', MainCtrl);
 
-MainCtrl.$inject = ['$filter'];
+MainCtrl.$inject = [];
 
-function MainCtrl($filter) {
+function MainCtrl() {
     
     var ctrl = this;
     ctrl.text = {
       company: 'Pharmaplus'
-    }
+    };
 
     ctrl.features = [
       {
@@ -39,4 +39,4 @@ function MainCtrl($filter) {
         name: '...'
       }];
 
-};
+}

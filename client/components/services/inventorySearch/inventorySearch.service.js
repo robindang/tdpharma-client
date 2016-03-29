@@ -3,9 +3,9 @@
 angular.module('tdpharmaClientApp')
   .factory('InventorySearch', InventorySearch);
 
-InventorySearch.$inject = ['$q', '$filter', '$timeout', '$cookies', 'InventoryItem', 'Category'];
+InventorySearch.$inject = ['$q', '$filter', '$timeout', '$cookies', 'InventoryItem'];
 
-function InventorySearch($q, $filter, $timeout, $cookies, InventoryItem, Category) {
+function InventorySearch($q, $filter, $timeout, $cookies, InventoryItem) {
   // Service logic
   // ...
 
@@ -22,9 +22,9 @@ function InventorySearch($q, $filter, $timeout, $cookies, InventoryItem, Categor
     number = 25;
     params = params || {};
     query.page = 1 + start / number;
-    if (params.categoryId) query.category_id = params.categoryId;
-    if (params.q) query.search = params.q;
-    if (params.inactive) query.inactive = true;
+    if (params.categoryId) {query.category_id = params.categoryId;}
+    if (params.q) {query.search = params.q;}
+    if (params.inactive) {query.inactive = true;}
     
     InventoryItem.get(query, function(obj) {        
       deferred.resolve({
@@ -37,4 +37,4 @@ function InventorySearch($q, $filter, $timeout, $cookies, InventoryItem, Categor
 
     return deferred.promise;
   }
-};
+}

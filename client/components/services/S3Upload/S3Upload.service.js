@@ -4,7 +4,7 @@
     .service('S3Upload', function ($q, toastr, $filter) {
     	var Upload = {
     		upload: upload
-    	}
+    	};
 
     	return Upload;
 

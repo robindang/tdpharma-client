@@ -3,9 +3,9 @@
 angular.module('tdpharmaClientApp')
   .controller('NavbarCtrl', NavbarCtrl);
 
-NavbarCtrl.$inject = ['$scope', '$location', '$translate', 'amMoment', 'pharmacare', 'Auth', '$localStorage'];
+NavbarCtrl.$inject = ['$scope', '$location', '$translate', 'amMoment', 'pharmacare', 'Auth'];
 
-function NavbarCtrl($scope, $location, $translate, amMoment, pharmacare, Auth, $storage) {
+function NavbarCtrl($scope, $location, $translate, amMoment, pharmacare, Auth) {
 
   var ctrl = this;
   ctrl.menu = [{

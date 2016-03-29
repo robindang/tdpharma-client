@@ -47,4 +47,4 @@ function OrderSearch($q, Receipt) {
 
     return deferred.promise;
   }
-};
+}

@@ -3,9 +3,9 @@
 angular.module('tdpharmaClientApp')
   .controller('InventoryCtrl', InventoryCtrl);
 
-InventoryCtrl.$inject = ['lodash', 'pharmacare', 'toastr', '$state', 'InventoryItem', 'InventorySearch', 'Medicine', 'APP_CONFIGURATION'];
+InventoryCtrl.$inject = ['lodash', 'pharmacare', 'toastr', '$state', 'InventoryItem', 'InventorySearch'];
 
-function InventoryCtrl(_, pharmacare, toastr, $state, InventoryItem, InventorySearch, Medicine, APP_CONFIG) {
+function InventoryCtrl(_, pharmacare, toastr, $state, InventoryItem, InventorySearch) {
 
   var ctrl = this;
   ctrl.displayed = [];
@@ -24,10 +24,10 @@ function InventoryCtrl(_, pharmacare, toastr, $state, InventoryItem, InventorySe
 
 
   function updateItemList() {      
-    if (ctrl.status == 'active') {
-      ctrl.displayed = _.filter(ctrl.raw, function(i){return i.status == 'active'});
-    } else if (ctrl.status == 'inactive') {
-      ctrl.displayed = _.filter(ctrl.raw, function(i){return i.status == 'inactive'});
+    if (ctrl.status === 'active') {
+      ctrl.displayed = _.filter(ctrl.raw, function(i){return i.status === 'active';});
+    } else if (ctrl.status === 'inactive') {
+      ctrl.displayed = _.filter(ctrl.raw, function(i){return i.status === 'inactive';});
     } else {
       ctrl.displayed = ctrl.raw;
     }
@@ -38,7 +38,7 @@ function InventoryCtrl(_, pharmacare, toastr, $state, InventoryItem, InventorySe
   }
 
   function searchMedicine(search_string, force) {
-    if ((search_string && search_string.length > 3) || force == true) {
+    if ((search_string && search_string.length > 3) || force === true) {
       InventorySearch.getPage(0, 25, {q: search_string}).then(function(resp){
         ctrl.store_medicines = resp.data;        
       }).catch(function(error){
@@ -77,8 +77,9 @@ function InventoryCtrl(_, pharmacare, toastr, $state, InventoryItem, InventorySe
     InventoryItem.update({id: item.id}, data).$promise.then(function(resp){
       item.sale_price = resp.data.sale_price;
     }, function(error){
-      if (error.data && error.data.data && error.data.data.errors)
+      if (error.data && error.data.data && error.data.data.errors) {
           toastr.error(error.data.data.errors);
-    })
+      }
+    });
   }
 }

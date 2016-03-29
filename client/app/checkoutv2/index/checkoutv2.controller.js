@@ -15,7 +15,7 @@ function Checkoutv2Ctrl($scope, $localStorage, $location, InventoryItem, toastr,
 
   var ctrl = this;
   ctrl.barcode = '';
-  ctrl.cart = $localStorage.cart || angular.copy(emptyCart)
+  ctrl.cart = $localStorage.cart || angular.copy(emptyCart);
   ctrl.addQuantity = addQuantity;
   ctrl.proceedToCheckout = proceedToCheckout;
   ctrl.removeProductFromCart = removeProductFromCart;
@@ -31,7 +31,7 @@ function Checkoutv2Ctrl($scope, $localStorage, $location, InventoryItem, toastr,
   }
   
   function addProductAndUpdateCart(barcode, product) {
-    if (!ctrl.cart.products[barcode]) ctrl.cart.products[barcode] = product;
+    if (!ctrl.cart.products[barcode]) {ctrl.cart.products[barcode] = product;}
     ctrl.cart.products[barcode].quantity = (ctrl.cart.products[barcode].quantity || 0) + 1;
     updateCartTotals();
     ctrl.barcode = '';
@@ -40,18 +40,18 @@ function Checkoutv2Ctrl($scope, $localStorage, $location, InventoryItem, toastr,
   function productAlreadyInCart(barcode) {
     var product = ctrl.cart.products[barcode];
     
-    if (!product) return null;
+    if (!product) {return null;}
     product.quantity = product.quantity + 1;
     updateCartTotals();
     return product;
   }
 
   function addProductToCart(barcode) {
-    if (!barcode) return;
-    if (productAlreadyInCart(barcode)) return;
+    if (!barcode) {return;}
+    if (productAlreadyInCart(barcode)) {return;}
     
     MedBatch.get({barcode: barcode}).$promise.then(function(x) {
-      if (!x.data.length) return;
+      if (!x.data.length) {return;}
       x = angular.copy(x.data[0]);
       InventoryItem.get({id: x.inventory_item.id}).$promise.then(function(y) {
         x.inventory_item = angular.copy(y.data);
@@ -83,7 +83,7 @@ function Checkoutv2Ctrl($scope, $localStorage, $location, InventoryItem, toastr,
   }
 
   function proceedToCheckout(cart) {
-    if (!cart.total) return toastr.warning('Please add items into the cart', 'Empty cart');
+    if (!cart.total) {return toastr.warning('Please add items into the cart', 'Empty cart');}
     $location.path('/checkout/confirm');
   }
 
@@ -112,7 +112,7 @@ function Checkoutv2Ctrl($scope, $localStorage, $location, InventoryItem, toastr,
     }
     if (e.which === 9) {
       e.preventDefault();
-      if (!e.shiftKey) proceedToCheckout(ctrl.cart);
+      if (!e.shiftKey) {proceedToCheckout(ctrl.cart);}
       return;
     }
     if (e.which === 39) {
@@ -124,7 +124,7 @@ function Checkoutv2Ctrl($scope, $localStorage, $location, InventoryItem, toastr,
       ctrl.barcode = '';
       return;
     }
-    if (!/[\d\w]/.test(s)) return;
+    if (!/[\d\w]/.test(s)) {return;}
     ctrl.barcode = ctrl.barcode + s;
   }
 

@@ -3,7 +3,7 @@
 angular.module('tdpharmaClientApp')
   .controller('CategoriesItemCtrl', CategoriesItemCtrl);
 
-CategoriesItemCtrl.$inject = ['$stateParams', 'DataHelper', 'InventorySearch']
+CategoriesItemCtrl.$inject = ['$stateParams', 'DataHelper', 'InventorySearch'];
 
 function CategoriesItemCtrl($stateParams, DataHelper, InventorySearch) {
   var ctrl = this;
@@ -26,7 +26,7 @@ function CategoriesItemCtrl($stateParams, DataHelper, InventorySearch) {
         function(next) {
           InventorySearch.getPage(0, 25, {categoryId:categoryId}).then(function(results) {
             ctrl.results = results;
-            next(null)
+            next(null);
           });
         }
       ], callback || function(){});

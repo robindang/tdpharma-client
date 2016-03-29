@@ -17,8 +17,8 @@ function CheckoutConfirmCtrl($scope, $localStorage, $location, _, toastr, Receip
   init();
 
   function checkout(cart, totalPaid) {
-    if (totalPaid < cart.total) return toastr.info('Please enter the total paid.', 'Total paid is less than cart total');
-    if (cart.isCheckedOut) return;
+    if (totalPaid < cart.total) {return toastr.info('Please enter the total paid.', 'Total paid is less than cart total');}
+    if (cart.isCheckedOut) {return;}
     cart.isCheckedOut = true;
     var o = {
       receipt: {
@@ -31,7 +31,7 @@ function CheckoutConfirmCtrl($scope, $localStorage, $location, _, toastr, Receip
             delivery_time: moment(),
             sale_user_id: 1,            
             total_price: item.quantity * item.inventory_item.sale_price.amount
-          }
+          };
         })
       }      
     };
@@ -55,15 +55,15 @@ function CheckoutConfirmCtrl($scope, $localStorage, $location, _, toastr, Receip
     cart.payment = angular.copy(payment);
     cart.date = new Date();
 
-    // save to database
-    Transactions.add(cart).then(function (res) {
+    //TODO: save to database, clear cart and start fresh
+    // Transactions.add(cart).then(function (res) {
 
-      // clear cart and start fresh
-      resetCart();
+    //   // clear cart and start fresh
+    //   resetCart();
       
-    });
+    // });
 
-    refreshInventory();
+    // refreshInventory();
   }
 
   function onKeydown(event, e) {
@@ -82,14 +82,14 @@ function CheckoutConfirmCtrl($scope, $localStorage, $location, _, toastr, Receip
     }
     if (e.which === 9) {
       e.preventDefault();
-      if (e.shiftKey) $location.path('/checkoutv2');
+      if (e.shiftKey) {$location.path('/checkoutv2');}
       return;
     }
-    if (e.which == 37) {
+    if (e.which === 37) {
       $location.path('/checkoutv2');
-      return
+      return;
     }
-    if (!/\d/.test(s)) return;
+    if (!/\d/.test(s)) {return;}
     ctrl.totalPaid = ctrl.totalPaid * 10 + parseInt(s);
   }
 
@@ -100,7 +100,7 @@ function CheckoutConfirmCtrl($scope, $localStorage, $location, _, toastr, Receip
 
   function initCart() {
     ctrl.cart = $localStorage.cart;
-    if (!ctrl.cart) $location.path('/checkoutv2');
+    if (!ctrl.cart) {$location.path('/checkoutv2');}
   }
 
   function initEvents() {

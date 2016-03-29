@@ -12,7 +12,7 @@ function CategoriesCtrl($location, $scope, _, Category) {
   init();
 
   function setActiveCategory(name, categories) {
-    if (categories.length) ctrl.activeCategory = categories[0];
+    if (categories.length) {ctrl.activeCategory = categories[0];}
     _.forEach(categories, function(category) {
       if (category.name.toLowerCase() === name.toLowerCase()) {
         ctrl.activeCategory = category;
@@ -26,7 +26,7 @@ function CategoriesCtrl($location, $scope, _, Category) {
     $scope.$on('hashchange', function($event, newHash) {
       setActiveCategory(newHash, ctrl.categories);
       $scope.$apply();
-    })
+    });
   }
 
   function initData() {
@@ -35,4 +35,4 @@ function CategoriesCtrl($location, $scope, _, Category) {
       setActiveCategory($location.hash(), ctrl.categories);
     });
   }
-};
+}

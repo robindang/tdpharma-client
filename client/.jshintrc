@@ -3,12 +3,12 @@
   "browser": true,
   "esnext": true,
   "bitwise": true,
-  "camelcase": true,
+  "camelcase": false,
   "curly": true,
   "eqeqeq": true,
   "immed": true,
   "indent": 2,
-  "latedef": true,
+  "latedef": "nofunc",
   "newcap": true,
   "noarg": true,
   "quotmark": "single",
@@ -33,6 +33,8 @@
     "expect": true,
     "browser": true,
     "element": true,
-    "by": true
+    "by": true,
+    "async": true,
+    "AWS": true
   }
 }

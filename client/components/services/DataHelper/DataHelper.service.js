@@ -7,9 +7,7 @@ DataHelper.$inject = ['$q', 'Category'];
 
 function DataHelper($q, Category) {
   // Service logic
-  // ...
-
-  var meaningOfLife = 42;
+  // ...  
 
   // Public API here
   return {
@@ -37,7 +35,7 @@ function DataHelper($q, Category) {
         var result = {};
           while (data.length) {
             var o = data.pop();
-            if (o.id in result) continue;
+            if (o.id in result) {continue;}
             result[o.id] = o;
             data = data.concat(o.children);
           }

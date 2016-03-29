@@ -15,7 +15,7 @@ angular.module('tdpharmaClientApp')
           form.password.$setValidity('mongoose', false);
           $scope.user.oldPassword = '';
           $scope.user.newPassword = '';
-          if  (resp.data && resp.data.data && resp.data.data.errors == 'Incorrect Password') {
+          if  (resp.data && resp.data.data && resp.data.data.errors === 'Incorrect Password') {
             toastr.error($filter('translate')('INCORRECT_PASSWORD'), $filter('translate')('TOASTR_SORRY'));
           }
         });

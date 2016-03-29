@@ -5,16 +5,17 @@ angular.module('tdpharmaClientApp')
 
 InventoryItemCtrl.$inject = [
   '$location', '$stateParams', '$window', 'pharmacare', 'toastr', 
-  'APP_CONFIGURATION', 'Auth', 'DataHelper', 'InventoryItem', 'Receipt'];
+  'APP_CONFIGURATION', 'Auth', 'DataHelper', 'InventoryItem'];
 
-function InventoryItemCtrl($location, $stateParams, $window, pharmacare, toastr, APP_CONFIGURATION, Auth, DataHelper, InventoryItem, Receipt) {
+function InventoryItemCtrl($location, $stateParams, $window, pharmacare, toastr, APP_CONFIGURATION, Auth, DataHelper, InventoryItem) {
   
   var async = $window.async;
 
   var ctrl = this;
   ctrl.APP_CONFIGURATION = APP_CONFIGURATION;
   ctrl.pharmacare = pharmacare;
-  ctrl.print = print;
+  ctrl.barcodePrint = barcodePrint;
+  ctrl.initBreadcrumbs = initBreadcrumbs;
 
   init();
 
@@ -27,8 +28,8 @@ function InventoryItemCtrl($location, $stateParams, $window, pharmacare, toastr,
         function(next) {
           InventoryItem.get($stateParams).$promise.then(function(item) {
             ctrl.item = item.data;
-            next(null, ctrl.item.category_id)
-          })    
+            next(null, ctrl.item.category_id);
+          });
         },
         function(categoryId, next) {
           DataHelper.getBreadcrumbs(categoryId).then(function(breadcrumbs) {
@@ -53,10 +54,11 @@ function InventoryItemCtrl($location, $stateParams, $window, pharmacare, toastr,
     ctrl.breadcrumbs = breadcrumbs;
   }
 
-  function print(batch) {
-    var divID = 'code-' + batch.id;
+  function barcodePrint(batch) {
+    /* jshint quotmark: true */
+    var divID = "code-" + batch.id;
     var printContents = document.getElementById(divID);
-    var popupWin = window.open('', '_blank');
+    var popupWin = window.open("", "_blank");
     popupWin.document.open();
     popupWin.document.write("<html><head></head><body onload=\"window.print()\"><img src=\"" + printContents.src + "\"/></body></html>");
     popupWin.document.close();
@@ -75,16 +77,16 @@ function InventoryItemCtrl($location, $stateParams, $window, pharmacare, toastr,
       setAddMode: __setter('add'),
       setEditMode: __setter('edit'),
       setReadMode: __setter('read')
-    }
+    };
 
-    function __getter(mode) {return function() {return __mode===mode}}
+    function __getter(mode) {return function() {return __mode===mode;};}
     function __setter(mode) {return function() {
-      if (__mode == 'edit') ctrl.item = angular.copy(__oldItem);
+      if (__mode === 'edit') {ctrl.item = angular.copy(__oldItem);}
       __mode = mode;
-      if (__mode == 'edit') __oldItem = angular.copy(ctrl.item);
-    }}
+      if (__mode === 'edit') {__oldItem = angular.copy(ctrl.item);}
+    };}
     function __save() {
-      if (__mode != 'edit') return;
+      if (__mode !== 'edit') {return;}
       ctrl.item.sale_price_attributes = ctrl.item.sale_price;
       InventoryItem.update({id: ctrl.item.id}, {inventory_item: ctrl.item});
       __mode = 'read';

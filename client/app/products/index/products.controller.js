@@ -28,7 +28,7 @@ function ProductsCtrl($cookies, $filter, $location, $scope, $timeout, $window, p
   };
   ctrl.loading = true;
   ctrl.updateUser = updateUser;
-  ctrl.open = open;
+  ctrl.open = openCalendar;
   ctrl.nextTab = nextTab;
   ctrl.pharmacare = pharmacare;
   ctrl.updateHash = updateHash;
@@ -46,10 +46,10 @@ function ProductsCtrl($cookies, $filter, $location, $scope, $timeout, $window, p
 
   function initActiveTab() {
     var hash = $location.hash().toLowerCase();
-    if (!hash) return;
+    if (!hash) {return;}
     _.each(ctrl.tabs, function(tab) {
-      if (tab.hash===hash && !tab.active) tab.active = true
-    })
+      if (tab.hash===hash && !tab.active) {tab.active = true;}
+    });
   }
 
   function initWatches() {
@@ -64,31 +64,30 @@ function ProductsCtrl($cookies, $filter, $location, $scope, $timeout, $window, p
   function initData(){    
     User.query().$promise.then(function(resp){
         ctrl.store_users = resp;
-        if (!ctrl.store_users.length) return;
+        if (!ctrl.store_users.length) {return;}
         ctrl.selected_user = ctrl.store_users[0];
         User.get().$promise.then(function(user) {
-          var users = ctrl.store_users.filter(function(x) {return x.id===user.id});
-          if (users.length) ctrl.selected_user = users[0];
-        })
+          var users = ctrl.store_users.filter(function(x) {return x.id===user.id;});
+          if (users.length) {ctrl.selected_user = users[0];}
+        });
     }).catch(function(err){
       toastr.error(err.data.data.errors, $filter('translate')('TOASTR_SORRY'));
     });
 
     Category.get({}, function(x) {
       ctrl.categories = x.data;
-      ctrl.selected = [ctrl.categories[0], ctrl.categories[0].children[0]]
-
+      ctrl.selected = [ctrl.categories[0], ctrl.categories[0].children[0]];
     });
 
     serverConfig.get({id: 'temp_amazon_s3'}).$promise.then(function(resp){
       ctrl.amazon_config = resp.data;
     }).catch(function(err){
       toastr.error(err.data.data.errors, $filter('translate')('TOASTR_SORRY'));
-    })
+    });
   }
 
   function updateUser(item){
-    if (!item) return;
+    if (!item) {return;}
     var resp = item;
     _.each(ctrl.medicine.med_batches_attributes, function(b){
       b.user_id = item.id;
@@ -96,7 +95,7 @@ function ProductsCtrl($cookies, $filter, $location, $scope, $timeout, $window, p
   }
 
   function nextTab() {
-    var idx = ctrl.tabs.findIndex(function(x) {return x.active});
+    var idx = ctrl.tabs.findIndex(function(x) {return x.active;});
     var tab = ctrl.tabs[idx+1];
     tab.active = true;
     tab.disabled = false;
@@ -150,7 +149,7 @@ function ProductsCtrl($cookies, $filter, $location, $scope, $timeout, $window, p
                 return callback(null, params);
               }).catch(function(error){
                 return callback({error: error});
-              })
+              });
             } else {
               callback(null, params);             // No image to processed so just return the same params
             }            
@@ -164,7 +163,7 @@ function ProductsCtrl($cookies, $filter, $location, $scope, $timeout, $window, p
             });
           },
           function(med, callback) {
-            if (!ctrl.salePrice) return callback(null, med);
+            if (!ctrl.salePrice) {return callback(null, med);}
             var o = {
               inventory_item: {
                 sale_price_attributes: {
@@ -193,12 +192,12 @@ function ProductsCtrl($cookies, $filter, $location, $scope, $timeout, $window, p
                     item = resp.data;                    
                   }).catch(function(error){                                                                                  
                     return cb(error.data.data.errors);
-                  })
+                  });
                   retry = retry - 1;
-                  if (retry == 0) {
+                  if (retry === 0) {
                     return cb($filter('translate')('PROCESSING_IMAGE_TIMEOUT'));
                   }
-                  $timeout(cb, 4000)
+                  $timeout(cb, 4000);
                 },
                 function(err) {
                   // Loop completed because of error    
@@ -223,7 +222,7 @@ function ProductsCtrl($cookies, $filter, $location, $scope, $timeout, $window, p
           toastr.error(err.error);
         }
         ctrl.loading = false;
-      })
+      });
     }
   }
 
@@ -288,10 +287,10 @@ function ProductsCtrl($cookies, $filter, $location, $scope, $timeout, $window, p
     return ok_flag;
   }
 
-  function open(status, $event, $index) {
+  function openCalendar(status, $event, $index) {
     ctrl[status] = ctrl[status] || [];
     ctrl[status][$index] = ctrl[status][$index] || {};
     ctrl[status][$index].opened = true;
-  };
+  }
 
 }

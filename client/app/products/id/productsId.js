@@ -6,13 +6,13 @@ angular.module('tdpharmaClientApp')
 ProductsIdCtrl.$inject = ['$stateParams', '$window', 'APP_CONFIGURATION', 'Medicine'];
 
 function ProductsIdCtrl($stateParams, $window, APP_CONFIGURATION, Medicine) {
-  console.log($stateParams)
+  console.log($stateParams);
   var async = $window.async;
 
   var ctrl = this;
   ctrl.APP_CONFIGURATION = APP_CONFIGURATION;
   ctrl.isReadOnly = true;
-  ctrl.goBack = goBack
+  ctrl.goBack = goBack;
 
   init();  
 
@@ -21,11 +21,12 @@ function ProductsIdCtrl($stateParams, $window, APP_CONFIGURATION, Medicine) {
         function(next) {
           Medicine.get($stateParams).$promise.then(function(medicine) {
             ctrl.medicine = medicine.data;
-            next(null)
+            next(null);
           });
         }
       ], function(err) {
         console.log(ctrl.medicine);
+        console.log(err);
       });
   }
 

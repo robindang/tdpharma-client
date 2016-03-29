@@ -16,6 +16,9 @@ function OrderItemCtrl(Receipt, $state, $stateParams, $filter, toastr, pharmacar
   function initData() {
     Receipt.get({id: $stateParams.id}).$promise.then(function(resp){
       vm.receipt = resp.data;
+      _.each(vm.receipt.transactions, function(t){
+        t.is_collapsed = false;
+      });
       switch(vm.receipt.receipt_type) {
         case 'purchase':
          vm.receipt_type = $filter('translate')('PURCHASE');
@@ -32,7 +35,7 @@ function OrderItemCtrl(Receipt, $state, $stateParams, $filter, toastr, pharmacar
       }      
     }, function(error){
       toastr.error(error.data.data.errors);
-    })
+    });
   }
 
   function toOrders(){

@@ -123,7 +123,7 @@ div(ng-include='"components/templates/navbar/navbar.html"')
                 p.form-control-static {{batch.expire_date}}
           .col-md-4.text-center            
             p
-              io-barcode(code='{{batch.barcode}}' type='CODE128B' id='code-{{batch.id}}' ng-click='iic.print(batch)')            
+              io-barcode(code='{{batch.barcode}}' type='CODE128B' id='code-{{batch.id}}' ng-click='iic.barcodePrint(batch)')            
       .row
         .col-xs-12.text-right
           .btn.btn-danger(ng-show='iic.mode.isEditMode()' ng-click='iic.mode.setReadMode()') Cancel

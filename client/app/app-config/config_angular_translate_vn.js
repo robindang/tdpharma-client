@@ -7,6 +7,8 @@
   angularTranslateConfig.$inject = ['$translateProvider'];
 
   function angularTranslateConfig($translateProvider) {
+
+      
     $translateProvider.translations('vi', {      
       GREETING: 'Allo, Allo!',
       LEADING_GREETING: 'Kích hoạt nhà thuốc của bạn với Pharmaplus',
@@ -51,7 +53,7 @@
       'Formula & Baby Food': 'Thức ăn của bé',
       'Feeding & Mealtime': 'Vật dụng ăn cho bé',
       'Baby Gear': 'An toàn của bé',
-      "Children's Medicine & Health": "Thuốc bệnh cho bé",
+      'Children\'s Medicine \& Health': 'Thuốc bệnh cho bé',
       'Bath & Body': 'Tắm rửa & Cơ thể',
       'Eye Cosmetics': 'Mỹ phẩm mắt',
       'Foundation, Blush & Bronzer': 'Phấn kem nền, má hồng, tạo khối',
@@ -80,14 +82,14 @@
       'Hemorrhoid & Piles Treatment': 'Điều trị trĩ cọc',
       'Diabetes': 'Tiểu đường',
       'Sleeping': 'Giấc ngũ',
-      "Women's Health": "Sức khoẻ phụ nữ",
+      'Women\'s Health': 'Sức khoẻ phụ nữ',
       'Multivitamins': 'Vitamin tổng hợp',
       'Calcium & Minerals': 'Calcium & Khoáng sản',
       'Fish Oils & Omegas': 'Dầu cá omega',
       'Enzymes': 'Enzymes',
       'Bee Supplements': 'Bổ dưỡng mật ong',
       'Vitamin': 'Vitamin',
-      "Greens & Antioxidants": "Thực phẫm chức năng",
+      'Greens & Antioxidants': 'Thực phẫm chức năng',
       'Mushrooms': 'Nấm',
       // Add product page
       SELECT_USER: 'Chọn người làm',
