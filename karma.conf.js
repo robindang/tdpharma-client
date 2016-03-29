@@ -35,6 +35,7 @@ module.exports = function(config) {
       'client/bower_components/angular-moment/angular-moment.js',
       'client/bower_components/odometer/odometer.js',
       'client/bower_components/angular-odometer-js/dist/angular-odometer.js',
+      'client/bower_components/angular-io-barcode/build/angular-io-barcode.js',
       'client/app/app.js',
       'client/app/app.coffee',
       'client/app/config.js',
