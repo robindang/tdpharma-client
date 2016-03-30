@@ -158,7 +158,15 @@
       'BACK': 'Trở về',
       'PURCHASE': 'Đơn nhập',
       'SALE': 'Đơn bán',
-      'ADJUSTMENT': 'Đơn chỉnh sữa'      
+      'ADJUSTMENT': 'Đơn chỉnh sữa',
+      'PAID': 'Đã trả tiền',
+      'FULFILL': 'Thi hành',
+      'PAY': 'Trả tiền',
+      'true': 'có',
+      'false': 'không',
+      'UPDATED_AT': 'Cập nhật lúc',
+      'CANCEL': 'Huỷ Bỏ',
+      'NOTE': 'Ghi chú'      
     });
   }
 

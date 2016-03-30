@@ -158,7 +158,15 @@
       'BACK': 'Back',
       'PURCHASE': 'Purchase',
       'SALE': 'Sale',
-      'ADJUSTMENT': 'Adjustment'
+      'ADJUSTMENT': 'Adjustment',
+      'PAID': 'Paid',
+      'FULFILL': 'Fulfill',
+      'PAY': 'Pay',
+      'true': 'true',
+      'false': 'false',
+      'UPDATED_AT': 'Updated At',
+      'CANCEL': 'Cancel',
+      'NOTE': 'Note'      
     });
     $translateProvider.preferredLanguage('vi');
   }

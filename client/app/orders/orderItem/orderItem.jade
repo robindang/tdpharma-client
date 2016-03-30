@@ -7,7 +7,7 @@ div(ng-include='"components/templates/navbar/navbar.html"')
 			| &nbsp;{{'BACK' | translate}} 
 	.row
 		.col-md-3.col-sm-3
-			io-barcode.m-20-t(code='{{vm.receipt.barcode}}' type='CODE128B' ng-if='vm.receipt.barcode')
+			io-barcode.m-20-t(code='{{vm.receipt.barcode}}' type='CODE128B' ng-if='vm.receipt.barcode' ng-click='vm.print(vm.receipt)' id='code-{{vm.receipt.barcode}}')
 		.col-md-8.col-sm-8.col-md-offset-1.col-sm-offset-1
 			.col-xs-3
 				h3 {{ vm.receipt_type }}
@@ -16,7 +16,7 @@ div(ng-include='"components/templates/navbar/navbar.html"')
 			.col-xs-8
 				h3 {{vm.receipt.barcode}}
 				h4 {{vm.receipt.created_at | amDateFormat:'lll'}}
-				h4 {{vm.receipt.total | currency:vm.pharmacare.getCurrencySymbol}}
+				h4 {{vm.receipt.total | currency}}
 	br
 	br
 	.row

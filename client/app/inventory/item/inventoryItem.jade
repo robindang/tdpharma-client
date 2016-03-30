@@ -10,18 +10,18 @@ div(ng-include='"components/templates/navbar/navbar.html"')
         .col-md-3.col-sm-3
           img(ng-src='{{iic.item.photo_thumb.photo | resolve}}' style='max-width:200px')
         .col-md-9.col-sm-9
-          .col-md-9.col-sm-7.col-xs-12
+          .col-md-6.col-sm-6.col-xs-12
             h3
               a(ng-href='/products/{{iic.item.itemable.id}}') {{iic.item.itemable.name}}
             h5 {{iic.item.itemable.manufacturer}}
-          .col-md-3.col-sm-5.hidden-xs.text-right
+          .col-md-6.col-sm-6.hidden-xs.text-right
             .btn.btn-default(ng-show='iic.mode.isReadMode()' ng-click='iic.mode.setAddMode()' style='margin-top:20px')
               i.fa.fa-plus
-              | &nbsp;Add
+              | &nbsp;{{'ADD_ITEM' | translate }}
             | &nbsp;&nbsp;
             .btn.btn-default(ng-show='iic.mode.isReadMode()' ng-click='iic.mode.setEditMode()' style='margin-top:20px')
               i.fa.fa-pencil
-              | &nbsp;Edit
+              | &nbsp;{{'EDIT' | translate }}
           .col-xs-12
             hr
             .form-inline
@@ -46,7 +46,7 @@ div(ng-include='"components/templates/navbar/navbar.html"')
                   label.control-label.col-sm-3 {{ 'MFG_LOCATION' | translate }}
                   .col-sm-9
                     p.form-control-static {{iic.item.itemable.mfg_location}}
-                  label.control-label.col-sm-3 Quantity
+                  label.control-label.col-sm-3 {{ 'TOTAL' | translate }}
                   .col-sm-9
                     p.form-control-static {{iic.item.amount | number}}
       form.form-horizontal(ng-show='iic.mode.isAddMode()')
@@ -106,7 +106,7 @@ div(ng-include='"components/templates/navbar/navbar.html"')
               .col-md-8.col-xs-7
                 p.form-control-static {{batch.barcode}}
             .form-group
-              label.col-md-4.col-xs-5.control-label {{ 'TOTAL' | translate }}
+              label.col-md-4.col-xs-5.control-label {{ 'QUANTITY' | translate }}
               .col-md-8.col-xs-7
                 p.form-control-static {{batch.total_units | number}}            
             .form-group
@@ -123,7 +123,7 @@ div(ng-include='"components/templates/navbar/navbar.html"')
                 p.form-control-static {{batch.expire_date}}
           .col-md-4.text-center            
             p
-              io-barcode(code='{{batch.barcode}}' type='CODE128B' id='code-{{batch.id}}' ng-click='iic.barcodePrint(batch)')            
+              io-barcode(code='{{batch.barcode}}' type='CODE128B' id='code-{{batch.barcode}}' ng-click='iic.barcodePrint(batch)')            
       .row
         .col-xs-12.text-right
           .btn.btn-danger(ng-show='iic.mode.isEditMode()' ng-click='iic.mode.setReadMode()') Cancel

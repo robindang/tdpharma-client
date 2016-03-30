@@ -1,7 +1,7 @@
 div(ng-include='"components/templates/navbar/navbar.html"')
 
 div.col-sm-12.new-purchase
-	.col-md-8
+	.col-md-10
 		p.col-md-12 {{ 'Enter the medicine name that needs to be supplied here' | translate }}
 		.form-group
 			.col-md-8
@@ -14,12 +14,12 @@ div.col-sm-12.new-purchase
 								| {{data.itemable.name}}, {{data.itemable.concentration}} {{data.itemable.concentration_unit}}, {{data.itemable.manufacturer}}, {{data.itemable.mfg_location}}					
 		
 		.form-group.m-10-t.col-md-8(ng-show='vm.item_list.length > 0')
-			label.col-md-2.control-label(for='user') {{ 'AUTHOR' | translate }}
+			label.col-md-2.m-10-t.control-label(for='user') {{ 'AUTHOR' | translate }}
 			.col-md-10
 				ui-select#user(ng-model='vm.selected_user' name='author' close-on-select='true' required)
 					ui-select-match(placeholder="{{ 'SELECT_USER' | translate }}") {{$select.selected.first_name}} {{$select.selected.last_name}}
 					ui-select-choices(repeat='data in vm.store_users | filter:$select.search') {{data.first_name}} {{data.last_name}}
-	.col-md-4
+	.col-md-2
 		button.btn.m-20-t.pull-right.btn-primary.btn-lg(ng-click='vm.savePurchase()') {{'SAVE' | translate}}
 	.col-md-12.m-10-t
 		table.table.table-striped(ng-show='vm.item_list.length > 0')

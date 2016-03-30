@@ -51,6 +51,15 @@ function pharmacare($filter, $storage, $translate, $window, $locale, amMoment) {
     getCurrencySymbol: function(){
       var locale = $storage.locale || $translate.use();
       return ((locale === 'vi') ? 'đ ' : '$ ');       
-    }
+    },
+    barcodePrint: function(item) {
+      /* jshint quotmark: true */
+      var divID = "code-" + item.barcode;
+      var printContents = document.getElementById(divID);
+      var popupWin = window.open("", "_blank");
+      popupWin.document.open();
+      popupWin.document.write("<html><head></head><body onload=\"window.print()\"><img src=\"" + printContents.src + "\"/></body></html>");
+      popupWin.document.close();
+    } 
   };
 }
