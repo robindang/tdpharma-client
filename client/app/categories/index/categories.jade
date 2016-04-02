@@ -6,8 +6,7 @@ div(ng-include='"components/templates/navbar/navbar.html"')
       ul(ng-repeat='category in cc.categories')
         li
           a(ng-href='/categories#{{category.name}}')
-            | {{category.name}}&nbsp;&nbsp;
-            span.badge {{category.children_count}}
+            | {{category.name}}&nbsp;&nbsp;            
           ul(ng-repeat='subcategory in category.children', ng-show='cc.activeCategory===category')
             li
               a(ng-href='/categories/{{subcategory.id}}') {{subcategory.name}}

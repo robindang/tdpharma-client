@@ -106,9 +106,11 @@
       EXPIRE_DATE: 'Ngày Hết Hạn',
       PACKAGE: 'Cách Đóng Gói',
       AMOUNT_PER_PACKAGE: 'Số lượng/Gói',
-      UNIT: 'Số Gói',
+      NUM_PACKAGE: 'Số Gói',
+      UNIT: 'Đơn vị',
       TOTAL: 'Tổng số lượng',
       PURCHASE_PRICE: 'Giá mua',
+      SALE_PRICE: 'Giá bán',      
       SAVE: 'Lưu Lại',
       AUTHOR_REQUIRED: 'Người lưu là mục cần thiết',
       NAME_REQUIRED: 'Tên là mục cần thiết',
@@ -120,7 +122,7 @@
       EXPIRE_DATE_REQUIRED: 'Ngày hết hạn là mục cần thiết',
       PACKAGE_REQUIRED: 'Cách đóng gói là mục cần thiết',
       AMOUNT_PER_PKG_REQUIRED: 'Số lượng/Gói là mục cần thiết',
-      AMOUNT_UNIT_REQUIRED: 'Số gói là mục cần thiết',
+      NUM_PACKAGE_REQUIRED: 'Số gói là mục cần thiết',
       TOTAL_UNITS_REQUIRED: 'Tổng số lượng là mục cần thiết',
       PRICE_REQUIRED: 'Giá mua là mục cần thiết',
       CATEGORY_REQUIRED: 'Thể loại là mục cần thiết. Xin quay lại chọn thể loại',
@@ -160,13 +162,19 @@
       'SALE': 'Đơn bán',
       'ADJUSTMENT': 'Đơn chỉnh sữa',
       'PAID': 'Đã trả tiền',
-      'FULFILL': 'Thi hành',
+      'FULFILL': 'Hoàn thành',
       'PAY': 'Trả tiền',
       'true': 'có',
       'false': 'không',
       'UPDATED_AT': 'Cập nhật lúc',
       'CANCEL': 'Huỷ Bỏ',
-      'NOTE': 'Ghi chú'      
+      'NOTE': 'Ghi chú / Giải thích',
+      'DELETE': 'Xoá Bỏ',
+      'EXPLANATION_REQUIRED': 'Ghi chú là mục cần thiết',
+      'DUE_DATE': 'Ngày trả tiền',
+      'DUE_DATE_REQUIRED': 'Ngày trả tiền là mục cần thiết',
+      'DELIVERY_DATE': 'Ngày giao hàng',
+      'DELIVERY_DATE_REQUIRED': 'Ngày giao hàng là mục cần thiết'            
     });
   }
 

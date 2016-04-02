@@ -16,6 +16,7 @@ function InventoryItemCtrl($location, $stateParams, $window, pharmacare, toastr,
   ctrl.pharmacare = pharmacare;
   ctrl.barcodePrint = pharmacare.barcodePrint;
   ctrl.initBreadcrumbs = initBreadcrumbs;
+  ctrl.updateTotalAmount = updateTotalAmount;
 
   init();
 
@@ -42,6 +43,12 @@ function InventoryItemCtrl($location, $stateParams, $window, pharmacare, toastr,
           next(null);
         }
       ], callback || function(){});
+  }
+
+  function updateTotalAmount() {
+    if (ctrl.medicine.med_batches_attributes[0].amount_per_pkg && ctrl.medicine.med_batches_attributes[0].number_pkg) {
+      ctrl.medicine.med_batches_attributes[0].total_units = ctrl.medicine.med_batches_attributes[0].amount_per_pkg * ctrl.medicine.med_batches_attributes[0].number_pkg;
+    }
   }
 
   function initBreadcrumbs(categoryId) {

@@ -1,6 +1,6 @@
 div(ng-include='"components/templates/navbar/navbar.html"')
 
-.container
+.col-sm-12
   .row
     .col-md-12
       ul.breadcrumb
@@ -14,4 +14,4 @@ div(ng-include='"components/templates/navbar/navbar.html"')
           .caption
             h3 {{item.itemable.name}}
             h5 {{item.itemable.manufacturer}}
-            p $1.00
+            p {{item.sale_price.amount | currency:undefined:0 }}

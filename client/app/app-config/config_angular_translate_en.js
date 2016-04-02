@@ -106,9 +106,11 @@
       EXPIRE_DATE: 'Expire Date',
       PACKAGE: 'Package',
       AMOUNT_PER_PACKAGE: 'Amount / Package',
-      UNIT: 'Number of Packages',
+      NUM_PACKAGE: 'Number of Packages',
+      UNIT: 'Unit',
       TOTAL: 'Total Amount',
       PURCHASE_PRICE: 'Purchase Price',
+      SALE_PRICE: 'Sale Price',
       SAVE: 'Save',
       AUTHOR_REQUIRED: 'Author is required',
       NAME_REQUIRED: 'Name is required',
@@ -120,7 +122,7 @@
       EXPIRE_DATE_REQUIRED: 'Expiration date is required',
       PACKAGE_REQUIRED: 'Package is required',
       AMOUNT_PER_PKG_REQUIRED: 'amount per package is required',
-      AMOUNT_UNIT_REQUIRED: 'Number of packages is required',
+      NUM_PACKAGE_REQUIRED: 'Number of packages is required',
       TOTAL_UNITS_REQUIRED: 'Total amount is required',
       PRICE_REQUIRED: 'Price is requried',
       CATEGORY_REQUIRED: 'Category is requried',
@@ -166,7 +168,13 @@
       'false': 'false',
       'UPDATED_AT': 'Updated At',
       'CANCEL': 'Cancel',
-      'NOTE': 'Note'      
+      'NOTE': 'Note',
+      'DELETE': 'Delete',
+      'EXPLANATION_REQUIRED': 'Explanation is requried',
+      'DUE_DATE': 'Due Date',
+      'DUE_DATE_REQUIRED': 'Due date is required',
+      'DELIVERY_DATE': 'Deliver Date',
+      'DELIVERY_DATE_REQUIRED': 'Deliver date is required'      
     });
     $translateProvider.preferredLanguage('vi');
   }

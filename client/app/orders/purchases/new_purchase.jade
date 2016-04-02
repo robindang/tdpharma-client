@@ -59,7 +59,7 @@ div.col-sm-12.new-purchase
 						p
 							input.form-control(type='number', placeholder="{{ 'AMOUNT_PER_PACKAGE' | translate }}", min='0' ng-model='row.med_batches_attributes[0].amount_per_pkg' ng-change="vm.updateTotalAmount(row)" required)
 						p
-							input.form-control(type='number', placeholder="{{ 'UNIT' | translate }}", min='0' ng-model='row.med_batches_attributes[0].amount_unit' ng-change="vm.updateTotalAmount(row)" required)
+							input.form-control(type='number', placeholder="{{ 'NUM_PACKAGE' | translate }}", min='0' ng-model='row.med_batches_attributes[0].number_pkg' ng-change="vm.updateTotalAmount(row)" required)
 					td.number-section
 						p
 							input.form-control(type='number', placeholder="{{ 'TOTAL' | translate }}", min='0' ng-model='row.med_batches_attributes[0].total_units' disabled required)

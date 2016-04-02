@@ -9,5 +9,7 @@ function Receipt($resource, APP_CONFIG) {
   return $resource(APP_CONFIG.API_V1_URL+'receipts/:id/:controller', {
     id: '@_id',
     format: 'json'
+  }, {
+    'update': { method:'PUT' }
   });
 }

@@ -66,8 +66,8 @@
     }
 
     function updateTotalAmount(item) {
-      if (item.med_batches_attributes[0].amount_per_pkg && item.med_batches_attributes[0].amount_unit) {
-        item.med_batches_attributes[0].total_units = item.med_batches_attributes[0].amount_per_pkg * item.med_batches_attributes[0].amount_unit;
+      if (item.med_batches_attributes[0].amount_per_pkg && item.med_batches_attributes[0].number_pkg) {
+        item.med_batches_attributes[0].total_units = item.med_batches_attributes[0].amount_per_pkg * item.med_batches_attributes[0].number_pkg;
       }
     }
 
@@ -101,8 +101,8 @@
         toastr.error(item.itemable.name + ' ' + $filter('translate')('AMOUNT_PER_PKG_REQUIRED')); 
         return false;
       }
-      if (!item.med_batches_attributes[0].amount_unit) {
-        toastr.error(item.itemable.name + ' ' + $filter('translate')('AMOUNT_UNIT_REQUIRED'));
+      if (!item.med_batches_attributes[0].number_pkg) {
+        toastr.error(item.itemable.name + ' ' + $filter('translate')('NUM_PACKAGE_REQUIRED'));
         return false;
       }
       if (!item.med_batches_attributes[0].total_units) {

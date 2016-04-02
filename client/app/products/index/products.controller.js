@@ -102,8 +102,8 @@ function ProductsCtrl($cookies, $filter, $location, $scope, $timeout, $window, p
   }
 
   function updateTotalAmount() {
-    if (ctrl.medicine.med_batches_attributes[0].amount_per_pkg && ctrl.medicine.med_batches_attributes[0].amount_unit) {
-      ctrl.medicine.med_batches_attributes[0].total_units = ctrl.medicine.med_batches_attributes[0].amount_per_pkg * ctrl.medicine.med_batches_attributes[0].amount_unit;
+    if (ctrl.medicine.med_batches_attributes[0].amount_per_pkg && ctrl.medicine.med_batches_attributes[0].number_pkg) {
+      ctrl.medicine.med_batches_attributes[0].total_units = ctrl.medicine.med_batches_attributes[0].amount_per_pkg * ctrl.medicine.med_batches_attributes[0].number_pkg;
     }
   }
 
@@ -272,8 +272,8 @@ function ProductsCtrl($cookies, $filter, $location, $scope, $timeout, $window, p
       toastr.error($filter('translate')('AMOUNT_PER_PKG_REQUIRED')); 
       ok_flag = false;
     }
-    if (ok_flag && !ctrl.medicine.med_batches_attributes[0].amount_unit) {
-      toastr.error($filter('translate')('AMOUNT_UNIT_REQUIRED'));
+    if (ok_flag && !ctrl.medicine.med_batches_attributes[0].number_pkg) {
+      toastr.error($filter('translate')('NUM_PACKAGE_REQUIRED'));
       ok_flag = false;
     }
     if (ok_flag && !ctrl.medicine.med_batches_attributes[0].total_units) {

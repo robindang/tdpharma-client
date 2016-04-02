@@ -1,6 +1,6 @@
 div(ng-include='"components/templates/navbar/navbar.html"')
 
-.container
+.col-sm-12
   .row
     .col-md-12
       ul.breadcrumb
@@ -8,7 +8,7 @@ div(ng-include='"components/templates/navbar/navbar.html"')
           a(ng-href='{{breadcrumb.link}}') {{breadcrumb.name}}
       .row
         .col-md-3.col-sm-3
-          img(ng-src='{{iic.item.photo_thumb.photo | resolve}}' style='max-width:200px')
+          img(ng-src='{{iic.item.image.photo_medium | resolve}}' style='max-width:250px')
         .col-md-9.col-sm-9
           .col-md-6.col-sm-6.col-xs-12
             h3
@@ -69,25 +69,25 @@ div(ng-include='"components/templates/navbar/navbar.html"')
         .form-group
           label.col-sm-2.control-label {{ 'PACKAGE' | translate }}
           .col-sm-10
-            input.form-control(type='text', placeholder="{{ 'PACKAGE' | translate }}", ng-model='pc.medicine.med_batches_attributes[0].package' required)    
+            input.form-control(type='text', placeholder="{{ 'PACKAGE' | translate }}", ng-model='iic.medicine.med_batches_attributes[0].package' required)    
         .form-group
           label.col-sm-2.control-label {{ 'AMOUNT_PER_PACKAGE' | translate }}
           .col-sm-10
-            input.form-control(type='number', placeholder="{{ 'AMOUNT_PER_PACKAGE' | translate }}", min='0' ng-model='pc.medicine.med_batches_attributes[0].amount_per_pkg' ng-change="pc.updateTotalAmount()" required)
+            input.form-control(type='number', placeholder="{{ 'AMOUNT_PER_PACKAGE' | translate }}", min='0' ng-model='iic.medicine.med_batches_attributes[0].amount_per_pkg' ng-change="iic.updateTotalAmount()" required)
         .form-group
-          label.col-sm-2.control-label {{ 'UNIT' | translate }}
+          label.col-sm-2.control-label {{ 'NUM_PACKAGE' | translate }}
           .col-sm-10
-            input.form-control(type='number', placeholder="{{ 'UNIT' | translate }}", min='0' ng-model='pc.medicine.med_batches_attributes[0].amount_unit' ng-change="pc.updateTotalAmount()" required)
+            input.form-control(type='number', placeholder="{{ 'NUM_PACKAGE' | translate }}", min='0' ng-model='iic.medicine.med_batches_attributes[0].number_pkg' ng-change="iic.updateTotalAmount()" required)
         .form-group
           label.col-sm-2.control-label {{ 'TOTAL' | translate }}
           .col-sm-10
-            input.form-control(type='number', placeholder="{{ 'TOTAL' | translate }}", min='0' ng-model='pc.medicine.med_batches_attributes[0].total_units' disabled required)
+            input.form-control(type='number', placeholder="{{ 'TOTAL' | translate }}", min='0' ng-model='iic.medicine.med_batches_attributes[0].total_units' disabled required)
         .form-group
           label.col-sm-2.control-label {{ 'PURCHASE_PRICE' | translate }}
           .col-sm-10
             .input-group
               span.input-group-addon ₫
-              input.form-control(type='number', placeholder="{{ 'PURCHASE_PRICE' | translate }}", min='0' ng-model='pc.medicine.med_batches_attributes[0].total_price' required)
+              input.form-control(type='number', placeholder="{{ 'PURCHASE_PRICE' | translate }}", min='0' ng-model='iic.medicine.med_batches_attributes[0].total_price' required)
         .col-xs-12.text-right
           .btn.btn-danger(ng-show='iic.mode.isAddMode()' ng-click='iic.mode.setReadMode()') Cancel
           | &nbsp;&nbsp;

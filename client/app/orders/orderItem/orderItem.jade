@@ -16,7 +16,7 @@ div(ng-include='"components/templates/navbar/navbar.html"')
 			.col-xs-8
 				h3 {{vm.receipt.barcode}}
 				h4 {{vm.receipt.created_at | amDateFormat:'lll'}}
-				h4 {{vm.receipt.total | currency}}
+				h4 {{vm.receipt.total | currency:undefined:0}}
 	br
 	br
 	.row
