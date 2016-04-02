@@ -206,8 +206,7 @@ function OrderItemCtrl(Receipt, $state, $stateParams, $filter, toastr, pharmacar
     if (vm.receipt.receipt_type == 'purchase' && vm.edit_transaction.transaction_type === 'purchase') {
       var t = {
         id: transaction.id,
-        amount: vm.edit_transaction.amount,
-        amount: vm.edit_transaction.amount,
+        amount: vm.edit_transaction.amount,        
         performed: vm.edit_transaction.performed,
         delivery_time: vm.edit_transaction.delivery_time,
         paid: vm.edit_transaction.paid,
