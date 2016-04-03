@@ -11,8 +11,25 @@ function InventorySearch($q, $filter, $timeout, $cookies, InventoryItem) {
 
   // Public API here
   return {
-    getPage: getPage
+    getPage: getPage,
+    getItemPage: getItemPage,
   };
+
+  function getItemPage(item) {
+    var deferred = $q.defer();
+    var query = {};
+    var number = 25;
+    query.inventory_id = item.id;
+    InventoryItem.get(query, function(objs){
+      deferred.resolve({
+        data: objs.data.items,
+        numberOfPages: Math.ceil(objs.data.total_count / number),
+        numberOfResults: objs.data.total_count,
+        current_page: objs.data.page
+      });
+    })
+    return deferred.promise;
+  }
 
   function getPage(start, number, params) {
 
@@ -30,7 +47,8 @@ function InventorySearch($q, $filter, $timeout, $cookies, InventoryItem) {
       deferred.resolve({
         data: obj.data.items,
         numberOfPages: Math.ceil(obj.data.total_count / number),
-        numberOfResults: obj.data.total_count
+        numberOfResults: obj.data.total_count,
+        current_page: obj.data.page
       });
     });
 

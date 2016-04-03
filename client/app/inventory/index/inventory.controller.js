@@ -18,10 +18,10 @@ function InventoryCtrl(_, pharmacare, toastr, $state, InventoryItem, InventorySe
   ctrl.updateItemList = updateItemList;
   ctrl.searchMedicine = searchMedicine;
   ctrl.gotoItem = gotoItem;
-  ctrl.updatePrice = updatePrice;
+  ctrl.updatePrice = updatePrice;  
+  ctrl.openItemPage = openItemPage;
 
   searchMedicine(null, true);
-
 
   function updateItemList() {      
     if (ctrl.status === 'active') {
@@ -35,7 +35,7 @@ function InventoryCtrl(_, pharmacare, toastr, $state, InventoryItem, InventorySe
 
   function gotoItem() {    
     $state.go('inventoryItem', {id: ctrl.selected_med.id});
-  }
+  }  
 
   function searchMedicine(search_string, force) {
     if ((search_string && search_string.length > 3) || force === true) {
@@ -45,6 +45,22 @@ function InventoryCtrl(_, pharmacare, toastr, $state, InventoryItem, InventorySe
         toastr.error(error.data.data.errors);
       });
     }      
+  }    
+
+  function openItemPage(item) {
+    ctrl.isLoading = true;
+
+    InventorySearch.getItemPage(ctrl.selected_med).then(function(result){
+      ctrl.raw = result.data;        
+      ctrl.numberOfResults = result.numberOfResults;
+      //set the number of pages so the pagination can update
+      ctrl.tableState.pagination.numberOfPages = result.numberOfPages;
+      ctrl.tableState.pagination.start = (result.current_page-1) * 25
+      ctrl.isLoading = false;      
+      updateItemList();
+    }).catch(function(error){
+      toastr.error(error.data.data.errors);
+    });
   }
 
   function callServer(tableState) {
@@ -62,6 +78,7 @@ function InventoryCtrl(_, pharmacare, toastr, $state, InventoryItem, InventorySe
       //set the number of pages so the pagination can update
       tableState.pagination.numberOfPages = result.numberOfPages;
       ctrl.isLoading = false;
+      ctrl.tableState = tableState;
       updateItemList();
     });
   }

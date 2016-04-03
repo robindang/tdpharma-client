@@ -36,6 +36,14 @@ function ProductsCtrl($cookies, $filter, $location, $scope, $timeout, $window, p
   ctrl.uploadImage = uploadImage;
   ctrl.saveDirectUpload = saveDirectUpload;
 
+  // local methods
+  var init = init;
+  var initActiveTab = initActiveTab;
+  var initWatches = initWatches;
+  var initData = initData;  
+  var finishSuccess = finishSuccess;
+  var validateForm = validateForm;
+
   init();
   
   function init() {

@@ -16,7 +16,7 @@ div(ng-include='"components/templates/navbar/navbar.html"')
                           img.photo-search(ng-src="{{ data.photo_thumb.photo | resolve }}")                        
                           | {{data.itemable.name}}, {{data.itemable.concentration}} {{data.itemable.concentration_unit}}, {{data.itemable.manufacturer}}, {{data.itemable.mfg_location}}
                   span.input-group-btn
-                    button.btn.btn-default(type='button' ng-click="ic.gotoItem()") {{ 'SEARCH' | translate }} 
+                    button.btn.btn-default(type='button' ng-click="ic.openItemPage(is.selected_med)") {{ 'SEARCH' | translate }} 
             .col-md-3.m-5-t
               span {{ic.numberOfResults}} {{'ITEMS'|translate}}
           br                                            
@@ -35,7 +35,7 @@ div(ng-include='"components/templates/navbar/navbar.html"')
         th {{'NAME'|translate}}
         th {{'STATUS' | translate}}
         th {{'CATEGORY' | translate}}
-        th {{'PRICE'|translate}}
+        th {{'SALE_PRICE'|translate}}
         th {{'QUANTITY'|translate}}
         th {{'ACTION'|translate}}
     tbody(ng-show='!ic.isLoading')
