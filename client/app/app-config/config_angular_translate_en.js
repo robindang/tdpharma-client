@@ -174,7 +174,8 @@
       'DUE_DATE': 'Due Date',
       'DUE_DATE_REQUIRED': 'Due date is required',
       'DELIVERY_DATE': 'Deliver Date',
-      'DELIVERY_DATE_REQUIRED': 'Deliver date is required'      
+      'DELIVERY_DATE_REQUIRED': 'Deliver date is required',
+      'VIEW': 'View'      
     });
     $translateProvider.preferredLanguage('vi');
   }

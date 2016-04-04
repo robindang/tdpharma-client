@@ -174,7 +174,8 @@
       'DUE_DATE': 'Ngày trả tiền',
       'DUE_DATE_REQUIRED': 'Ngày trả tiền là mục cần thiết',
       'DELIVERY_DATE': 'Ngày giao hàng',
-      'DELIVERY_DATE_REQUIRED': 'Ngày giao hàng là mục cần thiết'            
+      'DELIVERY_DATE_REQUIRED': 'Ngày giao hàng là mục cần thiết',
+      'VIEW': 'Xem sét'            
     });
   }
 

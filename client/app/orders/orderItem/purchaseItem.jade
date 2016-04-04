@@ -2,12 +2,15 @@ div.panel.panel-default(ng-repeat='t in vm.receipt.transactions')
 	div.panel-heading.clearfix
 		h4.panel-title.pull-left.m-5-t(ng-click='t.is_collapsed = !t.is_collapsed')
 			| {{t.buyer_item.itemable.name | uppercase }}, {{t.buyer_item.itemable.concentration }} {{t.buyer_item.itemable.concentration_unit}}, {{t.buyer_item.itemable.manufacturer}}, {{t.buyer_item.itemable.mfg_location }}
-		button.btn.btn-default.pull-right(ng-click='vm.editTransaction(t)' ng-if='t.is_editting === false && t.is_editable === true && t.status === "active"')
+		button.btn.btn-default.pull-right.m-10-l(ng-click='vm.editTransaction(t)' ng-if='t.is_editting === false && t.is_editable === true && t.status === "active"')
 			i.fa.fa-pencil
 			| &nbsp;{{'EDIT' | translate }}
-		button.btn.btn-primary.pull-right(ng-if='t.is_editting === false && t.is_editable === false')
+		button.btn.btn-primary.pull-right.m-10-l(ng-if='t.is_editting === false && t.is_editable === false')
 			i.fa.fa-shopping-cart
 			| &nbsp;{{'On Sale' | translate }}
+		button.btn.btn-default.pull-right.m-10-l(ng-click='vm.goToItem(t)' ng-if='t.is_editting === false')
+			i.fa.fa-laptop
+			| &nbsp;{{'VIEW' | translate }}			
 		button.btn.btn-primary.pull-right.m-10-l(ng-click='t.is_editting = false; vm.edit_transaction = {}' ng-if='t.is_editting === true')
 			i.fa.fa-times
 			| &nbsp;{{'BACK' | translate }}					

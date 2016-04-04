@@ -30,7 +30,7 @@ angular.module('tdpharmaClientApp', [
     angular.extend(toastrConfig, {
       closeButton: true,
       positionClass: 'toast-custom-top-right',
-      timeOut: 4000
+      timeOut: 5000
     });
   })
   .factory('authInterceptor', function ($rootScope, $q, $cookies, $location) {

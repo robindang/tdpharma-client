@@ -3,9 +3,9 @@
 angular.module('tdpharmaClientApp')
   .service('pharmacare', pharmacare);
 
-pharmacare.$inject = ['$filter', '$localStorage', '$translate', '$window', '$locale', 'amMoment'];
+pharmacare.$inject = ['$filter', '$localStorage', '$translate', '$window', '$locale', 'amMoment', 'toastr'];
 
-function pharmacare($filter, $storage, $translate, $window, $locale, amMoment) {
+function pharmacare($filter, $storage, $translate, $window, $locale, amMoment, toastr) {
   var moment = $window.moment;
   return {
     getDatePickerDateFormat: function(key) {
@@ -60,6 +60,36 @@ function pharmacare($filter, $storage, $translate, $window, $locale, amMoment) {
       popupWin.document.open();
       popupWin.document.write("<html><head></head><body onload=\"window.print()\"><img src=\"" + printContents.src + "\"/></body></html>");
       popupWin.document.close();
+    },
+    validateMedBatch: function(batch, name) {
+      if (!batch.user_id) {
+        toastr.error(name + ': ' + $filter('translate')('AUTHOR_REQUIRED')); return false;
+      }
+      if (!batch.category_id) {
+        toastr.error(name + ': ' + $filter('translate')('CATEGORY_REQUIRED')); return false;
+      }    
+      if (!batch.mfg_date){
+        toastr.error(name + ': ' + $filter('translate')('MFG_DATE_REQUIRED')); return false;
+      }
+      if (!batch.expire_date) {
+        toastr.error(name + ': ' + $filter('translate')('EXPIRE_DATE_REQUIRED')); return false;
+      }
+      if (!batch.package){
+        toastr.error(name + ': ' + $filter('translate')('PACKAGE_REQUIRED')); return false;
+      }
+      if (!batch.amount_per_pkg) {
+        toastr.error(name + ': ' + $filter('translate')('AMOUNT_PER_PKG_REQUIRED')); return false;
+      }
+      if (!batch.number_pkg) {
+        toastr.error(name + ': ' + $filter('translate')('NUM_PACKAGE_REQUIRED')); return false;
+      }
+      if (!batch.total_units) {
+        toastr.error(name + ': ' + $filter('translate')('TOTAL_UNITS_REQUIRED')); return false;
+      }
+      if (!batch.total_price) {
+        toastr.error(name + ': ' + $filter('translate')('PRICE_REQUIRED')); return false;
+      }
+      return true;
     } 
   };
 }

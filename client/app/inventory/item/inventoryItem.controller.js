@@ -5,18 +5,21 @@ angular.module('tdpharmaClientApp')
 
 InventoryItemCtrl.$inject = [
   '$location', '$stateParams', '$window', 'pharmacare', 'toastr', 
-  'APP_CONFIGURATION', 'Auth', 'DataHelper', 'InventoryItem'];
+  'APP_CONFIGURATION', 'Auth', 'DataHelper', 'InventoryItem', 'User', 'Medicine'];
 
-function InventoryItemCtrl($location, $stateParams, $window, pharmacare, toastr, APP_CONFIGURATION, Auth, DataHelper, InventoryItem) {
+function InventoryItemCtrl($location, $stateParams, $window, pharmacare, toastr, APP_CONFIGURATION, Auth, DataHelper, InventoryItem, User, Medicine) {
   
   var async = $window.async;
 
   var ctrl = this;
+  ctrl.store_users = [];
+  ctrl.medicine = {};
   ctrl.APP_CONFIGURATION = APP_CONFIGURATION;
   ctrl.pharmacare = pharmacare;
   ctrl.barcodePrint = pharmacare.barcodePrint;
   ctrl.initBreadcrumbs = initBreadcrumbs;
   ctrl.updateTotalAmount = updateTotalAmount;
+  ctrl.saveBatch = saveBatch;
 
   init();
 
@@ -39,10 +42,30 @@ function InventoryItemCtrl($location, $stateParams, $window, pharmacare, toastr,
           });
         },
         function(next) {
+          User.query().$promise.then(function(resp){
+            ctrl.store_users = resp; 
+            next(null);   
+          }).catch(function(err){
+            next(err.data.data.errors);            
+          });
+        },
+        function(next) {
+          User.get().$promise.then(function(user) {
+            ctrl.edit_user = _.find(ctrl.store_users, function(u){return u.id === user.id});            
+            next(null);
+          }).catch(function(err){
+            next(err.data.data.errors);
+          });
+        },
+        function(next) {
           initMode();
           next(null);
         }
-      ], callback || function(){});
+      ], callback || function(error){
+        if (error)  {
+          toastr.error(error, $filter('translate')('TOASTR_SORRY'));
+        }        
+      });
   }
 
   function updateTotalAmount() {
@@ -59,6 +82,22 @@ function InventoryItemCtrl($location, $stateParams, $window, pharmacare, toastr,
       categoryId = category.parent_id;
     }
     ctrl.breadcrumbs = breadcrumbs;
+  }
+
+  function saveBatch() {
+    if (ctrl.edit_user) {
+      ctrl.medicine.med_batches_attributes[0].user_id = ctrl.edit_user.id;
+    }
+    var bOk = ctrl.pharmacare.validateMedBatch(ctrl.medicine.med_batches_attributes[0], ctrl.item.itemable.name);
+    if (bOk) {
+      Medicine.update({id: ctrl.item.itemable.id}, {medicine: ctrl.medicine}).$promise.then(function(resp){
+        ctrl.item = resp.data;
+        ctrl.medicine = {};
+        ctrl.mode.setReadMode();
+      }).catch(function(error){
+        toastr.error(error.data.data.errors);
+      });
+    }
   }
 
   function initMode() {
@@ -81,6 +120,13 @@ function InventoryItemCtrl($location, $stateParams, $window, pharmacare, toastr,
       if (__mode === 'edit') {ctrl.item = angular.copy(__oldItem);}
       __mode = mode;
       if (__mode === 'edit') {__oldItem = angular.copy(ctrl.item);}
+      if (__mode === 'add') {
+        ctrl.medicine = {          
+          med_batches_attributes: [
+            { category_id: ctrl.item.category_id }
+          ]          
+        };        
+      }
     };}
     function __save() {
       if (__mode !== 'edit') {return;}

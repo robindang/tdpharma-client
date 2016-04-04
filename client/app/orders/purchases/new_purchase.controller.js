@@ -76,46 +76,6 @@
       vm.item_list.splice(idx, 1);
     }
 
-    function validateForm(item) {
-      if (!item.med_batches_attributes[0].user_id) {
-        toastr.error(item.itemable.name + ' ' + $filter('translate')('AUTHOR_REQUIRED'));
-        return false;
-      }
-      if (!item.med_batches_attributes[0].category_id) {
-        toastr.error(item.itemable.name + ' ' + $filter('translate')('CATEGORY_REQUIRED')); 
-        return false;
-      }    
-      if (!item.med_batches_attributes[0].mfg_date){
-        toastr.error(item.itemable.name + ' ' + $filter('translate')('MFG_DATE_REQUIRED')); 
-        return false;
-      }
-      if (!item.med_batches_attributes[0].expire_date) {
-        toastr.error(item.itemable.name + ' ' + $filter('translate')('EXPIRE_DATE_REQUIRED')); 
-        return false;
-      }
-      if (!item.med_batches_attributes[0].package){
-        toastr.error(item.itemable.name + ' ' + $filter('translate')('PACKAGE_REQUIRED')); 
-        return false;
-      }
-      if (!item.med_batches_attributes[0].amount_per_pkg) {
-        toastr.error(item.itemable.name + ' ' + $filter('translate')('AMOUNT_PER_PKG_REQUIRED')); 
-        return false;
-      }
-      if (!item.med_batches_attributes[0].number_pkg) {
-        toastr.error(item.itemable.name + ' ' + $filter('translate')('NUM_PACKAGE_REQUIRED'));
-        return false;
-      }
-      if (!item.med_batches_attributes[0].total_units) {
-        toastr.error(item.itemable.name + ' ' + $filter('translate')('TOTAL_UNITS_REQUIRED')); 
-        return false;
-      }
-      if (!item.med_batches_attributes[0].total_price) {
-        toastr.error(item.itemable.name + ' ' + $filter('translate')('PRICE_REQUIRED')); 
-        return false;
-      }
-      return true;
-    }
-
     function savePurchase() {
       var data = {
         receipt: {
@@ -126,7 +86,7 @@
       var ok = false;
       // Check whethere there are all required data
       _.each(vm.item_list, function(i){
-        ok = validateForm(i);
+        ok = pharmacare.validateMedBatch(i.med_batches_attributes[0], i.itemable.name);        
         if (ok) {
           data.receipt.med_batches_attributes.push(i.med_batches_attributes[0]);
         }      
@@ -134,7 +94,7 @@
       // Save data
       if (ok){ 
         Receipt.save(data).$promise.then(function(resp){        
-          toastr.success($filter('translate')('PURCHASE_RECEIPT') + $filter('translate')('TOASTR_CREATED'), $filter('translate')('TOASTR_CONGRATS'));
+          toastr.success($filter('translate')('PURCHASE') + $filter('translate')('TOASTR_CREATED'), $filter('translate')('TOASTR_CONGRATS'));
           vm.item_list = [];
           vm.selected_med = '';
         }, function(error){

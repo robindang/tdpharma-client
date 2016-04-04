@@ -1,6 +1,6 @@
 div(ng-include='"components/templates/navbar/navbar.html"')
 
-.col-sm-12
+.container
   .row
     .col-md-12
       ul.breadcrumb
@@ -51,6 +51,12 @@ div(ng-include='"components/templates/navbar/navbar.html"')
                     p.form-control-static {{iic.item.amount | number}}
       form.form-horizontal(ng-show='iic.mode.isAddMode()')
         .form-group
+          label.col-sm-2.control-label {{'AUTHOR' | translate }}
+          .col-sm-10
+            ui-select.m-10-b#user(ng-model='iic.edit_user' name='author' close-on-select='true' required)
+              ui-select-match(placeholder="{{ 'SELECT_USER' | translate }}") {{$select.selected.first_name}} {{$select.selected.last_name}}
+              ui-select-choices(repeat='data in iic.store_users | filter:$select.search') {{data.first_name}} {{data.last_name}}                 
+        .form-group
           label.col-sm-2.control-label {{'MANUFACTURE_DATE' | translate }}
           .col-sm-10
             p.input-group
@@ -91,7 +97,7 @@ div(ng-include='"components/templates/navbar/navbar.html"')
         .col-xs-12.text-right
           .btn.btn-danger(ng-show='iic.mode.isAddMode()' ng-click='iic.mode.setReadMode()') Cancel
           | &nbsp;&nbsp;
-          .btn.btn-primary(ng-show='iic.mode.isAddMode()' ng-click='iic.mode.setReadMode()') Add
+          .btn.btn-primary(ng-show='iic.mode.isAddMode()' ng-click='iic.saveBatch()') Add
           br
           br
       a(data-toggle='collapse', data-target='#collapse0')

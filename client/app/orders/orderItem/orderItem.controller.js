@@ -33,6 +33,7 @@ function OrderItemCtrl(Receipt, $state, $stateParams, $filter, toastr, pharmacar
   vm.updateDueDate = updateDueDate;
   vm.reverseTransaction = reverseTransaction;
   vm.saveEdit = saveEdit;
+  vm.goToItem = goToItem;
 
   //  Local methods
   var processData = processData;
@@ -239,4 +240,19 @@ function OrderItemCtrl(Receipt, $state, $stateParams, $filter, toastr, pharmacar
       })
     } 
   }
+
+  function goToItem(transaction) {
+    var id;
+    if (transaction.transaction_type === 'purchase') {
+      id = transaction.buyer_item.id;
+    } else if (transaction.transaction_type === 'sale') {
+      id = transaction.seller_item.id;
+    } else if (transaction.transaction_type === 'adjustment') {
+      id = transaction.adjust_item.id;
+    }
+    if (id) {
+      $state.go('inventoryItem', {id: id});
+    }    
+  }
+
 }
