@@ -175,7 +175,8 @@
       'DUE_DATE_REQUIRED': 'Due date is required',
       'DELIVERY_DATE': 'Deliver Date',
       'DELIVERY_DATE_REQUIRED': 'Deliver date is required',
-      'VIEW': 'View'      
+      'VIEW': 'View',
+      'NO_PRINTER': 'There is no printer detected'      
     });
     $translateProvider.preferredLanguage('vi');
   }

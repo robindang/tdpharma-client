@@ -16,17 +16,17 @@ function InventoryItemCtrl($location, $stateParams, $window, pharmacare, toastr,
   ctrl.medicine = {};
   ctrl.APP_CONFIGURATION = APP_CONFIGURATION;
   ctrl.pharmacare = pharmacare;
-  ctrl.barcodePrint = pharmacare.barcodePrint;
+  ctrl.barcodePrint = pharmacare.DYMOPrint;
   ctrl.initBreadcrumbs = initBreadcrumbs;
   ctrl.updateTotalAmount = updateTotalAmount;
   ctrl.saveBatch = saveBatch;
-
+  
   init();
 
   function init() {
     initData();        
   }
-
+  
   function initData(callback) {
     async.waterfall([
         function(next) {

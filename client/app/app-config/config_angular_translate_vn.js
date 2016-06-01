@@ -175,7 +175,8 @@
       'DUE_DATE_REQUIRED': 'Ngày trả tiền là mục cần thiết',
       'DELIVERY_DATE': 'Ngày giao hàng',
       'DELIVERY_DATE_REQUIRED': 'Ngày giao hàng là mục cần thiết',
-      'VIEW': 'Xem sét'            
+      'VIEW': 'Xem sét',
+      'NO_PRINTER': 'Không tìm thấy máy in cần thiết'            
     });
   }
 
