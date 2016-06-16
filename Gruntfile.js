@@ -561,6 +561,7 @@ module.exports = function (grunt) {
               ['{.tmp,<%= yeoman.client %>}/{app,components}/**/*.js',
                '!{.tmp,<%= yeoman.client %>}/app/app.js',
                '!{.tmp,<%= yeoman.client %>}/app/config.js',
+               '!{.tmp,<%= yeoman.client %>}/app/DYMO.Label.Frameork_2.0Beta.js',
                '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.spec.js',
                '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.mock.js']
             ]
