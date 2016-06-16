@@ -1,5 +1,5 @@
 {
-  "API_V1_URL": "http://localhost:3000/api/v1/",
-  "SERVER_END_POINT": "http://localhost:3000/",
-  "SERVER_DEFAULT_PICTURE_ENDPOINT": "http://localhost:3000"
+  "API_V1_URL": "https://staging-server.pharmacare.io/api/v1/",
+  "SERVER_END_POINT": "https://staging-server.pharmacare.io/",
+  "SERVER_DEFAULT_PICTURE_ENDPOINT": "https://staging-server.pharmacare.io"
 }

@@ -107,74 +107,67 @@ function pharmacare($filter, $storage, $translate, $window, $locale, amMoment, t
       }
     },
     DYMOPrint: function(item) {
-      // Label XML object with 128B barcode
-      var labelXml = "\
-       <DieCutLabel Version=\"8.0\" Units=\"twips\">\
-       <PaperOrientation>Landscape</PaperOrientation>\
-        <Id>Tape12mm</Id>\
-        <PaperName>12mm</PaperName>\
-        <LengthMode>Auto</LengthMode>\
-        <LabelLength>0</LabelLength>\
-        <RootCell>\
-          <Length>0</Length>\
-          <LengthMode>Auto</LengthMode>\
-          <BorderWidth>0</BorderWidth>\
-          <BorderStyle>Solid</BorderStyle>\
-          <BorderColor Alpha=\"255\" Red=\"0\" Green=\"0\" Blue=\"0\"/>\
-          <SubcellsOrientation>Horizontal</SubcellsOrientation>\
-          <Subcells>\
-            <Cell>\
-              <BarcodeObject>\
-                <Name>BARCODE</Name>\
-                <ForeColor Alpha=\"255\" Red=\"0\" Green=\"0\" Blue=\"0\"/>\
-                <BackColor Alpha=\"255\" Red=\"255\" Green=\"255\" Blue=\"255\"/>\
-                <LinkedObjectName></LinkedObjectName>\
-                <Rotation>Rotation0</Rotation>\
-                <IsMirrored>False</IsMirrored>\
-                <IsVariable>False</IsVariable>\
-                <Text>12345</Text>\
-                <Type>Code128B</Type>\
-                <Size>Medium</Size>\
-                <TextPosition>None</TextPosition>\
-                <TextFont Family=\"Helvetica\" Size=\"10\" Bold=\"False\" Italic=\"False\" Underline=\"False\" Strikeout=\"False\"/>\
-                <CheckSumFont Family=\"Helvetica\" Size=\"10\" Bold=\"False\" Italic=\"False\" Underline=\"False\" Strikeout=\"False\"/>\
-                <TextEmbedding>None</TextEmbedding>\
-                <ECLevel>0</ECLevel>\
-                <HorizontalAlignment>Center</HorizontalAlignment>\
-                <QuietZonesPadding Left=\"0\" Right=\"0\" Top=\"0\" Bottom=\"0\"/>\
-              </BarcodeObject>\
-              <ObjectMargin Left=\"200\" Right=\"200\" Top=\"0\" Bottom=\"0\"/>\
-              <Length>3280</Length>\
-              <LengthMode>Auto</LengthMode>\
-              <BorderWidth>0</BorderWidth>\
-              <BorderStyle>Solid</BorderStyle>\
-              <BorderColor Alpha=\"255\" Red=\"0\" Green=\"0\" Blue=\"0\"/>\
-            </Cell>\
-          </Subcells>\
-        </RootCell>\
-       </DieCutLabel>";
+      // Label XML object with 128C barcode
+      var labelXml = "<ContinuousLabel Version=\"8.0\" Units=\"twips\">\
+                      <PaperOrientation>Landscape</PaperOrientation>\
+                      <Id>Tape12mm</Id>\
+                      <PaperName>12mm</PaperName>\
+                      <LengthMode>Auto</LengthMode>\
+                      <LabelLength>7200</LabelLength>\
+                      <RootCell>\
+                        <Length>6000</Length>\
+                        <LengthMode>Auto</LengthMode>\
+                        <BorderWidth>0</BorderWidth>\
+                        <BorderStyle>Solid</BorderStyle>\
+                        <BorderColor Alpha=\"255\" Red=\"0\" Green=\"0\" Blue=\"0\"/>\
+                        <SubcellsOrientation>Horizontal</SubcellsOrientation>\
+                        <Subcells>\
+                          <Cell>\
+                            <BarcodeObject>\
+                              <Name>BARCODE</Name>\
+                              <ForeColor Alpha=\"255\" Red=\"0\" Green=\"0\" Blue=\"0\"/>\
+                              <BackColor Alpha=\"255\" Red=\"255\" Green=\"255\" Blue=\"255\"/>\
+                              <LinkedObjectName></LinkedObjectName>\
+                              <Rotation>Rotation0</Rotation>\
+                              <IsMirrored>False</IsMirrored>\
+                              <IsVariable>False</IsVariable>\
+                              <Text>12345798</Text>\
+                              <Type>Code39</Type>\
+                              <Size>Medium</Size>\
+                              <TextPosition>None</TextPosition>\
+                              <TextFont Family=\"Helvetica\" Size=\"10\" Bold=\"False\" Italic=\"False\" Underline=\"False\" Strikeout=\"False\"/>\
+                              <CheckSumFont Family=\"Helvetica\" Size=\"10\" Bold=\"False\" Italic=\"False\" Underline=\"False\" Strikeout=\"False\"/>\
+                              <TextEmbedding>None</TextEmbedding>\
+                              <ECLevel>0</ECLevel>\
+                              <HorizontalAlignment>Center</HorizontalAlignment>\
+                              <QuietZonesPadding Left=\"0\" Right=\"0\" Top=\"0\" Bottom=\"0\"/>\
+                            </BarcodeObject>\
+                            <ObjectMargin Left=\"200\" Right=\"200\" Top=\"0\" Bottom=\"0\"/>\
+                            <Length>4340</Length>\
+                            <LengthMode>Auto</LengthMode>\
+                            <BorderWidth>0</BorderWidth>\
+                            <BorderStyle>Solid</BorderStyle>\
+                            <BorderColor Alpha=\"255\" Red=\"0\" Green=\"0\" Blue=\"0\"/>\
+                          </Cell>\
+                        </Subcells>\
+                      </RootCell>\
+                    </ContinuousLabel>";
 
-      var label = dymo.label.framework.openLabelXml(labelXml);
-
-      angular.element(document).ready(function(item) {
-        var printers = dymo.label.framework.getPrinters();
-        var printerName = '';
-        if (printers.length === 0) {
-          toastr.error($filter('translate')('NO_PRINTER')); return false;
-        }
-        else {
-          // Select the first DYMO printer
-          for(var i = 0; i < printers.length - 1; i++) {
-            if (printer.printerType === 'labelWriterPrinter') {
-              printerName = printer.name;
-              break;
-            }
-          }
-          // Set the value of the barcode object. Refer by the name of the BarcodeObject
-          label.setObjectText('BARCODE', item);
-          label.print(printerName);
-        }        
-      })
+      var label = dymo.label.framework.openLabelXml(labelXml);      
+      var printers = dymo.label.framework.getPrinters();
+      var printerName = '';
+      if (printers.length === 0) {
+        toastr.error($filter('translate')('NO_PRINTER')); return false;
+      }
+      else {
+        // Find the first tape printer
+        printerName = _.find(printers, function(p){return p.printerType === 'TapePrinter';});
+        // Set the value of the barcode object. Refer by the name of the BarcodeObject
+        label.setObjectText('BARCODE', item);
+        label.print(printerName.name);
+      }              
     } 
   };
 }
+
+
