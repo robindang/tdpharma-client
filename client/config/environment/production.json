@@ -1,5 +1,5 @@
 {
-  "API_V1_URL": "http://tdpos.herokuapp.com/api/v1/",
-  "SERVER_END_POINT": "http://tdpos.herokuapp.com/",
-  "SERVER_DEFAULT_PICTURE_ENDPOINT": "http://tdpos.herokuapp.com"
+  "API_V1_URL": "https://staging-server.pharmacare.io/api/v1/",
+  "SERVER_END_POINT": "https://staging-server.pharmacare.io/",
+  "SERVER_DEFAULT_PICTURE_ENDPOINT": "https://staging-server.pharmacare.io"
 }

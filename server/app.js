@@ -16,11 +16,11 @@ var fs = require('fs');
 // Populate DB with sample data
 if(config.seedDB) { require('./config/seed'); }
 
-// Setup server
- var options = {
-      key: fs.readFileSync('./server/config/STAR_pharmacare_io.key'),
-      cert: fs.readFileSync('./server/config/STAR_pharmacare_io.crt')
-   };
+// Setup server. Only needed for development
+ // var options = {
+ //      key: fs.readFileSync('./server/config/develop_ssl/server.key'),
+ //      cert: fs.readFileSync('./server/config/develop_ssl/server.crt')
+ //   };
 var app = express();
 var server = https.createServer(options, app);
 var server_no_ssl = http.createServer(app);

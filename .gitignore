@@ -7,3 +7,10 @@ dist
 server/config/local.env.js
 client/config/local.env.json
 client/app/config.js
+server/config/STAR_pharmacare_io.crt
+server/config/STAR_pharmacare_io.key
+server/config/STAR_pharmacare_io.pem
+server/config/STAR_pharmacare_io_bundle.pem
+server/config/develop_ssl/server.crt
+server/config/develop_ssl/server.csr
+server/config/develop_ssl/server.key
