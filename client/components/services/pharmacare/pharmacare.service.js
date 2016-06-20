@@ -142,7 +142,7 @@ function pharmacare($filter, $storage, $translate, $window, $locale, amMoment, t
                               <HorizontalAlignment>Center</HorizontalAlignment>\
                               <QuietZonesPadding Left=\"0\" Right=\"0\" Top=\"0\" Bottom=\"0\"/>\
                             </BarcodeObject>\
-                            <ObjectMargin Left=\"200\" Right=\"200\" Top=\"0\" Bottom=\"0\"/>\
+                            <ObjectMargin Left=\"0\" Right=\"0\" Top=\"0\" Bottom=\"0\"/>\
                             <Length>4340</Length>\
                             <LengthMode>Auto</LengthMode>\
                             <BorderWidth>0</BorderWidth>\
