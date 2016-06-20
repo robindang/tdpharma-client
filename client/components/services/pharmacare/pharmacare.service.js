@@ -112,11 +112,11 @@ function pharmacare($filter, $storage, $translate, $window, $locale, amMoment, t
                       <PaperOrientation>Landscape</PaperOrientation>\
                       <Id>Tape12mm</Id>\
                       <PaperName>12mm</PaperName>\
-                      <LengthMode>Auto</LengthMode>\
-                      <LabelLength>7200</LabelLength>\
+                      <LengthMode>Fixed</LengthMode>\
+                      <LabelLength>3686.4</LabelLength>\
                       <RootCell>\
-                        <Length>6000</Length>\
-                        <LengthMode>Auto</LengthMode>\
+                        <Length>2486.4</Length>\
+                        <LengthMode>Fixed</LengthMode>\
                         <BorderWidth>0</BorderWidth>\
                         <BorderStyle>Solid</BorderStyle>\
                         <BorderColor Alpha=\"255\" Red=\"0\" Green=\"0\" Blue=\"0\"/>\
@@ -133,7 +133,7 @@ function pharmacare($filter, $storage, $translate, $window, $locale, amMoment, t
                               <IsVariable>False</IsVariable>\
                               <Text>12345798</Text>\
                               <Type>Code39</Type>\
-                              <Size>Medium</Size>\
+                              <Size>Small</Size>\
                               <TextPosition>None</TextPosition>\
                               <TextFont Family=\"Helvetica\" Size=\"10\" Bold=\"False\" Italic=\"False\" Underline=\"False\" Strikeout=\"False\"/>\
                               <CheckSumFont Family=\"Helvetica\" Size=\"10\" Bold=\"False\" Italic=\"False\" Underline=\"False\" Strikeout=\"False\"/>\

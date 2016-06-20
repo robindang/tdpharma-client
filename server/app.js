@@ -8,21 +8,21 @@
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 var express = require('express');
-// var https = require('https');
-var http = require('http');
 var config = require('./config/environment');
 var fs = require('fs');
-
 // Populate DB with sample data
 if(config.seedDB) { require('./config/seed'); }
+var app = express();
+
+var http = require('http');
+var server = http.createServer(app);
 
 // Setup server. Only needed for development 
- // var options = {
- //      key: fs.readFileSync('./server/config/develop_ssl/server.key'),
- //      cert: fs.readFileSync('./server/config/develop_ssl/server.crt')
- //   };
-var app = express();
-var server = http.createServer(app);
+// var https = require('https');
+// var options = {
+//      key: fs.readFileSync('./server/config/develop_ssl/server.key'),
+//      cert: fs.readFileSync('./server/config/develop_ssl/server.crt')
+//   };
 // var server = https.createServer(options, app);
 
 app.use('*',function(req,res,next){  
@@ -31,11 +31,11 @@ app.use('*',function(req,res,next){
   next();
 });
 
-// var socketio = require('socket.io')(server, {
-//   serveClient: (config.env === 'production') ? false : true,
-//   path: '/socket.io-client'
-// });
-// require('./config/socketio')(socketio);
+var socketio = require('socket.io')(server, {
+  serveClient: (config.env === 'production') ? false : true,
+  path: '/socket.io-client'
+});
+require('./config/socketio')(socketio);
 require('./config/express')(app);
 require('./routes')(app);
 
