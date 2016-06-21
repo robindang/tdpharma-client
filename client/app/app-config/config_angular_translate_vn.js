@@ -176,7 +176,10 @@
       'DELIVERY_DATE': 'Ngày giao hàng',
       'DELIVERY_DATE_REQUIRED': 'Ngày giao hàng là mục cần thiết',
       'VIEW': 'Xem sét',
-      'NO_PRINTER': 'Không tìm thấy máy in cần thiết'            
+      'NO_PRINTER': 'Không tìm thấy máy in cần thiết',
+      'BARCODE': 'Mã vạch',
+      'CURRENT_USED_BARCODE': 'Mã vạch của batch dang dùng',
+      'CURRENT_BATCH': 'Batch dang dùng'            
     });
   }
 

@@ -10,16 +10,16 @@ function NavbarCtrl($scope, $location, $translate, amMoment, pharmacare, Auth) {
   var ctrl = this;
   ctrl.menu = [{
     title: 'HOME',
-    link: '/'
+    link: ['/']
   }, {
     title: 'INVENTORY',
-    link: '/inventory'
+    link: ['/inventory']
   }, {
     title: 'ORDERS',
-    link: '/orders'
+    link: ['/purchases', '/sales', '/adjustments']
   }, {
     title: 'CHECKOUT',
-    link: '/checkoutv2'
+    link: ['/checkoutv2']
   }];
   ctrl.isCollapsed = true;
   ctrl.locale = pharmacare.getLocale();
@@ -41,7 +41,11 @@ function NavbarCtrl($scope, $location, $translate, amMoment, pharmacare, Auth) {
     $location.path('/login');
   }
 
-  function isActive(route) {
-    return route === $location.path();
+  function isActive(link) {
+    return _.contains(link, $location.path());
   }
+
+  // function isActive(route) {
+  //   return route === $location.path();
+  // }
 }

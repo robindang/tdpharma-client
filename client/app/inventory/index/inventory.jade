@@ -33,7 +33,7 @@ div(ng-include='"components/templates/navbar/navbar.html"')
       tr
         th
         th {{'NAME'|translate}}
-        th {{'STATUS' | translate}}
+        th {{'CURRENT_BATCH' | translate}}*
         th {{'CATEGORY' | translate}}
         th {{'SALE_PRICE'|translate}}
         th {{'QUANTITY'|translate}}
@@ -41,11 +41,11 @@ div(ng-include='"components/templates/navbar/navbar.html"')
     tbody(ng-show='!ic.isLoading')
       tr(ng-repeat='row in ic.displayed')
         td
-          img(ng-src='{{row.photo_thumb.photo | resolve}}')
+          img(ng-src='{{row.photo_thumb.photo | resolve}}' style='width: 100px;')
         td
           a(ng-href='/inventory/{{row.id}}') {{row.itemable.name}}
         td
-          span(ng-class='ic.pharmacare.getStatusCSSClass(row)') {{ic.pharmacare.getStatus(row) | translate}}
+          span(ng-class='ic.pharmacare.getStatusCSSClass(row)') {{ row.available_batches[0].barcode }}
         td
           a(href='/categories/{{row.category.id}}') {{row.category.name | translate}}
         td 

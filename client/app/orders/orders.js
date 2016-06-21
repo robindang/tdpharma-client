@@ -1,12 +1,30 @@
 'use strict';
 
-angular.module('tdpharmaClientApp')
-  .config(function ($stateProvider) {
+angular.module('tdpharmaClientApp')  
+  .config(function($stateProvider){
     $stateProvider
-      .state('orders', {
-        url: '/orders',
-        templateUrl: 'app/orders/orders.html',
-        controller: 'OrdersCtrl',
+      .state('listPurchases', {
+        url: '/purchases',
+        templateUrl: 'app/orders/purchases/purchases.html',
+        controller: 'PurchasesCtrl',
+        controllerAs: 'oc'
+      });
+  })
+  .config(function($stateProvider){
+    $stateProvider
+      .state('listSales', {
+        url: '/sales',
+        templateUrl: 'app/orders/sales/sales.html',
+        controller: 'SalesCtrl',
+        controllerAs: 'oc'
+      });
+  })
+  .config(function($stateProvider){
+    $stateProvider
+      .state('listAdjustments', {
+        url: '/adjustments',
+        templateUrl: 'app/orders/adjustments/adjustment.html',
+        controller: 'AdjustmentsCtrl',
         controllerAs: 'oc'
       });
   })

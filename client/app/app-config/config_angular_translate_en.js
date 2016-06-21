@@ -176,7 +176,10 @@
       'DELIVERY_DATE': 'Deliver Date',
       'DELIVERY_DATE_REQUIRED': 'Deliver date is required',
       'VIEW': 'View',
-      'NO_PRINTER': 'There is no printer detected'      
+      'NO_PRINTER': 'There is no printer detected',
+      'BARCODE': 'Barcode',
+      'CURRENT_USED_BARCODE': 'Barcode of the currently used batch',
+      'CURRENT_BATCH': 'Current Batch'      
     });
     $translateProvider.preferredLanguage('vi');
   }

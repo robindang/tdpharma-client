@@ -1,6 +1,0 @@
-div(ng-include='"components/templates/navbar/navbar.html"')
-
-.col-sm-12
-  uib-tabset
-    uib-tab(ng-repeat="tab in oc.tabs", heading="{{tab.title}}", active="tab.active", disable="tab.disabled")
-      div(ng-include="tab.template")
