@@ -11,7 +11,7 @@
       
     $translateProvider.translations('vi', {      
       GREETING: 'Allo, Allo!',
-      LEADING_GREETING: 'Kích hoạt nhà thuốc của bạn với Pharmaplus',
+      LEADING_GREETING: 'Kích hoạt nhà thuốc của bạn với Pharmacare',
       HOME: 'Trang chủ',
       INVENTORY: 'Tồn Kho',
       ORDERS: 'Hoá Đơn',
@@ -179,7 +179,8 @@
       'NO_PRINTER': 'Không tìm thấy máy in cần thiết',
       'BARCODE': 'Mã vạch',
       'CURRENT_USED_BARCODE': 'Mã vạch của batch dang dùng',
-      'CURRENT_BATCH': 'Batch dang dùng'            
+      'CURRENT_BATCH': 'Batch dang dùng',
+      'RETURN': 'Hồi Trả'            
     });
   }
 

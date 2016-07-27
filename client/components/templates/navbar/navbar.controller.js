@@ -42,7 +42,7 @@ function NavbarCtrl($scope, $location, $translate, amMoment, pharmacare, Auth) {
   }
 
   function isActive(link) {
-    return _.contains(link, $location.path());
+    return _.contains(link, $location.path());    
   }
 
   // function isActive(route) {

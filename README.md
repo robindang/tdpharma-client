@@ -61,6 +61,15 @@ Server configurations can be found in server/config/environment/. Configurations
 
 Client configurations are available in client/config/environment/. Configurations are accessible in angular by injecting APP_CONFIGURATION. These configurations are generated in app/config.js as part of the target build. They may be overrided for all targets by adding local.env.json file to the client/config/ folder.
 
+### Developing with local server without https set up
+With this change during development, you can use livereload feature set up
+Within Gruntfile.js, under express 'open' object configuration, switch from 'https' to 'http'
+Within server/app.js, comment out two section: 'Force application to use https' and 'Setup development for https server'
+
+### Before pushing code to production
+Make sure to undo the development http change mentioned above so production site is secured with https
+
+
 ### FAQ
 
 How to update npm and bower dependencies to the latest version
@@ -78,5 +87,4 @@ to update dependencies to latest version in package.json and bower.json respecti
 
 ### Known Issues
 
-The client still tries to access Thing api. It has been removed from the server. Test are broken at the moment. To be fixed. 
 

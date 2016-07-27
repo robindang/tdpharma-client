@@ -11,6 +11,7 @@ function SalesCtrl(Receipt, $state, $filter, OrderSearch) {
 	ctrl.getSales = getSales;
 	ctrl.toPurchases = toPurchases;
 	ctrl.toAdjustments = toAdjustments;
+  ctrl.toOrder = toOrder;
 
 	function getSales(tableState) {
     ctrl.is_loading_sales = false;
@@ -24,6 +25,10 @@ function SalesCtrl(Receipt, $state, $filter, OrderSearch) {
       tableState.pagination.numberOfPages = result.numberOfPages;
       ctrl.is_loading_sales = true;
     });
+  }
+
+  function toOrder(order){
+    $state.go('orderItem', {id: order.id});
   }
 
   function toPurchases() {

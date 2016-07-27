@@ -2,12 +2,12 @@ div(ng-include='"components/templates/navbar/navbar.html"')
 
 .container
 	.row.text-right
-		.btn.btn-default(ng-click='vm.toOrders()' style='margin-top:20px')
+		.btn.btn-default(ng-click='vm.toOrders(vm.receipt)' style='margin-top:20px')
 			i.fa.fa-long-arrow-left
 			| &nbsp;{{'BACK' | translate}} 
 	.row
 		.col-md-3.col-sm-3
-			io-barcode.m-20-t(code='{{vm.receipt.barcode}}' type='CODE128B' ng-if='vm.receipt.barcode' ng-click='vm.print(vm.receipt)' id='code-{{vm.receipt.barcode}}')
+			io-barcode.m-20-t(code='{{vm.receipt.barcode}}' type='CODE39' options='vm.barcode_style' ng-if='vm.receipt.barcode' ng-click='vm.print(vm.receipt)' id='code-{{vm.receipt.barcode}}')
 		.col-md-8.col-sm-8.col-md-offset-1.col-sm-offset-1
 			.col-xs-3
 				h3 {{ vm.receipt_type }}

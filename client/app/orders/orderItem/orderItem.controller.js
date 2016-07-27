@@ -13,7 +13,7 @@ function OrderItemCtrl(Receipt, $state, $stateParams, $filter, toastr, pharmacar
   vm.edit_user = {};
   vm.pharmacare = pharmacare;
   vm.barcode_style = {
-    width: 2,
+    width: 1,
     height: 70,
     displayValue: true,
     fontSize: 14,
@@ -31,6 +31,7 @@ function OrderItemCtrl(Receipt, $state, $stateParams, $filter, toastr, pharmacar
   vm.updateTotalAmount = updateTotalAmount;
   vm.updateDeliveryDate = updateDeliveryDate;
   vm.updateDueDate = updateDueDate;
+  vm.updateBatchSalePrice = updateBatchSalePrice;
   vm.reverseTransaction = reverseTransaction;
   vm.saveEdit = saveEdit;
   vm.goToItem = goToItem;
@@ -50,7 +51,14 @@ function OrderItemCtrl(Receipt, $state, $stateParams, $filter, toastr, pharmacar
       t.delivery_time = moment(t.delivery_time);
       t.due_date = moment(t.due_date);
       t.is_editting = false;
-      t.is_editable = (t.med_batch.total_units == t.med_batch.amount_per_pkg * t.med_batch.number_pkg) ? true : false;      // If this batch is already on sale, can't edit
+      // If this purchased batch is already on sale, can't edit.
+      if (t.buyer_item_id) {
+        t.is_editable = (t.med_batch.total_units == t.med_batch.amount_per_pkg * t.med_batch.number_pkg && t.buyer_item_id) ? true : false;  
+      } 
+      // If this is a sale, allow return
+      else if (t.seller_item_id && t.status !== 'deprecated') {
+        t.is_editable = true;
+      }
       t.med_batch.mfg_date = moment(t.med_batch.mfg_date).startOf('day');
       t.med_batch.expire_date = moment(t.med_batch.expire_date).startOf('day');
       t.updated_at = moment(t.updated_at);
@@ -62,11 +70,11 @@ function OrderItemCtrl(Receipt, $state, $stateParams, $filter, toastr, pharmacar
        break;
       case 'sale':
         vm.receipt_type = $filter('translate')('SALE');
-        vm.item_view = 'app/orders/orderItem/sale.html';
+        vm.item_view = 'app/orders/orderItem/saleItem.html';
         break;
       default:
         vm.receipt_type = $filter('translate')('ADJUSTMENT');
-        vm.item_view = 'app/orders/orderItem/adjustment.html';
+        vm.item_view = 'app/orders/orderItem/adjustmentItem.html';
         break;
     }      
   }
@@ -100,7 +108,7 @@ function OrderItemCtrl(Receipt, $state, $stateParams, $filter, toastr, pharmacar
       vm.edit_user = _.find(vm.store_users, function(u){return u.id === vm.edit_transaction.purchase_user_id;});
     }
     if (vm.edit_transaction.sale_user_id) {
-      vm.edit_user = _.find(vm.store_users, function(u){return u.id === vm.edit_transaction.sale_user_id;});
+      vm.edit_user = _.find(vm.store_users, function(u){return u.id === vm.edit_transaction.sale_user_id;});      
     }
   }
 
@@ -110,8 +118,13 @@ function OrderItemCtrl(Receipt, $state, $stateParams, $filter, toastr, pharmacar
       vm[status][$index].opened = true;
     }
 
-  function toOrders() {
-    $state.go('orders');
+  function toOrders(receipt) {
+    if (receipt.receipt_type === 'purchase') {
+      $state.go('listPurchases');
+    }
+    else if (receipt.receipt_type === 'sale') {
+      $state.go('listSales');
+    }    
   }
 
   function reverseTransaction(t) {
@@ -135,6 +148,9 @@ function OrderItemCtrl(Receipt, $state, $stateParams, $filter, toastr, pharmacar
       };
       if (vm.receipt.receipt_type === 'purchase' && t.transaction_type === 'purchase') {
         params.receipt.transactions_attributes[0].purchase_user_id = vm.edit_user.id;
+      }
+      if (vm.receipt.receipt_type === 'sale' && t.transaction_type === 'sale') {
+        params.receipt.transactions_attributes[0].sale_user_id = vm.edit_user.id;
       }
       Receipt.update({id: vm.receipt.id}, params).$promise.then(function(resp){
         vm.receipt = resp.data;
@@ -165,6 +181,11 @@ function OrderItemCtrl(Receipt, $state, $stateParams, $filter, toastr, pharmacar
     } else {
       transaction.due_date = new Date(moment().startOf('day'));
     }
+  }
+
+  function updateBatchSalePrice(transaction) {
+    var unit_price = transaction.total_price / transaction.amount;
+    vm.edit_transaction.total_price = unit_price * vm.edit_transaction.amount;
   }
 
   function validateData() {
@@ -200,11 +221,9 @@ function OrderItemCtrl(Receipt, $state, $stateParams, $filter, toastr, pharmacar
 
   function buildParams(transaction) {
     var params = {
-      receipt: {
-        id: vm.receipt.id        
-      }
+      receipt: {}
     };
-    if (vm.receipt.receipt_type == 'purchase' && vm.edit_transaction.transaction_type === 'purchase') {
+    if (vm.receipt.receipt_type === 'purchase' && vm.edit_transaction.transaction_type === 'purchase') {
       var t = {
         id: transaction.id,
         amount: vm.edit_transaction.amount,        
@@ -225,6 +244,17 @@ function OrderItemCtrl(Receipt, $state, $stateParams, $filter, toastr, pharmacar
       };
       params.receipt.transactions_attributes = [t];
       params.receipt.med_batches_attributes = [b];
+    }
+    else if (vm.receipt.receipt_type === 'sale' && vm.edit_transaction.transaction_type === 'sale') {
+      params.receipt.transactions_attributes = [
+        {
+          id: transaction.id,
+          notes: vm.edit_transaction.notes,
+          sale_user_id: vm.edit_user.id,
+          amount: vm.edit_transaction.amount,
+          total_price: vm.edit_transaction.total_price          
+        }
+      ];
     }
     return params;
   }

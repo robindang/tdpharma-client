@@ -1,0 +1,54 @@
+div.panel.panel-default(ng-repeat='t in vm.receipt.transactions')
+	div.panel-heading.clearfix
+		h4.panel-title.pull-left.m-5-t(ng-click='t.is_collapsed = !t.is_collapsed')
+			| {{t.seller_item.itemable.name | uppercase }}, {{t.seller_item.itemable.concentration }} {{t.seller_item.itemable.concentration_unit}}, {{t.seller_item.itemable.manufacturer}}, {{t.seller_item.itemable.mfg_location }}			
+		button.btn.btn-default.pull-right.m-10-l(ng-click='vm.editTransaction(t)' ng-if='t.is_editting === false && t.is_editable === true')
+			i.fa.fa-pencil
+			| &nbsp;{{'EDIT' | translate }}
+		button.btn.btn-default.pull-right.m-10-l(ng-click='vm.goToItem(t)' ng-if='t.is_editting === false')
+			i.fa.fa-laptop
+			| &nbsp;{{'VIEW' | translate }}
+		button.btn.btn-primary.pull-right.m-10-l(ng-click='t.is_editting = false; vm.edit_transaction = {}' ng-if='t.is_editting === true')
+			i.fa.fa-times
+			| &nbsp;{{'BACK' | translate }}
+		button.btn.btn-success.pull-right.m-10-l(ng-click='vm.saveEdit(t)' ng-if='t.is_editting === true')
+			i.fa.fa-floppy-o
+			| &nbsp;{{'SAVE' | translate }}
+		button.btn.btn-danger.pull-right(ng-click='vm.reverseTransaction(t)' ng-if='t.is_editting === true')
+			i.fa.fa-trash-o
+			| &nbsp;{{'RETURN' | translate }}
+	div.panel-body(uib-collapse='t.is_collapsed' ng-class="{'returned-bg': t.status === 'deprecated'}")
+		.col-md-6.col-sm-6
+			label.col-md-4.col-xs-5.control-label {{ 'QUANTITY' | translate }}:
+			.col-md-8.col-xs-7
+				p(ng-if='t.is_editting === false') {{ t.amount }}
+				p(ng-if='t.is_editting === true')
+					input.form-control(type='number' placeholder="{{ 'QUANTITY' | translate }}" ng-model='vm.edit_transaction.amount' required ng-change='vm.updateBatchSalePrice(t)' min='0')
+			label.col-md-4.col-xs-5.control-label {{ 'MANUFACTURE_DATE' | translate }}:
+			.col-md-8.col-xs-7
+				p {{t.med_batch.mfg_date | amDateFormat:'L'}}				
+			label.col-md-4.col-xs-5.control-label {{ 'EXPIRE_DATE' | translate }}:
+			.col-md-8.col-xs-7
+				p {{t.med_batch.expire_date | amDateFormat:'L'}}
+			label.col-md-4.col-xs-5.control-label(ng-if='t.is_updated') {{ 'UPDATED_AT' | translate }}:
+			.col-md-8.col-xs-7(ng-if='t.is_updated')
+				p {{t.updated_at | amDateFormat:'lll'}}										
+		.col-md-6.col-sm-6
+			label.col-md-4.col-xs-5.control-label {{'SALE_PRICE' | translate }}:
+			.col-md-8.col-xs-7
+				p(ng-if='t.is_editting === false') {{t.total_price | currency:undefined:0 }}
+				p(ng-if='t.is_editting === true')
+					input.form-control(type='number' placeholder='{{ SALE_PRICE | translate}}' ng-model='vm.edit_transaction.total_price' required min='0')
+			label.col-md-4.col-xs-5.control-label {{'AUTHOR' | translate }}:
+			.col-md-8.col-xs-7
+				p(ng-if='t.is_editting === false') {{t.sale_user.first_name }} {{ t.sale_user.last_name }}
+				ui-select.m-10-b#user(ng-model='vm.edit_user' name='author' close-on-select='true' required ng-if='t.is_editting === true')
+					ui-select-match(placeholder="{{ 'SELECT_USER' | translate }}") {{$select.selected.first_name}} {{$select.selected.last_name}}
+					ui-select-choices(repeat='data in vm.store_users | filter:$select.search') {{data.first_name}} {{data.last_name}}
+			label.col-md-4.col-xs-5.control-label(ng-if='t.is_editting === true') {{'NOTE' | translate }}:
+			.col-md-8.col-xs-7(ng-if='t.is_editting === true')
+				textarea.form-control(type='text' ng-model='vm.edit_transaction.notes' rows='5' required autofocus='true')
+			.col-md-12.m-10-b
+				io-barcode.m-10-t(code='{{t.med_batch.barcode}}' type='CODE39' ng-if='t.med_batch.barcode' options='vm.barcode_style' ng-click='vm.print(t.med_batch)' id='code-{{t.med_batch.barcode}}')
+			.col-md-12(ng-if='t.is_editting === false')
+				p {{t.notes}}								

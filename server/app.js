@@ -17,7 +17,7 @@ var app = express();
 var http = require('http');
 var server = http.createServer(app);
 
-// Setup server. Only needed for development 
+// Setup development for https server. Only needed for development while connecting to production server
 // var https = require('https');
 // var options = {
 //      key: fs.readFileSync('./server/config/develop_ssl/server.key'),
@@ -25,6 +25,7 @@ var server = http.createServer(app);
 //   };
 // var server = https.createServer(options, app);
 
+// Force application to use https
 app.use('*',function(req,res,next){  
 	var isSecure = req.secure || req.headers['x-forwarded-proto'] == 'https';
   if (!isSecure) return res.redirect('https://' + req.headers.host + req.url);

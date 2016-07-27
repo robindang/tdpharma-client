@@ -11,7 +11,7 @@
 
     $translateProvider.translations('en', {      
       GREETING: 'Allo, Allo!',
-      LEADING_GREETING: 'Kick-start your pharmacy with Pharmaplus',
+      LEADING_GREETING: 'Kick-start your pharmacy with Pharmacare',
       HOME: 'Home',
       INVENTORY: 'Inventory',
       ORDERS: 'Orders',
@@ -179,7 +179,8 @@
       'NO_PRINTER': 'There is no printer detected',
       'BARCODE': 'Barcode',
       'CURRENT_USED_BARCODE': 'Barcode of the currently used batch',
-      'CURRENT_BATCH': 'Current Batch'      
+      'CURRENT_BATCH': 'Current Batch',
+      'RETURN': 'Return'      
     });
     $translateProvider.preferredLanguage('vi');
   }

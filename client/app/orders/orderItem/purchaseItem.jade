@@ -111,7 +111,7 @@ div.panel.panel-default(ng-repeat='t in vm.receipt.transactions')
 			.col-md-8.col-xs-7(ng-if='t.is_editting === true')
 				textarea.form-control(type='text' ng-model='vm.edit_transaction.notes' rows='5' required)
 			.col-md-12.m-10-b
-				io-barcode.m-10-t(code='{{t.med_batch.barcode}}' type='CODE128B' ng-if='t.med_batch.barcode' options='vm.barcode_style' ng-click='vm.print(t.med_batch)' id='code-{{t.med_batch.barcode}}')
+				io-barcode.m-10-t(code='{{t.med_batch.barcode}}' type='CODE39' ng-if='t.med_batch.barcode' options='vm.barcode_style' ng-click='vm.print(t.med_batch)' id='code-{{t.med_batch.barcode}}')
 			.col-md-12(ng-if='t.is_editting === false')
 				p {{t.notes}}
 

@@ -13,7 +13,7 @@ div(ng-include='"components/templates/navbar/navbar.html"')
             th {{'AMOUNT' | translate }}
             th {{'TOTAL' | translate }}
         tbody(ng-show='oc.is_loading_sales')
-          tr(ng-repeat='sale in oc.sales | orderBy:"-created_at"')
+          tr(ng-repeat='sale in oc.sales | orderBy:"-created_at"' ng-click='oc.toOrder(sale)')
             td {{sale.created_at | amDateFormat:'lll'}}
             td        
               div.row(ng-repeat='t in sale.transactions | limitTo: 5') {{t.seller_item.itemable.name}}
