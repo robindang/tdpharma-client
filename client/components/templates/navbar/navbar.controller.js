@@ -28,17 +28,28 @@ function NavbarCtrl($scope, $location, $translate, amMoment, pharmacare, Auth) {
   ctrl.isAdmin = Auth.isAdmin;
   ctrl.getCurrentUser = Auth.getCurrentUser;
   ctrl.logout = logout;
-  ctrl.pharmacare = pharmacare;
+  ctrl.pharmacare = pharmacare;  
+  ctrl.switchCurrentUser = Auth.switchCurrentUser;
+  ctrl.getUsersList = getUsersList;
   
   init();
 
   function init() {
-    $scope.$watch('locale', pharmacare.updateLocale);
+    $scope.$watch('locale', pharmacare.updateLocale);  
+    Auth.checkReady().then(function(){
+      ctrl.users = Auth.getUsers();
+    })  
+  }
+
+  function getUsersList() {
+    ctrl.users = Auth.getUsers();
   }
 
   function logout() {
-    Auth.logout();
-    $location.path('/login');
+    var remain = Auth.logout();
+    if (remain === 0) {
+      $location.path('/login');
+    }          
   }
 
   function isActive(link) {

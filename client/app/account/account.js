@@ -4,7 +4,7 @@ angular.module('tdpharmaClientApp')
   .config(function ($stateProvider) {
     $stateProvider
       .state('login', {
-        url: '/login',
+        url: '/login?extra',
         templateUrl: 'app/account/login/login.html',
         controller: 'LoginCtrl'
       })

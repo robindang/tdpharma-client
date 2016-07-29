@@ -37,9 +37,18 @@ div.navbar.navbar-default.navbar-static-top(ng-controller='NavbarCtrl as nc')
         li(ng-show='nc.isLoggedIn()')
           p.navbar-text Hello {{ nc.getCurrentUser().first_name }}
 
-        li(ng-show='nc.isLoggedIn()', ng-class='{active: nc.isActive(["/settings"])}')
-          a(href='/settings')
+        li.dropdown(ng-show='nc.isLoggedIn()')
+          a.dropdown-toggle(href='javascript:void(0);' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false' ng-click='nc.getUsersList()')
             span.glyphicon.glyphicon-cog
+            span.caret
+          ul.dropdown-menu
+            li(ng-repeat='user in nc.users') 
+              a(href='javascript:void(0);' ng-click='nc.switchCurrentUser(user)') {{user.first_name}} {{user.last_name}}              
+            li.divider(role='separator')
+            li
+              a(href='/settings') {{ 'PASSWORD_CHANGE_TITLE' | translate }}
+            li
+              a(href='/login?extra=true') {{ 'EXTRA_LOGIN' | translate }}        
 
         li(ng-show='nc.isLoggedIn()', ng-class='{active: nc.isActive(["/logout"])}')
           a(href='', ng-click='nc.logout()') {{'LOGOUT' | translate}}

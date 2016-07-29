@@ -38,8 +38,8 @@ angular.module('tdpharmaClientApp', [
       // Add authorization token to headers
       request: function (config) {
         config.headers = config.headers || {};
-        if ($cookies.get('token')) {
-          config.headers.Authorization = 'Bearer ' + $cookies.get('token');
+        if ($cookies.get('token') && $cookies.get('email')) {          
+          config.headers.Authorization = $cookies.get('email') + ':' + $cookies.get('token');
         }
         return config;
       },
@@ -57,6 +57,7 @@ angular.module('tdpharmaClientApp', [
           $location.path('/login');
           // remove any stale tokens
           $cookies.remove('token');
+          $cookies.remove('email');
           return $q.reject(response);
         }
         else {

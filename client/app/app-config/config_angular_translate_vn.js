@@ -19,6 +19,7 @@
       SIGNUP: 'Đăng Ký',
       REGISTER: 'Đăng Ký',
       LOGIN: 'Đăng Nhập',
+      EXTRA_LOGIN: 'Đăng Nhập Thêm',
       LOGOUT: 'Đăng xuất',
       EMAIL: 'Email',
       PASSWORD: 'Mật Mã',

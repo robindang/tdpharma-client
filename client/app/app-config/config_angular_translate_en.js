@@ -19,6 +19,7 @@
       SIGNUP: 'Sign up',
       REGISTER: 'Register',
       LOGIN: 'Login',
+      EXTRA_LOGIN: 'Additonal Login',
       LOGOUT: 'Log out',      
       EMAIL: 'Email',
       PASSWORD: 'Password',
