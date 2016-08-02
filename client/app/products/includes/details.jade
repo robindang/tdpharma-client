@@ -10,9 +10,7 @@
         .form-group
           label.col-sm-2.control-label(for='user') {{ 'AUTHOR' | translate }}
           .col-sm-10
-            ui-select#user(ng-model='pc.selected_user' name='author' close-on-select='true' required)
-              ui-select-match(placeholder="{{ 'SELECT_USER' | translate }}") {{$select.selected.first_name}} {{$select.selected.last_name}}
-              ui-select-choices(repeat='data in pc.store_users | filter:$select.search') {{data.first_name}} {{data.last_name}}                                      
+            author-select(author='pc.selected_user')
         .form-group
           label.col-sm-2.control-label(for='name') {{ 'NAME' | translate }}
           .col-sm-10

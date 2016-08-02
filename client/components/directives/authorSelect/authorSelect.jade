@@ -1,0 +1,4 @@
+div(class="col-sm-{{divider}} text-center" ng-repeat='u in users')
+	div.circle-profile(back-img='{{u.photo_medium.photo | resolve}}' ng-click='selectUser(u)' ng-class='{"circle-active": author.id == u.id}')
+	p {{u.first_name}} {{u.last_name}}
+
