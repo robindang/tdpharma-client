@@ -44,25 +44,6 @@ function Auth($location, $rootScope, $http, User, $cookies, $q) {
     defer.resolve();
   }
 
-  // // Initialize user if there is data stored in cookies
-  // if ($cookies.get('email') && $cookies.get('token')) {
-  //   User.get().$promise.then(function(resp){
-  //     if (resp.email === $cookies.get('email')) {
-  //       currentUser = resp;
-  //       users.push(currentUser);        
-  //     }
-  //     else {
-  //       $cookies.remove('email');
-  //       $cookies.remove('token');
-  //       currentUser = {};
-  //     }
-  //     defer.resolve();
-  //   });
-  // }
-  // else {
-  //   defer.resolve();
-  // }  
-
   function checkReady() {
     return defer.promise;
   }
