@@ -10,24 +10,58 @@ function Auth($location, $rootScope, $http, User, $cookies, $q) {
   var currentUser = {};
   var defer = $q.defer();
 
-  // Initialize user if there is data stored in cookies
-  if ($cookies.get('email') && $cookies.get('token')) {
-    User.get().$promise.then(function(resp){
-      if (resp.email === $cookies.get('email')) {
-        currentUser = resp;
-        users.push(currentUser);        
-      }
-      else {
-        $cookies.remove('email');
-        $cookies.remove('token');
-        currentUser = {};
-      }
-      defer.resolve();
-    });
+  // Strategies: Auth service will store latest info of signed in users
+  // Cookies will store the data obtained through Auth to communicate with server.
+  // Data in cookies already is used to re-initialize signed in users in case of refresh
+
+  // Initialize sign in user if there is data stored in cookies  
+  if ($cookies.getObject('users') && $cookies.get('email') && $cookies.get('token')) {    
+    if (Object.prototype.toString.call($cookies.getObject('users')) === '[object Array]') {
+      // Get all current sign in users
+      users = $cookies.getObject('users');
+      // First obtain who is the current active sign in user
+      var u = _.find(users, function(x){return x.email === $cookies.get('email') && x.authentication_token === $cookies.get('token')});
+      if (u) {
+        User.get().$promise.then(function(resp){
+          if (resp.email === u.email) {
+            currentUser = resp;              
+          }
+          else {
+            $cookies.remove('email');
+            $cookies.remove('token');
+            currentUser = {};
+          }        
+          defer.resolve();        
+        });
+      } 
+    }
+    else { 
+      $cookies.putObject('users', []);
+    }
+    defer.resolve();    
   }
   else {
     defer.resolve();
-  }  
+  }
+
+  // // Initialize user if there is data stored in cookies
+  // if ($cookies.get('email') && $cookies.get('token')) {
+  //   User.get().$promise.then(function(resp){
+  //     if (resp.email === $cookies.get('email')) {
+  //       currentUser = resp;
+  //       users.push(currentUser);        
+  //     }
+  //     else {
+  //       $cookies.remove('email');
+  //       $cookies.remove('token');
+  //       currentUser = {};
+  //     }
+  //     defer.resolve();
+  //   });
+  // }
+  // else {
+  //   defer.resolve();
+  // }  
 
   function checkReady() {
     return defer.promise;
@@ -55,6 +89,7 @@ function Auth($location, $rootScope, $http, User, $cookies, $q) {
       users.push(currentUser);
       $cookies.put('email', currentUser.email);
       $cookies.put('token', currentUser.authentication_token);
+      $cookies.putObject('users', users);
       deferred.resolve(data);
       return cb();
     },
@@ -80,6 +115,7 @@ function Auth($location, $rootScope, $http, User, $cookies, $q) {
     if (idx >= 0) {
       users.splice(idx, 1);
     }    
+    $cookies.putObject('users', users);
     if (users.length > 0) {
       currentUser = users[0];
     }
