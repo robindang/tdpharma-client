@@ -1,7 +1,7 @@
 div(ng-include='"components/templates/navbar/navbar.html"')
 .col-sm-12
   uib-tabset
-    uib-tab(heading="{{'PURCHASES_RECEIPT' | translate }}", active="false", disable="tab.disabled" ng-click='oc.toPurchases')
+    uib-tab(heading="{{'PURCHASES_RECEIPT' | translate }}", active="false", disable="tab.disabled" ng-click='oc.toPurchases()')
     uib-tab(heading="{{'SALES_RECEIPT' | translate }}", active="false", disable="tab.disabled" ng-click='oc.toSales()')
     uib-tab(heading="{{'ADJUSTMENTS_RECEIPT' | translate }}", active="true", disable="tab.disabled")      
       table.table.table-striped(st-pipe='oc.getAdjustments', st-table='oc.adjustments')
@@ -17,13 +17,13 @@ div(ng-include='"components/templates/navbar/navbar.html"')
           tr(ng-repeat='item in oc.adjustments | orderBy:"-created_at"')
             td {{item.created_at | amDateFormat:'lll'}}
             td        
-              div.row(ng-repeat='t in item.transactions | limitTo: 5') {{t.adjust_item.itemable.name}}
+              div.row(ng-repeat='t in item.transactions | limitTo: 5') {{t.inventory_item.itemable.name}}
               div.row(ng-show='item.transactions.length > 5') ...
             td 
-              div.row(ng-repeat='t in item.transactions | limitTo: 5') {{t.adjust_item.itemable.concentration}} {{t.adjust_item.itemable.concentration_unit}}
+              div.row(ng-repeat='t in item.transactions | limitTo: 5') {{t.inventory_item.itemable.concentration}} {{t.inventory_item.itemable.concentration_unit}}
               div.row(ng-show='item.transactions.length > 5') ...
             td 
-              div.row(ng-repeat='t in item.transactions | limitTo: 5') {{t.adjust_item.itemable.manufacturer}}, {{t.adjust_item.itemable.mfg_location}}
+              div.row(ng-repeat='t in item.transactions | limitTo: 5') {{t.inventory_item.itemable.manufacturer}}, {{t.inventory_item.itemable.mfg_location}}
               div.row(ng-show='item.transactions.length > 5') ...
             td
               div.row(ng-repeat='t in item.transactions | limitTo: 5') {{t.amount}}      

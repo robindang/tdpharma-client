@@ -20,6 +20,12 @@ function InventoryItemCtrl($location, $stateParams, $window, pharmacare, toastr,
   ctrl.initBreadcrumbs = initBreadcrumbs;
   ctrl.updateTotalAmount = updateTotalAmount;
   ctrl.saveBatch = saveBatch;
+  ctrl.open = openCalendar;
+  ctrl.dateOptions = {
+    formatYear: 'yy',
+    startingDay: 1
+  };
+  ctrl.maxDate = new Date();
   
   init();
 
@@ -58,7 +64,9 @@ function InventoryItemCtrl($location, $stateParams, $window, pharmacare, toastr,
           });
         },
         function(next) {
-          initMode();
+          initMode();                  
+          if (ctrl.mode.isAddMode()) {ctrl.mode.setAddMode();}
+          if (ctrl.mode.isEditMode()) {ctrl.mode.setEditMode();}
           next(null);
         }
       ], callback || function(error){
@@ -87,7 +95,7 @@ function InventoryItemCtrl($location, $stateParams, $window, pharmacare, toastr,
   function saveBatch() {
     if (ctrl.edit_user) {
       ctrl.medicine.med_batches_attributes[0].user_id = ctrl.edit_user.id;
-    }
+    }    
     var bOk = ctrl.pharmacare.validateMedBatch(ctrl.medicine.med_batches_attributes[0], ctrl.item.itemable.name);
     if (bOk) {
       Medicine.update({id: ctrl.item.itemable.id}, {medicine: ctrl.medicine}).$promise.then(function(resp){
@@ -105,15 +113,15 @@ function InventoryItemCtrl($location, $stateParams, $window, pharmacare, toastr,
     var __mode = (hash==='add'||hash==='edit') ? hash:'read';
     var __oldItem = angular.copy(ctrl.item);
 
-    ctrl.mode = {
+    ctrl.mode = {      
       isAddMode: __getter('add'),
       isEditMode: __getter('edit'),
       isReadMode: __getter('read'),
       save: __save,
       setAddMode: __setter('add'),
       setEditMode: __setter('edit'),
-      setReadMode: __setter('read')
-    };
+      setReadMode: __setter('read')      
+    };        
 
     function __getter(mode) {return function() {return __mode===mode;};}
     function __setter(mode) {return function() {
@@ -123,7 +131,7 @@ function InventoryItemCtrl($location, $stateParams, $window, pharmacare, toastr,
       if (__mode === 'add') {
         ctrl.medicine = {          
           med_batches_attributes: [
-            { category_id: ctrl.item.category_id }
+            { category_id: ctrl.item.category_id, store_id: ctrl.edit_user.store_id }
           ]          
         };        
       }
@@ -134,6 +142,11 @@ function InventoryItemCtrl($location, $stateParams, $window, pharmacare, toastr,
       InventoryItem.update({id: ctrl.item.id}, {inventory_item: ctrl.item});
       __mode = 'read';
     }
+  }
 
+  function openCalendar(status, $event, $index) {
+    ctrl[status] = ctrl[status] || [];
+    ctrl[status][$index] = ctrl[status][$index] || {};
+    ctrl[status][$index].opened = true;
   }
 }

@@ -52,11 +52,11 @@ function OrderItemCtrl(Receipt, $state, $stateParams, $filter, toastr, pharmacar
       t.due_date = moment(t.due_date);
       t.is_editting = false;
       // If this purchased batch is already on sale, can't edit.
-      if (t.buyer_item_id) {
-        t.is_editable = (t.med_batch.total_units == t.med_batch.amount_per_pkg * t.med_batch.number_pkg && t.buyer_item_id) ? true : false;  
+      if (t.inventory_item_id && t.transaction_type === 'PurchaseTransaction') {
+        t.is_editable = (t.med_batch.total_units == t.med_batch.amount_per_pkg * t.med_batch.number_pkg && t.inventory_item_id) ? true : false;  
       } 
       // If this is a sale, allow return
-      else if (t.seller_item_id && t.status !== 'deprecated') {
+      else if (t.inventory_item_id && t.transaction_type === 'SaleTransaction' && t.status !== 'deprecated') {
         t.is_editable = true;
       }
       t.med_batch.mfg_date = moment(t.med_batch.mfg_date).startOf('day');
@@ -104,12 +104,9 @@ function OrderItemCtrl(Receipt, $state, $stateParams, $filter, toastr, pharmacar
       vm.edit_transaction.delivery_time = new Date(vm.edit_transaction.delivery_time);
       vm.edit_transaction.due_date = new Date(vm.edit_transaction.due_date);
     }
-    if (vm.edit_transaction.purchase_user_id) {
-      vm.edit_user = _.find(vm.store_users, function(u){return u.id === vm.edit_transaction.purchase_user_id;});
-    }
-    if (vm.edit_transaction.sale_user_id) {
-      vm.edit_user = _.find(vm.store_users, function(u){return u.id === vm.edit_transaction.sale_user_id;});      
-    }
+    if (vm.edit_transaction.user_id) {
+      vm.edit_user = _.find(vm.store_users, function(u){return u.id === vm.edit_transaction.user_id;});
+    }    
   }
 
   function openCalendar(status, $event, $index) {
@@ -133,24 +130,31 @@ function OrderItemCtrl(Receipt, $state, $stateParams, $filter, toastr, pharmacar
         toastr.error($filter('translate')('EXPLANATION_REQUIRED')); return;
       }
       var params = {
-        receipt: {
-          id: vm.receipt.id,
-          transactions_attributes: [
-            {
-              id: t.id,
-              status: 'deprecated',              
-              paid: vm.edit_transaction.paid,
-              performed: vm.edit_transaction.performed,
-              notes: vm.edit_transaction.notes
-            }
-          ]
-        }
+        receipt: { id: vm.receipt.id }
       };
-      if (vm.receipt.receipt_type === 'purchase' && t.transaction_type === 'purchase') {
-        params.receipt.transactions_attributes[0].purchase_user_id = vm.edit_user.id;
+      if (vm.receipt.receipt_type === 'purchase' && t.transaction_type === 'PurchaseTransaction') {
+        params.receipt.purchase_transactions_attributes = [
+          {
+            id: t.id,
+            status: 'deprecated',
+            user_id: vm.edit_user.id,   
+            paid: vm.edit_transaction.paid,
+            performed: vm.edit_transaction.performed,
+            notes: vm.edit_transaction.notes
+          }
+        ];        
       }
-      if (vm.receipt.receipt_type === 'sale' && t.transaction_type === 'sale') {
-        params.receipt.transactions_attributes[0].sale_user_id = vm.edit_user.id;
+      if (vm.receipt.receipt_type === 'sale' && t.transaction_type === 'SaleTransaction') {
+        params.receipt.sale_transactions_attributes = [
+          {
+            id: t.id,
+            status: 'deprecated',
+            user_id: vm.edit_user.id,
+            paid: vm.edit_transaction.paid,
+            performed: vm.edit_transaction.performed,
+            notes: vm.edit_transaction.notes
+          }
+        ];        
       }
       Receipt.update({id: vm.receipt.id}, params).$promise.then(function(resp){
         vm.receipt = resp.data;
@@ -223,7 +227,7 @@ function OrderItemCtrl(Receipt, $state, $stateParams, $filter, toastr, pharmacar
     var params = {
       receipt: {}
     };
-    if (vm.receipt.receipt_type === 'purchase' && vm.edit_transaction.transaction_type === 'purchase') {
+    if (vm.receipt.receipt_type === 'purchase' && vm.edit_transaction.transaction_type === 'PurchaseTransaction') {
       var t = {
         id: transaction.id,
         amount: vm.edit_transaction.amount,        
@@ -232,7 +236,7 @@ function OrderItemCtrl(Receipt, $state, $stateParams, $filter, toastr, pharmacar
         paid: vm.edit_transaction.paid,
         due_date:  vm.edit_transaction.due_date,
         notes: vm.edit_transaction.notes,
-        purchase_user_id: vm.edit_user.id        
+        user_id: vm.edit_user.id        
       };
       var b = {
         id: transaction.med_batch.id,
@@ -242,15 +246,15 @@ function OrderItemCtrl(Receipt, $state, $stateParams, $filter, toastr, pharmacar
         expire_date: moment(vm.edit_transaction.med_batch.expire_date),
         package: vm.edit_transaction.med_batch.package
       };
-      params.receipt.transactions_attributes = [t];
+      params.receipt.purchase_transactions_attributes = [t];
       params.receipt.med_batches_attributes = [b];
     }
-    else if (vm.receipt.receipt_type === 'sale' && vm.edit_transaction.transaction_type === 'sale') {
-      params.receipt.transactions_attributes = [
+    else if (vm.receipt.receipt_type === 'sale' && vm.edit_transaction.transaction_type === 'SaleTransaction') {
+      params.receipt.sale_transactions_attributes = [
         {
           id: transaction.id,
           notes: vm.edit_transaction.notes,
-          sale_user_id: vm.edit_user.id,
+          user_id: vm.edit_user.id,
           amount: vm.edit_transaction.amount,
           total_price: vm.edit_transaction.total_price          
         }
@@ -272,14 +276,7 @@ function OrderItemCtrl(Receipt, $state, $stateParams, $filter, toastr, pharmacar
   }
 
   function goToItem(transaction) {
-    var id;
-    if (transaction.transaction_type === 'purchase') {
-      id = transaction.buyer_item.id;
-    } else if (transaction.transaction_type === 'sale') {
-      id = transaction.seller_item.id;
-    } else if (transaction.transaction_type === 'adjustment') {
-      id = transaction.adjust_item.id;
-    }
+    var id = transaction.inventory_item.id;    
     if (id) {
       $state.go('inventoryItem', {id: id});
     }    

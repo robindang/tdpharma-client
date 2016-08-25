@@ -16,13 +16,13 @@ div(ng-include='"components/templates/navbar/navbar.html"')
           tr(ng-repeat='sale in oc.sales | orderBy:"-created_at"' ng-click='oc.toOrder(sale)')
             td {{sale.created_at | amDateFormat:'lll'}}
             td        
-              div.row(ng-repeat='t in sale.transactions | limitTo: 5') {{t.seller_item.itemable.name}}
+              div.row(ng-repeat='t in sale.transactions | limitTo: 5') {{t.inventory_item.itemable.name}}
               div.row(ng-show='sale.transactions.length > 5') ...
             td 
-              div.row(ng-repeat='t in sale.transactions | limitTo: 5') {{t.seller_item.itemable.concentration}} {{t.seller_item.itemable.concentration_unit}}
+              div.row(ng-repeat='t in sale.transactions | limitTo: 5') {{t.inventory_item.itemable.concentration}} {{t.inventory_item.itemable.concentration_unit}}
               div.row(ng-show='sale.transactions.length > 5') ...
             td 
-              div.row(ng-repeat='t in sale.transactions | limitTo: 5') {{t.seller_item.itemable.manufacturer}}, {{t.seller_item.itemable.mfg_location}}
+              div.row(ng-repeat='t in sale.transactions | limitTo: 5') {{t.inventory_item.itemable.manufacturer}}, {{t.inventory_item.itemable.mfg_location}}
               div.row(ng-show='sale.transactions.length > 5') ...
             td
               div.row(ng-repeat='t in sale.transactions | limitTo: 5') {{t.amount}}

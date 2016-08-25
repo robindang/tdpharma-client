@@ -23,13 +23,13 @@ function CheckoutConfirmCtrl($scope, $localStorage, $location, _, toastr, Receip
     var o = {
       receipt: {
         receipt_type: 'sale',
-        transactions_attributes: _.map(cart.products, function(item) {
+        sale_transactions_attributes: _.map(cart.products, function(item) {
           return {
             amount: item.quantity,
             med_batch_id: item.id,
             due_date: moment(),
             delivery_time: moment(),
-            sale_user_id: 1,            
+            user_id: 1,            
             total_price: item.quantity * item.inventory_item.sale_price.amount
           };
         })

@@ -71,7 +71,13 @@ function pharmacare($filter, $storage, $translate, $window, $locale, amMoment, t
       if (!batch.mfg_date){
         toastr.error(name + ': ' + $filter('translate')('MFG_DATE_REQUIRED')); return false;
       }
+      if (batch.mfg_date >= new Date()) {
+        toastr.error(name + ': ' + $filter('translate')('MFG_DATE_REQUIRED')); return false;
+      }
       if (!batch.expire_date) {
+        toastr.error(name + ': ' + $filter('translate')('EXPIRE_DATE_REQUIRED')); return false;
+      }      
+      if (batch.expire_date <= batch.mfg_date || batch.expire_date <= new Date()) {
         toastr.error(name + ': ' + $filter('translate')('EXPIRE_DATE_REQUIRED')); return false;
       }
       if (!batch.package){
