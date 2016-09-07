@@ -37,7 +37,8 @@ div(ng-include='"components/templates/navbar/navbar.html"')
             p.form-control-static
               a(ng-href='/inventory/{{product.inventory_item.id}}') {{ product.inventory_item.itemable.name }} 
           td.col-md-1
-            p.form-control-static {{ product.inventory_item.sale_price.amount | currency }} 
+            //- p.form-control-static {{ product.inventory_item.sale_price.amount | currency }} 
+            input.form-control-static(type='text' ng-model='product.inventory_item.sale_price.amount' select-on-click text-format='number')
           td.col-md-2
             .input-group
               span.input-group-btn

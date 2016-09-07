@@ -25,9 +25,17 @@ function InventoryCtrl(_, pharmacare, toastr, $state, InventoryItem, InventorySe
 
   function updateItemList() {      
     if (ctrl.status === 'active') {
-      ctrl.displayed = _.filter(ctrl.raw, function(i){return i.status === 'active';});
+      ctrl.displayed = _.filter(ctrl.raw, function(i){
+        return i.status === 'active' &&
+          (!ctrl.isNoPrice || !i.sale_price.amount) &&
+          (!ctrl.isNoInventory || !i.amount);
+      });
     } else if (ctrl.status === 'inactive') {
-      ctrl.displayed = _.filter(ctrl.raw, function(i){return i.status === 'inactive';});
+      ctrl.displayed = _.filter(ctrl.raw, function(i){
+        return i.status === 'inactive' &&
+          (!ctrl.isNoPrice || !i.sale_price.amount) &&
+          (!ctrl.isNoInventory || !i.amount);
+      });
     } else {
       ctrl.displayed = ctrl.raw;
     }

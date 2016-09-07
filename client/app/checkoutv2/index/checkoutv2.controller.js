@@ -3,9 +3,11 @@
 angular.module('tdpharmaClientApp')
   .controller('Checkoutv2Ctrl', Checkoutv2Ctrl);
 
-Checkoutv2Ctrl.$inject = ['$scope', '$localStorage', '$location', 'InventoryItem', 'toastr', 'MedBatch'];
+Checkoutv2Ctrl.$inject = ['$scope', '$localStorage', '$location', '$window', 
+  'InventoryItem', 'toastr', 'MedBatch'];
 
-function Checkoutv2Ctrl($scope, $localStorage, $location, InventoryItem, toastr, MedBatch) {
+function Checkoutv2Ctrl($scope, $localStorage, $location, $window, InventoryItem, 
+  toastr, MedBatch) {
 
   var emptyCart = {
     products: {},
@@ -100,6 +102,7 @@ function Checkoutv2Ctrl($scope, $localStorage, $location, InventoryItem, toastr,
   }
 
   function onKeydown(event, e) {
+    if ($window.document.activeElement !== $window.document.body) return;
     var s = String.fromCharCode(e.which);
     if (e.which === 27) {
       resetCart();

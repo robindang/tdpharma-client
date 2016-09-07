@@ -26,11 +26,13 @@ var server = http.createServer(app);
 // var server = https.createServer(options, app);
 
 // Force application to use https
-app.use('*',function(req,res,next){  
-	var isSecure = req.secure || req.headers['x-forwarded-proto'] == 'https';
-  if (!isSecure) return res.redirect('https://' + req.headers.host + req.url);
-  next();
-});
+if (config.httpsOnly) {
+  app.use('*',function(req,res,next){  
+    var isSecure = req.secure || req.headers['x-forwarded-proto'] == 'https';
+    if (!isSecure) return res.redirect('https://' + req.headers.host + req.url);
+    next();
+  });
+}
 
 var socketio = require('socket.io')(server, {
   serveClient: (config.env === 'production') ? false : true,

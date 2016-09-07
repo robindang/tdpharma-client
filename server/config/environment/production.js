@@ -12,4 +12,6 @@ module.exports = {
   port:     process.env.OPENSHIFT_NODEJS_PORT ||
             process.env.PORT ||
             8080,
+  // Enforce HTTPS
+  httpsOnly: true
 };
