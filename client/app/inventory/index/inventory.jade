@@ -21,13 +21,24 @@ div(ng-include='"components/templates/navbar/navbar.html"')
               span {{ic.numberOfResults}} {{'ITEMS'|translate}}
           br                                            
           .form-inline.col-md-12.clearfix
-            .form-group.col-md-3.pull-left
+            .form-group.col-md-6.pull-left
               label.control-label {{'FILTER'|translate}}
               span &nbsp;&nbsp;
               .btn-group
                 //- label.btn.btn-default(ng-model='ic.status', uib-btn-radio="''", ng-change='ic.updateItemList()') All
                 label.btn.btn-default(ng-model='ic.status', uib-btn-radio="'active'", ng-change='ic.updateItemList()') {{'On Sale' | translate }}
                 label.btn.btn-default(ng-model='ic.status', uib-btn-radio="'inactive'", ng-change='ic.updateItemList()') {{'Off Sale' | translate }}
+              span &nbsp;&nbsp;
+              .btn-group
+                label.btn.btn-default(ng-model='ic.isNoPrice' uib-btn-checkbox ng-change='ic.updateItemList()')
+                  i.fa.fa-money
+                  | &nbsp;{{'No Price' | translate }}
+              span &nbsp;&nbsp;
+              .btn-group
+                label.btn.btn-default(ng-model='ic.isNoInventory' uib-btn-checkbox ng-change='ic.updateItemList()')
+                  i.fa.fa-truck
+                  | &nbsp;{{'No Inventory' | translate }}
+
             .form-group.pull-right
               a.btn.btn-primary(href="/products") {{'ADD_A_PRODUCT' | translate}}
       tr
