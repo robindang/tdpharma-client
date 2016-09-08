@@ -8,7 +8,7 @@ angular.module('tdpharmaClientApp')
         if (!ctrl) return;
 
          ctrl.$formatters.unshift(function () {
-           return $filter(attrs.format)(ctrl.$modelValue)
+           return $filter(attrs.textFormat)(ctrl.$modelValue)
          });
 
          ctrl.$parsers.unshift(function (viewValue) {
