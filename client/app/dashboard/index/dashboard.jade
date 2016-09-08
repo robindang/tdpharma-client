@@ -3,6 +3,7 @@ div(ng-include='"components/templates/navbar/navbar.html"')
 .container
   .row
     .col-md-6
+      highchart(config='dc.chartConfig')
       | how much sales (dollars) - 1 day by default
     .col-md-6
       | how much purchases (quantity) - name quantity amount
