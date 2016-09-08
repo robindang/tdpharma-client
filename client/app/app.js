@@ -18,7 +18,8 @@ angular.module('tdpharmaClientApp', [
   'ngStorage',
   'toastr',
   'io-barcode',
-  'ngLocale'
+  'ngLocale',
+  'highcharts-ng'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
