@@ -19,8 +19,7 @@ angular.module('tdpharmaClientApp')
           // Account created, redirect to home
           $location.path('/');
         })
-        .catch( function(err) {
-          err = err.data;
+        .catch( function(err) {          
           $scope.errors = {};
 
           // Update validity of form fields that match the mongoose errors

@@ -30,8 +30,8 @@ function DataHelper($q, Category) {
     getCategories: function () {
       var deferred = $q.defer();
 
-      Category.get().$promise.then(function(categories) {
-        var data = categories.data;
+      Category.query().$promise.then(function(categories) {
+        var data = categories;
         var result = {};
           while (data.length) {
             var o = data.pop();

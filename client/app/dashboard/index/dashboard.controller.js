@@ -18,7 +18,7 @@ function DashboardCtrl($scope, OrderSearch) {
     })
   .then(
     function(result){
-      ctrl.sales = result.data;
+      ctrl.sales = result;
       console.log(ctrl.sales);
     });
 

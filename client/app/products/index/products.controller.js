@@ -70,15 +70,15 @@ function ProductsCtrl($cookies, $filter, $location, $scope, $timeout, $window, p
 
   // Function definition
   function initData(){        
-    Category.get({}, function(x) {
-      ctrl.categories = x.data;
+    Category.query({}, function(x) {
+      ctrl.categories = x;
       ctrl.selected = [ctrl.categories[0], ctrl.categories[0].children[0]];
     });
 
     serverConfig.get({id: 'temp_amazon_s3'}).$promise.then(function(resp){
-      ctrl.amazon_config = resp.data;
+      ctrl.amazon_config = resp;
     }).catch(function(err){
-      toastr.error(err.data.data.errors, $filter('translate')('TOASTR_SORRY'));
+      toastr.error(err.data.errors, $filter('translate')('TOASTR_SORRY'));
     });
   }
 
@@ -153,9 +153,9 @@ function ProductsCtrl($cookies, $filter, $location, $scope, $timeout, $window, p
           function(arg1, callback) {
             // Save the medicines 
             Medicine.save({}, params).$promise.then(function(resp){              
-              return callback(null, resp.data);
+              return callback(null, resp);
             }).catch(function(error){              
-              callback({error: error.data.data.errors});
+              callback({error: error.data.errors});
             });
           },
           function(med, callback) {
@@ -170,7 +170,7 @@ function ProductsCtrl($cookies, $filter, $location, $scope, $timeout, $window, p
             InventoryItem.update({id: med.id}, o).$promise.then(function() {
               callback(null, med);
             }, function(error) {
-              callback({error: error.data.data.errors});
+              callback({error: error.data.errors});
             });
           },
           function(arg1, callback) {
@@ -185,9 +185,9 @@ function ProductsCtrl($cookies, $filter, $location, $scope, $timeout, $window, p
                 function(cb) {                  
                   toastr.info($filter('translate')('PROCESSING_IMAGE'));
                   InventoryItem.get({id: item.id}).$promise.then(function(resp){
-                    item = resp.data;                    
+                    item = resp;                    
                   }).catch(function(error){                                                                                  
-                    return cb(error.data.data.errors);
+                    return cb(error.data.errors);
                   });
                   retry = retry - 1;
                   if (retry === 0) {

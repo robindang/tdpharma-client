@@ -81,16 +81,16 @@ function OrderItemCtrl(Receipt, $state, $stateParams, $filter, toastr, pharmacar
 
   function initData() {
     Receipt.get({id: $stateParams.id}).$promise.then(function(resp){
-      vm.receipt = resp.data;
+      vm.receipt = resp;
       processData(vm.receipt);      
     }, function(error){
-      toastr.error(error.data.data.errors);
+      toastr.error(error.data.errors);
     });
 
     User.query().$promise.then(function(resp){
       vm.store_users = resp;    
     }).catch(function(err){
-        toastr.error(err.data.data.errors, $filter('translate')('TOASTR_SORRY'));
+        toastr.error(err.data.errors, $filter('translate')('TOASTR_SORRY'));
     });
   }
 
@@ -157,10 +157,10 @@ function OrderItemCtrl(Receipt, $state, $stateParams, $filter, toastr, pharmacar
         ];        
       }
       Receipt.update({id: vm.receipt.id}, params).$promise.then(function(resp){
-        vm.receipt = resp.data;
+        vm.receipt = resp;
         processData(vm.receipt);
       }).catch(function(err){
-        toastr.error(err.data.data.errors, $filter('translate')('TOASTR_SORRY'));
+        toastr.error(err.data.errors, $filter('translate')('TOASTR_SORRY'));
       });
     }
   }
@@ -267,10 +267,10 @@ function OrderItemCtrl(Receipt, $state, $stateParams, $filter, toastr, pharmacar
     if (transaction.is_editting === true && validateData()) {
       var params = buildParams(transaction);
       Receipt.update({id: vm.receipt.id}, params).$promise.then(function(resp){
-        vm.receipt = resp.data;
+        vm.receipt = resp;
         processData(vm.receipt);
       }).catch(function(err){
-        toastr.error(err.data.data.errors, $filter('translate')('TOASTR_SORRY'));
+        toastr.error(err.data.errors, $filter('translate')('TOASTR_SORRY'));
       })
     } 
   }

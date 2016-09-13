@@ -38,7 +38,7 @@ function CheckoutConfirmCtrl($scope, $localStorage, $location, _, toastr, Receip
     Receipt.save({}, o).$promise.then(function(receipt) {
       cart.isCheckedOut = false;
       var compiled = _.template('Total: <%= total %>\nChange: <%= change %>');
-      var message = compiled({total: receipt.data.total, change: calcChangeDue(totalPaid, receipt.data.total)});
+      var message = compiled({total: receipt.total, change: calcChangeDue(totalPaid, receipt.total)});
       toastr.success(message, 'Sale Receipt', {timeOut: 20000});
       delete $localStorage.cart;
       $location.path('/checkoutv2');

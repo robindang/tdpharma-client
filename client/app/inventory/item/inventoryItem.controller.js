@@ -37,7 +37,7 @@ function InventoryItemCtrl($location, $stateParams, $window, pharmacare, toastr,
     async.waterfall([
         function(next) {
           InventoryItem.get($stateParams).$promise.then(function(item) {
-            ctrl.item = item.data;
+            ctrl.item = item;
             next(null, ctrl.item.category_id);
           });
         },
@@ -52,7 +52,7 @@ function InventoryItemCtrl($location, $stateParams, $window, pharmacare, toastr,
             ctrl.store_users = resp; 
             next(null);   
           }).catch(function(err){
-            next(err.data.data.errors);            
+            next(err.data.errors);            
           });
         },
         function(next) {
@@ -60,7 +60,7 @@ function InventoryItemCtrl($location, $stateParams, $window, pharmacare, toastr,
             ctrl.edit_user = _.find(ctrl.store_users, function(u){return u.id === user.id});            
             next(null);
           }).catch(function(err){
-            next(err.data.data.errors);
+            next(err.data.errors);
           });
         },
         function(next) {
@@ -99,11 +99,11 @@ function InventoryItemCtrl($location, $stateParams, $window, pharmacare, toastr,
     var bOk = ctrl.pharmacare.validateMedBatch(ctrl.medicine.med_batches_attributes[0], ctrl.item.itemable.name);
     if (bOk) {
       Medicine.update({id: ctrl.item.itemable.id}, {medicine: ctrl.medicine}).$promise.then(function(resp){
-        ctrl.item = resp.data;
+        ctrl.item = resp;
         ctrl.medicine = {};
         ctrl.mode.setReadMode();
       }).catch(function(error){
-        toastr.error(error.data.data.errors);
+        toastr.error(error.data.errors);
       });
     }
   }

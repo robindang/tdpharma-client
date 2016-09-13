@@ -35,7 +35,7 @@
             vm.selected_user = vm.store_users.find(function(x) {return x.id===user.id;});          
           });
       }).catch(function(err){
-        toastr.error(err.data.data.errors, $filter('translate')('TOASTR_SORRY'));
+        toastr.error(err.data.errors, $filter('translate')('TOASTR_SORRY'));
       });
     }
 
@@ -44,7 +44,7 @@
         InventorySearch.getPage(0, 25, {q: search_string}).then(function(resp){
           vm.store_medicines = resp.data;        
         }).catch(function(error){
-          toastr.error(error.data.data.errors);
+          toastr.error(error.data.errors);
         });
       }      
     }
@@ -98,7 +98,7 @@
           vm.item_list = [];
           vm.selected_med = '';
         }, function(error){
-          toastr.error(error.data.data.errors, $filter('translate')('TOASTR_SORRY'));
+          toastr.error(error.data.errors, $filter('translate')('TOASTR_SORRY'));
         });
       }    
     }

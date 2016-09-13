@@ -7,7 +7,7 @@ div(ng-include='"components/templates/navbar/navbar.html"')
         li(ng-repeat='breadcrumb in cic.breadcrumbs')
           a(ng-href='{{breadcrumb.link}}') {{breadcrumb.name}}
   .row
-    .col-md-2.col-sm-3.col-xs-4(ng-repeat='item in cic.results.data')
+    .col-md-2.col-sm-3.col-xs-4(ng-repeat='item in cic.results')
       a(ng-href='/inventory/{{item.id}}')
         .thumbnail
           img(ng-src='{{item.photo_thumb.photo | resolve}}', alt='...')

@@ -24,6 +24,7 @@
       EMAIL: 'Email',
       PASSWORD: 'Password',
       LOGIN_FORM_USER_PASSWORD_ERR: 'Please enter your email and password.',
+      INVALID_EMAIL_PASSWORD: 'Invalid Email and Password',
       PASSWORD_CHANGE_TITLE: 'Change password',
       CURRENT_PASSWORD: 'Current Password',
       NEW_PASSWORD: 'New Password',

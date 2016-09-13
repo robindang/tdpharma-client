@@ -30,8 +30,8 @@ function CategoriesCtrl($location, $scope, _, Category) {
   }
 
   function initData() {
-    Category.get().$promise.then(function(categories) {
-      ctrl.categories = categories.data;
+    Category.query().$promise.then(function(categories) {
+      ctrl.categories = categories;
       setActiveCategory($location.hash(), ctrl.categories);
     });
   }

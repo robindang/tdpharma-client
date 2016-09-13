@@ -20,7 +20,7 @@ function ProductsIdCtrl($stateParams, $window, APP_CONFIGURATION, Medicine) {
     async.waterfall([
         function(next) {
           Medicine.get($stateParams).$promise.then(function(medicine) {
-            ctrl.medicine = medicine.data;
+            ctrl.medicine = medicine;
             next(null);
           });
         }

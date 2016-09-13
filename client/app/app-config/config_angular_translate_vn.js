@@ -24,6 +24,7 @@
       EMAIL: 'Email',
       PASSWORD: 'Mật Mã',
       LOGIN_FORM_USER_PASSWORD_ERR: 'Xin vui lòng cung cấp email và mật mã của bạn.',
+      INVALID_EMAIL_PASSWORD: 'Email và mật mã không đúng',
       PASSWORD_CHANGE_TITLE: 'Cập Nhập Mật Mã',
       CURRENT_PASSWORD: 'Mật Mã Hiện Tại',
       NEW_PASSWORD: 'Mật Mã Mới',

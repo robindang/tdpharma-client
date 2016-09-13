@@ -48,9 +48,9 @@ function InventoryCtrl(_, pharmacare, toastr, $state, InventoryItem, InventorySe
   function searchMedicine(search_string, force) {
     if ((search_string && search_string.length > 3) || force === true) {
       InventorySearch.getPage(0, 25, {q: search_string}).then(function(resp){
-        ctrl.store_medicines = resp.data;        
+        ctrl.store_medicines = resp;        
       }).catch(function(error){
-        toastr.error(error.data.data.errors);
+        toastr.error(error.data.errors);
       });
     }      
   }    
@@ -67,7 +67,7 @@ function InventoryCtrl(_, pharmacare, toastr, $state, InventoryItem, InventorySe
       ctrl.isLoading = false;      
       updateItemList();
     }).catch(function(error){
-      toastr.error(error.data.data.errors);
+      toastr.error(error.data.errors);
     });
   }
 
@@ -100,10 +100,10 @@ function InventoryCtrl(_, pharmacare, toastr, $state, InventoryItem, InventorySe
       }
     };
     InventoryItem.update({id: item.id}, data).$promise.then(function(resp){
-      item.sale_price = resp.data.sale_price;
+      item.sale_price = resp.sale_price;
     }, function(error){
-      if (error.data && error.data.data && error.data.data.errors) {
-          toastr.error(error.data.data.errors);
+      if (error.data && error.data.errors) {
+          toastr.error(error.data.errors);
       }
     });
   }

@@ -38,9 +38,9 @@ function OrderSearch($q, Receipt) {
     
     Receipt.get(query, function(obj) {        
       deferred.resolve({
-        data: obj.data.receipts,
-        numberOfPages: Math.ceil(obj.data.total_count / number),
-        numberOfResults: obj.data.total_count
+        data: obj.receipts,
+        numberOfPages: Math.ceil(obj.total_count / number),
+        numberOfResults: obj.total_count
       });
     });
 

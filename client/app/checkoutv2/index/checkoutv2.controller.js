@@ -52,11 +52,11 @@ function Checkoutv2Ctrl($scope, $localStorage, $location, $window, InventoryItem
     if (!barcode) {return;}
     if (productAlreadyInCart(barcode)) {return;}
     
-    MedBatch.get({barcode: barcode}).$promise.then(function(x) {
-      if (!x.data.length) {return;}
-      x = angular.copy(x.data[0]);
+    MedBatch.query({barcode: barcode}).$promise.then(function(x) {
+      if (!x.length) {return;}
+      x = angular.copy(x[0]);
       InventoryItem.get({id: x.inventory_item.id}).$promise.then(function(y) {
-        x.inventory_item = angular.copy(y.data);
+        x.inventory_item = angular.copy(y);
         addProductAndUpdateCart(barcode, x);
       });
     });
@@ -73,7 +73,10 @@ function Checkoutv2Ctrl($scope, $localStorage, $location, $window, InventoryItem
 
   function updateCartTotals() {
     ctrl.cart.total = _.reduce(ctrl.cart.products, function (total, product) {
-      var salePrice = product.inventory_item.sale_price.amount;
+      var salePrice = 0;      
+      if (product.inventory_item.sale_price) {
+        var salePrice = product.inventory_item.sale_price.amount;
+      }       
       var taxPercent = 0;
       var weightedPrice = parseFloat( salePrice * product.quantity );
       var weightedTax = parseFloat( weightedPrice * taxPercent );

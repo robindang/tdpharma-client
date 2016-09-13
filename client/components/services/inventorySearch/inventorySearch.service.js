@@ -22,10 +22,10 @@ function InventorySearch($q, $filter, $timeout, $cookies, InventoryItem) {
     query.inventory_id = item.id;
     InventoryItem.get(query, function(objs){
       deferred.resolve({
-        data: objs.data.items,
-        numberOfPages: Math.ceil(objs.data.total_count / number),
-        numberOfResults: objs.data.total_count,
-        current_page: objs.data.page
+        data: objs.items,
+        numberOfPages: Math.ceil(objs.total_count / number),
+        numberOfResults: objs.total_count,
+        current_page: objs.page
       });
     })
     return deferred.promise;
@@ -45,10 +45,10 @@ function InventorySearch($q, $filter, $timeout, $cookies, InventoryItem) {
     
     InventoryItem.get(query, function(obj) {        
       deferred.resolve({
-        data: obj.data.items,
-        numberOfPages: Math.ceil(obj.data.total_count / number),
-        numberOfResults: obj.data.total_count,
-        current_page: obj.data.page
+        data: obj.items,
+        numberOfPages: Math.ceil(obj.total_count / number),
+        numberOfResults: obj.total_count,
+        current_page: obj.page
       });
     });
 
