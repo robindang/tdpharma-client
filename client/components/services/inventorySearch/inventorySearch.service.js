@@ -39,9 +39,16 @@ function InventorySearch($q, $filter, $timeout, $cookies, InventoryItem) {
     number = 25;
     params = params || {};
     query.page = 1 + start / number;
-    if (params.categoryId) {query.category_id = params.categoryId;}
-    if (params.q) {query.search = params.q;}
-    if (params.inactive) {query.inactive = true;}
+    if (params.categoryId) {query.by_category = params.categoryId;}
+    if (params.q) {query.by_medicine_name = params.q;}    
+    if (params.no_price) {query.without_sale_price = true;}
+    if (params.no_inventory) {query.out_of_stock = true;}
+    if (params.active === true) {
+      query.active = true;
+    }    
+    else if (params.active === false) {
+      query.inactive = true;
+    }
     
     InventoryItem.get(query, function(obj) {        
       deferred.resolve({
