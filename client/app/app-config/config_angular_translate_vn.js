@@ -182,7 +182,10 @@
       'BARCODE': 'Mã vạch',
       'CURRENT_USED_BARCODE': 'Mã vạch của batch dang dùng',
       'CURRENT_BATCH': 'Batch dang dùng',
-      'RETURN': 'Hồi Trả'            
+      'RETURN': 'Hồi Trả',
+      'NO_PRICE': 'Thiếu Giá',
+      'NO_INVENTORY': 'Hết Hàng',
+      'EXPIRED': 'Hết Hạn'            
     });
   }
 

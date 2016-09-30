@@ -34,12 +34,17 @@ div(ng-include='"components/templates/navbar/navbar.html"')
               .btn-group
                 label.btn.btn-default(ng-model='ic.status.no_price' uib-btn-checkbox ng-change='ic.updateItemList()')
                   i.fa.fa-money
-                  | &nbsp;{{'No Price' | translate }}
+                  | &nbsp;{{'NO_PRICE' | translate }}
               span &nbsp;&nbsp;
               .btn-group
                 label.btn.btn-default(ng-model='ic.status.no_inventory' uib-btn-checkbox ng-change='ic.updateItemList()')
                   i.fa.fa-truck
-                  | &nbsp;{{'No Inventory' | translate }}
+                  | &nbsp;{{'NO_INVENTORY' | translate }}
+              span &nbsp;&nbsp;
+              .btn-group
+                label.btn.btn-default(ng-model='ic.status.expired' uib-btn-checkbox ng-change='ic.updateItemList()')
+                  i.fa.fa-clock-o
+                  | &nbsp;{{'EXPIRED' | translate }}
 
             .form-group.pull-right
               a.btn.btn-primary(href="/products") {{'ADD_A_PRODUCT' | translate}}

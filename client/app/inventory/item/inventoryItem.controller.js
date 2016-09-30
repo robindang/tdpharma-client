@@ -38,6 +38,10 @@ function InventoryItemCtrl($location, $stateParams, $window, pharmacare, toastr,
         function(next) {
           InventoryItem.get($stateParams).$promise.then(function(item) {
             ctrl.item = item;
+            _.each(ctrl.item.available_batches, function(b){
+              b.is_expired = moment(b.expire_date).startOf('day').isBefore(moment().startOf('day')) || 
+                             moment(b.expire_date).startOf('day').isSame(moment().startOf('day'));              
+            });
             next(null, ctrl.item.category_id);
           });
         },

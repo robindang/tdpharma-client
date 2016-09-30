@@ -182,7 +182,10 @@
       'BARCODE': 'Barcode',
       'CURRENT_USED_BARCODE': 'Barcode of the currently used batch',
       'CURRENT_BATCH': 'Current Batch',
-      'RETURN': 'Return'      
+      'RETURN': 'Return',
+      'NO_PRICE': 'No Price',
+      'NO_INVENTORY': 'No Inventory',
+      'EXPIRED': 'Expired'      
     });
     $translateProvider.preferredLanguage('vi');
   }

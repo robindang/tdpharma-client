@@ -126,7 +126,7 @@ div(ng-include='"components/templates/navbar/navbar.html"')
             .form-group
               label.col-md-4.col-xs-5.control-label {{ 'EXPIRE_DATE' | translate }}
               .col-md-8.col-xs-7
-                p.form-control-static {{batch.expire_date}}
+                p.form-control-static(ng-class="{'text-danger': batch.is_expired}") {{batch.expire_date}}
           .col-md-4.text-center            
             p
               io-barcode(code='{{batch.barcode}}' type='CODE39' style='width: 310px' id='code-{{batch.barcode}}' ng-click='iic.barcodePrint(batch.barcode)')            

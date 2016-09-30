@@ -43,6 +43,7 @@ function InventorySearch($q, $filter, $timeout, $cookies, InventoryItem) {
     if (params.q) {query.by_medicine_name = params.q;}    
     if (params.no_price) {query.without_sale_price = true;}
     if (params.no_inventory) {query.out_of_stock = true;}
+    if (params.expired) {query.with_expired_batches = true;}
     if (params.active === true) {
       query.active = true;
     }    

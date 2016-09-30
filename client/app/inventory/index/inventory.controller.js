@@ -14,7 +14,8 @@ function InventoryCtrl(_, pharmacare, toastr, $state, InventoryItem, InventorySe
     clear: true,
     active: '',    
     no_price: false,
-    no_inventory: false
+    no_inventory: false,
+    expired: false  
   };
   ctrl.numberOfResults = '';
   ctrl.callServer = callServer;
@@ -28,22 +29,32 @@ function InventoryCtrl(_, pharmacare, toastr, $state, InventoryItem, InventorySe
 
   searchMedicine(null, true);
 
-  function clearFilter() {
+  function resetFitlerValues() {
+    ctrl.status.clear = true;
     ctrl.status.active = null;
     ctrl.status.no_price = false;
-    ctrl.status.no_inventory = false;      
+    ctrl.status.no_inventory = false;    
+    ctrl.status.expired = false;  
     ctrl.tableState.no_price = false;
     ctrl.tableState.no_inventory = false;
     ctrl.tableState.active = '';      
+    ctrl.tableState.expired = false;
+  }
+
+  function clearFilter() {
+    resetFitlerValues();
     callServer(ctrl.tableState);
   }
 
   function updateItemList() {
-    if (ctrl.status.active === true || ctrl.status.active === false || ctrl.status.no_price || ctrl.status.no_inventory) {
+    if (ctrl.status.active === true || ctrl.status.active === false || 
+        ctrl.status.no_price || ctrl.status.no_inventory || ctrl.status.expired) {
       ctrl.status.clear = false;            
+      ctrl.tableState.pagination.start = 0;
       ctrl.tableState.no_price = ctrl.status.no_price;
       ctrl.tableState.no_inventory = ctrl.status.no_inventory;
       ctrl.tableState.active = ctrl.status.active;
+      ctrl.tableState.expired = ctrl.status.expired;
     }
     callServer(ctrl.tableState);
   }
@@ -64,7 +75,7 @@ function InventoryCtrl(_, pharmacare, toastr, $state, InventoryItem, InventorySe
 
   function openItemPage(item) {
     ctrl.isLoading = true;
-
+    resetFitlerValues();
     InventorySearch.getItemPage(ctrl.selected_med).then(function(result){
       ctrl.displayed = result.data;        
       ctrl.numberOfResults = result.numberOfResults;
