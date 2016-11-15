@@ -40,6 +40,8 @@ module.exports = function(config) {
       'client/bower_components/highcharts/highcharts.js',
       'client/bower_components/highcharts/highcharts-more.js',
       'client/bower_components/highcharts/modules/exporting.js',
+      'client/bower_components/chart.js/dist/Chart.js',
+      'client/bower_components/angular-chart.js/angular-chart.js',
       'client/app/app.js',
       'client/app/app.coffee',
       'client/app/config.js',
