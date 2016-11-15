@@ -19,7 +19,7 @@ angular.module('tdpharmaClientApp', [
   'toastr',
   'io-barcode',
   'ngLocale',
-  'highcharts-ng'
+  'chart.js'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

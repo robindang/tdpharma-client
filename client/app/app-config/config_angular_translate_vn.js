@@ -13,6 +13,7 @@
       GREETING: 'Allo, Allo!',
       LEADING_GREETING: 'Kích hoạt nhà thuốc của bạn với Pharmacare',
       HOME: 'Trang chủ',
+      DASHBOARD: 'Điều phối',
       INVENTORY: 'Tồn Kho',
       ORDERS: 'Hoá Đơn',
       CHECKOUT: 'Bán Thuốc',

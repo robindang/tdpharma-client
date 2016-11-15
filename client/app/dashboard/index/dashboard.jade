@@ -2,13 +2,37 @@ div(ng-include='"components/templates/navbar/navbar.html"')
 
 .container
   .row
+    br
     .col-md-6
-      highchart(config='dc.chartConfig')
-      | how much sales (dollars) - 1 day by default
+      .panel.panel-default
+        .panel-heading
+          h3.panel-title At a Glance
+        .panel-body
+          uib-tabset(active="0")
+            uib-tab(ng-repeat="graph in dc.display.graphs" heading="{{graph.title}}")   
+              br           
+              canvas.chart.chart-line(id="line" chart-data="graph.data" chart-labels="graph.labels" chart-series="graph.series")                        
+
     .col-md-6
-      | how much purchases (quantity) - name quantity amount
-  .row
-    .col-md-6
-      | most recent 10 purchase
-    .col-md-6
-      | most recent 10 sold
+      .panel.panel-default
+        .panel-heading
+          h3.panel-title Today Top Transactions
+        .panel-body
+          uib-tabset(active="0")
+            uib-tab(ng-repeat="transaction in dc.display.top_transactions" heading="{{transaction.label}}")
+              br
+              table.table.table-striped
+                thead
+                  tr
+                    th #
+                    th Name
+                    th Amount
+                    th Price
+                tbody
+                  tr(ng-repeat="t in transaction.data")
+                    td {{$index + 1}}
+                    td {{t.inventory_item.item_name}}
+                    td {{t.amount}}
+                    td {{t.total_price | currency}}
+
+          

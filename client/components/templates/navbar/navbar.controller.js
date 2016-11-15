@@ -9,8 +9,8 @@ function NavbarCtrl($scope, $location, $translate, amMoment, pharmacare, Auth) {
 
   var ctrl = this;
   ctrl.menu = [{
-    title: 'HOME',
-    link: ['/']
+    title: 'DASHBOARD',
+    link: ['/dashboard']
   }, {
     title: 'INVENTORY',
     link: ['/inventory']

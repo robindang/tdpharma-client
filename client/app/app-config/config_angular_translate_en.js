@@ -13,6 +13,7 @@
       GREETING: 'Allo, Allo!',
       LEADING_GREETING: 'Kick-start your pharmacy with Pharmacare',
       HOME: 'Home',
+      DASHBOARD: 'Dashboard',
       INVENTORY: 'Inventory',
       ORDERS: 'Orders',
       CHECKOUT: 'Checkout',

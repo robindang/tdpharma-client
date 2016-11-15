@@ -9,6 +9,7 @@ See [here](http://pharmaplus.herokuapp.com/) for an example.
 First install node.js [here](http://nodejs.org/). Then:
 
 ```sh
+$ npm install -g yo gulp-cli generator-angular-fullstack
 $ npm install -g grunt-cli
 $ npm install -g bower
 $ npm install -g node-inspector
